@@ -96,31 +96,47 @@ const Navigation = () => {
           <NavigationMenuItem>
             <NavigationMenuTrigger>SHOP</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                <li className="row-span-3">
+              <ul className="fixed left-0 grid gap-5 p-4 md:w-[800px] lg:w-[900px] lg:grid-cols-3">
+                {/* Column 1 */}
+                <li>
+                  <ListItem href="/collections/jeans" title="Jeans">
+                    Sustainable denim jeans for every occasion.
+                  </ListItem>
+                  <ListItem href="/collections/tops" title="Tops">
+                    Tencel and modal tops.
+                  </ListItem>
+                  <ListItem href="/collections/dresses" title="Dresses">
+                    Dresses for your vacations.
+                  </ListItem>
+                </li>
+
+                {/* Column 2 */}
+                <li>
+                  <ListItem href="/collections/shoes" title="Shoes">
+                    Comfortable and sustainable shoes.
+                  </ListItem>
+                  <ListItem href="/collections/accessories" title="Accessories">
+                    Ethical accessories for every outfit.
+                  </ListItem>
+                  <ListItem href="/collections/bags" title="Bags">
+                    Durable, stylish bags for all occasions.
+                  </ListItem>
+                </li>
+
+                {/* Column 3 */}
+                <li>
                   <NavigationMenuLink asChild>
                     <a
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                       href="/"
                     >
-                      {/* <Icons.logo className="h-6 w-6" /> */}
-                      <div>shadcn/ui</div>
+                      <div>Featured</div>
                       <p className="text-sm leading-tight text-muted-foreground">
-                        Beautifully designed components built with Radix UI and
-                        Tailwind CSS.
+                        Our beautifully designed convertible collection.
                       </p>
                     </a>
                   </NavigationMenuLink>
                 </li>
-                <ListItem href="/docs" title="Introduction">
-                  Re-usable components built using Radix UI and Tailwind CSS.
-                </ListItem>
-                <ListItem href="/docs/installation" title="Installation">
-                  How to install dependencies and structure your app.
-                </ListItem>
-                <ListItem href="/docs/primitives/typography" title="Typography">
-                  Styles for headings, paragraphs, lists...etc
-                </ListItem>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
