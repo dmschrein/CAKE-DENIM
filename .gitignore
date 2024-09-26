@@ -22,6 +22,7 @@ client/.next/
 # misc
 .DS_Store
 *.pem
+client/public/assets
 
 # debug
 npm-debug.log*
