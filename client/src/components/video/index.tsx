@@ -11,7 +11,7 @@ export default function VideoWithFallback() {
       {videoError ? (
         // Fallback Image
         <Image
-          src="/assets/CD-hero.png"
+          src="/assets/CD-Website-2.png"
           alt="Fallback image"
           width={1920}
           height={1080}
