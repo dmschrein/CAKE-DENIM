@@ -2,6 +2,7 @@
 
 import React from "react";
 import Navbar from "@/components/home/navigation";
+import Footer from "@/components/footer";
 
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -9,6 +10,7 @@ const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
       <main>
         <Navbar />
         {children}
+        <Footer />
       </main>
     </div>
   );
