@@ -2,7 +2,6 @@
 
 import React from "react";
 import Navbar from "@/components/home/navigation";
-import Header from "@/components/home/header";
 
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
