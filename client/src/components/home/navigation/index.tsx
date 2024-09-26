@@ -75,9 +75,9 @@ const Navigation = () => {
         {/* Logo Section */}
         <div className="flex items-center gap-4">
           <Image
-            src="/assets/plura-logo.svg" // Update with the correct logo path
-            width={50}
-            height={50}
+            src="/assets/goldNORlogo.png" // Update with the correct logo path
+            width={30}
+            height={30}
             alt="Logo"
           />
           <span className="font-serif text-2xl">CAKE DENIM</span>
