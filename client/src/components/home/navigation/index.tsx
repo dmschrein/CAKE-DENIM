@@ -13,6 +13,55 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 
+const components: {
+  title: string;
+  image: string;
+  href: string;
+  description: string;
+}[] = [
+  {
+    title: "Alert Dialog",
+    image: "/assets/placeholder.png",
+    href: "/docs/primitives/alert-dialog",
+    description:
+      "A modal dialog that interrupts the user with important content and expects a response.",
+  },
+  {
+    title: "Hover Card",
+    href: "/docs/primitives/hover-card",
+    image: "/assets/placeholder.png",
+    description:
+      "For sighted users to preview content available behind a link.",
+  },
+  {
+    title: "Progress",
+    href: "/docs/primitives/progress",
+    image: "/assets/placeholder.png",
+    description:
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+  },
+  {
+    title: "Scroll-area",
+    href: "/docs/primitives/scroll-area",
+    image: "/assets/placeholder.png",
+    description: "Visually or semantically separates content.",
+  },
+  {
+    title: "Tabs",
+    href: "/docs/primitives/tabs",
+    image: "/assets/placeholder.png",
+    description:
+      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+  },
+  {
+    title: "Tooltip",
+    href: "/docs/primitives/tooltip",
+    image: "/assets/placeholder.png",
+    description:
+      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+  },
+];
+
 const Navigation = () => {
   return (
     <>
@@ -31,7 +80,7 @@ const Navigation = () => {
             height={50}
             alt="Logo"
           />
-          <span className="font-serif text-2xl">cult gaia</span>
+          <span className="font-serif text-2xl">CAKE DENIM</span>
         </div>
         {/* Center Navigation */}
         <ul className="flex gap-8 text-md uppercase tracking-wide">
@@ -42,7 +91,7 @@ const Navigation = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>SHOP</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="w-full grid gap-5 p-10 md:lg:grid-col-6 lg:grid-col-6">
+                    <ul className="bg-orange-100 fixed left-0 right-0 grid gap-5 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
                       <li>
                         <ListItem href="/collections/jeans" title="Jeans">
                           Sustainable denim jeans for every occasion.
@@ -88,33 +137,29 @@ const Navigation = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>COLLECTIONS</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-5 p-10 md:grid-cols-3">
-                      <li>
-                        <ListItem href="/collections/jeans" title="Jeans">
-                          Sustainable denim jeans for every occasion.
+                    <ul className="bg-orange-100 fixed left-0 grid gap-5 p-10 md:w-[800px] md:grid-cols-6 lg:w-full">
+                      {components.map((component) => (
+                        <ListItem
+                          key={component.title}
+                          title={component.title}
+                          image={component.image}
+                          href={component.href}
+                        >
+                          {component.description}
                         </ListItem>
-                        <ListItem href="/collections/tops" title="Tops">
-                          Tencel and modal tops.
-                        </ListItem>
-                        <ListItem href="/collections/dresses" title="Dresses">
-                          Dresses for your vacations.
-                        </ListItem>
-                      </li>
+                      ))}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>NEW</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid gap-5 p-10 md:grid-cols-3">
-                      <li>
-                        <ListItem href="/collections/jeans" title="Jeans">
-                          Sustainable denim jeans for every occasion.
-                        </ListItem>
-                      </li>
-                    </ul>
-                  </NavigationMenuContent>
+                  <Link href="/collections/new" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      NEW
+                    </NavigationMenuLink>
+                  </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
