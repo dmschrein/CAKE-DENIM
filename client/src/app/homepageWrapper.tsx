@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Navbar from "@/components/home/navigation";
-import Footer from "@/components/footer";
+import Navbar from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
 
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
   return (

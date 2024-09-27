@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
-import VideoWithFallback from "@/components/video";
+import VideoWithFallback from "@/components/common/Video";
 
 export default function Home() {
   return (
