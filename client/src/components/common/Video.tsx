@@ -25,7 +25,7 @@ export default function VideoWithFallback() {
           muted
           loop
           playsInline
-          poster="/assets/CD-hero.png" // Optional fallback before the video starts
+          poster="/assets/CD-Website-2.png" // Optional fallback before the video starts
           onError={() => setVideoError(true)} // Fallback to image if video fails to load
         >
           <source src="/assets/website-video.mp4" type="video/mp4" />
