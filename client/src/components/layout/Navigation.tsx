@@ -11,7 +11,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
 
 const components: {
   title: string;
@@ -175,7 +174,7 @@ const Navigation = () => {
   );
 };
 
-// ListItem component remains the same as your original version
+// ListItem component
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a"> & { image?: string; title: string }

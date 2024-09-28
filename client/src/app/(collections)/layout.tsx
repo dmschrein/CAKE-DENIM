@@ -26,11 +26,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <h1 className="items-center text-center">Collections Layout</h1>
+      {children} {/* Render the child pages */}
       <div className="flex flex-col items-center">
         {/* Pass categories prop to CarouselSize */}
+        <h1 className="items-center text-center text-3xl font-bold mb-6">
+          Similar Products
+        </h1>
         <CarouselSize categories={categories} key="carousel" />
       </div>
-      {children} {/* Render the child pages */}
     </div>
   );
 }
