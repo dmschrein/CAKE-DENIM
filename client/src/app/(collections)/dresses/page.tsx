@@ -1,61 +1,53 @@
+import CollectionPage from "@/components/common/CollectionPage";
 import React from "react";
-import Layout from "@/app/(collections)/layout";
-import CollectionCard from "@/components/common/CollectionCard";
 
 const DressesCollection = () => {
-  // Categories for dresses carousel
-  const dressCategories = [
-    {
-      image: "/assets/long-dress.jpg",
-      category: "Long Dresses",
-    },
-    {
-      image: "/assets/short-dress.jpg",
-      category: "Short Dresses",
-    },
-  ];
-
   const dresses = [
     {
       id: 1,
       title: "Sustainable Floral Dress",
       price: "$89.99",
       image: "/assets/3.png",
+      category: "Occasion",
     },
     {
       id: 2,
       title: "Short Dress",
       price: "$99.99",
       image: "/assets/3.png",
+      category: "Under $200",
     },
     {
-      id: 1,
-      title: "Sustainable Floral Dress",
-      price: "$89.99",
-      image: "/assets/3.png",
+      id: 3,
+      title: "Long Elegant Dress",
+      price: "$120.00",
+      image: "/assets/4.png",
+      category: "Bestselling",
     },
     {
-      id: 2,
-      title: "Short Dress",
-      price: "$99.99",
-      image: "/assets/3.png",
+      id: 4,
+      title: "Party Dress",
+      price: "$150.00",
+      image: "/assets/5.png",
+      category: "Workwear",
     },
-    // More dresses...
+    {
+      id: 5,
+      title: "Long Elegant Dress",
+      price: "$120.00",
+      image: "/assets/4.png",
+      category: "Denim Dresses",
+    },
+    {
+      id: 6,
+      title: "Party Dress",
+      price: "$150.00",
+      image: "/assets/5.png",
+      category: "Fall Dresses",
+    },
   ];
 
-  return (
-    <div>
-      <main className="container mx-auto py-10">
-        <h1 className="text-3xl font-bold mb-6">Dresses Collection</h1>
-        <div className="px-10 grid grid-cols-1 md:grid-cols-2 gap-8 justify-center items-center">
-          {/* Product cards section */}
-          {dresses.map((dress) => (
-            <CollectionCard key={dress.id} product={dress} />
-          ))}
-        </div>
-      </main>
-    </div>
-  );
+  return <CollectionPage collectionName="Dresses" products={dresses} />;
 };
 
 export default DressesCollection;
