@@ -1,76 +1,93 @@
-// import {
-//   TypedUseSelectorHook,
-//   useDispatch,
-//   useSelector,
-//   Provider,
-// } from "react-redux";
+import { useRef } from "react";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+  Provider,
+} from "react-redux";
+import globalReducer from "@/state";
+import { api } from "@/state/api"; // Ensure this is imported correctly
+import { setupListeners } from "@reduxjs/toolkit/query";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
-// import {
-//   persistStore,
-//   persistReducer,
-//   FLUSH,
-//   REHYDRATE,
-//   PAUSE,
-//   PERSIST,
-//   PURGE,
-//   REGISTER,
-// } from "redux-persist";
+const createNoopStorage = () => ({
+  getItem(): Promise<string | null> {
+    return Promise.resolve(null);
+  },
+  setItem(): Promise<void> {
+    return Promise.resolve();
+  },
+  removeItem(): Promise<void> {
+    return Promise.resolve();
+  },
+});
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const storage =
+  typeof window === "undefined"
+    ? createNoopStorage()
+    : createWebStorage("local");
 
-// /* REDUX STORE
-//  * makeStore: a function to configure the Redux store using the persistedReducer and some middleware
-//  * getDefaultMiddleware: retrieves the default middleware and disables serialization checks for Redux-Persist actions
-//  * api.middleware: adds middleware from the api slice for handling asynchronous requests and caching
-//  */
-// export const makeStore = () => {
-//   return configureStore({
-//     reducer: persistedReducer,
-//     middleware: (getDefaultMiddleware) =>
-//       getDefaultMiddleware({
-//         serializableCheck: {
-//           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//         },
-//       }).concat(api.middleware),
-//   });
-// };
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["global"],
+};
 
-// /* REDUX TYPES
-//  * AppStore: type of the Redux store created by makeStore
-//  * RootState: type of the state in store.
-//  * AppDispatch: type for dispatching actions to the store
-//  * useAppDispatch & useAppSelector: Custom hooks that give you typed access to the dispatch function and Redux state in React components
-//  */
-// export type AppStore = ReturnType<typeof makeStore>;
-// export type RootState = ReturnType<AppStore["getState"]>;
-// export type AppDispatch = AppStore["dispatch"];
-// export const useAppDispatch = () => useDispatch<AppDispatch>();
-// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+const rootReducer = combineReducers({
+  global: globalReducer,
+  [api.reducerPath]: api.reducer,
+});
 
-// /* PROVIDER
-//  * StoreProvider: A React component that provides the Redux store and persistence to the app.
-//  * storeRef: A useRef hook used to create the store only once (ensuring the store doesn't get recreated on every render)
-//  * persistor: created using persistStore, manages persisting the store
-//  * Provider: wraps the children with Redux's Provider which gives access to the Redux store in the app
-//  * PersistGate: Ensures that the app's UI isn't rendered until the persisted state has been rehydrated
-//  */
-// export default function StoreProvider({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   const storeRef = useRef<AppStore>();
-//   if (!storeRef.current) {
-//     storeRef.current = makeStore();
-//     setupListeners(storeRef.current.dispatch);
-//   }
-//   const persistor = persistStore(storeRef.current);
+export type RootState = ReturnType<typeof rootReducer>; // Explicitly define RootState
 
-//   return (
-//     <Provider store={storeRef.current}>
-//       <PersistGate loading={null} persistor={persistor}>
-//         {children}
-//       </PersistGate>
-//     </Provider>
-//   );
-// }
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const makeStore = () => {
+  return configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(api.middleware),
+  });
+};
+
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppDispatch = AppStore["dispatch"];
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export default function StoreProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const storeRef = useRef<AppStore>();
+  if (!storeRef.current) {
+    storeRef.current = makeStore();
+    setupListeners(storeRef.current.dispatch);
+  }
+  const persistor = persistStore(storeRef.current);
+
+  return (
+    <Provider store={storeRef.current}>
+      <PersistGate loading={null} persistor={persistor}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
+}

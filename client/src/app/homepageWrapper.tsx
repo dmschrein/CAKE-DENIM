@@ -3,13 +3,22 @@
 import React from "react";
 import Navbar from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import SideCart from "@/components/layout/SideCart";
+import StoreProvider, { useAppSelector } from "./redux";
 
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed
+  );
+
   return (
-    <div>
-      <main>
+    <div className="relative w-full h-full">
+      {/* SideCart Component */}
+      <SideCart />
+      <main className="flex flex-col w-full h-full bg-gray-50 transition-all duration-300">
+        {/* Navbar */}
         <Navbar />
-        {children}
+        <div className="flex-grow">{children}</div>
         <Footer />
       </main>
     </div>
@@ -17,8 +26,11 @@ const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
 };
 
 const HomePageWrapper = ({ children }: { children: React.ReactNode }) => {
-  return <HomePageLayout>{children}</HomePageLayout>;
-  //<StoreProvider></StoreProvider>;
+  return (
+    <StoreProvider>
+      <HomePageLayout>{children}</HomePageLayout>
+    </StoreProvider>
+  );
 };
 
 export default HomePageWrapper;
