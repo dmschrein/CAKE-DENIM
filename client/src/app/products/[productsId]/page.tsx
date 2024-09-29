@@ -1,33 +1,72 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/router";
+// import { useGetProductByIdQuery } from "@/services/api";
 
-type Props = {};
+const ProductsPage = () => {
+  const router = useRouter();
+  const { productId } = router.query;
 
-const Products = (props: Props) => {
+  // Find the product by productId
+  const {
+    data: product,
+    error,
+    isLoading,
+  } = useGetProductByIdQuery(productId as string);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading product</div>;
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <div className="flex flex-col md:flex-row space-x-8">
       {/* Product Image Gallery */}
       <div className="flex flex-row space-x-2">
         {/* Product Main Image */}
         <Image
-          src="/assets/3.png"
-          alt="Dress Example"
+          src={product.image || "/placeholder.png"}
+          alt={product.name}
           width={600}
           height={800}
         />
         {/* Thumbnails */}
         <div className="flex flex-col space-y-2">
-          <Image src="/assets/3.png" alt="Dress" width={100} height={150} />
-          <Image src="/assets/3.png" alt="Dress" width={100} height={150} />
-          <Image src="/assets/3.png" alt="Dress" width={100} height={150} />
-          <Image src="/assets/3.png" alt="Dress" width={100} height={150} />
+          <Image
+            src={product.image || "/placeholder.png"}
+            alt="Thumbnail"
+            width={100}
+            height={150}
+          />
+          <Image
+            src={product.image || "/placeholder.png"}
+            alt="Thumbnail"
+            width={100}
+            height={150}
+          />
+          <Image
+            src={product.image || "/placeholder.png"}
+            alt="Thumbnail"
+            width={100}
+            height={150}
+          />
+          <Image
+            src={product.image || "/placeholder.png"}
+            alt="Thumbnail"
+            width={100}
+            height={150}
+          />
         </div>
       </div>
       {/* Product Text Description */}
       <div className="flex-1">
-        <h1>ABRIL GOWN</h1>
-        <p className="text-2xl text-gray-700 mt-4">$500</p>
+        <h1>{product.name}</h1>
+        <p className="text-2xl text-gray-700 mt-4">${product.price}</p>
 
         {/* Afterpay */}
         <p className="text-sm text-gary-500 mt-2">
@@ -35,16 +74,13 @@ const Products = (props: Props) => {
           <strong>$103.65/mo</strong> with Afterpay.
         </p>
         {/* Product Description */}
-        <p className="mt-6">
-          A strapless column gown with signature gold hardware cutout at the
-          front bust.
-          <ul className="list-disc list-inside mt-4">
-            <li>Maxi length</li>
-            <li>Fitted bodice</li>
-            <li>Plunging neckline</li>
-            <li>Gold bust hardware</li>
-          </ul>
-        </p>
+        <p className="mt-6">{product.description}</p>
+        <ul className="list-disc list-inside mt-4">
+          {product.features?.map((feature, index) => (
+            <li key={index}>{feature}</li>
+          ))}
+        </ul>
+
         {/* Color Selection */}
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Color</h3>
@@ -56,8 +92,9 @@ const Products = (props: Props) => {
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Size</h3>
           <div>
-            {["00", "0", "2", "4", "6", "8", "10", "12"].map((size) => (
+            {["00", "0", "2", "4", "6", "8", "10", "12"].map((size, index) => (
               <Button
+                key={index}
                 variant="link"
                 size="sm"
                 type="submit"
@@ -93,4 +130,4 @@ const Products = (props: Props) => {
   );
 };
 
-export default Products;
+export default ProductsPage;
