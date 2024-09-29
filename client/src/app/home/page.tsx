@@ -7,7 +7,7 @@ import Image from "next/image";
 import VideoWithFallback from "@/components/common/Video";
 import PopupModal from "@/components/forms/PopupModal";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       {/* Hero section*/}
