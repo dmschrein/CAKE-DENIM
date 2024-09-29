@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +13,11 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { HeartIcon } from "@radix-ui/react-icons";
+import { Button } from "../ui/button";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import { setIsSidebarCollapsed } from "@/state";
+import { useAppDispatch, useAppSelector } from "@/app/redux";
 
 const components: {
   title: string;
@@ -62,6 +69,15 @@ const components: {
 ];
 
 const Navigation = () => {
+  const dispatch = useAppDispatch();
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed
+  );
+
+  const toggleSidebar = () => {
+    dispatch(setIsSidebarCollapsed(!setIsSidebarCollapsed));
+  };
+
   return (
     <>
       {/* Top Bar for "Shipping" and other info */}
@@ -70,7 +86,7 @@ const Navigation = () => {
       </div>
 
       {/* Main Navigation */}
-      <div className="w-full h-16 flex justify-between items-center px-8 sticky top-0 bg-white z-50 border-b">
+      <div className="w-full h-16 flex justify-between items-center px-8 sticky top-0 bg-white z-40 border-b">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
           <Image
@@ -166,8 +182,17 @@ const Navigation = () => {
         </ul>
         {/* Right Side Options */}
         <div className="flex gap-6 items-center">
-          <Link href="/saved">Saved</Link>
+          <div className="flex items-center">
+            <Link href="/saved">Favorites</Link>
+            <HeartIcon className="w-4 h-4" />
+          </div>
           <Link href="/login">Login</Link>
+          <button
+            className="p-3 bg-gray-100 rounded-full hover:bg-blue-100"
+            onClick={toggleSidebar}
+          >
+            <ShoppingBagOutlinedIcon />
+          </button>
         </div>
       </div>
     </>
