@@ -28,6 +28,7 @@ const SideCart = () => {
       </div>
       <div className="p-4">
         <p>Your cart is empty</p>
+        {/* TODO: add checkout button that takes user to checkout page */}
       </div>
     </div>
   );
