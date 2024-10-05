@@ -1,0 +1,74 @@
+[
+  {
+    "categoryId": "1",
+    "categoryName": "Denim Jeans",
+    "description": "Denim jeans",
+    "Products": [
+      {
+        "productId": ""
+      },
+      {"productId": ""}
+    ]
+
+  },{
+    "categoryId": "2",
+    "categoryName": "Top",
+    "description": "Tops that are not tshirts.",
+    "Products":[
+      {
+        "productId": ""
+      }
+    ]
+  },
+  {
+    "categoryId": "3",
+    "categoryName": "Top",
+    "description": "Tops that are not tshirts.",
+    "Products":[
+      {
+        "productId": ""
+      }
+    ]
+  },
+  {
+    "categoryId": "4",
+    "categoryName": "Top Tshirt",
+    "description": "Tops that are tshirts.",
+    "Products":[
+      {
+        "productId": ""
+      }
+    ]
+  },
+  {
+    "categoryId": "5",
+    "categoryName": "Shorts",
+    "description": "Bottom pieces that are short.",
+    "Products":[
+      {
+        "productId": ""
+      }
+    ]
+  },
+  {
+    "categoryId": "6",
+    "categoryName": "Dress",
+    "description": "Dresses",
+    "Products":[
+      {
+        "productId": ""
+      }
+    ]
+  },
+  {
+    "categoryId": "7",
+    "categoryName": "Skirt",
+    "description": "Skirts",
+    "Products":[
+      {
+        "productId": ""
+      }
+    ]
+  }
+
+]
