@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User (Customers) Model
+model Users {
+  userId           String     @id
+  email            String     @unique
+  passwordHash     String
+  firstName        String
+  lastName         String
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  Reviews          Reviews[] // each user can have multiple reviews
+  Orders           Orders[]
+  Cart             Cart?
+  FavoriteProducts Products[]
+}
+
+model Products {
+  productId     String   @id
+  name          String
+  description   String
+  price         Float
+  stockQuantity Int
+  imageURL      String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  Categories      Categories[]
+  ProductVariants ProductVariant[] // Products can have multiple variants
+  Reviews         Reviews[]
+  OrderItems      OrderItems[]
+  Users           Users[]
+}
+
+model ProductVariant {
+  variantId     String      @id
+  productId     String // Foreign key to the product
+  sizeId        String // Foreign key to the size
+  colorId       String // Foreign key to the color
+  price         Float
+  stockQuantity Int
+  Product       Products    @relation(fields: [productId], references: [productId])
+  size          Size        @relation(fields: [sizeId], references: [sizeId])
+  color         Color       @relation(fields: [colorId], references: [colorId])
+  CartItems     CartItems[]
+}
+
+model Size {
+  sizeId         String           @id
+  name           String // e.g., XS, S, M, L, XL
+  ProductVariant ProductVariant[]
+}
+
+model Color {
+  colorId        String           @id
+  name           String //e.g., indigo, black, white, gray, red, blue, floral pattern1, floral pattern2
+  ProductVariant ProductVariant[]
+}
+
+model Reviews {
+  reviewId  String   @id
+  userId    String
+  productId String
+  rating    Float
+  comment   String
+  createdAt DateTime
+  User      Users    @relation(fields: [userId], references: [userId]) // foreign key
+  Products  Products @relation(fields: [productId], references: [productId]) // foreign key
+}
+
+model Categories {
+  categoryId   String     @id
+  categoryName String
+  description  String
+  Product      Products[]
+}
+
+model OrderItems {
+  orderItemId Int      @id @default(autoincrement())
+  orderId     Int
+  productId   String
+  quantity    Int
+  price       Float
+  Order       Orders   @relation(fields: [orderId], references: [orderId])
+  Product     Products @relation(fields: [productId], references: [productId])
+}
+
+model Orders {
+  orderId     Int          @id @default(autoincrement())
+  userId      String
+  totalAmount Float
+  status      String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  Users       Users        @relation(fields: [userId], references: [userId])
+  OrderItems  OrderItems[]
+}
+
+model CartItems {
+  cartItemId Int    @id @default(autoincrement())
+  cartId     Int
+  productId  String
+  variantId  String
+  quantity   Int
+
+  ProductVariants ProductVariant @relation(fields: [variantId], references: [variantId])
+  Cart            Cart           @relation(fields: [cartId], references: [cartId])
+}
+
+model Cart {
+  cartId    Int         @id @default(autoincrement())
+  userId    String      @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  User      Users       @relation(fields: [userId], references: [userId])
+  CartItems CartItems[]
+}

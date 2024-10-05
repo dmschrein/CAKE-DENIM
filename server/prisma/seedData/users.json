@@ -1,0 +1,18 @@
+[
+  {
+    "userId": "1",
+    "email": "darrel@cakedenim.com",
+    "passwordHash": "CI6vd7yr1dNKEj#X",
+    "firstName": "Darrel",
+    "lastName":"Schreiner",
+    "createdAt": "",
+    "Reviews": [
+      {},
+      {}
+    ],
+    "Orders": [],
+    "Cart": {},
+    "FavoriteProducts": []
+  },
+  {}
+]
