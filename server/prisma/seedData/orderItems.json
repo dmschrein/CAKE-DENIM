@@ -1,0 +1,23 @@
+[
+  {
+    "orderItemId": 1,
+    "orderId": "1",
+    "variantId": "gen15-cd6f0wb0-fb8ws0-pr1d1-XS-w3",
+    "quantity": 2,
+    "price": 148.0
+  },
+  {
+    "orderItemId": 2,
+    "orderId": "2",
+    "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+    "quantity": 5,
+    "price": 148.0
+  },
+  {
+    "orderItemId": 3,
+    "orderId": "2",
+    "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+    "quantity": 3,
+    "price": 128.0
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "cartItemId": 1,
+    "cartId": 1,
+    "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+    "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-25-i1",
+    "quantity": 1
+  },
+  {
+    "cartItemId": 2,
+    "cartId": 1,
+    "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+    "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-XS-w3",
+    "quantity": 2
+  },
+  {
+    "cartItemId": 3,
+    "cartId": 2,
+    "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-w3",
+    "quantity": 1
+  },
+  {
+    "cartItemId": 4,
+    "cartId": 3,
+    "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-g4",
+    "quantity": 1
+  }
+]

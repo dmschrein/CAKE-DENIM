@@ -41,3 +41,5 @@ server/.env/
 *.tsbuildinfo
 next-env.d.ts
 node_modules
+
+server/prisma/inputData/

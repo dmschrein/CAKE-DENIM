@@ -41,21 +41,21 @@ model Products {
   Categories      Categories[]
   ProductVariants ProductVariant[] // Products can have multiple variants
   Reviews         Reviews[]
-  OrderItems      OrderItems[]
   Users           Users[]
 }
 
 model ProductVariant {
-  variantId     String      @id
+  variantId     String       @id
   productId     String // Foreign key to the product
   sizeId        String // Foreign key to the size
   colorId       String // Foreign key to the color
   price         Float
   stockQuantity Int
-  Product       Products    @relation(fields: [productId], references: [productId])
-  size          Size        @relation(fields: [sizeId], references: [sizeId])
-  color         Color       @relation(fields: [colorId], references: [colorId])
+  Product       Products     @relation(fields: [productId], references: [productId])
+  size          Size         @relation(fields: [sizeId], references: [sizeId])
+  color         Color        @relation(fields: [colorId], references: [colorId])
   CartItems     CartItems[]
+  OrderItems    OrderItems[]
 }
 
 model Size {
@@ -89,13 +89,13 @@ model Categories {
 }
 
 model OrderItems {
-  orderItemId Int      @id @default(autoincrement())
-  orderId     Int
-  productId   String
-  quantity    Int
-  price       Float
-  Order       Orders   @relation(fields: [orderId], references: [orderId])
-  Product     Products @relation(fields: [productId], references: [productId])
+  orderItemId    Int            @id @default(autoincrement())
+  orderId        Int
+  variantId      String
+  quantity       Int
+  price          Float
+  Order          Orders         @relation(fields: [orderId], references: [orderId])
+  ProductVariant ProductVariant @relation(fields: [variantId], references: [variantId])
 }
 
 model Orders {
