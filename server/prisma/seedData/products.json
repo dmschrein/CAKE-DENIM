@@ -1,531 +1,2737 @@
 [
   {
-    "productId": "cbs1-cd4f2fb2-w31111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "Cakebabe T-shirt",
-    "description": "Cakebabe White XS T-shirt",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+    "name": "The Nightingale",
+    "description": "Raw Relaxed Skinny - Midrise with Contour Waistband",
+    "price": 178,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "jn001",
+        "categoryName": "Jeans",
+        "description": "Jeans"
+      },
+      {
+        "categoryId": "bm001",
+        "categoryName": "Bottoms",
+        "description": "Bottoms"
+      },
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "24",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-25-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "25",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-26-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "26",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-27-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "27",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-28-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "28",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-29-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "29",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-30-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "30",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-31-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "31",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-32-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "32",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-33-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "33",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-34-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "34",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-35-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "35",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-36-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "36",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "24P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-25P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "25P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-26P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "26P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-27P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "27P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-28P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "28P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-29P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "29P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-30P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "30P",
+        "colorId": "i1",
+        "price": null,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-31P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "31P",
+        "colorId": "i1",
+        "price": null,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-32P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "32P",
+        "colorId": "i1",
+        "price": null,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-33P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "33P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-34P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "34P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-35P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "35P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-36P-i1",
+        "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+        "sizeId": "36P",
+        "colorId": "i1",
+        "price": 178,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "cbs1-cd4f2fb2-w31111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "Cakebabe T-shirt",
-    "description": "Cakebabe White S T-shirt",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+    "name": "The Morrison",
+    "description": "Classic Dark Wash Skinny - Midrise with Contour Waistband",
+    "price": 198,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "jn001",
+        "categoryName": "Jeans",
+        "description": "Jeans"
+      },
+      {
+        "categoryId": "bm001",
+        "categoryName": "Bottoms",
+        "description": "Bottoms"
+      },
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-24-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "24",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-25-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "25",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-26-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "26",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-27-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "27",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-28-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "28",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-29-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "29",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-30-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "30",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-31-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "31",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-32-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "32",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-33-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "33",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-34-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "34",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-35-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "35",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-36-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "36",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-24P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "24P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-25P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "25P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-26P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "26P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-27P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "27P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-28P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "28P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-29P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "29P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-30P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "30P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-31P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "31P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-32P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "32P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-33P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "33P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-34P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "34P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-35P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "35P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-36P-i1",
+        "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+        "sizeId": "36P",
+        "colorId": "i1",
+        "price": 198,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "cbs1-cd4f2fb2-w31111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "Cakebabe T-shirt",
-    "description": "Cakebabe White M T-shirt",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+    "name": "The Hershel",
+    "description": "Light Wash Distressed Skinny - Midrise with Contour Waistband",
+    "price": 228,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "jn001",
+        "categoryName": "Jeans",
+        "description": "Jeans"
+      },
+      {
+        "categoryId": "bm001",
+        "categoryName": "Bottoms",
+        "description": ""
+      },
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-24-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "24",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-25-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "25",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-26-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "26",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-27-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "27",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-28-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "28",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-29-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "29",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-30-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "30",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-31-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "31",
+        "colorId": "i1",
+        "price": null,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-32-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "32",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-33-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "33",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-34-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "34",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-35-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "35",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-36-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "36",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-24P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "24P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-25P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "25P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-26P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "26P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-27P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "27P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-28P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "28P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-29P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "29P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-30P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "30P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-31P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "31P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-32P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "32P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-33P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "33P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-34P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "34P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-35P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "35P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-36P-i1",
+        "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+        "sizeId": "36P",
+        "colorId": "i1",
+        "price": 228,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "cbs1-cd4f2fb2-w31111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "Cakebabe T-shirt",
-    "description": "Cakebabe White L T-shirt",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+    "name": "Cakebabe Shirt",
+    "description": "Statement Women's Tee",
+    "price": 38.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": ""
+      },
+      {
+        "categoryId": "tp002",
+        "categoryName": "Tops",
+        "description": ""
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-XS-w3",
+        "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "w3",
+        "price": 38.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-S-w3",
+        "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "w3",
+        "price": 38.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-M-w3",
+        "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "w3",
+        "price": 38.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-L-w3",
+        "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "w3",
+        "price": 38.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-XL-w3",
+        "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "w3",
+        "price": 38.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "emcs2-cd4f2fb2-w31111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "EAT MORE CAKE T-shirt",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+    "name": "Eat More Cake Shirt",
+    "description": "Statement Oversized Tee",
+    "price": 35.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": ""
+      },
+      {
+        "categoryId": "tp002",
+        "categoryName": "Tops",
+        "description": ""
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-XS-w3",
+        "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "w3",
+        "price": 35.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-S-w3",
+        "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "w3",
+        "price": 35.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-M-w3",
+        "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "w3",
+        "price": 35.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-L-w3",
+        "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "w3",
+        "price": 35.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-XL-w3",
+        "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "w3",
+        "price": 35.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "bw3-cd2f2fb4-bl21111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Blackwell Denim Bralette",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+    "name": "The Blackwell",
+    "description": "Denim Bralette - Crop Top",
+    "price": 128.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "",
+        "categoryName": "cd2",
+        "description": "",
+        "Product": []
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-XS-bl2",
+        "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+        "sizeId": "XS",
+        "colorId": "bl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-S-bl2",
+        "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+        "sizeId": "S",
+        "colorId": "bl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-M-bl2",
+        "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+        "sizeId": "M",
+        "colorId": "bl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-L-bl2",
+        "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+        "sizeId": "L",
+        "colorId": "bl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-XL-bl2",
+        "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+        "sizeId": "XL",
+        "colorId": "bl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "bar5-cd2f2fb2-w31111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Bari White Tank Top",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+    "name": "The Bari",
+    "description": "Sleeveless Tank",
+    "price": 34.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "ux003",
+        "categoryName": "Unisex",
+        "description": ""
+      },
+      {
+        "categoryId": "tp002",
+        "categoryName": "Tops",
+        "description": ""
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-w3",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "w3",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-bl2",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "bl2",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-g4",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "g4",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-r5",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "r5",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-w3",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "w3",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-bl2",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "bl2",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-g4",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "g4",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-r5",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "r5",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-w3",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "w3",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-bl2",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "bl2",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-g4",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "g4",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-r5",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "r5",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-w3",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "w3",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-bl2",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "bl2",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-g4",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "g4",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-r5",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "r5",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-w3",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "w3",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-bl2",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "bl2",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-g4",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "g4",
+        "price": 34.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-r5",
+        "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "r5",
+        "price": 34.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "bk4-cd6f7fb6-bl61111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Brescia Knit Dress",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+    "name": "The Ochoa",
+    "description": "Deep Plunge Ribbed Bodysuit",
+    "price": 78.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
-    ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
-  }, 
-  {
-    "productId": "cag6-cd2f0fb0-fl11111-0001", 
-    "Categories" :[
+    "Categories": [
       {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": ""
+      },
+      {
+        "categoryId": "tp002",
+        "categoryName": "Tops",
+        "description": ""
       }
     ],
+    "ProductVariants": [
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-w3",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "w3",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-bl2",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "bl2",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-g4",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "g4",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-r5",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "r5",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-w3",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "w3",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-bl2",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "bl2",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-g4",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "g4",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-r5",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "r5",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-w3",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "w3",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-bl2",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "bl2",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-g4",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "g4",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-r5",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "r5",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-w3",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "w3",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-bl2",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "bl2",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-g4",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "g4",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-r5",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "r5",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-w3",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "w3",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-bl2",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "bl2",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-g4",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "g4",
+        "price": 78.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-r5",
+        "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "r5",
+        "price": 78.0,
+        "stockQuantity": 100
+      }
+    ]
+  },
+  {
+    "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+    "name": "The Brescia",
+    "description": "Knitted Midi Sweater Dress",
+    "price": 84.0,
+    "stockQuantity": 100,
+    "imageURL": "",
+    "createdAt": "",
+    "updatedAt": "",
+    "Categories": [
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": ""
+      },
+      {
+        "categoryId": "ds003",
+        "categoryName": "Dress",
+        "description": ""
+      }
+    ],
+    "ProductVariants": [
+      {
+        "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-XS-b6",
+        "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "b6",
+        "price": 84.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-S-b6",
+        "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "b6",
+        "price": 84.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-M-b6",
+        "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "b6",
+        "price": 84.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-L-b6",
+        "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "b6",
+        "price": 84.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-XL-b6",
+        "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "b6",
+        "price": 84.0,
+        "stockQuantity": 100
+      }
+    ]
+  },
+  {
+    "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+    "name": "The Cagliari Skirt",
+    "description": "Satin Mini Skirt",
+    "price": 130.0,
+    "stockQuantity": 100,
+    "imageURL": "",
+    "createdAt": "",
+    "updatedAt": "",
+    "Categories": [
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      },
+      {
+        "categoryId": "sk001",
+        "categoryName": "Skirt",
+        "description": "Skirt"
+      },
+      {
+        "categoryId": "bm001",
+        "categoryName": "Bottoms",
+        "description": "Bottoms"
+      }
+    ],
+    "ProductVariants": [
+      {
+        "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-XS-dfl1",
+        "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "dfl1",
+        "price": 130.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-S-dfl1",
+        "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "dfl1",
+        "price": 130.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-M-dfl1",
+        "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "dfl1",
+        "price": 130.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-L-dfl1",
+        "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "dfl1",
+        "price": 130.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-XL-dfl1",
+        "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "dfl1",
+        "price": 130.0,
+        "stockQuantity": 100
+      }
+    ]
+  },
+  {
+    "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
     "name": "The Cagliari Blouse",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "description": "Satin Button Up Top",
+    "price": 150.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
-    ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
-  },
-  {
-    "productId": "cag7-cd7f0fb0-fl11111-0001", 
-    "Categories" :[
+    "Categories": [
       {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": ""
+      },
+      {
+        "categoryId": "tp002",
+        "categoryName": "Tops",
+        "description": ""
       }
     ],
-    "name": "The Cagliari Blouse",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
-    "imageURL": "",
-    "createdAt": "",
-    "updatedAt": "",
-    "Reviews": [
-      {}
-    ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-XS-dfl1",
+        "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "dfl1",
+        "price": 150.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-S-dfl1",
+        "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "dfl1",
+        "price": 150.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-M-dfl1",
+        "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "dfl1",
+        "price": 150.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-L-dfl1",
+        "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "dfl1",
+        "price": 150.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-XL-dfl1",
+        "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "dfl1",
+        "price": 150.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "cleo8-cd1f1fb1-i1824p11-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Cleo Gold Foil Denim Jeans",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+    "name": "The Cleo",
+    "description": "Gold Finish Denim Jeans - Midrise with Contour Waistband",
+    "price": 248.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "bm001",
+        "categoryName": "Bottoms",
+        "description": "Bottoms"
+      },
+      {
+        "categoryId": "jn001",
+        "categoryName": "Jeans",
+        "description": "Jeans"
+      },
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-24-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "24",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-25-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "25",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-26-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "26",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-27-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "27",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-28-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "28",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-29-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "29",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-30-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "30",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-31-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "31",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-32-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "32",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-33-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "33",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-34-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "34",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-35-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "35",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-36-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "36",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-24P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "24P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-25P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "25P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-26P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "26P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-27P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "27P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-28P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "28P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-29P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "29P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-30P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "30P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-31P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "31P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-32P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "32P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-33P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "33P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-34P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "34P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-35P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "35P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "cleo12-cd1f1wb2-fb1ws0-pr1d1-36P-gld",
+        "productId": "cleo12-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "36P",
+        "colorId": "gld",
+        "price": 248.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "faw9-cd2f0fb5-i17111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Fawcett Washed Denim Shirt",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+    "name": "The Joan",
+    "description": "Silver Finish Denim Jeans - Midrise with Contour Waistband",
+    "price": 248.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "bm001",
+        "categoryName": "Bottoms",
+        "description": "Bottoms"
+      },
+      {
+        "categoryId": "jn001",
+        "categoryName": "Jeans",
+        "description": "Jeans"
+      },
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-24-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "24",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-25-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "25",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-26-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "26",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-27-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "27",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-28-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "28",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-29-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "29",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-30-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "30",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-31-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "31",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-32-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "32",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-33-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "33",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-34-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "34",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-35-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "35",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-36-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "36",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-24P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "24P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-25P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "25P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-26P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "26P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-27P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "27P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-28P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "28P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-29P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "29P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-30P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "30P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-31P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "31P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-32P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "32P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-33P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "33P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-34P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "34P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-35P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "35P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+
+      {
+        "variantId": "jn13-cd1f1wb2-fb1ws0-pr1d1-36P-slv",
+        "productId": "jn13-cd1f1wb2-fb1ws0-pr1d1",
+        "sizeId": "36P",
+        "colorId": "slv",
+        "price": 248.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "fray10-cd3f5fb0-i17111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Fray Denim Jacket",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "fry14-cd3f0wb0-fb0ws0-pr1d1",
+    "name": "The Fray",
+    "description": "Denim Jacket",
+    "price": 238.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "jk003",
+        "categoryName": "Jacket",
+        "description": "Jacket"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "fry14-cd3f0wb0-fb0ws0-pr1d1-XS-i1",
+        "productId": "fry14-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "i1",
+        "price": 238.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "fry14-cd3f0wb0-fb0ws0-pr1d1-S-i1",
+        "productId": "fry14-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "i1",
+        "price": 238.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "fry14-cd3f0wb0-fb0ws0-pr1d1-M-i1",
+        "productId": "fry14-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "i1",
+        "price": 238.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "fry14-cd3f0wb0-fb0ws0-pr1d1-L-i1",
+        "productId": "fry14-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "i1",
+        "price": 238.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "fry14-cd3f0wb0-fb0ws0-pr1d1-XL-i1",
+        "productId": "fry14-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "i1",
+        "price": 238.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "gen11-cd6f0fb0-fl21111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Genoa Dress",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "gen15-cd6f0wb0-fb8ws0-pr1d1",
+    "name": "The Genoa",
+    "description": "Ruffled Lace Mini Dress",
+    "price": 148.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      },
+      {
+        "categoryId": "ds003",
+        "categoryName": "Dress",
+        "description": "Dress"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "gen15-cd6f0wb0-fb8ws0-pr1d1-XS-w3",
+        "productId": "gen15-cd6f0wb0-fb8ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "w3",
+        "price": 148.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "gen15-cd6f0wb0-fb8ws0-pr1d1-S-w3",
+        "productId": "gen15-cd6f0wb0-fb8ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "w3",
+        "price": 148.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "gen15-cd6f0wb0-fb8ws0-pr1d1-M-w3",
+        "productId": "gen15-cd6f0wb0-fb8ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "w3",
+        "price": 148.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "gen15-cd6f0wb0-fb8ws0-pr1d1-L-w3",
+        "productId": "gen15-cd6f0wb0-fb8ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "w3",
+        "price": 148.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "gen15-cd6f0wb0-fb8ws0-pr1d1-XL-w3",
+        "productId": "gen15-cd6f0wb0-fb8ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "w3",
+        "price": 148.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "her12-cd1f1fb1-i132411-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Hershel Midrise Distressed Jean",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+    "name": "The Luna",
+    "description": "Floral Ruffled Mini Dress",
+    "price": 128.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      },
+      {
+        "categoryId": "ds003",
+        "categoryName": "Dress",
+        "description": "Dress"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-XS-w3",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "w3",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-XS-fl2",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "fl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-S-w3",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "w3",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-S-fl2",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "fl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-M-w3",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "w3",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-M-fl2",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "fl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-L-w3",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "w3",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-L-fl2",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "fl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-XL-w3",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "w3",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "lun16-cd6f0wb0-fb0ws0-pr1d1-XL-fl2",
+        "productId": "lun16-cd6f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "fl2",
+        "price": 128.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "jn13-cd1f1fb1-i16111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Joan Silver Midrise Jean",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+    "name": "The Ravenna",
+    "description": "Frayed Hem Highrise Denim Shorts",
+    "price": 128.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "w001",
+        "categoryName": "Womens",
+        "description": "Womens"
+      },
+      {
+        "categoryId": "sh001",
+        "categoryName": "Shorts",
+        "description": "Shorts"
+      },
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-24-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "24",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-25-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "25",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-26-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "26",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-27-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "27",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-28-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "28",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-29-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "29",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-30-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "30",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-31-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "31",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-32-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "32",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-33-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "33",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-34-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "34",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-35-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "35",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-36-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "36",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-24P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "24P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-25P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "25P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-26P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "26P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-27P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "27P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-28P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "28P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-29P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "29P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-30P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "30P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-31P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "31P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-32P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "32P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-33P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "33P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-34P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "34P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-35P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "35P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "rav17-cd5f0wb1-fb0ws6-pr1d1-36P-i1",
+        "productId": "rav17-cd5f0wb1-fb0ws6-pr1d1",
+        "sizeId": "36P",
+        "colorId": "i1",
+        "price": 128.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "kd14-cd3f5fb4-i11211-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Kennedy Convertible Denim Jacket",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "per18-cd2f5wb0-fb5ws0-pr1d1",
+    "name": "The Peron",
+    "description": "Lightweight Raw Denim Shirt",
+    "price": 248.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "tps002",
+        "categoryName": "Tops",
+        "description": "Tops"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "per18-cd2f5wb0-fb5ws0-pr1d1-XS-i1",
+        "productId": "per18-cd2f5wb0-fb5ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "i1",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "per18-cd2f5wb0-fb5ws0-pr1d1-S-i1",
+        "productId": "per18-cd2f5wb0-fb5ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "i1",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "per18-cd2f5wb0-fb5ws0-pr1d1-M-i1",
+        "productId": "per18-cd2f5wb0-fb5ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "i1",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "per18-cd2f5wb0-fb5ws0-pr1d1-L-i1",
+        "productId": "per18-cd2f5wb0-fb5ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "i1",
+        "price": 248.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "per18-cd2f5wb0-fb5ws0-pr1d1-XL-i1",
+        "productId": "per18-cd2f5wb0-fb5ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "i1",
+        "price": 248.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "lun15-cd6f0fb0-fl31111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Luna Dress",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "faw19-cd2f0wb0-fb5ws6-pr1d1",
+    "name": "The Fawcett",
+    "description": "Lightweight Washed Denim Shirt",
+    "price": 228.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "tp002",
+        "categoryName": "Tops",
+        "description": "Tops"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "faw19-cd2f0wb0-fb5ws6-pr1d1-XS-i1",
+        "productId": "faw19-cd2f0wb0-fb5ws6-pr1d1",
+        "sizeId": "XS",
+        "colorId": "i1",
+        "price": 228.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "faw19-cd2f0wb0-fb5ws6-pr1d1-S-i1",
+        "productId": "faw19-cd2f0wb0-fb5ws6-pr1d1",
+        "sizeId": "S",
+        "colorId": "i1",
+        "price": 228.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "faw19-cd2f0wb0-fb5ws6-pr1d1-M-i1",
+        "productId": "faw19-cd2f0wb0-fb5ws6-pr1d1",
+        "sizeId": "M",
+        "colorId": "i1",
+        "price": 228.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "faw19-cd2f0wb0-fb5ws6-pr1d1-L-i1",
+        "productId": "faw19-cd2f0wb0-fb5ws6-pr1d1",
+        "sizeId": "L",
+        "colorId": "i1",
+        "price": 228.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "faw19-cd2f0wb0-fb5ws6-pr1d1-XL-i1",
+        "productId": "faw19-cd2f0wb0-fb5ws6-pr1d1",
+        "sizeId": "XL",
+        "colorId": "i1",
+        "price": 228.0,
+        "stockQuantity": 100
+      }
+    ]
   },
   {
-    "productId": "mor16-cd1f1fb1-i182411-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Morrison Midrise Dark Wash Denim",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "ken20-cd3f5wb0-fb4ws0-pr1d1",
+    "name": "The Kennedy",
+    "description": "Convertible Denim Jacket - Oversized Jacket with Crop Option",
+    "price": 320.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
-    ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
-  },
-  
-  {
-    "productId": "rav18-cd5f0fb0-i172411-0001", 
-    "Categories" :[
+    "Categories": [
       {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "jk003",
+        "categoryName": "Jacket",
+        "description": "Jacket"
       }
     ],
-    "name": "The Ravenna Light Wash Denim Shorts",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
-    "imageURL": "",
-    "createdAt": "",
-    "updatedAt": "",
-    "Reviews": [
-      {}
-    ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
-  },
-  {
-    "productId": "per19-cd2f5fb5-i112411-0001", 
-    "Categories" :[
+    "ProductVariants": [
       {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
+        "variantId": "ken20-cd3f5wb0-fb4ws0-pr1d1-XS-i1",
+        "productId": "ken20-cd3f5wb0-fb4ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "i1",
+        "price": 320.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ken20-cd3f5wb0-fb4ws0-pr1d1-S-i1",
+        "productId": "ken20-cd3f5wb0-fb4ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "i1",
+        "price": 320.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ken20-cd3f5wb0-fb4ws0-pr1d1-M-i1",
+        "productId": "ken20-cd3f5wb0-fb4ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "i1",
+        "price": 320.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ken20-cd3f5wb0-fb4ws0-pr1d1-L-i1",
+        "productId": "ken20-cd3f5wb0-fb4ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "i1",
+        "price": 320.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "ken20-cd3f5wb0-fb4ws0-pr1d1-XL-i1",
+        "productId": "ken20-cd3f5wb0-fb4ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "i1",
+        "price": 320.0,
+        "stockQuantity": 100
       }
-    ],
-    "name": "The Peron Raw Denim Shirt",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
-    "imageURL": "",
-    "createdAt": "",
-    "updatedAt": "",
-    "Reviews": [
-      {}
-    ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    ]
   },
   {
-    "productId": "zor20-cd3f5fb0-i17111-0001", 
-    "Categories" :[
-      {
-        "categoryId":  "",
-        "categoryName": "",
-        "description":  "",
-        "Product": []   
-      }
-    ],
-    "name": "The Zora Denim Jacket",
-    "description": "",
-    "price": "",
-    "stockQuantity": "",
+    "productId": "zor21-cd3f0wb0-fb0ws0-pr1d1",
+    "name": "The Zora",
+    "description": "French Terry with Denim Jacket",
+    "price": 294.0,
+    "stockQuantity": 100,
     "imageURL": "",
     "createdAt": "",
     "updatedAt": "",
-    "Reviews": [
-      {}
+    "Categories": [
+      {
+        "categoryId": "dm001",
+        "categoryName": "Denim",
+        "description": "Denim"
+      },
+      {
+        "categoryId": "jk003",
+        "categoryName": "Jacket",
+        "description": "Jacket"
+      }
     ],
-    "OrderItems": [],
-    "CartItems": [],
-    "Users": []
+    "ProductVariants": [
+      {
+        "variantId": "zor21-cd3f0wb0-fb0ws0-pr1d1-XS-i1",
+        "productId": "zor21-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XS",
+        "colorId": "i1",
+        "price": 294.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "zor21-cd3f0wb0-fb0ws0-pr1d1-S-i1",
+        "productId": "zor21-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "S",
+        "colorId": "i1",
+        "price": 294.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "zor21-cd3f0wb0-fb0ws0-pr1d1-M-i1",
+        "productId": "zor21-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "M",
+        "colorId": "i1",
+        "price": 294.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "zor21-cd3f0wb0-fb0ws0-pr1d1-L-i1",
+        "productId": "zor21-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "L",
+        "colorId": "i1",
+        "price": 294.0,
+        "stockQuantity": 100
+      },
+      {
+        "variantId": "zor21-cd3f0wb0-fb0ws0-pr1d1-XL-i1",
+        "productId": "zor21-cd3f0wb0-fb0ws0-pr1d1",
+        "sizeId": "XL",
+        "colorId": "i1",
+        "price": 294.0,
+        "stockQuantity": 100
+      }
+    ]
   }
 ]

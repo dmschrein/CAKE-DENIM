@@ -5,14 +5,30 @@
     "passwordHash": "CI6vd7yr1dNKEj#X",
     "firstName": "Darrel",
     "lastName":"Schreiner",
-    "createdAt": "",
-    "Reviews": [
-      {},
-      {}
-    ],
-    "Orders": [],
-    "Cart": {},
-    "FavoriteProducts": []
+    "createdAt": ""
   },
-  {}
+  {
+    "userId": "2",
+    "email": "dominique@cakedenim.com",
+    "passwordHash": "",
+    "firstName": "Dominique",
+    "lastName":"Schreiner",
+    "createdAt": ""
+  },
+  {
+    "userId": "3",
+    "email": "evie.flores@gmail.com",
+    "passwordHash": "",
+    "firstName": "Evelyn",
+    "lastName":"Schreiner",
+    "createdAt": ""
+  },
+  {
+    "userId": "4",
+    "email": "darrelmskent@gmail.com",
+    "passwordHash": "",
+    "firstName": "Darrel",
+    "lastName":"Kent",
+    "createdAt": ""
+  }
 ]

@@ -1,6 +1,7 @@
-import csvParser from "csv-parser";
 import fs from "fs";
+import csvParser from "csv-parser";
 
+// Interface for Product and Variants
 interface ProductAttributes {
   productCode: string;
   categoryCode: string;
@@ -17,31 +18,17 @@ interface ProductAttributes {
   imageURL: string;
   createdAt: string;
   updatedAt: string;
-  categories: [];
-  variantSizes: [];
-  variantColors: [];
+  variantSizes: string[];
+  variantColors: string[];
 }
 
-interface ProductJSONFormat {
+interface ProductVariantAttributes {
+  variantId: string;
   productId: string;
-  name: string;
-  description: string;
+  sizeId: string;
+  colorId: string;
   price: number;
   stockQuantity: number;
-  imageURL: string;
-  createdAt: string;
-  updatedAt: string;
-  Categories: Array<object>;
-  ProductVariants: Array<object>;
-  Reviews: Array<object>;
-  OrderItems: Array<object>;
-  Users: Array<object>;
-}
-
-// Interface for variant attributes (now used properly)
-interface VariantAttributes {
-  sizeCode: string;
-  colorCode: string;
 }
 
 // Function to generate Product IDs based on fields
@@ -58,30 +45,44 @@ const generateProductId = ({
   return `${productCode}-${categoryCode}${fitCode}${waistbandCode}-${fabricCode}${washFinishCode}-${productionRound}${destinationCode}`;
 };
 
-// Function to generate Variant ID
-const generateVariantId = (sizeCode: string, colorCode: string): string => {
-  console.log("Variant Ids generated: ", + ${sizeCode}-${colorCode});
-  return `${sizeCode}-${colorCode}`;
+// Function to generate Variant IDs based on size and color codes
+const generateVariantId = ({
+  productId,
+  sizeId,
+  colorId,
+}: {
+  productId: string;
+  sizeId: string;
+  colorId: string;
+}): string => {
+  return `${productId}-${sizeId}-${colorId}`;
 };
 
-// Generate the product variants from sizes and colors
+// Generate the product variants
 const generateVariants = (
   sizes: string[],
   colors: string[],
   productId: string,
   price: number
-): object[] => {
-  const variants: object[] = [];
+): ProductVariantAttributes[] => {
+  const variants: ProductVariantAttributes[] = [];
   sizes.forEach((size) => {
     colors.forEach((color) => {
-      const variantId = generateVariantId(size, color); // Pass sizeCode and colorCode as separate strings
+      const variantId = generateVariantId({
+        productId,
+        sizeId: size,
+        colorId: color,
+      });
+      console.log(
+        `Generating variant: ${variantId} for product ${productId} (Size: ${size}, Color: ${color})`
+      );
       variants.push({
         variantId,
         productId,
         sizeId: size,
         colorId: color,
-        price: price, // use product price for now
-        stockQuantity: 0, // Placeholder for stock quantity
+        price,
+        stockQuantity: 100, // Example default stock, you can replace this value
       });
     });
   });
@@ -90,101 +91,88 @@ const generateVariants = (
 
 // Parse the CSV and generate product JSON
 const generateProductsFromCSV = () => {
-  const products: ProductJSONFormat[] = [];
-  const variantsData: { [key: string]: VariantAttributes[] } = {}; // Store variants
+  const products: any[] = [];
 
-  // path to the CSV file
+  // Path to the CSV file
   const productsCsvPath = "./inputData/ProductsTable.csv";
-  const variantsCsvPath = "./inputData/VariantCodes.csv";
 
   // Ensure the seedData directory exists, create it if not
   if (!fs.existsSync("./seedData")) {
     fs.mkdirSync("./seedData");
   }
 
-  // Read variants CSV file and store variants data
-  fs.createReadStream(variantsCsvPath)
+  fs.createReadStream(productsCsvPath)
     .pipe(csvParser())
     .on("data", (row: any) => {
-      const productCode = row.ProductCode;
-      if (!variantsData[productCode]) {
-        variantsData[productCode] = [];
-      }
-      // Push the size and color data into the variant array for this product
-      variantsData[productCode].push({
-        sizeCode: row.SizeCode, // Correctly extracting SizeCode and ColorCode
-        colorCode: row.ColorCode,
-      });
+      const product: ProductAttributes = {
+        productCode: row.ProductCode,
+        categoryCode: row.Category,
+        fitCode: row.Fit,
+        waistbandCode: row.Waistband,
+        fabricCode: row.Fabric,
+        washFinishCode: row.WashFinish,
+        productionRound: row.ProductionRound,
+        destinationCode: row.Destination,
+        name: row.ProductName,
+        description: row.Description,
+        price: parseFloat(row.Price),
+        stockQuantity: parseInt(row.StockQuantity, 10),
+        imageURL: row.ImageURL,
+        createdAt: row.CreatedAt,
+        updatedAt: row.UpdatedAt,
+        variantSizes: row.VariantSizes.split(", "), // Assumed sizes are comma-separated
+        variantColors: row.VariantColors.split(", "), // Assumed colors are comma-separated
+      };
+
+      const productId = generateProductId(product);
+      console.log(`Processing product: ${productId} - ${product.name}`);
+
+      const productVariants = generateVariants(
+        product.variantSizes,
+        product.variantColors,
+        productId,
+        product.price
+      );
+
+      // Structure the product data for JSON format
+      const productJSON = {
+        productId,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        stockQuantity: product.stockQuantity,
+        imageURL: product.imageURL,
+        createdAt: product.createdAt,
+        updatedAt: product.updatedAt,
+        Categories: [
+          {
+            categoryId: "",
+            categoryName: row.Category,
+            description: "",
+            Product: [],
+          },
+        ],
+        ProductVariants: productVariants,
+        Reviews: [],
+        OrderItems: [],
+        Users: [],
+      };
+
+      console.log(
+        `Generated ${productVariants.length} variants for product ${productId}`
+      );
+      products.push(productJSON);
     })
     .on("end", () => {
-      // Read products CSV file and generate products JSON
-      fs.createReadStream(productsCsvPath)
-        .pipe(csvParser())
-        .on("data", (row: any) => {
-          const product: ProductAttributes = {
-            productCode: row.ProductCode,
-            categoryCode: row.Category,
-            fitCode: row.Fit,
-            waistbandCode: row.Waistband,
-            fabricCode: row.Fabric,
-            washFinishCode: row.WashFinish,
-            productionRound: row.ProductionRound,
-            destinationCode: row.Destination,
-            name: row.ProductName,
-            description: row.Description,
-            price: parseFloat(row.Price),
-            stockQuantity: parseInt(row.StockQuantity, 10),
-            imageURL: row.ImageURL,
-            createdAt: row.CreatedAt,
-            updatedAt: row.UpdatedAt,
-            categories: row.Categories,
-            variantSizes: row.VariantSizes.split(","), // Assuming sizes are separated by commas
-            variantColors: row.VariantColors.split(","), // Assuming colors are separated by commas
-          };
-
-          const productId = generateProductId(product);
-          const productVariants = generateVariants(
-            product.variantSizes,
-            product.variantColors,
-            productId,
-            product.price
-          );
-
-          // Structure the product data for JSON format
-          const productJSON: ProductJSONFormat = {
-            productId,
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            stockQuantity: product.stockQuantity,
-            imageURL: product.imageURL,
-            createdAt: product.createdAt,
-            updatedAt: product.updatedAt,
-            Categories: [
-              {
-                categoryId: "",
-                categoryName: row.Categories,
-                description: "",
-                Product: [],
-              },
-            ],
-            ProductVariants: productVariants,
-            Reviews: [],
-            OrderItems: [],
-            Users: [],
-          };
-          products.push(productJSON);
-        })
-        .on("end", () => {
-          // Write to JSON file
-          fs.writeFileSync(
-            "./seedData/products.json",
-            JSON.stringify(products, null, 2)
-          );
-          console.log(
-            "Product data has been successfully written to seedData/products.json"
-          );
-        });
+      // Write to JSON file
+      console.log("Writing data to products.json...");
+      fs.writeFileSync(
+        "./seedData/products.json",
+        JSON.stringify(products, null, 2)
+      );
+      console.log(
+        "Product data has been successfully written to seedData/products.json"
+      );
     });
 };
 

@@ -1,0 +1,26 @@
+[
+  {
+    "orderId": 1,
+    "userId": "1",
+    "totalAmount": 500.0,
+    "status": "Processed",
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "orderId": 2,
+    "userId": "2",
+    "totalAmount": 1500.0,
+    "status": "Processed",
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "orderId": 3,
+    "userId": "3",
+    "totalAmount": 2500.0,
+    "status": "Fulfilled",
+    "createdAt": "",
+    "updatedAt": ""
+  }
+]

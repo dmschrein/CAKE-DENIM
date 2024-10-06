@@ -1,0 +1,62 @@
+[
+  {
+    "colorId": "i1",
+    "name": "Indigo"
+  },
+  {
+    "colorId": "bl2",
+    "name": "Black"
+  },
+  {
+    "colorId": "w3",
+    "name": "White"
+  },
+  {
+    "colorId": "g4",
+    "name": "Gray"
+  },
+  {
+    "colorId": "r5",
+    "name": "Red"
+  },
+  {
+    "colorId": "b6",
+    "name": "Blue"
+  },
+  {
+    "colorId": "dfl1",
+    "name": "Daisy Floral Pattern 1"
+  },
+  {
+    "colorId": "fl2",
+    "name": "Floral Pattern 2"
+  },
+  {
+    "colorId": "fl3",
+    "name": "Floral Pattern 3"
+  },
+  {
+    "colorId": "gld",
+    "name": "Gold"
+  },
+  {
+    "colorId": "slv",
+    "name": "Silver"
+  },
+  {
+    "colorId": "dkbl",
+    "name": "Dark Blue"
+  },
+  {
+    "colorId": "ltbl",
+    "name": "Light Blue"
+  },
+  {
+    "colorId": "p1",
+    "name": "Pink"
+  },
+  {
+    "colorId": "ylw1",
+    "name": "Yellow"
+  }
+]
