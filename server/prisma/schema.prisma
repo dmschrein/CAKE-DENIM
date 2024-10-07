@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User (Customers) Model
+model Users {
+  userId           String     @id
+  email            String     @unique
+  passwordHash     String
+  firstName        String
+  lastName         String
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  Reviews          Reviews[] // each user can have multiple reviews
+  Orders           Orders[]
+  Cart             Carts?
+  favoriteProducts Products[]
+}
+
+model Products {
+  productId       String              @id
+  name            String
+  description     String
+  price           Float
+  stockQuantity   Int
+  imageURL        String
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  Reviews         Reviews[]
+  Users           Users[]
+  Categories      ProductCategories[]
+  ProductVariants ProductVariants[]
+}
+
+model Variants {
+  variantId     String            @id
+  size          String // Foreign key to the size
+  color         String // Foreign key to the color
+  price         Float
+  stockQuantity Int
+  CartItems     CartItems[]
+  OrderItems    OrderItems[]
+  products      ProductVariants[]
+}
+
+model ProductVariants {
+  variantId String
+  productId String
+  product   Products @relation(fields: [productId], references: [productId])
+  variant   Variants @relation(fields: [variantId], references: [variantId])
+
+  @@id([variantId, productId])
+}
+
+model Categories {
+  categoryId   String              @id
+  categoryName String
+  description  String?
+  products     ProductCategories[]
+}
+
+model ProductCategories {
+  productId  String
+  categoryId String
+  product    Products   @relation(fields: [productId], references: [productId])
+  category   Categories @relation(fields: [categoryId], references: [categoryId])
+
+  @@id([productId, categoryId]) //Composite primary key
+}
+
+model Reviews {
+  reviewId  String   @id
+  userId    String
+  productId String
+  rating    Float
+  comment   String
+  createdAt DateTime
+  User      Users    @relation(fields: [userId], references: [userId]) // foreign key
+  Products  Products @relation(fields: [productId], references: [productId]) // foreign key
+}
+
+model OrderItems {
+  orderItemId Int      @id @default(autoincrement())
+  orderId     Int
+  variantId   String
+  quantity    Int
+  price       Float
+  Order       Orders   @relation(fields: [orderId], references: [orderId])
+  variant     Variants @relation(fields: [variantId], references: [variantId])
+}
+
+model Orders {
+  orderId     Int          @id @default(autoincrement())
+  userId      String
+  totalAmount Float
+  status      String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  Users       Users        @relation(fields: [userId], references: [userId])
+  OrderItems  OrderItems[]
+}
+
+model CartItems {
+  cartItemId Int      @id @default(autoincrement())
+  cartId     Int
+  variantId  String
+  quantity   Int
+  variants   Variants @relation(fields: [variantId], references: [variantId])
+  Cart       Carts    @relation(fields: [cartId], references: [cartId])
+}
+
+model Carts {
+  cartId    Int         @id @default(autoincrement())
+  userId    String      @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  User      Users       @relation(fields: [userId], references: [userId])
+  CartItems CartItems[]
+}

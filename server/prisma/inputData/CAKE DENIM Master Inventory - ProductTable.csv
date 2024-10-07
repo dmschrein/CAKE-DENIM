@@ -1,0 +1,22 @@
+ProductName,Description,ProductCode,Category,Fit,Waistband,Fabric,WashFinish,ProductionRound,Destination,Price,ImageURL,CreatedAt,UpdatedAt,Categories,Variant Sizes,Variant Colors
+The Nightingale,Raw Relaxed Skinny - Midrise with Contoured Waistband,ng1,cd1,f10,wb2,fb1,ws0,pr1,d1,$178,,,,"Denim, Jeans, Bottoms, Womens","24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 24P, 25P, 26P, 27P, 28P, 29P, 30P, 31P, 32P, 33P, 34P, 35P, 36P",Indigo
+The Morrison,Classic Dark Wash Skinny - Midrise with Contoured Waistband,mor2,cd1,f1,wb2,fb1,ws1,pr1,d1,$198,,,,"Denim, Jeans, Bottoms, Womens","24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 24P, 25P, 26P, 27P, 28P, 29P, 30P, 31P, 32P, 33P, 34P, 35P, 36P",Indigo
+The Hershel,Light Wash Distressed Skinny - Midrise with Contoured Waistband,her3,cd1,f1,wb2,fb1,ws2,pr1,d1,$228,,,,"Tee, Womens","24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 24P, 25P, 26P, 27P, 28P, 29P, 30P, 31P, 32P, 33P, 34P, 35P, 36P",Indigo
+Cakebabe Shirt,Statement Women's Tee,cbs4,cd4,f2,wb0,fb2,ws0,pr1,d1,$38,,,,"Tops, Womens","X-Small, Small, Medium, Large, X-Large",White
+Eat More Cake Shirt,Statement Oversized Tee,emcs5,cd4,f5,wb0,fb2,ws0,pr1,d1,$35,,,,"Tops, Unisex","X-Small, Small, Medium, Large, X-Large",White
+The Blackwell,Denim Bralette - Crop Top,bw6,cd2,f7,wb0,fb4,ws3,pr1,d1,$128,,,,"Womens, Tops","X-Small, Small, Medium, Large, X-Large",Black
+The Bari,Sleeveless Tank,bar7,cd2,f0,wb0,fb2,ws0,pr1,d1,$34,,,,"Womens, Tops","X-Small, Small, Medium, Large, X-Large","White, Black, Gray, Red"
+The Ochoa,Deep Plunge Ribbed Bodysuit,och8,cd8,f3,wb0,fb3,ws0,pr1,d1,$78,,,,"Womens, Tops","X-Small, Small, Medium, Large, X-Large","White, Black, Gray, Red"
+The Brescia,Knitted Midi Sweater Dress,bre9,cd6,f0,wb0,fb6,ws0,pr1,d1,$84,,,,"Womens, Dress","X-Small, Small, Medium, Large, X-Large",Blue
+The Cagliari Skirt,Satin Mini Skirt,cag10,cd9,f0,wb0,fb7,ws0,pr1,d1,$130,,,,"Womens, Skirt, Bottoms","X-Small, Small, Medium, Large, X-Large",Daisy Floral
+The Cagliari Blouse,Satin Button Up Top,cag11,cd2,f0,wb0,fb7,ws0,pr1,d1,$150,,,,"Womens, Tops","X-Small, Small, Medium, Large, X-Large",Daisy Floral
+The Cleo,Gold Finish Denim Jeans - Midrise with Contoured Waistband,cleo12,cd1,f1,wb2,fb1,ws0,pr1,d1,$248,,,,"Denim, Jeans, Bottoms, Womens","24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 24P, 25P, 26P, 27P, 28P, 29P, 30P, 31P, 32P, 33P, 34P, 35P, 36P","Indigo, Gold"
+The Joan,Silver Finish Denim Jeans - Midrise with Contoured Waistband,jn13,cd1,f1,wb2,fb1,ws0,pr1,d1,$248,,,,"Denim, Jeans, Bottoms, Womens","24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 24P, 25P, 26P, 27P, 28P, 29P, 30P, 31P, 32P, 33P, 34P, 35P, 36P","Indigo, Silver"
+The Fray,Denim Jacket,fry14,cd3,f0,wb0,fb0,ws0,pr1,d1,$238,,,,"Denim, Jacket","X-Small, Small, Medium, Large, X-Large",Indigo
+The Genoa,Ruffled Lace Mini Dress,gen15,cd6,f0,wb0,fb8,ws0,pr1,d1,$148,,,,"Womens, Dress","X-Small, Small, Medium, Large, X-Large",White
+The Luna,Floral Ruffled Mini Dress,lun16,cd6,f0,wb0,fb0,ws0,pr1,d1,$128,,,,"Womens, Dress","X-Small, Small, Medium, Large, X-Large","White, Floral"
+The Ravenna,Frayed Hem Highrise Denim Shorts,rav17,cd5,f0,wb1,fb0,ws6,pr1,d1,$128,,,,"Womens, Shorts, Denim","24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 24P, 25P, 26P, 27P, 28P, 29P, 30P, 31P, 32P, 33P, 34P, 35P, 36P",Indigo
+The Peron,Lightweight Raw Denim Shirt,per18,cd2,f5,wb0,fb5,ws0,pr1,d1,$248,,,,"Denim, Tops","X-Small, Small, Medium, Large, X-Large",Indigo
+The Fawcett,Lightweight Washed Denim Shirt,faw19,cd2,f0,wb0,fb5,ws6,pr1,d1,$228,,,,"Denim, Tops","X-Small, Small, Medium, Large, X-Large",Indigo
+The Kennedy,Convertible Denim Jacket - Oversized Jacket with Crop Option,ken20,cd3,f5,wb0,fb4,ws0,pr1,d1,$320,,,,"Denim, Jacket","X-Small, Small, Medium, Large, X-Large",Indigo
+The Zora,French Terry with Denim Jacket,zor21,cd3,f0,wb0,fb0,ws0,pr1,d1,$294,,,,"Denim, Jacket","X-Small, Small, Medium, Large, X-Large",Indigo
