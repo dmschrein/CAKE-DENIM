@@ -1,7 +1,6 @@
-import path from "path";
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
-
+import path from "path";
 const prisma = new PrismaClient();
 
 async function deleteAllData(orderedFileNames: string[]) {
@@ -27,23 +26,36 @@ async function main() {
   const dataDirectory = path.join(__dirname, "seedData");
 
   const orderedFileNames = [
+    "cartItems.json",
+    "orderItems.json",
+    "productCategories.json",
+    "carts.json",
+    "orders.json",
+    "productVariants.json",
     "categories.json",
+    "variants.json",
+    "reviews.json",
+    "products.json",
     "users.json",
+  ];
+
+  const orderedFileNamesSeed = [
+    "users.json",
+    "categories.json",
+    "variants.json",
     "products.json",
     "productVariants.json",
-    "color.json",
-    "size.json",
-    "cart.json",
+    "reviews.json",
     "orders.json",
+    "carts.json",
+    "productCategories.json",
     "orderItems.json",
     "cartItems.json",
-    "products.json",
-    "reviews.json",
   ];
 
   await deleteAllData(orderedFileNames);
 
-  for (const fileName of orderedFileNames) {
+  for (const fileName of orderedFileNamesSeed) {
     const filePath = path.join(dataDirectory, fileName);
     const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     const modelName = path.basename(fileName, path.extname(fileName));
@@ -59,6 +71,7 @@ async function main() {
         data,
       });
     }
+
     console.log(`Seeded ${modelName} with data from ${fileName}`);
   }
 }
