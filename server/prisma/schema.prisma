@@ -24,50 +24,59 @@ model Users {
   updatedAt        DateTime   @updatedAt
   Reviews          Reviews[] // each user can have multiple reviews
   Orders           Orders[]
-  Cart             Cart?
-  FavoriteProducts Products[]
+  Cart             Carts?
+  favoriteProducts Products[]
 }
 
 model Products {
-  productId     String   @id
-  name          String
-  description   String
-  price         Float
-  stockQuantity Int
-  imageURL      String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  Categories      Categories[]
-  ProductVariants ProductVariant[] // Products can have multiple variants
+  productId       String              @id
+  name            String
+  description     String
+  price           Float
+  stockQuantity   Int
+  imageURL        String
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
   Reviews         Reviews[]
   Users           Users[]
+  Categories      ProductCategories[]
+  ProductVariants ProductVariants[]
 }
 
-model ProductVariant {
-  variantId     String       @id
-  productId     String // Foreign key to the product
-  sizeId        String // Foreign key to the size
-  colorId       String // Foreign key to the color
+model Variants {
+  variantId     String            @id
+  size          String // Foreign key to the size
+  color         String // Foreign key to the color
   price         Float
   stockQuantity Int
-  Product       Products     @relation(fields: [productId], references: [productId])
-  size          Size         @relation(fields: [sizeId], references: [sizeId])
-  color         Color        @relation(fields: [colorId], references: [colorId])
   CartItems     CartItems[]
   OrderItems    OrderItems[]
+  products      ProductVariants[]
 }
 
-model Size {
-  sizeId         String           @id
-  name           String // e.g., XS, S, M, L, XL
-  ProductVariant ProductVariant[]
+model ProductVariants {
+  variantId String
+  productId String
+  product   Products @relation(fields: [productId], references: [productId])
+  variant   Variants @relation(fields: [variantId], references: [variantId])
+
+  @@id([variantId, productId])
 }
 
-model Color {
-  colorId        String           @id
-  name           String //e.g., indigo, black, white, gray, red, blue, floral pattern1, floral pattern2
-  ProductVariant ProductVariant[]
+model Categories {
+  categoryId   String              @id
+  categoryName String
+  description  String?
+  products     ProductCategories[]
+}
+
+model ProductCategories {
+  productId  String
+  categoryId String
+  product    Products   @relation(fields: [productId], references: [productId])
+  category   Categories @relation(fields: [categoryId], references: [categoryId])
+
+  @@id([productId, categoryId]) //Composite primary key
 }
 
 model Reviews {
@@ -81,21 +90,14 @@ model Reviews {
   Products  Products @relation(fields: [productId], references: [productId]) // foreign key
 }
 
-model Categories {
-  categoryId   String     @id
-  categoryName String
-  description  String
-  Product      Products[]
-}
-
 model OrderItems {
-  orderItemId    Int            @id @default(autoincrement())
-  orderId        Int
-  variantId      String
-  quantity       Int
-  price          Float
-  Order          Orders         @relation(fields: [orderId], references: [orderId])
-  ProductVariant ProductVariant @relation(fields: [variantId], references: [variantId])
+  orderItemId Int      @id @default(autoincrement())
+  orderId     Int
+  variantId   String
+  quantity    Int
+  price       Float
+  Order       Orders   @relation(fields: [orderId], references: [orderId])
+  variant     Variants @relation(fields: [variantId], references: [variantId])
 }
 
 model Orders {
@@ -110,17 +112,15 @@ model Orders {
 }
 
 model CartItems {
-  cartItemId Int    @id @default(autoincrement())
+  cartItemId Int      @id @default(autoincrement())
   cartId     Int
-  productId  String
   variantId  String
   quantity   Int
-
-  ProductVariants ProductVariant @relation(fields: [variantId], references: [variantId])
-  Cart            Cart           @relation(fields: [cartId], references: [cartId])
+  variants   Variants @relation(fields: [variantId], references: [variantId])
+  Cart       Carts    @relation(fields: [cartId], references: [cartId])
 }
 
-model Cart {
+model Carts {
   cartId    Int         @id @default(autoincrement())
   userId    String      @unique
   createdAt DateTime    @default(now())

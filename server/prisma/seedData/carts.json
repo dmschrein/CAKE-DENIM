@@ -1,25 +1,19 @@
 [
   {
-    "orderId": 1,
+    "cartId": 1,
     "userId": "1",
-    "totalAmount": 500.0,
-    "status": "Processed",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
-    "orderId": 2,
+    "cartId": 2,
     "userId": "2",
-    "totalAmount": 1500.0,
-    "status": "Processed",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
-    "orderId": 3,
+    "cartId": 3,
     "userId": "3",
-    "totalAmount": 2500.0,
-    "status": "Fulfilled",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
   }
