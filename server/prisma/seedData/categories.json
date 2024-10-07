@@ -1,0 +1,47 @@
+[
+  {
+    "categoryId": "dm001",
+    "categoryName": "Denim",
+    "description": "Denim Clothing"
+  },
+  {
+    "categoryId": "jn001",
+    "categoryName": "Jeans",
+    "description": "Jeans"
+  },
+  {
+    "categoryId": "bm001",
+    "categoryName": "Bottoms",
+    "description": "Bottoms"
+  },
+  {
+    "categoryId": "w001",
+    "categoryName": "Womens",
+    "description": "Womens"
+  },
+  {
+    "categoryId": "tp002",
+    "categoryName": "Tops",
+    "description": "Tops"
+  },
+  {
+    "categoryId": "ux003",
+    "categoryName": "Unisex",
+    "description": "Unisex"
+  },
+  {
+    "categoryId": "ds003",
+    "categoryName": "Dress",
+    "description": "Dress"
+  },
+  {
+    "categoryId": "jk003",
+    "categoryName": "Jacket",
+    "description": "Jacket"
+  },
+  {
+    "categoryId": "sh001",
+    "categoryName": "Shorts",
+    "description": "Shorts"
+  }
+]

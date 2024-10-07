@@ -1,0 +1,26 @@
+[
+  {
+    "cartItemId": 1,
+    "cartId": 1,
+    "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
+    "quantity": 1
+  },
+  {
+    "cartItemId": 2,
+    "cartId": 1,
+    "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
+    "quantity": 2
+  },
+  {
+    "cartItemId": 3,
+    "cartId": 2,
+    "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
+    "quantity": 1
+  },
+  {
+    "cartItemId": 4,
+    "cartId": 3,
+    "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
+    "quantity": 1
+  }
+]

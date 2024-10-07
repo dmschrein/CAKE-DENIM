@@ -1,0 +1,18 @@
+[
+  {
+    "reviewId": "1",
+    "userId": "1",
+    "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+    "rating": 3.5,
+    "comment": "Loved it.",
+    "createdAt": "2024-01-08T22:08:30Z"
+  },
+  {
+    "reviewId": "2",
+    "userId": "2",
+    "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+    "rating": 4.5,
+    "comment": "Loved it.",
+    "createdAt": "2024-01-09T22:08:30Z"
+  }
+]

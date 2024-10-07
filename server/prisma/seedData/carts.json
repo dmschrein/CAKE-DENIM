@@ -1,0 +1,20 @@
+[
+  {
+    "cartId": 1,
+    "userId": "1",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
+  },
+  {
+    "cartId": 2,
+    "userId": "2",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
+  },
+  {
+    "cartId": 3,
+    "userId": "3",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
+  }
+]
