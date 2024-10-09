@@ -3,6 +3,7 @@
 # dependencies
 client/node_modules/
 server/node_modules/
+client/public
 client/dist/
 server/dist/
 client/.pnp
@@ -22,7 +23,6 @@ client/.next/
 # misc
 .DS_Store
 *.pem
-client/public/assets
 
 # debug
 npm-debug.log*
