@@ -44,3 +44,12 @@ node_modules
 
 server/prisma/inputData/
 jsonSeedData/
+
+# Sentry
+client/sentry.client.config.ts
+client/sentry.edge.config.ts
+client/sentry.server.config.ts
+client/src/instrumentation.ts
+client/src/app/global-error.tsx
+client/src/app/sentry-example-page
+client/src/app/api
