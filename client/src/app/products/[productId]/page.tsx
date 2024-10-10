@@ -1,16 +1,17 @@
+// client/src/app/products/[productsId]/page.tsx
 "use client";
 
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation"; // Use useParams instead of useRouter
 import { useGetProductByIdQuery } from "@/state/api";
 
 const ProductsPage = () => {
-  const router = useRouter();
-  const { productId } = router.query;
+  const { productId } = useParams(); // Retrieve productId directly
 
-  // Find the product by productId
+  console.log("Product Detail Page Product ID: ", productId);
+  // Fetch product by productId
   const {
     data: product,
     error,
@@ -30,7 +31,7 @@ const ProductsPage = () => {
       <div className="flex flex-row space-x-2">
         {/* Product Main Image */}
         <Image
-          src={product.image || "/placeholder.png"}
+          src={product.imageURL || "/assets/placeholder.png"}
           alt={product.name}
           width={600}
           height={800}
@@ -38,25 +39,25 @@ const ProductsPage = () => {
         {/* Thumbnails */}
         <div className="flex flex-col space-y-2">
           <Image
-            src={product.image || "/placeholder.png"}
+            src={product.imageURL || "/assets/placeholder.png"}
             alt="Thumbnail"
             width={100}
             height={150}
           />
           <Image
-            src={product.image || "/placeholder.png"}
+            src={product.imageURL || "/assets/placeholder.png"}
             alt="Thumbnail"
             width={100}
             height={150}
           />
           <Image
-            src={product.image || "/placeholder.png"}
+            src={product.imageURL || "/assets/placeholder.png"}
             alt="Thumbnail"
             width={100}
             height={150}
           />
           <Image
-            src={product.image || "/placeholder.png"}
+            src={product.imageURL || "/assets/placeholder.png"}
             alt="Thumbnail"
             width={100}
             height={150}
@@ -69,17 +70,17 @@ const ProductsPage = () => {
         <p className="text-2xl text-gray-700 mt-4">${product.price}</p>
 
         {/* Afterpay */}
-        <p className="text-sm text-gary-500 mt-2">
+        <p className="text-sm text-gray-500 mt-2">
           Pay as low as <strong>$70/mo</strong> with Klarna, or{" "}
           <strong>$103.65/mo</strong> with Afterpay.
         </p>
         {/* Product Description */}
         <p className="mt-6">{product.description}</p>
-        <ul className="list-disc list-inside mt-4">
+        {/* <ul className="list-disc list-inside mt-4">
           {product.features?.map((feature, index) => (
             <li key={index}>{feature}</li>
           ))}
-        </ul>
+        </ul> */}
 
         {/* Color Selection */}
         <div className="mt-4">

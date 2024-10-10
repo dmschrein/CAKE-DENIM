@@ -34,8 +34,9 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
             {collectionName}
           </h1>
         </div>
-        {/* Collection Section */}
-        // TODO: Include when we have more categories and add subcategories
+        {/* Collection Section
+         * TODO: Include when we have more categories and add subcategories
+         */}
         {/* <div className="flex justify-center">
           <div className="mt-20 px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-8">
             {products.map((product) => (
@@ -45,7 +46,7 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
                   product={{
                     title: product.name,
                     price: `$${product.price.toFixed(2)}`, // Ensure price is a string with formatting
-                    image: "/assets/nightingale.png", // TODO: Update images for correct subcategory
+                    image: product.imageURL, // TODO: Update images for correct subcategory
                     category: product.category || "Uncategorized",
                   }}
                 />
@@ -58,10 +59,10 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
             <CollectionCard
               key={product.productId}
               product={{
-                id: Number(product.productId), // Convert productId to a number for CollectionCard
+                productId: product.productId,
                 title: product.name,
                 price: `$${product.price.toFixed(2)}`, // Convert price to a string with two decimal places
-                image: "/assets/nightingale.png", //TODO: update image path later
+                image: product.imageURL, //TODO: update image path later
               }}
             />
           ))}

@@ -1,3 +1,5 @@
+// client/src/app/products/[productsId]/layout.tsx
+
 import React from "react";
 
 type LayoutProps = {

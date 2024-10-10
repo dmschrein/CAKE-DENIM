@@ -81,11 +81,9 @@ export const api = createApi({
     ),
     getProductById: build.query<Product, string>({
       query: (productId) => ({
-        url: `/products/$productId`,
+        url: `/products/${productId}`,
       }),
-      providesTags: (result, error, productId) => [
-        { type: "Products", id: productId },
-      ],
+      providesTags: (_, __, productId) => [{ type: "Products", id: productId }],
     }),
 
     /*

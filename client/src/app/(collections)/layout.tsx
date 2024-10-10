@@ -5,7 +5,7 @@ import React from "react";
 // Example category data, you can modify this as needed for your use case
 const categories = [
   {
-    image: "/assets/3.png",
+    image: "/assets/dress.png",
     category: "Wide Jeans",
   },
   {
