@@ -17,26 +17,6 @@ export interface NewProduct {
   stockQuantity: number;
 }
 
-export interface SalesSummary {
-  salesSummaryId: string;
-  totalValue: number;
-  changePercentage?: number;
-  date: string;
-}
-
-export interface PurchaseSummary {
-  purchaseSummaryId: string;
-  totalPurchased: number;
-  changePercentage?: number;
-  date: string;
-}
-
-export interface ExpenseSummary {
-  expenseSummarId: string;
-  totalExpenses: number;
-  date: string;
-}
-
 export interface ExpenseByCategorySummary {
   expenseByCategorySummaryId: string;
   category: string;
@@ -44,11 +24,8 @@ export interface ExpenseByCategorySummary {
   date: string;
 }
 
-export interface DashboardMetrics {
+export interface HomePageMetrics {
   popularProducts: Product[];
-  salesSummary: SalesSummary[];
-  purchaseSummary: PurchaseSummary[];
-  expenseSummary: ExpenseSummary[];
   expenseByCategorySummary: ExpenseByCategorySummary[];
 }
 
@@ -64,16 +41,22 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api" /* unique path to store the API state in Redux store */,
   /* helps Redux Query manage cache invalidation by tagging resources. When a mutation (e.g., createProduct) occurs, the cache for certain tags can be invalidated*/
-  tagTypes: ["DashboardMetrics", "Products", "Users", "Expenses"],
+  tagTypes: ["HomePageMetrics", "Products", "Users", "Expenses"],
 
-  /* endpoints function where the actual API queries and mutations are defined 
-  Queries are used to fetch data from the server. Each query is defined by calling build.query() and specifying:
-  Type: The type of data the query will return.
-  Parameters: Input for the query (if any).
-  Query function: Defines the URL and any additional request parameters (e.g., search strings).
-  Queries fetch data
-  */
+  /*
+   * endpoints function where the actual API queries and mutations are defined
+   * Queries are used to fetch data from the server. Each query is defined by calling build.query() and specifying:
+   * Type: The type of data the query will return.
+   * Parameters: Input for the query (if any).
+   * Query function: Defines the URL and any additional request parameters (e.g., search strings).
+   * Queries fetch data
+   */
   endpoints: (build) => ({
+    getHomePageMetrics: build.query<HomePageMetrics, void>({
+      query: () => "/home",
+      providesTags: ["HomePageMetrics"],
+    }),
+
     /*
      * The query sends a GET request to /products and optionally includes a search parameter.
      * The response will be an array of Product[].
@@ -99,4 +82,8 @@ export const api = createApi({
 });
 
 /* Export React hooks for each query or mutation. Used in components to easily interact with API */
-export const { useGetProductsQuery, useGetUsersQuery } = api;
+export const {
+  useGetHomePageMetricsQuery,
+  useGetProductsQuery,
+  useGetUsersQuery,
+} = api;
