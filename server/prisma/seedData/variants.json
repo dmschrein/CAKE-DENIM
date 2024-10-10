@@ -3,98 +3,98 @@
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
     "size": "24",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-25-i1",
     "size": "25",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-26-i1",
     "size": "26",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-27-i1",
     "size": "27",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-28-i1",
     "size": "28",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-29-i1",
     "size": "29",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-30-i1",
     "size": "30",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-31-i1",
     "size": "31",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-32-i1",
     "size": "32",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-33-i1",
     "size": "33",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-34-i1",
     "size": "34",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-35-i1",
     "size": "35",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-36-i1",
     "size": "36",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24P-i1",
     "size": "24P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
@@ -102,7 +102,7 @@
 
     "size": "25P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
@@ -110,81 +110,931 @@
 
     "size": "26P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-27P-i1",
     "size": "27P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-28P-i1",
     "size": "28P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-29P-i1",
     "size": "29P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-30P-i1",
     "size": "30P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-31P-i1",
-
     "size": "31P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-32P-i1",
-
     "size": "32P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-33P-i1",
-
     "size": "33P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-34P-i1",
-
     "size": "34P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-35P-i1",
     "size": "35P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
     "stockQuantity": 100
   },
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-36P-i1",
     "size": "36P",
     "color": "Indigo",
-    "price": 178,
+    "price": 178.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-24-i1",
+    "size": "24",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-25-i1",
+    "size": "25",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-26-i1",
+    "size": "26",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-27-i1",
+    "size": "27",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-28-i1",
+    "size": "28",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-29-i1",
+    "size": "29",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-30-i1",
+    "size": "30",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-31-i1",
+    "size": "31",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-32-i1",
+    "size": "32",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-33-i1",
+    "size": "33",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-34-i1",
+    "size": "34",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-35-i1",
+    "size": "35",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-36-i1",
+    "size": "36",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-24P-i1",
+    "size": "24P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-25P-i1",
+    "size": "25P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-26P-i1",
+    "size": "26P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-27P-i1",
+    "size": "27P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-28P-i1",
+    "size": "28P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-29P-i1",
+    "size": "29P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-30P-i1",
+    "size": "30P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-31P-i1",
+    "size": "31P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-32P-i1",
+    "size": "32P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-33P-i1",
+    "size": "33P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-34P-i1",
+    "size": "34P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-35P-i1",
+    "size": "35P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-36P-i1",
+    "size": "36P",
+    "color": "Indigo",
+    "price": 198.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-24-i1",
+    "size": "24",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-25-i1",
+    "size": "25",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-26-i1",
+    "size": "26",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-27-i1",
+    "size": "27",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-28-i1",
+    "size": "28",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-29-i1",
+    "size": "29",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-30-i1",
+    "size": "30",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-31-i1",
+    "size": "31",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-32-i1",
+    "size": "32",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-33-i1",
+    "size": "33",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-34-i1",
+    "size": "34",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-35-i1",
+    "size": "35",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-36-i1",
+    "size": "36",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-24P-i1",
+    "size": "24P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-25P-i1",
+    "size": "25P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-26P-i1",
+    "size": "26P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-27P-i1",
+    "size": "27P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-28P-i1",
+    "size": "28P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-29P-i1",
+    "size": "29P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-30P-i1",
+    "size": "30P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-31P-i1",
+    "size": "31P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-32P-i1",
+    "size": "32P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-33P-i1",
+    "size": "33P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-34P-i1",
+    "size": "34P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-35P-i1",
+    "size": "35P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "her3-cd1f1wb2-fb1ws2-pr1d1-36P-i1",
+    "size": "36P",
+    "color": "Indigo",
+    "price": 228.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-XS-w3",
+    "size": "XS",
+    "color": "w3",
+    "price": 38.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-S-w3",
+    "size": "S",
+    "color": "w3",
+    "price": 38.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-M-w3",
+    "size": "M",
+    "color": "w3",
+    "price": 38.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-L-w3",
+    "size": "L",
+    "color": "w3",
+    "price": 38.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cbs4-cd4f2wb0-fb2ws0-pr1d1-XL-w3",
+    "size": "XL",
+    "color": "w3",
+    "price": 38.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-XS-w3",
+    "size": "XS",
+    "color": "w3",
+    "price": 35.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-S-w3",
+    "size": "S",
+    "color": "w3",
+    "price": 35.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-M-w3",
+    "size": "M",
+    "color": "w3",
+    "price": 35.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-L-w3",
+    "size": "L",
+    "color": "w3",
+    "price": 35.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "emcs5-cd4f5wb0-fb2ws0-pr1d1-XL-w3",
+    "size": "XL",
+    "color": "w3",
+    "price": 35.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-XS-bl2",
+    "size": "XS",
+    "color": "bl2",
+    "price": 128.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-S-bl2",
+    "size": "S",
+    "color": "bl2",
+    "price": 128.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-M-bl2",
+    "size": "M",
+    "color": "bl2",
+    "price": 128.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-L-bl2",
+    "size": "L",
+    "color": "bl2",
+    "price": 128.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bw6-cd2f7wb0-fb4ws3-pr1d1-XL-bl2",
+    "size": "XL",
+    "color": "bl2",
+    "price": 128.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-w3",
+    "size": "XS",
+    "color": "w3",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-bl2",
+    "size": "XS",
+    "color": "bl2",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-g4",
+    "size": "XS",
+    "color": "g4",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XS-r5",
+    "size": "XS",
+    "color": "r5",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-w3",
+    "size": "S",
+    "color": "w3",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-bl2",
+    "size": "S",
+    "color": "bl2",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-g4",
+    "size": "S",
+    "color": "g4",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-S-r5",
+    "size": "S",
+    "color": "r5",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-w3",
+    "size": "M",
+    "color": "w3",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-bl2",
+    "size": "M",
+    "color": "bl2",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-g4",
+    "size": "M",
+    "color": "g4",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-M-r5",
+    "size": "M",
+    "color": "r5",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-w3",
+    "size": "L",
+    "color": "w3",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-bl2",
+    "size": "L",
+    "color": "bl2",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-g4",
+    "size": "L",
+    "color": "g4",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-L-r5",
+    "size": "L",
+    "color": "r5",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-w3",
+    "size": "XL",
+    "color": "w3",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-bl2",
+    "size": "XL",
+    "color": "bl2",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-g4",
+    "size": "XL",
+    "color": "g4",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bar7-cd2f0wb0-fb2ws0-pr1d1-XL-r5",
+    "size": "XL",
+    "color": "r5",
+    "price": 34.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-w3",
+    "size": "XS",
+    "color": "w3",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-bl2",
+    "size": "XS",
+    "color": "bl2",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-g4",
+    "size": "XS",
+    "color": "g4",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XS-r5",
+    "size": "XS",
+    "color": "r5",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-w3",
+    "size": "S",
+    "color": "w3",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-bl2",
+    "size": "S",
+    "color": "bl2",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-g4",
+    "size": "S",
+    "color": "g4",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-S-r5",
+    "size": "S",
+    "color": "r5",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-w3",
+    "size": "M",
+    "color": "w3",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-bl2",
+    "size": "M",
+    "color": "bl2",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-g4",
+    "size": "M",
+    "color": "g4",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-M-r5",
+    "size": "M",
+    "color": "r5",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-w3",
+    "size": "L",
+    "color": "w3",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-bl2",
+    "size": "L",
+    "color": "bl2",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-g4",
+    "size": "L",
+    "color": "g4",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-L-r5",
+    "size": "L",
+    "color": "r5",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-w3",
+    "size": "XL",
+    "color": "w3",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-bl2",
+    "size": "XL",
+    "color": "bl2",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-g4",
+    "size": "XL",
+    "color": "g4",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "och8-cd8f3wb0-fb3ws0-pr1d1-XL-r5",
+    "size": "XL",
+    "color": "r5",
+    "price": 78.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-XS-b6",
+    "size": "XS",
+    "color": "b6",
+    "price": 84.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-S-b6",
+    "size": "S",
+    "color": "b6",
+    "price": 84.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-M-b6",
+    "size": "M",
+    "color": "b6",
+    "price": 84.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-L-b6",
+    "size": "L",
+    "color": "b6",
+    "price": 84.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "bre9-cd6f0wb0-fb6ws0-pr1d1-XL-b6",
+    "size": "XL",
+    "color": "b6",
+    "price": 84.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-XS-dfl1",
+    "size": "XS",
+    "color": "dfl1",
+    "price": 130.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-S-dfl1",
+    "size": "S",
+    "color": "dfl1",
+    "price": 130.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-M-dfl1",
+    "size": "M",
+    "color": "dfl1",
+    "price": 130.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-L-dfl1",
+    "size": "L",
+    "color": "dfl1",
+    "price": 130.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag10-cd9f0wb0-fb7ws0-pr1d1-XL-dfl1",
+    "size": "XL",
+    "color": "dfl1",
+    "price": 130.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-XS-dfl1",
+    "size": "XS",
+    "color": "dfl1",
+    "price": 150.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-S-dfl1",
+    "size": "S",
+    "color": "dfl1",
+    "price": 150.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-M-dfl1",
+    "size": "M",
+    "color": "dfl1",
+    "price": 150.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-L-dfl1",
+    "size": "L",
+    "color": "dfl1",
+    "price": 150.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-XL-dfl1",
+    "size": "XL",
+    "color": "dfl1",
+    "price": 150.0,
     "stockQuantity": 100
   }
 ]

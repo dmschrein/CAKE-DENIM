@@ -1,13 +1,17 @@
-/* API service to handle API interactions in a declarative way */
+/* API Slice service to handle API interactions in a declarative way */
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Product {
   productId: string;
   name: string;
+  description: string;
   price: number;
-  rating?: number;
   stockQuantity: number;
+  imageURL: string;
+  category?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface NewProduct {
@@ -63,19 +67,25 @@ export const api = createApi({
      * If a search term is provided, it appends ?search=<search> as a query string to the URL.
      * providesTags: ["Products"] caches the products and tags them under "Products" for potential invalidation later.
      */
-    getProducts: build.query<Product[], string | void>({
-      query: (search) => ({
-        url: "/products",
-        params: search ? { search } : {},
+    getProducts: build.query<Product[], { search?: string; category?: string }>(
+      {
+        query: ({ search, category }) => ({
+          url: "/products",
+          params: {
+            ...(search && { search }),
+            ...(category && { category }),
+          },
+        }),
+        providesTags: ["Products"],
+      }
+    ),
+    getProductById: build.query<Product, string>({
+      query: (productId) => ({
+        url: `/products/$productId`,
       }),
-      providesTags: ["Products"],
-    }),
-    getProductById: build.query<Product["productId"], string | void>({
-      query: (search) => ({
-        url: "/products/[productId]",
-        params: search ? { search } : {},
-      }),
-      providesTags: ["Products"],
+      providesTags: (result, error, productId) => [
+        { type: "Products", id: productId },
+      ],
     }),
 
     /*

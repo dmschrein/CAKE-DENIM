@@ -31,16 +31,18 @@ export const getProductById = async (
   res: Response
 ): Promise<void> => {
   try {
-    const search = req.query.product.productId.toString();
-    const products = await prisma.products.findOne({
+    const productId = req.params.productId;
+    const product = await prisma.products.findUnique({
       // find one
       where: {
-        productId: {
-          contains: getProductById,
-        },
+        productId: productId,
       },
     });
-    res.json(products);
+    if (!product) {
+      res.status(404).json({ message: "Product not found" });
+      return;
+    }
+    res.json(product);
   } catch (error) {
     res.status(500).json({ message: "Error retrieving products" });
   }
