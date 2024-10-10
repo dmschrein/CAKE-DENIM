@@ -1,3 +1,5 @@
+// client/src/components/common/CollectionPage.tsx
+
 import CollectionCard from "@/components/common/CollectionCard";
 import React from "react";
 import CategoryCard from "./CategoryFilterCard";

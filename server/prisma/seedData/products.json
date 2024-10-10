@@ -6,6 +6,7 @@
     "price": 178.0,
     "stockQuantity": 100,
     "imageURL": "",
+    "category": "Jeans",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
   }

@@ -1,3 +1,5 @@
+// server/src/controllers/productControllers.ts
+
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
@@ -9,10 +11,32 @@ export const getProducts = async (
 ): Promise<void> => {
   try {
     const search = req.query.search?.toString();
+    const category = req.query.category?.toString();
     const products = await prisma.products.findMany({
       where: {
         name: {
           contains: search,
+        },
+        category: category || undefined, // Filter by category if provided
+      },
+    });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving products" });
+  }
+};
+
+export const getProductById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const search = req.query.product.productId.toString();
+    const products = await prisma.products.findOne({
+      // find one
+      where: {
+        productId: {
+          contains: getProductById,
         },
       },
     });

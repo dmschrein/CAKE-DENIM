@@ -70,6 +70,13 @@ export const api = createApi({
       }),
       providesTags: ["Products"],
     }),
+    getProductById: build.query<Product["productId"], string | void>({
+      query: (search) => ({
+        url: "/products/[productId]",
+        params: search ? { search } : {},
+      }),
+      providesTags: ["Products"],
+    }),
 
     /*
      * This query sends a GET request to /users and expects an array of User[] objects in response.
@@ -85,5 +92,6 @@ export const api = createApi({
 export const {
   useGetHomePageMetricsQuery,
   useGetProductsQuery,
+  useGetProductByIdQuery,
   useGetUsersQuery,
 } = api;

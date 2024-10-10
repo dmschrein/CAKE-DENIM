@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
-// import { useGetProductByIdQuery } from "@/services/api";
+import { useGetProductByIdQuery } from "@/state/api";
 
 const ProductsPage = () => {
   const router = useRouter();
