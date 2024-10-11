@@ -6,7 +6,118 @@
     "price": 178.0,
     "stockQuantity": 100,
     "imageURL": "",
+    "category": "Jeans",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
+  },
+  {
+    "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+    "name": "The Morrison",
+    "description": "Classic Dark Wash Skinny - Midrise with Contour Waistband",
+    "price": 198.0,
+    "stockQuantity": 100,
+    "category": "Jeans",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+    "name": "The Hershel",
+    "description": "Light Wash Distressed Skinny - Midrise with Contour Waistband",
+    "price": 228.0,
+    "stockQuantity": 100,
+    "category": "Jeans",
+    "imageURL": "",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
+  },
+  {
+    "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+    "name": "Cakebabe Shirt",
+    "description": "Statement Women's Tee",
+    "price": 38.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+    "name": "Eat More Cake Shirt",
+    "description": "Statement Oversized Tee",
+    "price": 35.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+    "name": "The Blackwell",
+    "description": "Denim Bralette - Crop Top",
+    "price": 128.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+    "name": "The Bari",
+    "description": "Sleeveless Tank",
+    "price": 34.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+    "name": "The Ochoa",
+    "description": "Deep Plunge Ribbed Bodysuit",
+    "price": 78.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+    "name": "The Brescia",
+    "description": "Knitted Midi Sweater Dress",
+    "price": 84.0,
+    "stockQuantity": 100,
+    "category": "Dresses",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+    "name": "The Cagliari Skirt",
+    "description": "Satin Mini Skirt",
+    "price": 130.0,
+    "stockQuantity": 100,
+    "category": "Bottoms",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
+    "name": "The Cagliari Blouse",
+    "description": "Satin Button Up Top",
+    "price": 150.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
   }
 ]

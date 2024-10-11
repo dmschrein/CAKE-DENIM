@@ -3,6 +3,8 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
+import { useRouter } from "next/navigation";
+
 
 const SideCart = () => {
   const dispatch = useAppDispatch();
@@ -13,6 +15,15 @@ const SideCart = () => {
   const toggleSidebar = () => {
     dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
   };
+
+  // initialize router
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    //Redirect to the checkout page
+    router.push("/checkout");
+  };
+
 
   const sidebarClassNames = `fixed top-0 right-0 h-full bg-white shadow-lg transition-transform transform ${
     isSidebarCollapsed ? "translate-x-full" : "translate-x-0"
@@ -28,7 +39,14 @@ const SideCart = () => {
       </div>
       <div className="p-4">
         <p>Your cart is empty</p>
-        {/* TODO: add checkout button that takes user to checkout page */}
+
+        <button
+          onClick={handleCheckout}
+          className="w-full bg-black text-white py-2 mt-4 font-bold"
+        >
+          Checkout
+        </button>
+
       </div>
     </div>
   );
