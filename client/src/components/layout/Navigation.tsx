@@ -14,10 +14,10 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { HeartIcon } from "@radix-ui/react-icons";
-import { Button } from "../ui/button";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { setIsSidebarCollapsed } from "@/state";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
+import logo from "@/assets/cakedenim-logo.png";
 
 const components: {
   title: string;
@@ -71,7 +71,7 @@ const components: {
 const Navigation = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
-    (state) => state.global.isSidebarCollapsed
+    (state) => state.global.isSidebarCollapsed,
   );
 
   const toggleSidebar = () => {
@@ -81,16 +81,16 @@ const Navigation = () => {
   return (
     <>
       {/* Top Bar for "Shipping" and other info */}
-      <div className="w-full h-8 bg-gray-100 text-sm flex justify-center items-center">
+      <div className="flex h-8 w-full items-center justify-center bg-gray-100 text-sm">
         <span>SHIPPING TO UNITED STATES</span>
       </div>
 
       {/* Main Navigation */}
-      <div className="w-full h-16 flex justify-between items-center px-8 sticky top-0 bg-white z-40 border-b">
+      <div className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b bg-white px-8">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
           <Image
-            src="/assets/goldNORlogo.png" // Update with the correct logo path
+            src={logo} // Update with the correct logo path
             width={30}
             height={30}
             alt="Logo"
@@ -98,7 +98,7 @@ const Navigation = () => {
           <span className="font-serif text-2xl">CAKE DENIM</span>
         </div>
         {/* Center Navigation */}
-        <ul className="flex gap-8 text-md uppercase tracking-wide">
+        <ul className="text-md flex gap-8 uppercase tracking-wide">
           {/* Navigation Dropdowns */}
           <nav className="container mx-auto">
             <NavigationMenu>
@@ -106,7 +106,7 @@ const Navigation = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>SHOP</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="bg-orange-100 fixed left-0 right-0 grid gap-5 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
+                    <ul className="fixed left-0 right-0 grid gap-5 bg-orange-100 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
                       <li>
                         <ListItem href="/collections/jeans" title="Jeans">
                           Sustainable denim jeans for every occasion.
@@ -152,7 +152,7 @@ const Navigation = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>COLLECTIONS</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="bg-orange-100 fixed left-0 grid gap-5 p-10 md:w-[800px] md:grid-cols-6 lg:w-full">
+                    <ul className="fixed left-0 grid gap-5 bg-orange-100 p-10 md:w-[800px] md:grid-cols-6 lg:w-full">
                       {components.map((component) => (
                         <ListItem
                           key={component.title}
@@ -181,14 +181,14 @@ const Navigation = () => {
           </nav>
         </ul>
         {/* Right Side Options */}
-        <div className="flex gap-6 items-center">
+        <div className="flex items-center gap-6">
           <div className="flex items-center">
             <Link href="/saved">Favorites</Link>
-            <HeartIcon className="w-4 h-4" />
+            <HeartIcon className="h-4 w-4" />
           </div>
           <Link href="/login">Login</Link>
           <button
-            className="p-3 bg-gray-100 rounded-full hover:bg-blue-100"
+            className="rounded-full bg-gray-100 p-3 hover:bg-blue-100"
             onClick={toggleSidebar}
           >
             <ShoppingBagOutlinedIcon />
@@ -211,11 +211,11 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
+            className,
           )}
           {...props}
         >
-          <div className="relative h-24 w-24 mb-2">
+          <div className="relative mb-2 h-24 w-24">
             <Image
               src={"/assets/placeholder.png"}
               alt={title}

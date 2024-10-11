@@ -1,5 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
 import { Button } from "../ui/button";
+import Image from "next/image";
+import cakebabe from "@/assets/cakebabe.png";
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -22,11 +26,11 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-xl max-w-sm w-full p-6">
+    <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-xl">
       {/* If the form has been submitted, show confirmation */}
       {submitted ? (
         <div className="text-center">
-          <h2 className="text-xl font-semibold mb-2">
+          <h2 className="mb-2 text-xl font-semibold">
             Thank you for signing up!
           </h2>
           <p className="text-gray-500">
@@ -36,21 +40,23 @@ const SignupForm = () => {
       ) : (
         <>
           {/* Image section */}
-          <div className="flex justify-center mb-4">
-            <img
-              src="/assets/cakebabe.png"
+          <div className="mb-4 flex justify-center">
+            <Image
+              src={cakebabe}
+              width={748}
+              height={850}
               alt="Signup"
               className="w-full rounded-t-lg object-cover"
             />
           </div>
 
           {/* Heading */}
-          <h2 className="text-xl font-semibold text-center mb-2">
+          <h2 className="mb-2 text-center text-xl font-semibold">
             10% off your first order when you join our VIP club
           </h2>
 
           {/* Subtitle */}
-          <p className="text-gray-500 text-center mb-6">
+          <p className="mb-6 text-center text-gray-500">
             Sign up to get weekly updates on sales, new drops, and look ideas.
           </p>
 
@@ -61,13 +67,13 @@ const SignupForm = () => {
               placeholder="Your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full p-3 border ${
+              className={`w-full border p-3 ${
                 error ? "border-red-500" : "border-gray-300"
               } rounded-md focus:outline-none focus:ring-2 focus:ring-black`}
               required
             />
             {error && (
-              <p className="text-red-500 text-sm">Please enter a valid email</p>
+              <p className="text-sm text-red-500">Please enter a valid email</p>
             )}
 
             <Button
@@ -81,7 +87,7 @@ const SignupForm = () => {
           </form>
 
           {/* Social icons */}
-          <div className="flex justify-center space-x-4 mt-4">
+          <div className="mt-4 flex justify-center space-x-4">
             <a href="#" className="text-black hover:text-gray-600">
               <i className="fab fa-facebook"></i>
             </a>
