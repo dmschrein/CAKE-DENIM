@@ -1,5 +1,7 @@
+
 // server/src/index.ts
 import express, { Request, Response, NextFunction } from "express";
+
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -19,6 +21,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 // CORS configuration
 app.use(
   cors({
@@ -28,9 +31,11 @@ app.use(
   })
 );
 
+
 /* ROUTES */
 app.use("/home", homeRoutes); // http://localhost:8000/home
 app.use("/products", productRoutes); // http://localhost:8000/products
+
 
 /* Error handling middleware */
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
