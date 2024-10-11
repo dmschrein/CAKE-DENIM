@@ -52,6 +52,7 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>; // Explicitly define RootState
 
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const makeStore = () => {
@@ -66,10 +67,12 @@ export const makeStore = () => {
   });
 };
 
+
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppDispatch = AppStore["dispatch"];
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 
 export default function StoreProvider({
   children,

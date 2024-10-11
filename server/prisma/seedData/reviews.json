@@ -3,16 +3,33 @@
     "reviewId": "1",
     "userId": "1",
     "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
-    "rating": 3.5,
+    "rating": 5.0,
     "comment": "Loved it.",
     "createdAt": "2024-01-08T22:08:30Z"
   },
   {
     "reviewId": "2",
     "userId": "2",
-    "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
+    "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
     "rating": 4.5,
     "comment": "Loved it.",
     "createdAt": "2024-01-09T22:08:30Z"
+  },
+  {
+    "reviewId": "3",
+    "userId": "3",
+    "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+    "rating": 5.0,
+    "comment": "Loved it.",
+    "createdAt": "2024-01-08T22:08:30Z"
+  },
+  {
+    "reviewId": "4",
+    "userId": "2",
+    "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+    "rating": 4.0,
+    "comment": "Loved it.",
+    "createdAt": "2024-01-09T22:08:30Z"
+
   }
 ]

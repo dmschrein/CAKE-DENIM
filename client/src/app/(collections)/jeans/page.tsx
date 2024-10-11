@@ -1,53 +1,37 @@
+
+// client/src/app/(collections)/jeans/page.tsx
+"use client";
+
 import CollectionPage from "@/components/common/CollectionPage";
+import { useGetProductsQuery } from "@/state/api";
 import React from "react";
 
 const JeansCollection = () => {
-  const jeans = [
-    {
-      id: 1,
-      title: "Sustainable Skinny Jeans",
-      price: "$89.99",
-      image: "/assets/7.png",
-      category: "High Rise",
-    },
-    {
-      id: 2,
-      title: "High-Rise Relaxed Jeans",
-      price: "$99.99",
-      image: "/assets/morrison.png",
-      category: "Mid Rise",
-    },
-    {
-      id: 3,
-      title: "Wide-Leg Jeans",
-      price: "$110.00",
-      image: "/assets/hershel.png",
-      category: "Relaxed Fit",
-    },
-    {
-      id: 4,
-      title: "Straight-Leg Jeans",
-      price: "$95.00",
-      image: "/assets/wide-leg.png",
-      category: "Wide Leg",
-    },
-    {
-      id: 5,
-      title: "Wide-Leg Jeans",
-      price: "$110.00",
-      image: "/assets/cakebabe.png",
-      category: "Straight Leg",
-    },
-    {
-      id: 6,
-      title: "Straight-Leg Jeans",
-      price: "$95.00",
-      image: "/assets/7.png",
-      category: "Stretch Denim",
-    },
-  ];
+  const {
+    data: jeans,
+    error,
+    isLoading,
+  } = useGetProductsQuery({ category: "Jeans" });
 
-  return <CollectionPage collectionName="Jeans" products={jeans} />;
-};
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading products</div>;
+
+  console.log("Jeans Collection Product Data: ", jeans);
+  // Map the API product structure to match the expected type by CollectionPage
+  const formattedJeans =
+    jeans?.map((product) => ({
+      productId: product.productId,
+      name: product.name,
+      description: product.description || "No description available", // Default if description is missing
+      price: product.price,
+      stockQuantity: product.stockQuantity || 0, // Default if stockQuantity is missing
+      imageURL: "/assets/nightingale.png",
+      category: product.category || "Uncategorized",
+      createdAt: product.createdAt || new Date().toISOString(), // Default for createdAt
+      updatedAt: product.updatedAt || new Date().toISOString(), // Default for updatedAt
+    })) || [];
+
+  console.log("Product Data: ", formattedJeans);
+  return <CollectionPage collectionName="Jeans" products={formattedJeans} />;
 
 export default JeansCollection;
