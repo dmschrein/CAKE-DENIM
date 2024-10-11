@@ -1,3 +1,4 @@
+
 // client/src/app/(collections)/dresses/page.tsx
 "use client";
 
@@ -35,6 +36,7 @@ const DressesCollection = () => {
   return (
     <CollectionPage collectionName="Dresses" products={formattedDresses} />
   );
+
 };
 
 export default DressesCollection;

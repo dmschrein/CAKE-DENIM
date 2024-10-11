@@ -1,3 +1,4 @@
+
 // client/src/app/(collections)/jeans/page.tsx
 "use client";
 
@@ -32,6 +33,5 @@ const JeansCollection = () => {
 
   console.log("Product Data: ", formattedJeans);
   return <CollectionPage collectionName="Jeans" products={formattedJeans} />;
-};
 
 export default JeansCollection;

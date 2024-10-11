@@ -1,3 +1,4 @@
+
 // server/src/controllers/productControllers.ts
 
 import { Request, Response } from "express";
@@ -11,13 +12,17 @@ export const getProducts = async (
 ): Promise<void> => {
   try {
     const search = req.query.search?.toString();
+
     const category = req.query.category?.toString();
+
     const products = await prisma.products.findMany({
       where: {
         name: {
           contains: search,
         },
+
         category: category || undefined, // Filter by category if provided
+
       },
     });
     res.json(products);

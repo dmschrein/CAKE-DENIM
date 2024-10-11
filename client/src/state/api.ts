@@ -1,4 +1,6 @@
+
 /* API Slice service to handle API interactions in a declarative way */
+
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -12,6 +14,7 @@ export interface Product {
   category?: string;
   createdAt: string;
   updatedAt: string;
+
 }
 
 export interface NewProduct {
@@ -67,6 +70,7 @@ export const api = createApi({
      * If a search term is provided, it appends ?search=<search> as a query string to the URL.
      * providesTags: ["Products"] caches the products and tags them under "Products" for potential invalidation later.
      */
+
     getProducts: build.query<Product[], { search?: string; category?: string }>(
       {
         query: ({ search, category }) => ({
@@ -84,6 +88,7 @@ export const api = createApi({
         url: `/products/${productId}`,
       }),
       providesTags: (_, __, productId) => [{ type: "Products", id: productId }],
+
     }),
 
     /*

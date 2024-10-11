@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
 import { useRouter } from "next/navigation";
 
+
 const SideCart = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
@@ -23,6 +24,7 @@ const SideCart = () => {
     router.push("/checkout");
   };
 
+
   const sidebarClassNames = `fixed top-0 right-0 h-full bg-white shadow-lg transition-transform transform ${
     isSidebarCollapsed ? "translate-x-full" : "translate-x-0"
   } z-50 w-72 md:w-96 duration-300 ease-in-out`;
@@ -37,12 +39,14 @@ const SideCart = () => {
       </div>
       <div className="p-4">
         <p>Your cart is empty</p>
+
         <button
           onClick={handleCheckout}
           className="w-full bg-black text-white py-2 mt-4 font-bold"
         >
           Checkout
         </button>
+
       </div>
     </div>
   );
