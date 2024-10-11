@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Lora } from "next/font/google";
 import "./globals.css";
 //import ModalProvider from "@/providers/modal-provider";
 import HomePageWrapper from "./homepageWrapper";
 
-const font = DM_Sans({ subsets: ["latin"] });
+const lora = Lora({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CAKE DENIM",
-  description: "All in one Brand Manager Solution",
+  title: { template: "% | CAKE DENIM", absolute: "CAKE DENIM" },
+  description: "Luxury Travel Essentials", // Adventure Awaits
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       {/* children comes from  */}
 
-      <body className={font.className}>
+      <body className={lora.className}>
         <HomePageWrapper>{children}</HomePageWrapper>
       </body>
     </html>

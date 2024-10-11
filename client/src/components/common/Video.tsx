@@ -2,16 +2,17 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import FallBackImage from "@/assets/CD-Website-2.png";
 
 export default function VideoWithFallback() {
   const [videoError, setVideoError] = useState(false);
 
   return (
-    <div className="w-full flex justify-center mt-6">
+    <div className="mt-6 flex w-full justify-center">
       {videoError ? (
         // Fallback Image
         <Image
-          src="/assets/CD-Website-2.png"
+          src={FallBackImage}
           alt="Fallback image"
           width={1920}
           height={1080}
