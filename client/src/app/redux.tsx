@@ -1,3 +1,5 @@
+// src/app/store.ts
+
 import { useRef } from "react";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
@@ -21,7 +23,9 @@ import {
 } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+import { cartSlice } from "@/state/features/cartSlice";
 
+// Fallback storage for SSR environment
 const createNoopStorage = () => ({
   getItem(): Promise<string | null> {
     return Promise.resolve(null);
@@ -39,14 +43,16 @@ const storage =
     ? createNoopStorage()
     : createWebStorage("local");
 
+// Persist config
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["global"],
+  whitelist: ["global", "cart"],
 };
 
 const rootReducer = combineReducers({
   global: globalReducer,
+  cart: cartSlice.reducer, // add cart reducer to store
   [api.reducerPath]: api.reducer,
 });
 
@@ -65,11 +71,11 @@ export const makeStore = () => {
       }).concat(api.middleware),
   });
 };
-
+// Typed hooks for using dispatch and selector with Redux
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppDispatch = AppStore["dispatch"];
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch = () => useDispatch<AppDispatch>(); // used for sending an action to our Redux store
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector; // used for selecting part of our store data inside our component
 
 export default function StoreProvider({
   children,

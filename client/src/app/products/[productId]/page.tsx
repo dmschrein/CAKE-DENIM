@@ -6,6 +6,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation"; // Use useParams instead of useRouter
 import { useGetProductByIdQuery } from "@/state/api";
+import { useAppDispatch } from "@/app/redux";
+import addToCart from "@/state";
+import AddToCartButton from "@/components/common/AddToCartButton";
 
 const ProductsPage = () => {
   const { productId } = useParams(); // Retrieve productId directly
@@ -24,6 +27,20 @@ const ProductsPage = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        productId: product.productId,
+        name: product.name,
+        price: product.price,
+        imageURL: product.imageURL,
+        quantity: 1,
+      })
+    );
+  };
 
   return (
     <div className="flex flex-col md:flex-row space-x-8">
@@ -108,19 +125,13 @@ const ProductsPage = () => {
         </div>
         {/* Add to Bag Button */}
         <div className="flex flex-row space-x-2">
-          <Button
-            variant="outline"
-            size="lg"
-            type="submit"
-            className="w-full mt-6 py-3 text-black"
-          >
-            ADD TO BAG
-          </Button>
+          <AddToCartButton product={props.product} />
           {/* Save Button */}
           <Button
+            onClick={handleAddToCart}
             variant="outline"
             size="lg"
-            type="submit"
+            type="button"
             className="mt-6 py-3 bg-gray-200 text-black"
           >
             SAVE
