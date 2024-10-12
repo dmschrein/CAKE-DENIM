@@ -4,7 +4,7 @@ import React from "react";
 import Navbar from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import SideCart from "@/components/layout/SideCart";
-import StoreProvider from "./redux";
+import AppProviders from "@/providers/AppProviders";
 
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
   // const isSidebarCollapsed = useAppSelector(
@@ -27,9 +27,9 @@ const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
 
 const HomePageWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    <StoreProvider>
+    <AppProviders>
       <HomePageLayout>{children}</HomePageLayout>
-    </StoreProvider>
+    </AppProviders>
   );
 };
 

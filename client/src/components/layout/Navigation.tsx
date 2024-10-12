@@ -17,7 +17,7 @@ import { HeartIcon } from "@radix-ui/react-icons";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { setIsSidebarCollapsed } from "@/state";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
-import logo from "@/assets/cakedenim-logo.png";
+import logo from "@/assets/goldNORLogo.png";
 
 const components: {
   title: string;

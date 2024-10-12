@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import FallBackImage from "@/assets/CD-Website-2.png";
+import FallBackImage from "@/assets/banner.png";
 
 export default function VideoWithFallback() {
   const [videoError, setVideoError] = useState(false);

@@ -4,6 +4,7 @@
 client/node_modules/
 server/node_modules/
 client/public/
+client/src/assets
 client/dist/
 server/dist/
 client/.pnp
@@ -52,4 +53,5 @@ client/sentry.server.config.ts
 client/src/instrumentation.ts
 client/src/app/global-error.tsx
 client/src/app/sentry-example-page
-client/src/app/api
+client/src/app/apiclient/src/assets
+client/src/app/api/sentry-example-api/route.ts
