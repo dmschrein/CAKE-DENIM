@@ -27,7 +27,7 @@ const components: {
 }[] = [
   {
     title: "Alert Dialog",
-    image: "/assets/placeholder.png",
+    image: "/assets/cakebabe.png",
     href: "/docs/primitives/alert-dialog",
     description:
       "A modal dialog that interrupts the user with important content and expects a response.",
@@ -35,34 +35,34 @@ const components: {
   {
     title: "Hover Card",
     href: "/docs/primitives/hover-card",
-    image: "/assets/placeholder.png",
+    image: "/assets/cakebabe.png",
     description:
       "For sighted users to preview content available behind a link.",
   },
   {
     title: "Progress",
     href: "/docs/primitives/progress",
-    image: "/assets/placeholder.png",
+    image: "/assets/cakebabe.png",
     description:
       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
   },
   {
     title: "Scroll-area",
     href: "/docs/primitives/scroll-area",
-    image: "/assets/placeholder.png",
+    image: "/assets/cakebabe.png",
     description: "Visually or semantically separates content.",
   },
   {
     title: "Tabs",
     href: "/docs/primitives/tabs",
-    image: "/assets/placeholder.png",
+    image: "/assets/cakebabe.png",
     description:
       "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
   },
   {
     title: "Tooltip",
     href: "/docs/primitives/tooltip",
-    image: "/assets/placeholder.png",
+    image: "/assets/cakebabe.png",
     description:
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
@@ -217,7 +217,7 @@ const ListItem = React.forwardRef<
         >
           <div className="relative mb-2 h-24 w-24">
             <Image
-              src={"/assets/placeholder.png"}
+              src={"/assets/cakebabe.png"}
               alt={title}
               layout="fill"
               objectFit="cover"
