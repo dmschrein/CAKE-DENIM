@@ -48,7 +48,7 @@ const ProductsPage = () => {
       <div className="flex flex-row space-x-2">
         {/* Product Main Image */}
         <Image
-          src={product.imageURL || "/assets/placeholder.png"}
+          src={product.imageURL || "/assets/cakebabe.png"}
           alt={product.name}
           width={600}
           height={800}
@@ -56,25 +56,25 @@ const ProductsPage = () => {
         {/* Thumbnails */}
         <div className="flex flex-col space-y-2">
           <Image
-            src={product.imageURL || "/assets/placeholder.png"}
+            src={product.imageURL || "/assets/cakebabe.png"}
             alt="Thumbnail"
             width={100}
             height={150}
           />
           <Image
-            src={product.imageURL || "/assets/placeholder.png"}
+            src={product.imageURL || "/assets/cakebabe.png"}
             alt="Thumbnail"
             width={100}
             height={150}
           />
           <Image
-            src={product.imageURL || "/assets/placeholder.png"}
+            src={product.imageURL || "/assets/cakebabe.png"}
             alt="Thumbnail"
             width={100}
             height={150}
           />
           <Image
-            src={product.imageURL || "/assets/placeholder.png"}
+            src={product.imageURL || "/assets/cakebabe.png"}
             alt="Thumbnail"
             width={100}
             height={150}
