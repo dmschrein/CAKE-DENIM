@@ -5,21 +5,19 @@ import React from "react";
 // Example category data, you can modify this as needed for your use case
 const categories = [
   {
-
-    image: "/assets/dress.png",
-
+    image: "/src/assets/dress.png",
     category: "Wide Jeans",
   },
   {
-    image: "/assets/2.png",
+    image: "/src/assets/dress.png",
     category: "Straight Jeans",
   },
   {
-    image: "/assets/1.png",
+    image: "/src/assets/dress.png",
     category: "Short Dresses",
   },
   {
-    image: "/assets/2.png",
+    image: "/src/assets/dress.png",
     category: "Long Dresses",
   },
 ];
@@ -31,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {children} {/* Render the child pages */}
       <div className="flex flex-col items-center">
         {/* Pass categories prop to CarouselSize */}
-        <h1 className="items-center text-center text-3xl font-bold mb-6">
+        <h1 className="mb-6 items-center text-center text-3xl font-bold">
           Similar Products
         </h1>
         <CarouselSize categories={categories} key="carousel" />
