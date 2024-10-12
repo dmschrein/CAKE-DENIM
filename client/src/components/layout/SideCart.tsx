@@ -1,52 +1,135 @@
 "use client";
 
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@/app/redux";
-import { setIsSidebarCollapsed } from "@/state";
-import { useRouter } from "next/navigation";
+import { useCart } from "@/providers/CartProvider"; // Custom hook for accessing the cart context
+import { signIn, useSession } from "next-auth/react"; // Function for authentication and session management from NextAuth.js
+import { useRouter } from "next/navigation"; // Hook for navigating between pages in Next.js
+import Image from "next/image";
 
+// Define the props the component will receive
+interface Props {
+  visible?: boolean; // Boolean prop to control visibility of the side cart
+  onRequestClose?(): void; // Optional callback function for closing the sidecart
+}
 
-const SideCart = () => {
-  const dispatch = useAppDispatch();
-  const isSidebarCollapsed = useAppSelector(
-    (state) => state.global.isSidebarCollapsed
-  );
+// Functional component definition for the SideCart
+const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
+  // Destructure cart-related functions and data from the custom useCart hook
+  const {
+    items: cartItems, // List of items in the cart
+    updateCart, // Function to update the cart items
+    removeFromCart, // Function to remove an item from the cart
+    countTotalPrice, // Function to calculate the total price of items in the cart
+    clearCart, // Function to clear all items from the cart
+  } = useCart();
 
-  const toggleSidebar = () => {
-    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
-  };
-
-  // initialize router
+  // Initialize the router for page navigation
   const router = useRouter();
 
-  const handleCheckout = () => {
-    //Redirect to the checkout page
-    router.push("/checkout");
-  };
-
-
-  const sidebarClassNames = `fixed top-0 right-0 h-full bg-white shadow-lg transition-transform transform ${
-    isSidebarCollapsed ? "translate-x-full" : "translate-x-0"
-  } z-50 w-72 md:w-96 duration-300 ease-in-out`;
+  //Retrieve the user's session status from NextAuth
+  const { status } = useSession();
+  const isLoggedIn = status === "authenticated"; // Boolean to check if the user is authenitcated
 
   return (
-    <div className={sidebarClassNames}>
-      <div className="flex justify-between items-center p-4 border-b">
-        <h1 className="font-bold text-xl">Shopping Cart</h1>
-        <button onClick={toggleSidebar} className="text-xl font-bold">
-          &times;
+    // Render the SideCart container, which will slide in from the right based on the visibility prop
+    <div
+      style={{ right: visible ? "0" : "-100%" }}
+      className="fixed right-0 top-0 z-50 flex min-h-screen w-96 flex-col bg-white shadow-md transition-all"
+    >
+      {/* Header section with cart title and clear cart button */}
+      <div className="flex justify-between p-4">
+        <h1 className="font-semibold uppercase text-gray-600">Cart</h1>
+        <button onClick={clearCart} className="text-sm uppercase">
+          Clear
         </button>
       </div>
-      <div className="p-4">
-        <p>Your cart is empty</p>
+      {/* Divider Line */}
+      <div className="h-0.5 w-full bg-gray-200" />
+      {/* Iterate over the cart items and render each product in the cart */}
+      {cartItems.map((cartItem) => {
+        return (
+          <div key={cartItem.product.productId} className="p-4">
+            <div className="flex space-x-4">
+              {/* Display product image using Next.js Image component for optimization */}
+              <Image
+                src="/assets/placeholder.png" //cartItem.product.thumbnail
+                alt=""
+                className="rounded object-cover"
+                width={64}
+                height={64}
+              />
+              <div className="flex-1">
+                <h2 className="font-semibold">Smartphone Case</h2>
+                {/* Quantity and total price for this item */}
+                <div className="flex space-x-1 text-sm text-gray-400">
+                  <span>x</span>
+                  <span>{cartItem.count * cartItem.product.price}</span>
+                </div>
+              </div>
 
+              <div className="ml-auto">
+                {/* Remove item button */}
+                <button
+                  onClick={() => removeFromCart(cartItem.product)}
+                  className="text-xs uppercase hover:underline"
+                >
+                  Remove
+                </button>
+                {/* Quantity control buttons */}
+                <div className="flex items-center justify-between">
+                  <button onClick={() => updateCart(cartItem.product, -1)}>
+                    -
+                  </button>
+                  <span className="text-xs">{cartItem.count}</span>
+                  <button onClick={() => updateCart(cartItem.product, 1)}>
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Divider Line */}
+      <div className="h-0.5 w-full bg-gray-200" />
+      {/* Footer section with total price and checkout button */}
+      <div className="mt-auto p-4">
+        <div className="py-4">
+          <h1 className="text-xl font-semibold uppercase">Total</h1>
+          <p className="font-semibold">
+            <span className="font-normal text-gray-400">
+              The total of your cart is:{" "}
+            </span>{" "}
+            ${countTotalPrice()}
+          </p>
+        </div>
+
+        {/* Checkout button, conditional on user authentication */}
         <button
-          onClick={handleCheckout}
-          className="w-full bg-black text-white py-2 mt-4 font-bold"
+          onClick={() => {
+            if (isLoggedIn) {
+              // Proceed to checkout if user is authenticated
+              console.log("send data to the server and create payment link");
+              router.push("/checkout");
+            } else {
+              // Redirect user to sign-in if user is not authenticated
+              router.push("/auth/sign-in");
+            }
+            onRequestClose && onRequestClose(); // Close the cart if onRequestCLose is provided
+          }}
+          className="w-full rounded border-2 border-blue-950 py-2 uppercase text-blue-950"
         >
           Checkout
         </button>
 
+        {/* Close button */}
+        <button
+          onClick={onRequestClose}
+          className="mt-4 block w-full text-center uppercase outline-none"
+        >
+          Close
+        </button>
       </div>
     </div>
   );

@@ -1,12 +1,10 @@
-
 // client/src/components/common/CollectionPage.tsx
 
 import CollectionCard from "@/components/common/CollectionCard";
 import React from "react";
-import CategoryCard from "./CategoryFilterCard";
+//import CategoryCard from "./CategoryFilterCard";
 
 interface Product {
-
   productId: string;
   name: string;
   description: string;
@@ -16,7 +14,6 @@ interface Product {
   category?: string;
   createdAt: string;
   updatedAt: string;
-
 }
 
 interface CollectionPageProps {
@@ -32,8 +29,8 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
     <div>
       <main className="container mx-auto py-10">
         {/* Header */}
-        <div className="text-center mb-15">
-          <h1 className="text-3xl font-bold mb-15 text-center">
+        <div className="mb-15 text-center">
+          <h1 className="mb-15 text-center text-3xl font-bold">
             {collectionName}
           </h1>
         </div>
@@ -57,7 +54,7 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
             ))}
           </div>
         </div> */}
-        <div className="px-10 mt-20 grid grid-cols-1 md:grid-cols-2 gap-8 justify-center items-center">
+        <div className="mt-20 grid grid-cols-1 items-center justify-center gap-8 px-10 md:grid-cols-2">
           {products.map((product) => (
             <CollectionCard
               key={product.productId}

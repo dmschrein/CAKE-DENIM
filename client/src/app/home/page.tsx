@@ -4,11 +4,11 @@ import Image from "next/image";
 //import { pricingCards } from "@/lib/constants";
 import VideoWithFallback from "@/components/common/Video";
 import PopupModal from "@/components/forms/PopupModal";
-import banner from "@/assets/CD-Website-2.png";
+import banner from "@/assets/banner.png";
 import sweater from "@/assets/sweater.png";
 import ochoa from "@/assets/ochoa.png";
 import peron from "@/assets/peron.png";
-import morrison from "@/assets/nightingale.png";
+import jeansback from "@/assets/jeansback.png";
 import dress from "@/assets/dress.png";
 import jumpsuit from "@/assets/jumpsuit.png";
 import cakebabe from "@/assets/cakebabe.png";
@@ -26,7 +26,7 @@ export default function HomePage() {
         <ul className="grid h-full w-full gap-1 pt-1 md:grid-cols-4">
           <Image src={sweater} width={480} height={707} alt="image1" />
           <Image src={ochoa} width={480} height={707} alt="image2" />
-          <Image src={morrison} width={480} height={707} alt="image2" />
+          <Image src={jeansback} width={480} height={707} alt="image2" />
           <Image src={peron} width={480} height={707} alt="image2" />
         </ul>
         {/* Third section with 2 photos */}

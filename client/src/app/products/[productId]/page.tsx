@@ -6,9 +6,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation"; // Use useParams instead of useRouter
 import { useGetProductByIdQuery } from "@/state/api";
-import { useAppDispatch } from "@/app/redux";
-import addToCart from "@/state";
-import AddToCartButton from "@/components/common/AddToCartButton";
+// import { useAppDispatch } from "@/app/redux";
+// import addToCart from "@/state";
+//import AddToCartButton from "@/components/common/AddToCartButton";
 
 const ProductsPage = () => {
   const { productId } = useParams(); // Retrieve productId directly
@@ -28,22 +28,22 @@ const ProductsPage = () => {
     return <div>Product not found</div>;
   }
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        productId: product.productId,
-        name: product.name,
-        price: product.price,
-        imageURL: product.imageURL,
-        quantity: 1,
-      })
-    );
-  };
+  // const handleAddToCart = () => {
+  //   dispatch(
+  //     addToCart({
+  //       productId: product.productId,
+  //       name: product.name,
+  //       price: product.price,
+  //       imageURL: product.imageURL,
+  //       quantity: 1,
+  //     })
+  //   );
+  // };
 
   return (
-    <div className="flex flex-col md:flex-row space-x-8">
+    <div className="flex flex-col space-x-8 md:flex-row">
       {/* Product Image Gallery */}
       <div className="flex flex-row space-x-2">
         {/* Product Main Image */}
@@ -84,10 +84,10 @@ const ProductsPage = () => {
       {/* Product Text Description */}
       <div className="flex-1">
         <h1>{product.name}</h1>
-        <p className="text-2xl text-gray-700 mt-4">${product.price}</p>
+        <p className="mt-4 text-2xl text-gray-700">${product.price}</p>
 
         {/* Afterpay */}
-        <p className="text-sm text-gray-500 mt-2">
+        <p className="mt-2 text-sm text-gray-500">
           Pay as low as <strong>$70/mo</strong> with Klarna, or{" "}
           <strong>$103.65/mo</strong> with Afterpay.
         </p>
@@ -102,8 +102,8 @@ const ProductsPage = () => {
         {/* Color Selection */}
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Color</h3>
-          <div className="flex space-x-2 mt-2">
-            <button className="w-8 h-8 bg-black rounded-full border border-gray-300"></button>
+          <div className="mt-2 flex space-x-2">
+            <button className="h-8 w-8 rounded-full border border-gray-300 bg-black"></button>
           </div>
         </div>
         {/* Size Selection */}
@@ -116,7 +116,7 @@ const ProductsPage = () => {
                 variant="link"
                 size="sm"
                 type="submit"
-                className="p-2 rounded text-center"
+                className="rounded p-2 text-center"
               >
                 {size}
               </Button>
@@ -125,14 +125,14 @@ const ProductsPage = () => {
         </div>
         {/* Add to Bag Button */}
         <div className="flex flex-row space-x-2">
-          <AddToCartButton product={props.product} />
+          {/* <AddToCartButton product={product} /> */}
           {/* Save Button */}
           <Button
-            onClick={handleAddToCart}
+            // onClick={handleAddToCart}
             variant="outline"
             size="lg"
             type="button"
-            className="mt-6 py-3 bg-gray-200 text-black"
+            className="mt-6 bg-gray-200 py-3 text-black"
           >
             SAVE
           </Button>
