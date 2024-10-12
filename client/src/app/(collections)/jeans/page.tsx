@@ -1,4 +1,3 @@
-
 // client/src/app/(collections)/jeans/page.tsx
 "use client";
 
@@ -25,7 +24,7 @@ const JeansCollection = () => {
       description: product.description || "No description available", // Default if description is missing
       price: product.price,
       stockQuantity: product.stockQuantity || 0, // Default if stockQuantity is missing
-      imageURL: "/assets/nightingale.png",
+      imageURL: "/assets/jeansback.png",
       category: product.category || "Uncategorized",
       createdAt: product.createdAt || new Date().toISOString(), // Default for createdAt
       updatedAt: product.updatedAt || new Date().toISOString(), // Default for updatedAt
@@ -33,5 +32,5 @@ const JeansCollection = () => {
 
   console.log("Product Data: ", formattedJeans);
   return <CollectionPage collectionName="Jeans" products={formattedJeans} />;
-
+};
 export default JeansCollection;

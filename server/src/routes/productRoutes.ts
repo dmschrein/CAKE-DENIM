@@ -1,4 +1,3 @@
-
 // server/src/routes/productRoutes.ts
 
 import { Router } from "express";
@@ -6,9 +5,7 @@ import {
   createProduct,
   getProductById,
   getProducts,
-} from "../controllers/productController"
-import { Router } from "express";
-import { createProduct, getProducts } from "../controllers/productController";
+} from "../controllers/productController";
 
 const router = Router();
 
