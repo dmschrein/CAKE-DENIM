@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import FallBackImage from "@/assets/banner.png";
 
 export default function VideoWithFallback() {
   const [videoError, setVideoError] = useState(false);
@@ -12,7 +11,7 @@ export default function VideoWithFallback() {
       {videoError ? (
         // Fallback Image
         <Image
-          src={FallBackImage}
+          src="/assets/banner.png"
           alt="Fallback image"
           width={1920}
           height={1080}
@@ -26,7 +25,7 @@ export default function VideoWithFallback() {
           muted
           loop
           playsInline
-          poster="/assets/CD-Website-2.png" // Optional fallback before the video starts
+          poster="/assets/banner.png" // Optional fallback before the video starts
           onError={() => setVideoError(true)} // Fallback to image if video fails to load
         >
           <source src="/assets/website-video.mp4" type="video/mp4" />
