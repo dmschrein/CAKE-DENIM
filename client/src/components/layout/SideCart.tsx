@@ -38,9 +38,16 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
     >
       {/* Header section with cart title and clear cart button */}
       <div className="flex justify-between p-4">
-        <h1 className="font-semibold uppercase text-gray-600">Cart</h1>
-        <button onClick={clearCart} className="text-sm uppercase">
-          Clear
+        <h1 className="mt-4 text-xl font-semibold uppercase text-blue-950">
+          In your bag ({cartItems.length})
+        </h1>
+        {/* Close button */}
+        <button
+          onClick={onRequestClose}
+          className="text-right text-4xl"
+          aria-label="Close cart"
+        >
+          &times;
         </button>
       </div>
 
@@ -49,6 +56,8 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
 
       {/* Iterate over the cart items and render each product in the cart */}
       {cartItems.map((cartItem) => {
+        if (!cartItem.product) return null;
+
         return (
           <div key={cartItem.product.productId} className="p-4">
             <div className="flex space-x-4">
@@ -61,11 +70,15 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
                 height={64}
               />
               <div className="flex-1">
-                <h2 className="font-semibold">Smartphone Case</h2>
+                <h2 className="font-semibold">{cartItem.product.name}</h2>
                 {/* Quantity and total price for this item */}
                 <div className="flex space-x-1 text-sm text-gray-400">
                   <span>x</span>
-                  <span>{cartItem.count * cartItem.product.price}</span>
+                  <span>
+                    {cartItem.product
+                      ? cartItem.count * cartItem.product.price
+                      : "N/A"}
+                  </span>
                 </div>
               </div>
 
@@ -125,14 +138,6 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
           className="w-full rounded border-2 border-blue-950 py-2 uppercase text-blue-950"
         >
           Checkout
-        </button>
-
-        {/* Close button */}
-        <button
-          onClick={onRequestClose}
-          className="mt-4 block w-full text-center uppercase outline-none"
-        >
-          Close
         </button>
       </div>
     </div>

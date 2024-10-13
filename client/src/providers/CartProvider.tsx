@@ -55,6 +55,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const updateCart = (product: Product, qty: number) => {
+    console.log("Adding to cart:", product);
     const finalCartItems = [...cartItems];
     const index = cartItems.findIndex(
       (item) => product.productId === item.product.productId,
@@ -70,6 +71,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
       removeFromCart(product);
     } else {
       setCartItems(finalCartItems);
+      console.log("Cart items after update: ", finalCartItems);
       updateCartInLS(finalCartItems);
     }
   };
@@ -92,17 +94,30 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const countTotalPrice = () => {
     return cartItems
-      .reduce(
-        (total, cartItem) => total + cartItem.product.price * cartItem.count,
-        0,
-      )
+      .reduce((total, cartItem) => {
+        if (cartItem.product && cartItem.product.price !== undefined) {
+          return total + cartItem.product.price * cartItem.count;
+        }
+        return total;
+      }, 0)
       .toFixed(2);
   };
 
   useEffect(() => {
     const result = localStorage.getItem("cartItems");
     if (result !== null) {
-      setCartItems(JSON.parse(result));
+      try {
+        const storedCartItems = JSON.parse(result);
+        const validCartItems = storedCartItems.filter(
+          (items: cartItem) =>
+            items.product && items.product.price !== undefined,
+        );
+        console.log("Filtered valid items from localStorage: ", validCartItems);
+        setCartItems(validCartItems);
+      } catch (error) {
+        console.error("Error parsing cart items from localStorage: ", error);
+        setCartItems([]); // Reset if parsing fails
+      }
     }
   }, []);
 

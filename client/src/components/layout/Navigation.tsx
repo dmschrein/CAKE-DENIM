@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -15,9 +15,11 @@ import {
 } from "@/components/ui/navigation-menu";
 import { HeartIcon } from "@radix-ui/react-icons";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import { setIsSidebarCollapsed } from "@/state";
-import { useAppDispatch, useAppSelector } from "@/app/redux";
+// import { setIsSidebarCollapsed } from "@/state";
+// import { useAppDispatch, useAppSelector } from "@/app/redux";
 import logo from "@/assets/goldNORLogo.png";
+import { useCart } from "@/providers/CartProvider";
+import SideCart from "./SideCart";
 
 const components: {
   title: string;
@@ -69,14 +71,18 @@ const components: {
 ];
 
 const Navigation = () => {
-  const dispatch = useAppDispatch();
-  const isSidebarCollapsed = useAppSelector(
-    (state) => state.global.isSidebarCollapsed,
-  );
+  // const dispatch = useAppDispatch();
+  // const isSidebarCollapsed = useAppSelector(
+  //   (state) => state.global.isSidebarCollapsed,
+  // );
 
-  const toggleSidebar = () => {
-    dispatch(setIsSidebarCollapsed(!setIsSidebarCollapsed));
-  };
+  // const toggleSidebar = () => {
+  //   dispatch(setIsSidebarCollapsed(!setIsSidebarCollapsed));
+  // };
+
+  const { countAllItems, countTotalPrice } = useCart();
+  const [showSideCart, setShowSideCart] = useState(false);
+  const cartItems = countAllItems();
 
   return (
     <>
@@ -186,15 +192,33 @@ const Navigation = () => {
             <Link href="/saved">Favorites</Link>
             <HeartIcon className="h-4 w-4" />
           </div>
+
+          {/* Side cart */}
           <Link href="/login">Login</Link>
-          <button
+          {/* <button
             className="rounded-full bg-gray-100 p-3 hover:bg-blue-100"
             onClick={toggleSidebar}
           >
             <ShoppingBagOutlinedIcon />
+          </button> */}
+
+          <button
+            onClick={() => setShowSideCart((old) => !old)}
+            className="relative rounded-full bg-gray-200 p-3"
+          >
+            <ShoppingBagOutlinedIcon />
+            {cartItems > 0 ? (
+              <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-950 bg-opacity-70 text-xs font-semibold text-white">
+                <p>{cartItems >= 9 ? "9+" : cartItems}</p>
+              </div>
+            ) : null}
           </button>
         </div>
       </div>
+      <SideCart
+        visible={showSideCart}
+        onRequestClose={() => setShowSideCart(false)}
+      />
     </>
   );
 };
