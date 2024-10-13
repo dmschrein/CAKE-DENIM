@@ -1,63 +1,33 @@
 "use client";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import {
   ChangeEventHandler,
   DOMAttributes,
   FC,
   InputHTMLAttributes,
-  ReactNode,
   useState,
+  ReactNode,
 } from "react";
+import { useCart } from "@/providers/CartProvider";
+import { CartItem } from "../../../../interfaces";
 
 interface AuthFormContainerProps {
   children: ReactNode;
   title: string;
-  linkOne: { label?: string; href: string; title: string };
-  linkTwo: { label?: string; href: string; title: string };
   onSubmit?: DOMAttributes<HTMLFormElement>["onSubmit"];
 }
 
 const AuthFormContainer: FC<AuthFormContainerProps> = ({
-  linkOne,
-  linkTwo,
   children,
   title,
   onSubmit,
 }) => {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <form
-        onSubmit={onSubmit}
-        className="w-96 space-y-6 bg-white p-10 shadow-md"
-      >
-        <h1 className="text-3xl text-gray-800">{title}</h1>
+    <div className="space-y-6 bg-white p-10 shadow-md">
+      <h1 className="text-3xl text-gray-800">{title}</h1>
+      <form onSubmit={onSubmit} className="space-y-4">
         {children}
-
-        <div className="mt-10 space-y-2 text-sm text-gray-800">
-          <div>
-            {linkOne.label ? (
-              <span className="mr-1">{linkOne.label}</span>
-            ) : null}
-            <a
-              className="uppercase text-blue-500 underline"
-              href={linkOne.href}
-            >
-              {linkOne.title}
-            </a>
-          </div>
-
-          <div>
-            {linkTwo.label ? (
-              <span className="mr-1">{linkTwo.label}</span>
-            ) : null}
-            <a
-              className="uppercase text-blue-500 underline"
-              href={linkTwo.href}
-            >
-              {linkTwo.title}
-            </a>
-          </div>
-        </div>
       </form>
     </div>
   );
@@ -94,23 +64,9 @@ const AuthInput: FC<AuthInputProps> = ({
   );
 };
 
-interface SubmitBtnProps {
-  value?: string;
-}
-
-const SubmitBtn: FC<SubmitBtnProps> = ({ value }) => {
-  return (
-    <div>
-      <input
-        type="submit"
-        value={value}
-        className="w-full cursor-pointer rounded bg-blue-600 bg-none p-2 text-white outline-none transition-all hover:shadow-md"
-      />
-    </div>
-  );
-};
-
 const SignIn = () => {
+  const { items } = useCart();
+
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -118,36 +74,101 @@ const SignIn = () => {
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value } = target;
-
     setUserInfo({ ...userInfo, [name]: value });
   };
 
   return (
-    <AuthFormContainer
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await signIn("credentials", { ...userInfo, callbackUrl: "/checkout" });
-      }}
-      linkOne={{ href: "#", label: "Have trouble", title: "Forget Password" }}
-      linkTwo={{ href: "#", label: "Need an Account", title: "Sign Up" }}
-      title="Login"
-    >
-      <AuthInput
-        name="email"
-        type="text"
-        label="Email"
-        placeholder="john@email.com"
-        onChange={handleChange}
-      />
-      <AuthInput
-        name="password"
-        type="password"
-        label="Password"
-        placeholder="********"
-        onChange={handleChange}
-      />
-      <SubmitBtn value="Login" />
-    </AuthFormContainer>
+    <div className="flex min-h-screen items-start justify-center space-x-10 p-5">
+      {/* Login options */}
+      <div className="flex flex-col space-x-10 md:flex-row">
+        {/* Guest Checkout */}
+        <AuthFormContainer title="Continue as guest">
+          <AuthInput
+            name="guestEmail"
+            type="email"
+            label="Email"
+            placeholder="youremail@example.com"
+            onChange={handleChange}
+          />
+          <div>
+            <input type="checkbox" id="newsletter" className="mr-2" />
+            <label htmlFor="newsletter" className="text-sm text-blue-950">
+              Get in on top-secret CAKE DENIM news and other cool stuff.
+            </label>
+          </div>
+          <button
+            type="button"
+            className="w-full rounded bg-black p-2 text-white"
+          >
+            Continue as guest
+          </button>
+        </AuthFormContainer>
+
+        {/* Sign In Checkout */}
+        <AuthFormContainer
+          title="Sign in for faster checkout"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await signIn("credentials", {
+              ...userInfo,
+              callbackUrl: "/checkout",
+            });
+          }}
+        >
+          <AuthInput
+            name="email"
+            type="email"
+            label="Email"
+            placeholder="youremail@example.com"
+            value={userInfo.email}
+            onChange={handleChange}
+          />
+          <AuthInput
+            name="password"
+            type="password"
+            label="Password"
+            placeholder=""
+            value={userInfo.password}
+            onChange={handleChange}
+          />
+          <button
+            type="submit"
+            className="w-full rounded bg-black p-2 text-white"
+          >
+            Sign in
+          </button>
+          <div className="mt-4">
+            <a href="#" className="text-sm text-blue-950 underline">
+              Forgot password?
+            </a>
+          </div>
+        </AuthFormContainer>
+      </div>
+
+      {/* Cart Details */}
+      <div className="w-72 bg-white p-10 shadow-md">
+        {items && items.length > 0 ? (
+          items.map((item) => (
+            <div key={item.product.productId} className="mb-4">
+              <Image
+                src={item.product.imageURL}
+                alt={item.product.name}
+                width={80}
+                height={80}
+              />
+              <p>{item.product.name}</p>
+              <p>{item.product.description}</p>
+              <p>{item.product.category}</p>
+              <p>Quantity: {item.count}</p>
+              <p>Price: ${item.product.price}</p>
+              <p>Total: ${item.product.price * item.count}</p>
+            </div>
+          ))
+        ) : (
+          <p>Your cart is empty.</p>
+        )}
+      </div>
+    </div>
   );
 };
 
