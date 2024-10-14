@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { useCart } from "@/providers/CartProvider";
-import { Product } from "../../../interfaces";
+import { Product } from "../../interfaces";
 
 interface Props {
   product: Product;

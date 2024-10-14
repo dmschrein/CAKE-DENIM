@@ -5,7 +5,7 @@ import {
   useState,
   useEffect,
 } from "react";
-import { Product } from "../../interfaces";
+import { Product } from "../interfaces";
 
 type cartItem = {
   product: Product;

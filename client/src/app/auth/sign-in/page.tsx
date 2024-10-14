@@ -10,7 +10,8 @@ import {
   ReactNode,
 } from "react";
 import { useCart } from "@/providers/CartProvider";
-import { CartItem } from "../../../../interfaces";
+import { CartItem } from "@/interfaces";
+import { useGetUserByEmailQuery } from "@/state/api";
 
 interface AuthFormContainerProps {
   children: ReactNode;
@@ -72,9 +73,36 @@ const SignIn = () => {
     password: "",
   });
 
+  const {
+    data: user,
+    error,
+    isLoading,
+  } = useGetUserByEmailQuery(userInfo.email, { skip: !userInfo.email });
+
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value } = target;
     setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isLoading) return;
+
+    if (error) {
+      console.error("Error fetching user data: ", error);
+      alert("An erro occurred while fetching user data. Please try again.");
+      return;
+    }
+    if (!user) {
+      alert("User not found. Please check your email or sign up.");
+      return;
+    }
+    await signIn("credentials", {
+      email: userInfo.email,
+      password: userInfo.password,
+      callbackUrl: "/checkout",
+    });
   };
 
   return (
@@ -107,13 +135,7 @@ const SignIn = () => {
         {/* Sign In Checkout */}
         <AuthFormContainer
           title="Sign in for faster checkout"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            await signIn("credentials", {
-              ...userInfo,
-              callbackUrl: "/checkout",
-            });
-          }}
+          onSubmit={handleSignIn}
         >
           <AuthInput
             name="email"
@@ -135,13 +157,17 @@ const SignIn = () => {
             type="submit"
             className="w-full rounded bg-black p-2 text-white"
           >
-            Sign in
+            {isLoading ? "Loading..." : "Sign in"}
           </button>
           <div className="mt-4">
             <a href="#" className="text-sm text-blue-950 underline">
               Forgot password?
             </a>
+            <a href="#" className="text-sm text-blue-950 underline">
+              Sign Up
+            </a>
           </div>
+          {error && <p>Error fetching user data.</p>}
         </AuthFormContainer>
       </div>
 
