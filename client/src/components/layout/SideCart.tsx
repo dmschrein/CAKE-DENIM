@@ -28,7 +28,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
 
   // Retrieve the user's session status from NextAuth
   const { status } = useSession();
-  console.log(status);
+  console.log("SideCart user status:", status);
   const isLoggedIn = status === "authenticated"; // Boolean to check if the user is authenticated
 
   return (
@@ -133,7 +133,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
               router.push("/checkout");
             } else {
               // Redirect to sign-in page if user is not authenticated
-              router.push("/auth/sign-in");
+              router.push("/sign-in");
             }
             onRequestClose && onRequestClose(); // Close the cart if onRequestClose is provided
           }}

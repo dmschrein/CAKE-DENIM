@@ -1,5 +1,6 @@
 "use client";
 
+import { signIn, signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,6 +21,8 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import logo from "@/assets/goldNORLogo.png";
 import { useCart } from "@/providers/CartProvider";
 import SideCart from "./SideCart";
+import { SigninForm } from "../forms/SigninForm";
+import CreateAccountForm from "../forms/CreateAccountForm";
 
 const components: {
   title: string;
@@ -71,24 +74,34 @@ const components: {
 ];
 
 const Navigation = () => {
-  // const dispatch = useAppDispatch();
-  // const isSidebarCollapsed = useAppSelector(
-  //   (state) => state.global.isSidebarCollapsed,
-  // );
-
-  // const toggleSidebar = () => {
-  //   dispatch(setIsSidebarCollapsed(!setIsSidebarCollapsed));
-  // };
-
-  const { countAllItems, countTotalPrice } = useCart();
+  const { countAllItems } = useCart();
   const [showSideCart, setShowSideCart] = useState(false);
+  const [showSigninModal, setShowSigninModal] = useState(false);
+  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
   const cartItems = countAllItems();
+
+  // Retrieve the user's session status from NextAuth
+  const { status } = useSession();
+  console.log("Navigation user status:", status);
+  const isLoggedIn = status === "authenticated";
+
+  const handleSignin = () => {
+    console.log("Sign In button clicked");
+    setShowSigninModal(true);
+    setShowCreateAccountModal(false);
+  };
+
+  const handleCreateAccount = () => {
+    console.log("Create Account button clicked");
+    setShowSigninModal(false);
+    setShowCreateAccountModal(true);
+  };
 
   return (
     <>
       {/* Top Bar for "Shipping" and other info */}
       <div className="flex h-8 w-full items-center justify-center bg-gray-100 text-sm">
-        <span>SHIPPING TO UNITED STATES</span>
+        <span>FREE SHIPPING TO UNITED STATES</span>
       </div>
 
       {/* Main Navigation */}
@@ -192,18 +205,20 @@ const Navigation = () => {
             <Link href="/saved">Favorites</Link>
             <HeartIcon className="h-4 w-4" />
           </div>
-
+          {/* Check if user is logged in */}
+          {isLoggedIn ? (
+            <button onClick={() => signOut()} className="text-sm underline">
+              Account
+            </button>
+          ) : (
+            // if the user is already logged in, change Sign In to Account on Nav bar
+            <button onClick={handleSignin} className="text-sm underline">
+              Sign In
+            </button>
+          )}
           {/* Side cart */}
-          <Link href="/login">Login</Link>
-          {/* <button
-            className="rounded-full bg-gray-100 p-3 hover:bg-blue-100"
-            onClick={toggleSidebar}
-          >
-            <ShoppingBagOutlinedIcon />
-          </button> */}
-
           <button
-            onClick={() => setShowSideCart((old) => !old)}
+            onClick={() => setShowSideCart((prev) => !prev)}
             className="relative rounded-full bg-gray-200 p-3"
           >
             <ShoppingBagOutlinedIcon />
@@ -219,6 +234,24 @@ const Navigation = () => {
         visible={showSideCart}
         onRequestClose={() => setShowSideCart(false)}
       />
+      {/* Signin Modal */}
+      {showSigninModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <SigninForm
+            handleClose={() => setShowSigninModal(false)}
+            onSignupClick={handleCreateAccount} // on sign
+          />
+        </div>
+      )}
+
+      {/* Create Account Modal */}
+      {showCreateAccountModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <CreateAccountForm
+            handleClose={() => setShowCreateAccountModal(false)}
+          />
+        </div>
+      )}
     </>
   );
 };

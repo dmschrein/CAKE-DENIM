@@ -15,7 +15,7 @@ datasource db {
 
 // User (Customers) Model
 model Users {
-  userId           String     @id 
+  userId           String     @id @default(uuid())
   email            String     @unique
   passwordHash     String
   firstName        String

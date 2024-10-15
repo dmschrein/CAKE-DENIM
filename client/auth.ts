@@ -1,7 +1,6 @@
 import nextAuth, { NextAuthConfig } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
-import { createUser } from "@/lib/utils";
-import { NewUser } from "@/interfaces";
+import bcrypt from "bcrypt";
 
 const authConfig: NextAuthConfig = {
   providers: [
@@ -15,25 +14,35 @@ const authConfig: NextAuthConfig = {
           email: string;
           password: string;
         };
-        // Check if th user exists
-        const newUser: NewUser = {
-          email,
-          password,
-          firstName,
-          lastName,
-        };
-
-        // Use createUser function from lib/utils.ts
         try {
-          const user = await createUser(newUser);
-          // If the user is successfully created, return the user object for the session
-          if (user) {
-            return user;
+          // Fetch user data from your backend API
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/users?email=${encodeURIComponent(email)}`,
+          );
+
+          if (!response.ok) {
+            console.error("User not found or server error");
+            return null;
           }
+
+          const user = await response.json();
+
+          // Verify the password
+          const isValidPassword = await bcrypt.compare(
+            password,
+            user.passwordHash,
+          );
+          if (!isValidPassword) throw new Error("Invalid password");
+
+          return {
+            id: user.userId,
+            email: user.email,
+            name: `${user.firstName} ${user.lastName}`,
+          };
         } catch (error) {
-          console.error("Error creating user: ", error);
+          console.error("Error authorizing user:", error);
+          return null;
         }
-        return null;
       },
     }),
   ],
