@@ -9,16 +9,17 @@ import {
   useState,
   ReactNode,
 } from "react";
-import { useCart } from "@/providers/CartProvider";
-import { CartItem } from "@/interfaces";
-import { useGetUserByEmailQuery } from "@/state/api";
+import { useCart } from "@/providers/CartProvider"; // custom hook to access cart data
+import { useGetUserByEmailQuery } from "@/state/api"; // custom hook for fetching user data by email
 
+// Props interface for AuthFormContainer component
 interface AuthFormContainerProps {
   children: ReactNode;
   title: string;
   onSubmit?: DOMAttributes<HTMLFormElement>["onSubmit"];
 }
 
+// Component to create a form container with a title and submit handling
 const AuthFormContainer: FC<AuthFormContainerProps> = ({
   children,
   title,
@@ -34,6 +35,7 @@ const AuthFormContainer: FC<AuthFormContainerProps> = ({
   );
 };
 
+// Props interface for AuthInput component
 interface AuthInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   value?: string;
@@ -41,6 +43,7 @@ interface AuthInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
 }
 
+// Component to create labeled input fields for forms
 const AuthInput: FC<AuthInputProps> = ({
   label,
   placeholder,
@@ -59,35 +62,40 @@ const AuthInput: FC<AuthInputProps> = ({
         placeholder={placeholder}
         value={value}
         name={name}
-        {...rest}
+        {...rest} // spread the remaining input attributes here
       />
     </div>
   );
 };
 
+// Main SigIn component to handle user sign-in and display cart details
 const SignIn = () => {
-  const { items } = useCart();
+  const { items } = useCart(); // Retrieve cart items using custom hook
 
+  // useState for mananging user input in sign-in form
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
 
+  // Custom hook to fetch user data by email when email changes
   const {
     data: user,
     error,
     isLoading,
   } = useGetUserByEmailQuery(userInfo.email, { skip: !userInfo.email });
 
+  // Handle input change and update userInfo state
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value } = target;
     setUserInfo({ ...userInfo, [name]: value });
   };
 
+  // Handle form submission for signing in the user
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (isLoading) return;
+    if (isLoading) return; // Prevent submission if loading
 
     if (error) {
       console.error("Error fetching user data: ", error);
@@ -101,7 +109,7 @@ const SignIn = () => {
     await signIn("credentials", {
       email: userInfo.email,
       password: userInfo.password,
-      callbackUrl: "/checkout",
+      callbackUrl: "/checkout", // redirect after sign-in
     });
   };
 
