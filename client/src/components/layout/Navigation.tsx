@@ -91,6 +91,10 @@ const Navigation = () => {
     setShowCreateAccountModal(false);
   };
 
+  const handleSignOutClicked = async () => {
+    await signOut({ callbackUrl: "/" });
+  };
+
   const handleCreateAccount = () => {
     console.log("Create Account button clicked");
     setShowSigninModal(false);
@@ -205,10 +209,15 @@ const Navigation = () => {
             <Link href="/saved">Favorites</Link>
             <HeartIcon className="h-4 w-4" />
           </div>
-          {/* Check if user is logged in */}
+          {/* Check if user is logged in
+           * TODO: Add Account link with Sign Out option
+           */}
           {isLoggedIn ? (
-            <button onClick={() => signOut()} className="text-sm underline">
-              Account
+            <button
+              onClick={handleSignOutClicked}
+              className="text-sm underline"
+            >
+              Sign Out
             </button>
           ) : (
             // if the user is already logged in, change Sign In to Account on Nav bar
