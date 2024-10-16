@@ -1,5 +1,8 @@
 // src/interfaces
 
+// Define UserType Enum-like type
+export type UserType = "EMAIL_ONLY" | "GUEST" | "REGISTERED";
+
 export interface Product {
   productId: string;
   name: string;
@@ -41,11 +44,13 @@ export interface User {
   password: string;
   firstName: string;
   lastName: string;
+  userType: UserType;
 }
 
 export interface NewUser {
   email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
+  password?: string;
+  firstName?: string;
+  lastName?: string;
+  userType: UserType;
 }

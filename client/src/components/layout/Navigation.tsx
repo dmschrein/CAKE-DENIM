@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -248,7 +248,7 @@ const Navigation = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <SigninForm
             handleClose={() => setShowSigninModal(false)}
-            onSignupClick={handleCreateAccount} // on sign
+            onCreateAccountClick={handleCreateAccount} // if user clicks "Create Account" go to CreateAccountForm
           />
         </div>
       )}
@@ -257,7 +257,7 @@ const Navigation = () => {
       {showCreateAccountModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <CreateAccountForm
-            handleClose={() => setShowCreateAccountModal(false)}
+            handleClose={() => setShowCreateAccountModal(false)} // close the create modal account
           />
         </div>
       )}

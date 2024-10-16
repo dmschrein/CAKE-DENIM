@@ -17,7 +17,7 @@ import { useGetUserByEmailQuery } from "@/state/api";
 // Define properties for SigninForm component
 interface SigninFormProps {
   handleClose: () => void;
-  onSignupClick: () => void;
+  onCreateAccountClick: () => void;
 }
 
 // Container component for the form with styling
@@ -73,7 +73,7 @@ const AuthInput: FC<AuthInputProps> = ({
 };
 
 // Main component for the sign-in form
-export function SigninForm({ handleClose, onSignupClick }: SigninFormProps) {
+export function SigninForm({ handleClose, onCreateAccountClick }: SigninFormProps) {
   const { data: session } = useSession(); // Retrieve session data to check if user is logged in
   const [message, setMessage] = useState(""); // Store message for user feedback
   const [userInfo, setUserInfo] = useState({ email: "", password: "" }); // Store user input for email and password
@@ -155,7 +155,7 @@ export function SigninForm({ handleClose, onSignupClick }: SigninFormProps) {
             </Link>
             <br />
             <button
-              onClick={onSignupClick}
+              onClick={onCreateAccountClick}
               className="text-sm text-gray-500 underline"
             >
               Create an account

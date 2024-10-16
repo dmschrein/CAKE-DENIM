@@ -55,12 +55,23 @@ export const api = createApi({
      * and expects a User object in response.
      */
     createUser: build.mutation<User, NewUser>({
-      query: (newUser) => ({
-        url: "/users",
-        method: "POST",
-        body: newUser,
-      }),
+      query: (newUser) => {
+        console.log("Creating user with data:", newUser);
+        return {
+          url: "/users",
+          method: "POST",
+          body: newUser,
+        };
+      },
       invalidatesTags: ["Users"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("User created sucessfully: ", data);
+        } catch (error) {
+          console.error("Error creating user: ", error);
+        }
+      },
     }),
     /*
      * This query sends a GET request to /users and expects an array of User[] objects in response.

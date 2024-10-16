@@ -10,22 +10,32 @@ export const createUser = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { email, password, firstName, lastName } = req.body;
+    const {
+      email,
+      password,
+      firstName = "",
+      lastName = "",
+      userType,
+    } = req.body; // Set default values for optional fields
 
-    // Hash the password
-    const passwordHash = await bcrypt.hash(password, saltRounds);
+    console.log("Received user data: ", { email, userType });
+    // Provide a default value for passwordHash if no password is provided
+    const passwordHash = password
+      ? await bcrypt.hash(password, saltRounds)
+      : "";
 
-    // Create user without specifying userId
+    // Create user without specifying userId, with only email required
     const user = await prisma.users.create({
       data: {
         email,
         passwordHash,
         firstName,
         lastName,
+        userType,
       },
     });
-
-    res.status(201).json(user);
+    console.log("User created successfully: ", user);
+    res.status(201).json(user); // Send the created user as the response
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ message: "Error creating user" });

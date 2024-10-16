@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { AiOutlineClose } from "react-icons/ai";
 import { useCreateUserMutation } from "@/state/api";
+import {signIn} from "next-auth/react";
 
 interface CreateAccountFormProps {
   handleClose: () => void;
@@ -18,11 +19,10 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     firstName: "",
     lastName: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const [error, setError] = useState(false);
 
-  const [createUser, { isLoading, isSuccess, isError }] =
-    useCreateUserMutation();
+  const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,7 +54,21 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
 
     setError(false);
     try {
-      await createUser({ email, password, firstName, lastName }).unwrap();
+      const userType = "REGISTERED";
+      await createUser({
+        email,
+        password,
+        firstName,
+        lastName,
+        userType,
+      }).unwrap();
+      // Immediately sign the user in and redirect them to /account
+      await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/account",
+      });
+      
       handleClose();
     } catch (error) {
       console.error("Failed to create user:", error);
