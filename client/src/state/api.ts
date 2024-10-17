@@ -21,8 +21,19 @@ export const api = createApi({
    */
   endpoints: (build) => ({
     getHomePageMetrics: build.query<HomePageMetrics, void>({
-      query: () => "/home",
+      query: () => {
+        console.log("Fetching home page metrics...");
+        return "/home";
+      },
       providesTags: ["HomePageMetrics"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Home page metrics fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching home page metrics: ", error);
+        }
+      },
     }),
 
     /*
@@ -34,21 +45,41 @@ export const api = createApi({
 
     getProducts: build.query<Product[], { search?: string; category?: string }>(
       {
-        query: ({ search, category }) => ({
-          url: "/products",
-          params: {
-            ...(search && { search }),
-            ...(category && { category }),
-          },
-        }),
+        query: ({ search, category }) => {
+          console.log("Getting products with data: ", { search, category });
+          return {
+            url: "/products",
+            params: {
+              ...(search && { search }),
+              ...(category && { category }),
+            },
+          };
+        },
         providesTags: ["Products"],
+        onQueryStarted: async (_args, { queryFulfilled }) => {
+          try {
+            const { data } = await queryFulfilled;
+            console.log("Products fetched successfully:", data);
+          } catch (error) {
+            console.error("Error fetching products: ", error);
+          }
+        },
       },
     ),
     getProductById: build.query<Product, string>({
-      query: (productId) => ({
-        url: `/products/${productId}`,
-      }),
+      query: (productId) => {
+        console.log("Fetching product by ID: ", productId);
+        return { url: `/products/${productId}` };
+      },
       providesTags: (_, __, productId) => [{ type: "Products", id: productId }],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Product fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetched producted by ID: ", error);
+        }
+      },
     }),
     /*
      * * This mutation sends a POST request to /users with a NewUser object in the request body
@@ -77,18 +108,38 @@ export const api = createApi({
      * This query sends a GET request to /users and expects an array of User[] objects in response.
      */
     getUsers: build.query<User[], void>({
-      query: () => "/users",
+      query: () => {
+        console.log("Fetching all users...");
+        return "/users";
+      },
       providesTags: ["Users"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Users fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching users: ", error);
+        }
+      },
     }),
 
     /*
      * This query sends a GET request to /users and expects an User objects in response.
      */
     getUserByEmail: build.query<User, string>({
-      query: (email) => ({
-        url: `/users?${email}`,
-      }),
+      query: (email) => {
+        console.log("Fetching user by email:", email);
+        return { url: `/users?${email}` };
+      },
       providesTags: (_, __, email) => [{ type: "Users", id: email }],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("User fetched successfully: ", data);
+        } catch (error) {
+          console.error("Error fetching user by email: ", error);
+        }
+      },
     }),
   }),
 });

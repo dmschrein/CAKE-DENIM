@@ -213,6 +213,7 @@ const Navigation = () => {
            * TODO: Add Account link with Sign Out option
            */}
           {isLoggedIn ? (
+            // if user is not logged in, render sign out button
             <button
               onClick={handleSignOutClicked}
               className="text-sm underline"

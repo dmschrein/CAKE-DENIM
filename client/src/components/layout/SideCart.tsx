@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useCart } from "@/providers/CartProvider"; // Custom hook for accessing the cart context
-import { signIn, useSession } from "next-auth/react"; // Functions for authentication and session management from NextAuth.js
+import { useSession } from "next-auth/react"; // Functions for authentication and session management from NextAuth.js
 import { useRouter } from "next/navigation"; // Hook for navigating between pages in Next.js
 import Image from "next/image"; // Component for optimized image rendering in Next.js
 
@@ -20,7 +20,6 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
     updateCart, // Function to update cart items
     removeFromCart, // Function to remove an item from the cart
     countTotalPrice, // Function to calculate the total price of items in the cart
-    clearCart, // Function to clear all items from the cart
   } = useCart();
 
   // Initialize the router for page navigation
@@ -127,15 +126,18 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
         <button
           onClick={() => {
             if (isLoggedIn) {
-              // Proceed to checkout if user is authenticated
-              // TODO: Send create user info to backend
-              console.log("send data to the server and create payment link");
+              // User is authenticated, proceed to checkout
+              console.log("User is authenticated, proceeding to checkout");
               router.push("/checkout");
             } else {
-              // Redirect to sign-in page if user is not authenticated
+              // User is not authenticated, redirect to sign-in
+              console.log("User is not authenticated, redirecting to sign-in");
               router.push("/sign-in");
             }
-            onRequestClose && onRequestClose(); // Close the cart if onRequestClose is provided
+            // Close the cart if onRequestClose is provided
+            if (onRequestClose) {
+              onRequestClose();
+            }
           }}
           className="w-full rounded border-2 border-blue-950 py-2 uppercase text-blue-950"
         >
