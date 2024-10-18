@@ -100,7 +100,7 @@ const GuestSigninForm: React.FC = () => {
     e.preventDefault();
     const { email, newsletterOptIn } = formData;
 
-    console.log("Guest form submitted with email: ", email);
+    console.log("🟢Guest form submitted with email: ", email);
 
     // validate email input
     if (!email) {
@@ -122,16 +122,16 @@ const GuestSigninForm: React.FC = () => {
       }
       // if the user exists, sign them in
       if (user) {
-        console.log("Guest user found, signing in...");
+        console.log("🟢Guest user found, signing in...");
         // TODO: add update user for cases where a user is a stored guest user and wants to opt int
         if (user.userType === "GUEST" && newsletterOptIn) {
           // update the user to "EMAIL_ONLY"
-          console.log("Updating user to EMAIL_ONLY...");
+          console.log("🟢Updating user to EMAIL_ONLY...");
           await updateUserMutation({
             userId: user.userId,
             userType: "EMAIL_ONLY",
           }).unwrap();
-          console.log("User updated to EMAIL_ONLY");
+          console.log("🟢User updated to EMAIL_ONLY");
         }
         // Sign in the user
         await signIn("credentials", {
@@ -145,7 +145,7 @@ const GuestSigninForm: React.FC = () => {
           email,
           userType,
         }).unwrap();
-        console.log("Guest user created successfully: ", result);
+        console.log("🟢Guest user created successfully: ", result);
         setSubmitted(true);
         // Immediately sign the user in and redirect them to /checkout
         await signIn("credentials", {
