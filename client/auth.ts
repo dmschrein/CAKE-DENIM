@@ -27,6 +27,23 @@ const authConfig: NextAuthConfig = {
 
           const user = await response.json();
 
+          //Handle guest users or EMAIL_ONLY users without passwords
+          //TODO: Check that this does not create security issues
+          if (user.userType === "GUEST" || user.userType === "EMAIL_ONLY") {
+            console.log(
+              "Guest or EMAIL_ONLY user detected, bypassing password check",
+            );
+            return {
+              id: user.userId,
+              email: user.email,
+            };
+          }
+
+          // Verify the password
+          if (!password || !user.passwordHash) {
+            throw new Error("Password or hash missing");
+          }
+
           // Verify the password
           const isValidPassword = await bcrypt.compare(
             password,

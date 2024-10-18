@@ -42,6 +42,40 @@ export const createUser = async (
   }
 };
 
+export const updateUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { userId } = req.params; // provided by session
+    const { email, password, firstName, lastName, userType } = req.body;
+
+    console.log("Received user data: ", { email, userType });
+
+    // Hash the password if it is being updated
+    let passwordHash;
+    if (password) {
+      passwordHash = await bcrypt.hash(password, saltRounds);
+    }
+    // Update the user
+    const updatedUser = await prisma.users.update({
+      where: { userId },
+      data: {
+        email,
+        passwordHash: passwordHash || undefined, // Only update if password is provided
+        firstName,
+        lastName,
+        userType,
+      },
+    });
+    console.log("User updated successfully: ", updatedUser);
+    res.status(200).json(updateUser);
+  } catch (error) {
+    console.error("Error updating user: ", error);
+    res.status(500).json({ message: "Error updating user" });
+  }
+};
+
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     const email = req.query.email?.toString();

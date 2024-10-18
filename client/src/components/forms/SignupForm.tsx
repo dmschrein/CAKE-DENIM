@@ -36,7 +36,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
       console.log("User created successfully: ", result);
       setSubmitted(true);
       console.log("handleClose: ", handleClose);
-      if (typeof handleClose === 'function') {
+      if (typeof handleClose === "function") {
         handleClose();
       } else {
         console.error("handleClose is not a function or missing");
@@ -111,13 +111,13 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
           {/* Social icons */}
           <div className="mt-4 flex justify-center space-x-4">
             <a href="#" className="text-black hover:text-gray-600">
-              <i className="fab fa-facebook"></i>
+              <i className="fab fa-facebook">Facebook</i>
             </a>
             <a href="#" className="text-black hover:text-gray-600">
-              <i className="fab fa-twitter"></i>
+              <i className="fab fa-twitter">Twitter</i>
             </a>
             <a href="#" className="text-black hover:text-gray-600">
-              <i className="fab fa-pinterest"></i>
+              <i className="fab fa-pinterest">Pinterest</i>
             </a>
           </div>
           {isError && (

@@ -1,4 +1,3 @@
-
 // client/src/components/common/CollectionPage.tsx
 
 import CollectionCard from "@/components/common/CollectionCard";
@@ -6,7 +5,6 @@ import React from "react";
 //import CategoryCard from "./CategoryFilterCard";
 
 interface Product {
-
   productId: string;
   name: string;
   description: string;
@@ -16,12 +14,11 @@ interface Product {
   category?: string;
   createdAt: string;
   updatedAt: string;
-
 }
 
 interface CollectionPageProps {
   collectionName: string;
-  products: Product[];
+  products: Product[]; // TODO: update to use interfaces.ts
 }
 
 const CollectionPage: React.FC<CollectionPageProps> = ({

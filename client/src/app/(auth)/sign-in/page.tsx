@@ -11,6 +11,10 @@ import {
 } from "react";
 import { useCart } from "@/providers/CartProvider"; // custom hook to access cart data
 import { useGetUserByEmailQuery } from "@/state/api"; // custom hook for fetching user data by email
+import Link from "next/link";
+import SigninFormCommon from "@/components/forms/SigninFormCommon";
+import CreateAccountForm from "@/components/forms/CreateAccountForm";
+import GuestSigninForm from "@/components/forms/GuestSigninForm";
 
 // Props interface for AuthFormContainer component
 interface AuthFormContainerProps {
@@ -71,7 +75,8 @@ const AuthInput: FC<AuthInputProps> = ({
 // Main SigIn component to handle user sign-in and display cart details
 const SignIn = () => {
   const { items } = useCart(); // Retrieve cart items using custom hook
-
+  const [showSigninModal, setShowSigninModal] = useState(false);
+  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
   // useState for mananging user input in sign-in form
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -112,13 +117,19 @@ const SignIn = () => {
       callbackUrl: "/checkout", // redirect after sign-in
     });
   };
+  const handleCreateAccount = () => {
+    console.log("Create Account button clicked");
+    setShowSigninModal(false);
+    setShowCreateAccountModal(true);
+  };
 
   return (
     <div className="flex min-h-screen items-start justify-center space-x-10 p-5">
       {/* Login options */}
       <div className="flex flex-col space-x-10 md:flex-row">
         {/* Guest Checkout */}
-        <AuthFormContainer title="Continue as guest">
+        <GuestSigninForm />
+        {/* <AuthFormContainer title="Continue as guest">
           <AuthInput
             name="guestEmail"
             type="email"
@@ -138,10 +149,14 @@ const SignIn = () => {
           >
             Continue as guest
           </button>
-        </AuthFormContainer>
+        </AuthFormContainer> */}
 
         {/* Sign In Checkout */}
-        <AuthFormContainer
+        <SigninFormCommon
+          formTitle="Sign in for a faster checkout"
+          callBackUrl="/checkout"
+        />
+        {/* <AuthFormContainer
           title="Sign in for faster checkout"
           onSubmit={handleSignIn}
         >
@@ -167,16 +182,21 @@ const SignIn = () => {
           >
             {isLoading ? "Loading..." : "Sign in"}
           </button>
-          <div className="mt-4">
-            <a href="#" className="text-sm text-blue-950 underline">
+          <div className="mt-8 flex justify-between">
+            <Link href="#" className="text-blue-950 underline">
               Forgot password?
-            </a>
-            <a href="#" className="text-sm text-blue-950 underline">
-              Sign Up
-            </a>
+            </Link>
+
+            <button
+              onClick={handleCreateAccount}
+              className="text-blue-950 underline"
+            >
+              Create an account
+            </button>
           </div>
+
           {error && <p>Error fetching user data.</p>}
-        </AuthFormContainer>
+        </AuthFormContainer> */}
       </div>
 
       {/* Cart Details */}
@@ -202,6 +222,14 @@ const SignIn = () => {
           <p>Your cart is empty.</p>
         )}
       </div>
+      {/* Create Account Modal */}
+      {showCreateAccountModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <CreateAccountForm
+            handleClose={() => setShowCreateAccountModal(false)} // close the create modal account
+          />
+        </div>
+      )}
     </div>
   );
 };

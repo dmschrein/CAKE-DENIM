@@ -1,7 +1,14 @@
 /* API Slice service to handle API interactions in a declarative way */
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Product, HomePageMetrics, User, NewUser } from "@/interfaces";
+import {
+  Product,
+  HomePageMetrics,
+  User,
+  NewUser,
+  UserType,
+  GuestUser,
+} from "@/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
 export const api = createApi({
@@ -105,6 +112,31 @@ export const api = createApi({
       },
     }),
     /*
+     * * This mutation sends a PUT request to /users with an updated User object in the request body
+     * and expects a User object in response.
+     */
+    updateUser: build.mutation<User, Partial<User> & { userId: string }>({
+      query: ({ userId, ...updatedUserData }) => {
+        console.log("Updated user with data: ", updatedUserData);
+        return {
+          url: `/users/${userId}`,
+          method: "PATCH",
+          body: updatedUserData,
+        };
+      },
+      invalidatesTags: (result, error, { userId }) => [
+        { type: "Users", id: userId },
+      ],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("User updated successfully: ", data);
+        } catch (error) {
+          console.log("Error updating user: ", error);
+        }
+      },
+    }),
+    /*
      * This query sends a GET request to /users and expects an array of User[] objects in response.
      */
     getUsers: build.query<User[], void>({
@@ -122,7 +154,6 @@ export const api = createApi({
         }
       },
     }),
-
     /*
      * This query sends a GET request to /users and expects an User objects in response.
      */
@@ -141,6 +172,29 @@ export const api = createApi({
         }
       },
     }),
+    /*
+     * This mutation sends a POST to /users with a GuestUser object in the request body
+     * and expects a User object in response.
+     */
+    createGuestUser: build.mutation<GuestUser, { email: string }>({
+      query: (guestUserData) => {
+        console.log("Creating guest user with data:", guestUserData);
+        return {
+          url: "/users",
+          method: "POST",
+          body: guestUserData,
+        };
+      },
+      invalidatesTags: ["Users"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Guest user created successfully: ", data);
+        } catch (error) {
+          console.error("Error creating guest user: ", error);
+        }
+      },
+    }),
   }),
 });
 
@@ -152,4 +206,6 @@ export const {
   useGetUserByEmailQuery,
   useCreateUserMutation,
   useGetUsersQuery,
+  useCreateGuestUserMutation,
+  useUpdateUserMutation,
 } = api;

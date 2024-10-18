@@ -40,6 +40,7 @@ export interface HomePageMetrics {
 }
 
 export interface User {
+  userId: string;
   email: string;
   password: string;
   firstName: string;
@@ -52,5 +53,11 @@ export interface NewUser {
   password?: string;
   firstName?: string;
   lastName?: string;
+  userType: UserType;
+}
+
+export interface GuestUser {
+  email: string;
+  sessionToken?: string;
   userType: UserType;
 }
