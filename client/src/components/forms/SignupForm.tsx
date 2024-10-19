@@ -4,25 +4,46 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import cakebabe from "@/assets/cakebabe.png";
+import { useCreateUserMutation } from "@/state/api";
 
-const SignupForm = () => {
+interface SignUpFormProps {
+  handleClose: () => void;
+}
+
+const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false); // Track form submission
   const [error, setError] = useState(false); // Track if there's an error
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [createUser, { isLoading, isError }] = useCreateUserMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form submitted with email: ", email);
+
     if (!email) {
       setError(true);
+      console.log("Error: No email provided");
       return;
     }
     setError(false);
-
-    // Simulate email submission request (replace with actual API call)
-    setTimeout(() => {
-      console.log("Email submitted:", email);
-      setSubmitted(true); // Set to true to show confirmation message
-    }, 1000);
+    try {
+      console.log("Attempting to create user...");
+      const result = await createUser({
+        email,
+        userType: "EMAIL_ONLY",
+      }).unwrap();
+      console.log("User created successfully: ", result);
+      setSubmitted(true);
+      console.log("handleClose: ", handleClose);
+      if (typeof handleClose === "function") {
+        handleClose();
+      } else {
+        console.error("handleClose is not a function or missing");
+      }
+    } catch (error) {
+      console.error("Oops! Sign up failed!", error);
+    }
   };
 
   return (
@@ -81,23 +102,27 @@ const SignupForm = () => {
               size="lg"
               type="submit"
               className="w-full"
+              disabled={isLoading}
             >
-              I’m in!
+              {isLoading ? "Signing Up..." : "I’m in!"}
             </Button>
           </form>
 
           {/* Social icons */}
           <div className="mt-4 flex justify-center space-x-4">
             <a href="#" className="text-black hover:text-gray-600">
-              <i className="fab fa-facebook"></i>
+              <i className="fab fa-facebook">Facebook</i>
             </a>
             <a href="#" className="text-black hover:text-gray-600">
-              <i className="fab fa-twitter"></i>
+              <i className="fab fa-twitter">Twitter</i>
             </a>
             <a href="#" className="text-black hover:text-gray-600">
-              <i className="fab fa-pinterest"></i>
+              <i className="fab fa-pinterest">Pinterest</i>
             </a>
           </div>
+          {isError && (
+            <p className="text-red-500">Error Signing up. Please try again.</p>
+          )}
         </>
       )}
     </div>

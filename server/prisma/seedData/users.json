@@ -5,23 +5,29 @@
     "passwordHash": "CI6vd7yr1dNKEj#X",
     "firstName": "Darrel",
     "lastName": "Schreiner",
-    "createdAt": "2023-04-01T12:00:00Z"
+    "userType": "REGISTERED",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
     "userId": "2",
     "email": "dominique@cakedenim.com",
     "passwordHash": "",
-    "firstName": "Dominique",
-    "lastName": "Schreiner",
-    "createdAt": "2023-04-01T12:00:00Z"
+    "firstName": "",
+    "lastName": "",
+    "userType": "EMAIL_ONLY",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
     "userId": "3",
     "email": "evie.flores@gmail.com",
-    "passwordHash": "",
+    "passwordHash": "2^48tu%nVpEjeu2a",
     "firstName": "Evelyn",
     "lastName": "Schreiner",
-    "createdAt": "2023-04-01T12:00:00Z"
+    "userType": "REGISTERED",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
     "userId": "4",
@@ -29,6 +35,8 @@
     "passwordHash": "",
     "firstName": "Darrel",
     "lastName": "Kent",
-    "createdAt": "2023-04-01T12:00:00Z"
+    "userType": "GUEST",
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-01T12:00:00Z"
   }
 ]

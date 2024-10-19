@@ -4,6 +4,7 @@ import SignupForm from "./SignupForm";
 const PopupModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // function to show pop up 1 second after the user visits the page
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsOpen(true);
@@ -23,19 +24,19 @@ const PopupModal = () => {
           onClick={handleClose}
         >
           <div
-            className="relative bg-white rounded-lg shadow-xl max-w-sm w-full p-6"
+            className="relative w-full max-w-sm rounded-lg bg-white p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside the modal
           >
             {/* Close button in PopupModal */}
             <button
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 focus:outline-none"
+              className="absolute right-2 top-2 text-gray-400 hover:text-gray-600 focus:outline-none"
               onClick={handleClose}
             >
               &times;
             </button>
 
             {/* Embed SignupForm */}
-            <SignupForm />
+            <SignupForm handleClose={handleClose} />
           </div>
         </div>
       )}

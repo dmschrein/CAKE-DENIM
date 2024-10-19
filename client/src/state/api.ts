@@ -1,46 +1,14 @@
-
 /* API Slice service to handle API interactions in a declarative way */
 
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-export interface Product {
-  productId: string;
-  name: string;
-  description: string;
-  price: number;
-  stockQuantity: number;
-  imageURL: string;
-  category?: string;
-  createdAt: string;
-  updatedAt: string;
-
-}
-
-export interface NewProduct {
-  name: string;
-  price: number;
-  rating?: number;
-  stockQuantity: number;
-}
-
-export interface ExpenseByCategorySummary {
-  expenseByCategorySummaryId: string;
-  category: string;
-  amount: string;
-  date: string;
-}
-
-export interface HomePageMetrics {
-  popularProducts: Product[];
-  expenseByCategorySummary: ExpenseByCategorySummary[];
-}
-
-export interface User {
-  userId: string;
-  name: string;
-  email: string;
-}
+import {
+  Product,
+  HomePageMetrics,
+  User,
+  NewUser,
+  UserType,
+  GuestUser,
+} from "@/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
 export const api = createApi({
@@ -60,8 +28,19 @@ export const api = createApi({
    */
   endpoints: (build) => ({
     getHomePageMetrics: build.query<HomePageMetrics, void>({
-      query: () => "/home",
+      query: () => {
+        console.log("Fetching home page metrics...");
+        return "/home";
+      },
       providesTags: ["HomePageMetrics"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Home page metrics fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching home page metrics: ", error);
+        }
+      },
     }),
 
     /*
@@ -73,30 +52,148 @@ export const api = createApi({
 
     getProducts: build.query<Product[], { search?: string; category?: string }>(
       {
-        query: ({ search, category }) => ({
-          url: "/products",
-          params: {
-            ...(search && { search }),
-            ...(category && { category }),
-          },
-        }),
+        query: ({ search, category }) => {
+          console.log("Getting products with data: ", { search, category });
+          return {
+            url: "/products",
+            params: {
+              ...(search && { search }),
+              ...(category && { category }),
+            },
+          };
+        },
         providesTags: ["Products"],
-      }
+        onQueryStarted: async (_args, { queryFulfilled }) => {
+          try {
+            const { data } = await queryFulfilled;
+            console.log("Products fetched successfully:", data);
+          } catch (error) {
+            console.error("Error fetching products: ", error);
+          }
+        },
+      },
     ),
     getProductById: build.query<Product, string>({
-      query: (productId) => ({
-        url: `/products/${productId}`,
-      }),
+      query: (productId) => {
+        console.log("Fetching product by ID: ", productId);
+        return { url: `/products/${productId}` };
+      },
       providesTags: (_, __, productId) => [{ type: "Products", id: productId }],
-
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Product fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetched producted by ID: ", error);
+        }
+      },
     }),
-
+    /*
+     * * This mutation sends a POST request to /users with a NewUser object in the request body
+     * and expects a User object in response.
+     */
+    createUser: build.mutation<User, NewUser>({
+      query: (newUser) => {
+        console.log("Creating user with data:", newUser);
+        return {
+          url: "/users",
+          method: "POST",
+          body: newUser,
+        };
+      },
+      invalidatesTags: ["Users"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("User created sucessfully: ", data);
+        } catch (error) {
+          console.error("Error creating user: ", error);
+        }
+      },
+    }),
+    /*
+     * * This mutation sends a PUT request to /users with an updated User object in the request body
+     * and expects a User object in response.
+     */
+    updateUser: build.mutation<User, Partial<User> & { userId: string }>({
+      query: ({ userId, ...updatedUserData }) => {
+        console.log("Updated user with data: ", updatedUserData);
+        return {
+          url: `/users/${userId}`,
+          method: "PATCH",
+          body: updatedUserData,
+        };
+      },
+      invalidatesTags: (result, error, { userId }) => [
+        { type: "Users", id: userId },
+      ],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("User updated successfully: ", data);
+        } catch (error) {
+          console.log("Error updating user: ", error);
+        }
+      },
+    }),
     /*
      * This query sends a GET request to /users and expects an array of User[] objects in response.
      */
     getUsers: build.query<User[], void>({
-      query: () => "/users",
+      query: () => {
+        console.log("Fetching all users...");
+        return "/users";
+      },
       providesTags: ["Users"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Users fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching users: ", error);
+        }
+      },
+    }),
+    /*
+     * This query sends a GET request to /users and expects an User objects in response.
+     */
+    getUserByEmail: build.query<User, string>({
+      query: (email) => {
+        console.log("Fetching user by email:", email);
+        return { url: `/users?${email}` };
+      },
+      providesTags: (_, __, email) => [{ type: "Users", id: email }],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("User fetched successfully: ", data);
+        } catch (error) {
+          console.error("Error fetching user by email: ", error);
+        }
+      },
+    }),
+    /*
+     * This mutation sends a POST to /users with a GuestUser object in the request body
+     * and expects a User object in response.
+     */
+    createGuestUser: build.mutation<GuestUser, { email: string }>({
+      query: (guestUserData) => {
+        console.log("Creating guest user with data:", guestUserData);
+        return {
+          url: "/users",
+          method: "POST",
+          body: guestUserData,
+        };
+      },
+      invalidatesTags: ["Users"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Guest user created successfully: ", data);
+        } catch (error) {
+          console.error("Error creating guest user: ", error);
+        }
+      },
     }),
   }),
 });
@@ -106,5 +203,9 @@ export const {
   useGetHomePageMetricsQuery,
   useGetProductsQuery,
   useGetProductByIdQuery,
+  useGetUserByEmailQuery,
+  useCreateUserMutation,
   useGetUsersQuery,
+  useCreateGuestUserMutation,
+  useUpdateUserMutation,
 } = api;

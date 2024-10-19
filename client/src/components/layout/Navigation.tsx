@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import { signOut, useSession } from "next-auth/react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -15,9 +16,13 @@ import {
 } from "@/components/ui/navigation-menu";
 import { HeartIcon } from "@radix-ui/react-icons";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import { setIsSidebarCollapsed } from "@/state";
-import { useAppDispatch, useAppSelector } from "@/app/redux";
+// import { setIsSidebarCollapsed } from "@/state";
+// import { useAppDispatch, useAppSelector } from "@/app/redux";
 import logo from "@/assets/goldNORLogo.png";
+import { useCart } from "@/providers/CartProvider";
+import SideCart from "./SideCart";
+import { SigninForm } from "../forms/SigninForm";
+import CreateAccountForm from "../forms/CreateAccountForm";
 
 const components: {
   title: string;
@@ -69,20 +74,38 @@ const components: {
 ];
 
 const Navigation = () => {
-  const dispatch = useAppDispatch();
-  const isSidebarCollapsed = useAppSelector(
-    (state) => state.global.isSidebarCollapsed,
-  );
+  const { countAllItems } = useCart();
+  const [showSideCart, setShowSideCart] = useState(false);
+  const [showSigninModal, setShowSigninModal] = useState(false);
+  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
+  const cartItems = countAllItems();
 
-  const toggleSidebar = () => {
-    dispatch(setIsSidebarCollapsed(!setIsSidebarCollapsed));
+  // Retrieve the user's session status from NextAuth
+  const { status } = useSession();
+  console.log("Navigation user status:", status);
+  const isLoggedIn = status === "authenticated";
+
+  const handleSignin = () => {
+    console.log("Sign In button clicked");
+    setShowSigninModal(true);
+    setShowCreateAccountModal(false);
+  };
+
+  const handleSignOutClicked = async () => {
+    await signOut({ callbackUrl: "/" });
+  };
+
+  const handleCreateAccount = () => {
+    console.log("Create Account button clicked");
+    setShowSigninModal(false);
+    setShowCreateAccountModal(true);
   };
 
   return (
     <>
       {/* Top Bar for "Shipping" and other info */}
       <div className="flex h-8 w-full items-center justify-center bg-gray-100 text-sm">
-        <span>SHIPPING TO UNITED STATES</span>
+        <span>FREE SHIPPING TO UNITED STATES</span>
       </div>
 
       {/* Main Navigation */}
@@ -186,15 +209,59 @@ const Navigation = () => {
             <Link href="/saved">Favorites</Link>
             <HeartIcon className="h-4 w-4" />
           </div>
-          <Link href="/login">Login</Link>
+          {/* Check if user is logged in
+           * TODO: Add Account link with Sign Out option
+           */}
+          {isLoggedIn ? (
+            // if user is not logged in, render sign out button
+            <button
+              onClick={handleSignOutClicked}
+              className="text-sm underline"
+            >
+              Sign Out
+            </button>
+          ) : (
+            // if the user is already logged in, change Sign In to Account on Nav bar
+            <button onClick={handleSignin} className="text-sm underline">
+              Sign In
+            </button>
+          )}
+          {/* Side cart */}
           <button
-            className="rounded-full bg-gray-100 p-3 hover:bg-blue-100"
-            onClick={toggleSidebar}
+            onClick={() => setShowSideCart((prev) => !prev)}
+            className="relative rounded-full bg-gray-200 p-3"
           >
             <ShoppingBagOutlinedIcon />
+            {cartItems > 0 ? (
+              <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-950 bg-opacity-70 text-xs font-semibold text-white">
+                <p>{cartItems >= 9 ? "9+" : cartItems}</p>
+              </div>
+            ) : null}
           </button>
         </div>
       </div>
+      <SideCart
+        visible={showSideCart}
+        onRequestClose={() => setShowSideCart(false)}
+      />
+      {/* Signin Modal */}
+      {showSigninModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <SigninForm
+            handleClose={() => setShowSigninModal(false)}
+            onCreateAccountClick={handleCreateAccount} // if user clicks "Create Account" go to CreateAccountForm
+          />
+        </div>
+      )}
+
+      {/* Create Account Modal */}
+      {showCreateAccountModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <CreateAccountForm
+            handleClose={() => setShowCreateAccountModal(false)} // close the create modal account
+          />
+        </div>
+      )}
     </>
   );
 };
