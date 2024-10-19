@@ -1,18 +1,16 @@
 import React, {
-  ChangeEventHandler,
+  useState,
   FC,
   ReactNode,
   DOMAttributes,
-  useState,
   InputHTMLAttributes,
 } from "react";
 import {
   useGetUserByEmailQuery,
-  useCreateGuestUserMutation,
   useCreateUserMutation,
   useUpdateUserMutation,
 } from "@/state/api";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 // Props interface for AuthFormContainer component
 interface AuthFormContainerProps {
@@ -71,90 +69,120 @@ const AuthInput: FC<AuthInputProps> = ({
 };
 
 const GuestSigninForm: React.FC = () => {
+  console.log("⭐️ Guest SignIn Form Starts");
   const [formData, setFormData] = useState({
     email: "",
     newsletterOptIn: false,
   });
   const [submitted, setSubmitted] = useState(false);
-  // const [newsletterOptIn, setNewsletterOptIn] = useState(false);
   const [error, setError] = useState(false);
 
   // Fetch user by email if it exists
-  const { data: user, refetch } = useGetUserByEmailQuery(formData.email, {
+  const {
+    data: user,
+    error: userError,
+    isLoading,
+    isFetching,
+  } = useGetUserByEmailQuery(formData.email, {
     skip: !formData.email,
   });
 
-  // Mutation hook to create a new guest user
+  // Mutation hooks for creating and updating users
   const [createUser, { isLoading: isCreatingUser }] = useCreateUserMutation();
-
   const [updateUserMutation] = useUpdateUserMutation();
-  const { data: session } = useSession();
 
-  // Handle input change and update the email state
+  // Handle input change and update form data
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Handle checkbox change for newsletterOptIn
+  const handleCheckboxChange = () => {
+    console.log("⭐️ Handling checkbox change");
+
+    setFormData({
+      ...formData,
+      newsletterOptIn: !formData.newsletterOptIn, // toggle the value
+    });
+    
   };
 
   // Handle guest login or account creation
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log();
     e.preventDefault();
     const { email, newsletterOptIn } = formData;
 
-    console.log("🟢Guest form submitted with email: ", email);
+    console.log("⭐️ Guest form submitted with email: ", email);
 
     // validate email input
     if (!email) {
       setError(true);
-      console.log("Error: No email provided");
+      console.log("⭐️Error: No email provided");
       return;
     }
     setError(false);
 
     try {
-      await refetch(); // Refetch user info based on entered email
-      // if the user opted in to newletter, create user with userType: OPT_IN
+      if (isLoading || isFetching) {
+        console.log("⭐️User data is still loading...");
+        return;
+      }
+      if (userError) {
+        console.error("⭐️Error fetching user data: ", userError);
+        return;
+      }
       let userType: "EMAIL_ONLY" | "GUEST";
-      // if user opts in for the newsletter, set userType to EMAIL_ONLY
+
+      // Set the userType based on newsletterOptIn checkbox
       if (newsletterOptIn) {
         userType = "EMAIL_ONLY";
       } else {
         userType = "GUEST";
       }
+
       // if the user exists, sign them in
+      console.log("⭐️ Guest userType: ", userType);
       if (user) {
-        console.log("🟢Guest user found, signing in...");
-        // TODO: add update user for cases where a user is a stored guest user and wants to opt int
+        console.log("⭐️ Guest user found, signing in...");
+
+        // Update user if they opt-in for the newsletter
         if (user.userType === "GUEST" && newsletterOptIn) {
-          // update the user to "EMAIL_ONLY"
-          console.log("🟢Updating user to EMAIL_ONLY...");
+          console.log("⭐️ Updating user to EMAIL_ONLY...");
           await updateUserMutation({
             userId: user.userId,
             userType: "EMAIL_ONLY",
           }).unwrap();
-          console.log("🟢User updated to EMAIL_ONLY");
+          console.log("⭐️ User updated to EMAIL_ONLY");
         }
+
         // Sign in the user
         await signIn("credentials", {
           email,
-          callbackUrl: "/checkout",
+          //callbackUrl: "/checkout",
         });
       } else {
-        // If no user is found, create a new guest or email only user
-        console.log("Attempting to create guest or email-only user...");
+        // If no user is found, create a new guest or email-only user
+        console.log("⭐️ Creating guest or email-only user...");
         const result = await createUser({
           email,
           userType,
         }).unwrap();
-        console.log("🟢Guest user created successfully: ", result);
+        console.log("⭐️ Guest user created successfully: ", result);
         setSubmitted(true);
+
         // Immediately sign the user in and redirect them to /checkout
         await signIn("credentials", {
           email,
-          callbackUrl: "/checkout",
+          //callbackUrl: "/checkout",
         });
       }
     } catch (error) {
-      console.error("Guest user sign up failed!", error);
+      console.error("⭐️🛑 Guest user sign up failed!", error);
     }
   };
 
@@ -174,12 +202,7 @@ const GuestSigninForm: React.FC = () => {
           id="newsletter"
           className="mr-2"
           checked={formData.newsletterOptIn}
-          onChange={() =>
-            setFormData({
-              ...formData,
-              newsletterOptIn: !formData.newsletterOptIn,
-            })
-          }
+          onChange={handleCheckboxChange} // Handle checkbox toggle
         />
         <label htmlFor="newsletter" className="text-sm text-blue-950">
           Get in on top-secret CAKE DENIM news and other cool stuff.

@@ -28,7 +28,7 @@ const authConfig: NextAuthConfig = {
           if (response.status === 404) {
             // If the user is not found, we create a new guest user
             console.log("🟡 User not found, creating a new GUEST user...");
-
+            // TODO: Check if this is safe
             const createResponse = await fetch(
               `${process.env.NEXT_PUBLIC_API_BASE_URL}/users`,
               {
