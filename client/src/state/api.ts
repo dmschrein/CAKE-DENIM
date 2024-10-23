@@ -8,6 +8,8 @@ import {
   NewUser,
   UserType,
   GuestUser,
+  Order,
+  NewOrder
 } from "@/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
@@ -16,7 +18,14 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api" /* unique path to store the API state in Redux store */,
   /* helps Redux Query manage cache invalidation by tagging resources. When a mutation (e.g., createProduct) occurs, the cache for certain tags can be invalidated*/
-  tagTypes: ["HomePageMetrics", "Products", "Users", "Expenses"],
+  tagTypes: [
+    "HomePageMetrics",
+    "Products",
+    "Users",
+    "Expenses",
+    "Payments",
+    "Orders",
+  ],
 
   /*
    * endpoints function where the actual API queries and mutations are defined
@@ -195,6 +204,61 @@ export const api = createApi({
         }
       },
     }),
+    /*
+     * This mutation sends a POST to /stripe/payments to process a payment
+     * Expects a payment response from Stripe API
+     */
+    createPayment: build.mutation<
+      any,
+      {
+        email: string;
+        paymentMethodId: string;
+        amount: number;
+        currency: string;
+        orderId: string;
+      }
+    >({
+      query: (paymentData) => {
+        console.log("Creating payment with data: ", paymentData);
+        return {
+          url: "/stripe/payments",
+          method: "POST",
+          body: paymentData,
+        };
+      },
+      invalidatesTags: ["Payments"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Payment processed successfully: ", data);
+        } catch (error) {
+          console.error("Error processing payment: ", error);
+        }
+      },
+    }),
+    /*
+     * This mutation sends a POST to /orders to create an order for a customer
+     * Expects an Order object response
+     */
+    createOrder: build.mutation<Order, NewOrder>({
+      query: (newOrder) => {
+        console.log("Creating an order with data: ", newOrder);
+        return {
+          url: "/orders",
+          method: "POST",
+          body: newOrder,
+        };
+      },
+      invalidatesTags: ["Orders"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Order created successfully: ", data);
+        } catch (error) {
+          console.error("Error creating order: ", error);
+        }
+      },
+    }),
   }),
 });
 
@@ -208,4 +272,5 @@ export const {
   useGetUsersQuery,
   useCreateGuestUserMutation,
   useUpdateUserMutation,
+  useCreatePaymentMutation,
 } = api;

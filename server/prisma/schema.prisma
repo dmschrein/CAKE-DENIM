@@ -26,38 +26,51 @@ model Users {
   passwordHash     String?
   firstName        String?
   lastName         String?
+  addressId        String?
+  address          Address?   @relation(fields: [addressId], references: [addressId])
   userType         UserType   @default(REGISTERED)
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
+  stripeCustomerId String?
   Reviews          Reviews[] // each user can have multiple reviews
   Orders           Orders[]
   Cart             Carts?
   favoriteProducts Products[]
 }
 
+model Address {
+  addressId String  @id @default(uuid())
+  address   String
+  city      String
+  state     String
+  zipCode   String
+  country   String
+  Users     Users[]
+}
+
 model OptInUser {
-  id  String @id @default(uuid())
-  email String @unique
+  id        String   @id @default(uuid())
+  email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model GuestUser {
-  id String @id @default(uuid())
-  email String @unique
+  id           String   @id @default(uuid())
+  email        String   @unique
   sessionToken String?
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt    DateTime
+  updatedAt    DateTime
 }
 
 model RegisteredUser {
-  id String @id @default(uuid())
-  email String @unique
+  id           String   @id @default(uuid())
+  email        String   @unique
   passwordHash String
-  firstName String
-  lastName String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  firstName    String
+  lastName     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Products {
@@ -133,15 +146,37 @@ model OrderItems {
   variant     Variants @relation(fields: [variantId], references: [variantId])
 }
 
+enum DeliveryType {
+  FREE_STANDARD
+  GROUND
+  EXPRESS
+  NEXT_DAY
+}
+
 model Orders {
-  orderId     Int          @id @default(autoincrement())
-  userId      String
-  totalAmount Float
-  status      String
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  Users       Users        @relation(fields: [userId], references: [userId])
-  OrderItems  OrderItems[]
+  orderId      Int          @id @default(autoincrement())
+  userId       String
+  totalAmount  Float
+  deliveryType DeliveryType @default(FREE_STANDARD)
+  paymentId    String?
+  payment      PaymentInfo? @relation(fields: [paymentId], references: [paymentId])
+  status       String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  Users        Users        @relation(fields: [userId], references: [userId])
+  OrderItems   OrderItems[]
+}
+
+enum PaymentType {
+  CREDIT_CARD
+  PAYPAL
+  AFTERPAY
+}
+
+model PaymentInfo {
+  paymentId   String      @id @default(uuid())
+  paymentType PaymentType @default(CREDIT_CARD)
+  Orders      Orders[]
 }
 
 model CartItems {

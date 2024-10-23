@@ -11,6 +11,7 @@ import morgan from "morgan";
 import homeRoutes from "./routes/homeRoutes";
 import productRoutes from "./routes/productRoutes";
 import userRoutes from "./routes/userRoutes";
+import checkoutRoutes from "./routes/checkoutRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -34,6 +35,7 @@ app.use(
 app.use("/home", homeRoutes); // http://localhost:8000/home
 app.use("/products", productRoutes); // http://localhost:8000/products
 app.use("/users", userRoutes);
+app.use("/api/checkout", checkoutRoutes); // TODO: check if i need api
 
 /* Error handling middleware */
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
