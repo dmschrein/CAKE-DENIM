@@ -38,7 +38,7 @@ export interface OrderSummary {
   // TODO: check if needed
   subtotal: number;
   shipping: number;
-  tax: string;
+  tax: number;
   total: number;
 }
 

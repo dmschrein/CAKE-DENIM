@@ -1,3 +1,5 @@
+// ReviewForm.tsx
+
 import { ShippingInfo } from "@/interfaces";
 import { PaymentInfo } from "@/interfaces";
 import { OrderSummary } from "@/interfaces";
@@ -7,6 +9,7 @@ interface ReviewFormProps {
   paymentInfo: PaymentInfo | null;
   orderSummary: OrderSummary;
   previousStep: () => void;
+  onPlaceOrder: () => void; // Add onPlaceOrder to the props
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = ({
@@ -14,6 +17,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
   paymentInfo,
   orderSummary,
   previousStep,
+  onPlaceOrder,
 }) => {
   return (
     <div>
@@ -52,6 +56,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
       </div>
 
       <button onClick={previousStep}>Back</button>
+      <button onClick={onPlaceOrder}>Place Order</button>
     </div>
   );
 };
