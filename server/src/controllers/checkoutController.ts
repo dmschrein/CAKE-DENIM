@@ -1,3 +1,5 @@
+// server/src/controllers/checkoutController.ts
+
 import { Request, Response } from "express";
 import Stripe from "stripe";
 import { CheckoutService } from "../services/checkoutService";
@@ -16,9 +18,12 @@ class CheckoutController {
   public async createCheckout(req: Request, res: Response): Promise<void> {
     try {
       const data = req.body;
+      console.log("Received checkout data:", data);
       const result = await this.checkoutService.createCheckout(data);
+      console.log("Successfully created checkout:", result);
       res.status(201).json(result);
     } catch (error: any) {
+      console.log("Error creating checkout: ", error);
       res.status(500).json({ error: error.message });
     }
   }
@@ -27,7 +32,9 @@ class CheckoutController {
   public async createInvoice(req: Request, res: Response): Promise<void> {
     try {
       const data = req.body;
+      console.log("Received invoice data:", data);
       const result = await this.invoiceService.createInvoice(data);
+      console.log("Successfully created invoice:", result);
       res.status(201).json(result);
     } catch (error: any) {
       res.status(500).json({ error: error.message });

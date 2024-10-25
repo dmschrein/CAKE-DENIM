@@ -9,7 +9,7 @@ import {
   UserType,
   GuestUser,
   Order,
-  NewOrder
+  NewOrder,
 } from "@/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
@@ -205,7 +205,7 @@ export const api = createApi({
       },
     }),
     /*
-     * This mutation sends a POST to /stripe/payments to process a payment
+     * This mutation sends a POST to /api/payments to process a payment
      * Expects a payment response from Stripe API
      */
     createPayment: build.mutation<
@@ -221,7 +221,7 @@ export const api = createApi({
       query: (paymentData) => {
         console.log("Creating payment with data: ", paymentData);
         return {
-          url: "/stripe/payments",
+          url: "/api/stripe/payments",
           method: "POST",
           body: paymentData,
         };

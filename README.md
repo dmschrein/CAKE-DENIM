@@ -61,3 +61,33 @@ npx prisma generate
 npx prisma migrate dev --name init
 npm run seed
 ```
+
+## Test Backend Routes
+
+### Test for Registered Customer
+
+```
+curl -X POST http://localhost:8000/api/stripe/payments \
+     -H "Content-Type: application/json" \
+     -d '{
+          "email": "test3@test.com",
+          "paymentMethodId": "pm_card_visa",
+          "amount": 5000,
+          "currency": "usd",
+          "orderId": "order123"
+        }'
+```
+
+### Test for Guest Customer
+
+```
+curl -X POST http://localhost:8000/api/stripe/payments \
+     -H "Content-Type: application/json" \
+     -d '{
+          "email": "test2@newemail.com",
+          "paymentMethodId": "pm_card_visa",
+          "amount": 5000,
+          "currency": "usd",
+          "orderId": "order123"
+        }'
+```

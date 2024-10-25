@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, FormEvent } from "react";
 import { ShippingInfo } from "@/interfaces";
 
@@ -12,75 +14,86 @@ export default function ShippingForm({
   setShippingInfo,
   nextStep,
 }: ShippingFormProps) {
-  const [deliveryMethod, setDeliveryMethod] = useState("Free standard");
+  const [name, setName] = useState(shippingInfo?.name || "");
+  const [address, setAddress] = useState(shippingInfo?.address || "");
+  const [deliveryMethod, setDeliveryMethod] = useState(
+    shippingInfo?.deliveryMethod || "Free standard",
+  );
 
   const handleShippingSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const target = e.target as typeof e.target & {
-      name: { value: string };
-      address: { value: string };
-    };
-
-    // Collect the shipping details from the form
-    setShippingInfo({
-      name: target.name.value,
-      address: target.address.value,
-      deliveryMethod: deliveryMethod,
-    });
-
-    nextStep();
+    // Ensure that the data is full populated before moving to the next step
+    if (name && address && deliveryMethod) {
+      // Collect the shipping details from the form
+      setShippingInfo({
+        name,
+        address,
+        deliveryMethod,
+      });
+      nextStep();
+    } else {
+      console.error("Please fill in all the fields.");
+    }
   };
 
   return (
     <form
       onSubmit={handleShippingSubmit}
-      className="mx-auto max-w-lg space-y-6 p-6 shadow-lg"
+      className="mx-auto max-w-lg space-y-6 p-6"
     >
       <h2 className="mb-4 text-2xl font-bold">Shipping</h2>
       <div className="space-y-4">
-        <label className="block text-sm font-bold">Shipping to</label>
+        <label className="block text-sm font-bold">Full Name</label>
         <input
           type="text"
-          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
           required
-          defaultValue={shippingInfo?.name || ""}
         />
+      </div>
+      <div className="space-y-4">
+        <label className="block text-sm font-bold">Shipping Address</label>
         <input
           type="text"
-          name="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
           placeholder="Shipping Address"
           required
-          defaultValue={shippingInfo?.address || ""}
         />
       </div>
 
-      <h3 className="text-lg font-semibold">Delivery</h3>
+      <h3 className="text-lg font-semibold">Delivery Methods</h3>
       <div className="space-y-3">
-        <label>
-          <input
-            type="radio"
-            name="delivery"
-            value="Free standard"
-            checked={deliveryMethod === "Free standard"}
-            onChange={() => setDeliveryMethod("Free standard")}
-          />
-          Free standard (3-6 business days)
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="delivery"
-            value="Express"
-            checked={deliveryMethod === "Express"}
-            onChange={() => setDeliveryMethod("Express")}
-          />
-          Express (2 business days) - $25
-        </label>
+        <ul>
+          <label>
+            <input
+              type="radio"
+              value="Free standard"
+              checked={deliveryMethod === "Free standard"}
+              onChange={() => setDeliveryMethod("Free standard")}
+            />
+            Free standard (3-6 business days)
+          </label>
+        </ul>
+        <ul>
+          <label>
+            <input
+              type="radio"
+              name="delivery"
+              value="Express"
+              checked={deliveryMethod === "Express"}
+              onChange={() => setDeliveryMethod("Express")}
+            />
+            Express (2 business days) - $25
+          </label>
+        </ul>
       </div>
 
-      <button type="submit">Next</button>
+      <button type="submit" className="w-full bg-black p-2 text-white">
+        Next
+      </button>
     </form>
   );
 }

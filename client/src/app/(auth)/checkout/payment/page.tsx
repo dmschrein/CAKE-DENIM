@@ -11,6 +11,7 @@ export default function CheckoutPaymentPage() {
   const router = useRouter();
 
   const handleNextStep = () => {
+    console.log("Payment Information Set: ", paymentInfo);
     sessionStorage.setItem("paymentInfo", JSON.stringify(paymentInfo));
     router.push("/checkout/reviewOrder");
   };

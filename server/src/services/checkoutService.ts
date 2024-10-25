@@ -1,3 +1,5 @@
+// server/src/services/checkoutService.ts
+
 import Stripe from "stripe";
 import { getUsers } from "../controllers/userController";
 import { PrismaClient } from "@prisma/client";
@@ -40,6 +42,10 @@ export class CheckoutService {
         customer: user.stripeCustomerId, // Assuming you store the Stripe customer ID in the user record
         payment_method: data.paymentMethodId, // Payment method ID from the request
         confirm: true, // Automatically confirm the payment intent
+        automatic_payment_methods: {
+          enabled: true,
+          allow_redirects: "never", // TODO: Update when adding other payment methods (other than CC)
+        },
         metadata: {
           orderId: data.orderId, // Store order ID for reference
         },

@@ -108,7 +108,6 @@ const GuestSigninForm: React.FC = () => {
       ...formData,
       newsletterOptIn: !formData.newsletterOptIn, // toggle the value
     });
-    
   };
 
   // Handle guest login or account creation
@@ -163,7 +162,7 @@ const GuestSigninForm: React.FC = () => {
         // Sign in the user
         await signIn("credentials", {
           email,
-          //callbackUrl: "/checkout",
+          callbackUrl: "/checkout",
         });
       } else {
         // If no user is found, create a new guest or email-only user
@@ -178,7 +177,7 @@ const GuestSigninForm: React.FC = () => {
         // Immediately sign the user in and redirect them to /checkout
         await signIn("credentials", {
           email,
-          //callbackUrl: "/checkout",
+          callbackUrl: "/checkout",
         });
       }
     } catch (error) {
