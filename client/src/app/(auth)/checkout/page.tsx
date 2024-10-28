@@ -7,6 +7,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { CheckoutForm } from "@/components/forms/checkout-form"; // Update with your actual path to CheckoutForm
 import { useCart } from "@/providers/CartProvider";
 import Image from "next/image";
+import { useCallback } from "react";
 
 // Load Stripe using the publishable key
 const stripePromise = loadStripe(
@@ -17,6 +18,7 @@ export default function CheckoutPage() {
   // Assuming price and store are provided, perhaps fetched from your backend or passed as props
   // const price = { amount: 5000 }; // $50 in cents for example
   // const store = { id: "store-id", name: "My Store" }; // Store details
+
   const { items } = useCart();
   const calculateTotalPrice = () => {
     if (!items || items.length === 0) {
@@ -37,7 +39,7 @@ export default function CheckoutPage() {
           <CheckoutForm />
         </Elements>
       </div>
-      <h1>Checkout Page</h1>
+
       {/* Cart Details */}
       <div className="w-72 bg-white p-10 shadow-md">
         {items && items.length > 0 ? (

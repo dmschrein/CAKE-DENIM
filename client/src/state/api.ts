@@ -10,6 +10,8 @@ import {
   GuestUser,
   Order,
   NewOrder,
+  PaymentData,
+  PaymentResponse,
 } from "@/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
@@ -208,16 +210,7 @@ export const api = createApi({
      * This mutation sends a POST to /api/payments to process a payment
      * Expects a payment response from Stripe API
      */
-    createPayment: build.mutation<
-      any,
-      {
-        email: string;
-        paymentMethodId: string;
-        amount: number;
-        currency: string;
-        orderId: string;
-      }
-    >({
+    createPayment: build.mutation<PaymentResponse, PaymentData>({
       query: (paymentData) => {
         console.log("Creating payment with data: ", paymentData);
         return {
@@ -231,6 +224,14 @@ export const api = createApi({
         try {
           const { data } = await queryFulfilled;
           console.log("Payment processed successfully: ", data);
+
+          // Access the client_secret from the payment response
+          const clientSecret = data.client_secret;
+          if (!clientSecret) {
+            throw new Error("Client secret not found in payment response.");
+          }
+          // Use the client_secret in your payment processing flow here
+          console.log("Client secret received: ", clientSecret);
         } catch (error) {
           console.error("Error processing payment: ", error);
         }

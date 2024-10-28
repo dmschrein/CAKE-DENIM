@@ -1,4 +1,5 @@
 // server/src/controllers/checkoutController.ts
+"use server";
 
 import { Request, Response } from "express";
 import Stripe from "stripe";
@@ -36,6 +37,16 @@ class CheckoutController {
       const result = await this.invoiceService.createInvoice(data);
       console.log("Successfully created invoice:", result);
       res.status(201).json(result);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  // Handle Webhooks
+  public async handleWebhook(req: Request, res: Response): Promise<void> {
+    try {
+      const event = req.body;
+      // Process webhook event using appropriate service
+      res.status(200).json({ received: true });
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }

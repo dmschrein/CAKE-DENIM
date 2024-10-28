@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { useRouter } from "next/navigation";
 
 import { useCreatePaymentMutation } from "@/state/api";
 import { useCart } from "@/providers/CartProvider";
@@ -17,6 +18,7 @@ import { useCart } from "@/providers/CartProvider";
 export function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -44,8 +46,9 @@ export function CheckoutForm() {
       setError("Stripe has not been properly initialized.");
       return;
     }
+
     setError(null); // Reset errors
-    setPaymentProcessing(true); // Indicate taht payment is processing
+    setPaymentProcessing(true); // Indicate that payment is processing
 
     const cardElement = elements.getElement(CardElement);
     if (!cardElement) {
@@ -55,7 +58,7 @@ export function CheckoutForm() {
     }
 
     try {
-      // Step 1: Confirm details using Stripe elements
+      // Step 1: Create Payment Method
       const { error: stripeError, paymentMethod } =
         await stripe.createPaymentMethod({
           type: "card",
@@ -64,29 +67,40 @@ export function CheckoutForm() {
             email,
           },
         });
+
       if (stripeError) {
         setError(stripeError.message || "Failed to process payment.");
         setPaymentProcessing(false);
         return;
       }
-      //Step 2: Call the API to create the payment and get the client secret
+
+      // Step 2: Create the Payment Intent on the server and get the client secret
       const paymentAmount = calculateTotalPrice() * 100; // Convert to cents for Stripe
       const { data: paymentResponse } = await createPayment({
         email,
         paymentMethodId: paymentMethod?.id,
         amount: paymentAmount,
         currency: "usd",
-        orderId: "uniqueOrderId", // TODO: Replace with the actual order ID
+        orderId: "uniqueOrderId", // Replace with the actual order ID
       });
 
-      const clientSecret = paymentResponse?.clientSecret;
+      const clientSecret = paymentResponse?.client_secret;
 
       if (!clientSecret) {
         setError("Failed to retrieve client secret from the server.");
         setPaymentProcessing(false);
         return;
       }
-      // Step 3: Confirm the payment with the client secret
+      console.log("Payment Response is: ", paymentResponse);
+      // Step 3: Check if the Payment Intent is already confirmed to avoid duplicate requests
+      if (paymentResponse?.status === "succeeded") {
+        console.log("Payment already confirmed, skipping further action.");
+        router.push("/checkout/success");
+        setPaymentProcessing(false);
+        return;
+      }
+
+      // Step 4: Confirm the Payment Intent with the client secret
       const { error: confirmationError, paymentIntent } =
         await stripe.confirmCardPayment(clientSecret);
 
@@ -95,8 +109,10 @@ export function CheckoutForm() {
         setPaymentProcessing(false);
         return;
       }
+
       if (paymentIntent?.status === "succeeded") {
         console.log("Payment succeeded: ", paymentIntent);
+        router.push("/checkout/success");
       } else {
         setError("Payment processing failed. Please try again.");
       }
@@ -104,6 +120,7 @@ export function CheckoutForm() {
       setError("An unexpected error occurred during payment processing.");
       console.error(error);
     }
+
     setPaymentProcessing(false);
   };
 

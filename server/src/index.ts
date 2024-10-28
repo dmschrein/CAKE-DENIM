@@ -12,6 +12,8 @@ import homeRoutes from "./routes/homeRoutes";
 import productRoutes from "./routes/productRoutes";
 import userRoutes from "./routes/userRoutes";
 import checkoutRoutes from "./routes/checkoutRoutes";
+// import { handleStripeWebhook } from "./controllers/webhookController";
+import { IncomingMessage } from "http";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -35,7 +37,19 @@ app.use(
 app.use("/home", homeRoutes); // http://localhost:8000/home
 app.use("/products", productRoutes); // http://localhost:8000/products
 app.use("/users", userRoutes);
+
+console.log("Checkout Routes executed");
 app.use("/api/stripe", checkoutRoutes); // TODO: check if i need api
+
+// export type WebhookRequest = IncomingMessage & {
+//   rawBody: Buffer;
+// };
+// const webhookMiddleware = bodyParser.json({
+//   verify: (req: WebhookRequest, _, buffer) => {
+//     req.rawBody = buffer;
+//   },
+// });
+// app.post("/api/webhooks/stripe", webhookMiddleware, handleStripeWebhook);
 
 /* Error handling middleware */
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

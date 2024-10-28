@@ -124,3 +124,18 @@ export interface GuestUser {
   sessionToken?: string;
   userType: UserType;
 }
+
+// Define the interface for the data sent in the payment request
+export interface PaymentData {
+  email: string;
+  paymentMethodId: string;
+  amount: number;
+  currency: string;
+  orderId: string;
+}
+
+// Define the interface for the response from the Stripe API
+export interface PaymentResponse {
+  client_secret: string;
+  status: string;
+}

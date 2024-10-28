@@ -12,6 +12,7 @@ const prisma = new PrismaClient();
 
 export class CheckoutService {
   // Create a new checkout session for single payment
+
   async createCheckout(data: any) {
     try {
       // get customer using email from auth log in session and update the userId
@@ -34,8 +35,9 @@ export class CheckoutService {
         });
         user.stripeCustomerId = customer.id; // Update local referece
       }
-
+      console.log("createCheckout executed");
       // Create a payment intent for the order using the user ID as the Stripe customer ID
+      console.log("paymentIntent executed");
       const paymentIntent = await stripe.paymentIntents.create({
         amount: data.amount, // Order amount in smallest currency unit (e.g., cents)
         currency: data.currency, // Currency (e.g., USD)
@@ -50,6 +52,15 @@ export class CheckoutService {
           orderId: data.orderId, // Store order ID for reference
         },
       });
+      console.log("PaymentIntent created: ", paymentIntent);
+      if (!paymentIntent.client_secret) {
+        console.error("client_secret is missing in Stripe response");
+        throw new Error("Failed to retrieve client secret from Stripe");
+      }
+      console.log(
+        "🟢🟢Payment Intent Client Secret: ",
+        paymentIntent.client_secret
+      );
       return paymentIntent;
     } catch (error: any) {
       throw new Error(`Failed to create payment: ${error.message}`);
