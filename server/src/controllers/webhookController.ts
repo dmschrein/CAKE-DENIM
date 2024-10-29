@@ -17,17 +17,20 @@ class WebhookController {
   constructor() {
     this.prisma = new PrismaClient();
   }
+
   // Handle Webhooks
   public async handleWebhook(req: Request, res: Response): Promise<void> {
-    console.log("🟢Webhook is being handled.");
+    console.log("🟢🟢Webhook is being handled.");
     let event = req.body;
+
     if (endpointSecret) {
       const sig = req.headers["stripe-signature"];
       if (!sig) {
         res.status(400).send("Missing Stripe signature header");
-        return;
+        return; // Just exit the function, don't return anything explicitly
       }
-      console.log("🟢Trying to create the event.");
+
+      console.log("🟢🟢Trying to create the event.");
       try {
         console.log("Raw body received: ", req.body.toString());
         // Construct the event using Stripe's signature and raw body
@@ -42,21 +45,25 @@ class WebhookController {
           err.message
         );
         res.status(400).send(`Webhook Error: ${err.message}`);
-        return;
+        return; // Exit after sending the response
       }
-      console.log("🟢Event is being handled.", event.type);
+
+      console.log("🟢🟢Event is being handled.", event.type);
+
       // Handle the event
       switch (event.type) {
         case "payment_intent.succeeded": {
           const paymentIntent = event.data.object as Stripe.PaymentIntent;
           console.log("🔔 PaymentIntent was successful:", paymentIntent.id);
+
           // Get orderId from metadata and update order status to "paid"
           const orderId = paymentIntent.metadata.orderId;
           if (!orderId) {
             console.error("orderId missing from paymentIntent metadata.");
             res.status(400).send("Missing orderId in metadata");
-            return;
+            return; // Exit after sending the response
           }
+
           console.log("Updating order with orderId:", orderId);
           try {
             const updatedOrder = await prisma.orders.update({
@@ -68,15 +75,15 @@ class WebhookController {
           } catch (err) {
             console.error("Error updating order:", err);
             res.status(500).json({ error: "Failed to update order" });
-            return;
           }
-          break;
+          return; // Exit after sending the response
         }
+
         default:
           console.log(`Unhandled event type: ${event.type}`);
+          res.status(400).send(`Unhandled event type: ${event.type}`);
+          return; // Exit after sending the response
       }
-      // Return a 200 response to acknowledge receipt of the event
-      res.status(200).json({ received: true });
     } else {
       res.status(405).send("Method Not Allowed");
     }
