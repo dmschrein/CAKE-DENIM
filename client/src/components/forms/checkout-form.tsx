@@ -1,20 +1,10 @@
-"use client";
-
-import {
-  useElements,
-  PaymentElement,
-  useStripe,
-  LinkAuthenticationElement,
-  CardElement,
-} from "@stripe/react-stripe-js";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-
+import { useElements, CardElement, useStripe } from "@stripe/react-stripe-js";
 import { useCreatePaymentMutation, useCreateOrderMutation } from "@/state/api";
 import { useCart } from "@/providers/CartProvider";
-import { NewOrder, NewOrderItem } from "@/interfaces";
+import { NewOrder, ShippingInfo } from "@/interfaces";
+import { useSession } from "next-auth/react";
 
 export function CheckoutForm() {
   const stripe = useStripe();
@@ -22,7 +12,7 @@ export function CheckoutForm() {
   const router = useRouter();
 
   const { data: session } = useSession();
-
+  console.log("Session data: ", session);
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPaymentProcessing, setPaymentProcessing] = useState(false);
@@ -32,24 +22,34 @@ export function CheckoutForm() {
 
   const { items } = useCart();
 
+  // Initialize shippingInfo state with initial values
+  const [shippingInfo, setShippingInfo] = useState<ShippingInfo>({
+    name: "",
+    address: "",
+    deliveryMethod: "FREE_STANDARD", // Default delivery method
+  });
+
   const calculateTotalPrice = () => {
     if (!items || items.length === 0) {
       return 0; // if no items, return 0
     }
-    // Reduce the items array to sum up the total price of all items
     return items.reduce(
       (acc, item) => acc + item.product.price * item.count,
       0,
     );
   };
 
-  // Helper function to format cart items into NewOrderItem[]
-  const createOrderItems = (): NewOrderItem[] => {
-    return items.map((item) => ({
-      itemId: item.product.productId,
-      quantity: item.count,
+  // Handle changes in the shipping form
+  const handleShippingChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setShippingInfo((prev) => ({
+      ...prev,
+      [name]: value, // Dynamically set the value based on the field's name attribute
     }));
   };
+
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -69,136 +69,150 @@ export function CheckoutForm() {
     }
 
     try {
-      //Extract userId from the session
-      const userId = session?.user?.id || "";
-      console.log("Session User id: ", userId);
-      // Check if user is authenticated
-      if (!session || !session.user) {
-        setError("You must be logged in to place an order.");
-        setPaymentProcessing(false);
-        return;
-      }
-
-      // Step 1: Create an order on the server
+      // Step 1: Create an order with the new shipping info
       const paymentAmount = calculateTotalPrice() * 100;
-      const orderItems = createOrderItems();
-
       const newOrder: NewOrder = {
-        userId,
+        userId: "userIdFromSession", // Replace with the actual user ID from the session
         email,
         totalAmount: paymentAmount,
-        deliveryType: "FREE_STANDARD",
-        status: "pending",
-        orderItems,
+        deliveryType: shippingInfo.deliveryMethod,
+        shippingInfo, // Use the updated shippingInfo state
+        billingInfo: {
+          address: shippingInfo.address,
+          city: "DefaultCity", // Set default or required fields if they are missing from ShippingInfo
+          state: "DefaultState",
+          zipCode: "DefaultZip",
+          phone: "1234567890", // You can customize this based on your billing form
+        },
+        orderItems: items.map((item) => ({
+          itemId: item.product.productId,
+          quantity: item.count,
+        })),
+        status: "Pending",
       };
 
       const orderResponse = await createOrder(newOrder);
       const { orderId } = orderResponse.data as { orderId: string };
 
-      if (!orderId) {
-        setError("Failed to create order.");
-        setPaymentProcessing(false);
-        return;
-      }
-
-      // Step 2: Create Payment Method
-      const { error: stripeError, paymentMethod } =
-        await stripe.createPaymentMethod({
-          type: "card",
-          card: cardElement,
-          billing_details: {
-            email,
-          },
-        });
-
-      if (stripeError) {
-        setError(stripeError.message || "Failed to process payment.");
-        setPaymentProcessing(false);
-        return;
-      }
-
-      // Step 3: Create the Payment Intent on the server and get the client secret
-
-      const { data: paymentResponse } = await createPayment({
-        email,
-        paymentMethodId: paymentMethod?.id,
-        amount: paymentAmount,
-        currency: "usd",
-        orderId: orderId, // Replace with the actual order ID
-      });
-
-      const clientSecret = paymentResponse?.client_secret;
-
-      if (!clientSecret) {
-        setError("Failed to retrieve client secret from the server.");
-        setPaymentProcessing(false);
-        return;
-      }
-
-      console.log("Payment Response is: ", paymentResponse);
-      // Step 4: Check if the Payment Intent is already confirmed to avoid duplicate requests
-      if (paymentResponse?.status === "succeeded") {
-        console.log("Payment already confirmed, skipping further action.");
-        router.push("/checkout/success");
-        setPaymentProcessing(false);
-        return;
-      }
-
-      // Step 5: Confirm the Payment Intent with the client secret
-      const { error: confirmationError, paymentIntent } =
-        await stripe.confirmCardPayment(clientSecret);
-
-      if (confirmationError) {
-        setError(confirmationError.message || "Failed to confirm payment.");
-        setPaymentProcessing(false);
-        return;
-      }
-
-      if (paymentIntent?.status === "succeeded") {
-        console.log("Payment succeeded: ", paymentIntent);
-        router.push("/checkout/success");
-      } else {
-        setError("Payment processing failed. Please try again.");
-      }
+      // Handle the rest of the payment logic
     } catch (error) {
-      setError("An unexpected error occurred during payment processing.");
-      console.error(error);
+      setError("An error occurred during payment processing.");
+      setPaymentProcessing(false);
     }
-
-    setPaymentProcessing(false);
   };
 
   return (
-    <div>
+    <div className="flex h-screen w-full justify-center bg-gray-100">
       <form
         id="payment-form"
         onSubmit={handlePaymentSubmit}
-        className="space-y-6"
+        className="w-full max-w-lg space-y-6 rounded-lg bg-white p-8 shadow-md"
       >
-        <h2>Checkout</h2>
-        {/* <LinkAuthenticationElement id="link-authentication-element" />
-          <PaymentElement id="payment-element" /> */}
+        {/* Signed in email at the top */}
+        {session?.user?.email && (
+          <div className="text-black-600 text-md mb-6">
+            Signed in as {session?.user?.email}
+          </div>
+        )}
+
         {error && <p style={{ color: "red" }}>{error}</p>}
 
         {/* Email input */}
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        {/* <div className="mb-4 flex flex-col">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="rounded-md border border-gray-300 p-3"
+            required
+            disabled={!!session?.user?.email}
+          />
+        </div> */}
+
+        {/* Shipping Information */}
+        <div className="mb-4 flex flex-col">
+          <h3 className="mb-2 text-lg font-semibold">Shipping Information</h3>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={shippingInfo.name}
+            onChange={handleShippingChange}
+            className="mb-3 rounded-md border border-gray-300 p-3"
+            required
+          />
+          <input
+            type="text"
+            name="address"
+            placeholder="Street Address"
+            value={shippingInfo.address}
+            onChange={handleShippingChange}
+            className="mb-3 rounded-md border border-gray-300 p-3"
+            required
+          />
+        </div>
+
+        {/* Delivery Method */}
+        <div className="mb-4 flex flex-col">
+          <label className="mb-2 text-sm font-medium">Delivery Type:</label>
+          <div className="flex items-center space-x-4">
+            <ul>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="deliveryMethod"
+                  value="FREE_STANDARD"
+                  checked={shippingInfo.deliveryMethod === "FREE_STANDARD"}
+                  onChange={handleShippingChange}
+                  className="mr-2"
+                />
+                Free Standard (3-6 Business Days) $0
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="deliveryMethod"
+                  value="GROUND"
+                  checked={shippingInfo.deliveryMethod === "GROUND"}
+                  onChange={handleShippingChange}
+                  className="mr-2"
+                />
+                Ground (2-5 Business Days) $10
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="deliveryMethod"
+                  value="EXPRESS"
+                  checked={shippingInfo.deliveryMethod === "EXPRESS"}
+                  onChange={handleShippingChange}
+                  className="mr-2"
+                />
+                Express (order by 1pm PT to receive in 2 business days) $25
+              </label>
+            </ul>
+          </div>
+        </div>
+
         {/* Stripe Card Element */}
-        <div>
-          <label>Card Details:</label>
-          <CardElement />
+        <div className="mb-4 flex flex-col">
+          <label className="mb-2 text-sm font-medium">Card Details:</label>
+          <CardElement className="rounded-md border border-gray-300 p-3" />
         </div>
 
         {/* Display total price */}
-        <p>Total Price: ${(calculateTotalPrice() / 100).toFixed(2)}</p>
-        <Button className="w-full" type="submit" disabled={isPaymentProcessing}>
+        <p className="text-lg font-semibold">
+          Total Price: ${(calculateTotalPrice() / 100).toFixed(2)}
+        </p>
+
+        <button
+          className="w-full rounded-md bg-indigo-600 p-3 text-white"
+          type="submit"
+          disabled={isPaymentProcessing}
+        >
           {isPaymentProcessing ? "Processing..." : "Place Order"}
-        </Button>
+        </button>
       </form>
     </div>
   );

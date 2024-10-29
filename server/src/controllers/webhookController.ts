@@ -56,7 +56,7 @@ class WebhookController {
           const paymentIntent = event.data.object as Stripe.PaymentIntent;
           console.log("🔔 PaymentIntent was successful:", paymentIntent.id);
 
-          // Get orderId from metadata and update order status to "paid"
+          // Get orderId from metadata and update order status to "Paid"
           const orderId = paymentIntent.metadata.orderId;
           if (!orderId) {
             console.error("orderId missing from paymentIntent metadata.");
@@ -68,7 +68,7 @@ class WebhookController {
           try {
             const updatedOrder = await prisma.orders.update({
               where: { orderId: orderId },
-              data: { status: "paid" },
+              data: { status: "Paid" },
             });
             console.log("✅ Order updated successfully:", updatedOrder.orderId);
             res.status(200).json({ received: true });

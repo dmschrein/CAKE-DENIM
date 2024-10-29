@@ -32,8 +32,8 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-start justify-center space-x-10 p-5">
-      <div className="flex flex-col space-x-10 md:flex-row">
+    <div className="flex h-screen min-h-screen w-full items-start space-x-10 p-5">
+      <div className="flex w-full flex-col md:flex-row">
         {/* Ensure Stripe Elements are wrapped in the Elements component */}
         <Elements stripe={stripePromise}>
           <CheckoutForm />
@@ -41,7 +41,7 @@ export default function CheckoutPage() {
       </div>
 
       {/* Cart Details */}
-      <div className="w-72 bg-white p-10 shadow-md">
+      <div className="w-200 bg-white p-10 shadow-md">
         {items && items.length > 0 ? (
           items.map((item) => (
             <div key={item.product.productId} className="mb-4">
