@@ -274,4 +274,5 @@ export const {
   useCreateGuestUserMutation,
   useUpdateUserMutation,
   useCreatePaymentMutation,
+  useCreateOrderMutation,
 } = api;

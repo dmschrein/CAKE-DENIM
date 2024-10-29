@@ -9,22 +9,26 @@ import {
 } from "@stripe/react-stripe-js";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-import { useCreatePaymentMutation } from "@/state/api";
+import { useCreatePaymentMutation, useCreateOrderMutation } from "@/state/api";
 import { useCart } from "@/providers/CartProvider";
+import { NewOrder, NewOrderItem } from "@/interfaces";
 
 export function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
 
+  const { data: session } = useSession();
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPaymentProcessing, setPaymentProcessing] = useState(false);
 
   const [createPayment] = useCreatePaymentMutation(); // Hook to call API for payment
+  const [createOrder] = useCreateOrderMutation();
 
   const { items } = useCart();
 
@@ -39,6 +43,13 @@ export function CheckoutForm() {
     );
   };
 
+  // Helper function to format cart items into NewOrderItem[]
+  const createOrderItems = (): NewOrderItem[] => {
+    return items.map((item) => ({
+      itemId: item.product.productId,
+      quantity: item.count,
+    }));
+  };
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -58,7 +69,39 @@ export function CheckoutForm() {
     }
 
     try {
-      // Step 1: Create Payment Method
+      //Extract userId from the session
+      const userId = session?.user?.id || "";
+      console.log("Session User id: ", userId);
+      // Check if user is authenticated
+      if (!session || !session.user) {
+        setError("You must be logged in to place an order.");
+        setPaymentProcessing(false);
+        return;
+      }
+
+      // Step 1: Create an order on the server
+      const paymentAmount = calculateTotalPrice() * 100;
+      const orderItems = createOrderItems();
+
+      const newOrder: NewOrder = {
+        userId,
+        email,
+        totalAmount: paymentAmount,
+        deliveryType: "FREE_STANDARD",
+        status: "pending",
+        orderItems,
+      };
+
+      const orderResponse = await createOrder(newOrder);
+      const { orderId } = orderResponse.data as { orderId: string };
+
+      if (!orderId) {
+        setError("Failed to create order.");
+        setPaymentProcessing(false);
+        return;
+      }
+
+      // Step 2: Create Payment Method
       const { error: stripeError, paymentMethod } =
         await stripe.createPaymentMethod({
           type: "card",
@@ -74,14 +117,14 @@ export function CheckoutForm() {
         return;
       }
 
-      // Step 2: Create the Payment Intent on the server and get the client secret
-      const paymentAmount = calculateTotalPrice() * 100; // Convert to cents for Stripe
+      // Step 3: Create the Payment Intent on the server and get the client secret
+
       const { data: paymentResponse } = await createPayment({
         email,
         paymentMethodId: paymentMethod?.id,
         amount: paymentAmount,
         currency: "usd",
-        orderId: "uniqueOrderId", // Replace with the actual order ID
+        orderId: orderId, // Replace with the actual order ID
       });
 
       const clientSecret = paymentResponse?.client_secret;
@@ -91,8 +134,9 @@ export function CheckoutForm() {
         setPaymentProcessing(false);
         return;
       }
+
       console.log("Payment Response is: ", paymentResponse);
-      // Step 3: Check if the Payment Intent is already confirmed to avoid duplicate requests
+      // Step 4: Check if the Payment Intent is already confirmed to avoid duplicate requests
       if (paymentResponse?.status === "succeeded") {
         console.log("Payment already confirmed, skipping further action.");
         router.push("/checkout/success");
@@ -100,7 +144,7 @@ export function CheckoutForm() {
         return;
       }
 
-      // Step 4: Confirm the Payment Intent with the client secret
+      // Step 5: Confirm the Payment Intent with the client secret
       const { error: confirmationError, paymentIntent } =
         await stripe.confirmCardPayment(clientSecret);
 

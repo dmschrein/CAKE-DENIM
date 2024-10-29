@@ -50,6 +50,7 @@ export class CheckoutService {
         },
         metadata: {
           orderId: data.orderId, // Store order ID for reference
+          userId: user.userId,
         },
       });
       console.log("PaymentIntent created: ", paymentIntent);

@@ -137,8 +137,8 @@ model Reviews {
 }
 
 model OrderItems {
-  orderItemId Int      @id @default(autoincrement())
-  orderId     Int
+  orderItemId String   @id @default(uuid())
+  orderId     String
   variantId   String
   quantity    Int
   price       Float
@@ -154,7 +154,7 @@ enum DeliveryType {
 }
 
 model Orders {
-  orderId      Int          @id @default(autoincrement())
+  orderId      String       @id @default(uuid())
   userId       String
   totalAmount  Float
   deliveryType DeliveryType @default(FREE_STANDARD)

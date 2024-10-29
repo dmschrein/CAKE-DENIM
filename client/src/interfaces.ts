@@ -43,7 +43,7 @@ export interface OrderSummary {
 }
 
 export interface Order {
-  orderId: number;
+  orderId: string;
   userId: string;
   totalAmount: number;
   deliveryType: DeliveryType;
@@ -56,6 +56,7 @@ export interface Order {
 
 export interface NewOrder {
   userId: string;
+  email: string;
   totalAmount: number;
   deliveryType?: DeliveryType;
   paymentId?: string;

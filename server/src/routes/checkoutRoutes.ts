@@ -13,12 +13,6 @@ stripeRouter.post(
   CheckoutController.createCheckout.bind(CheckoutController)
 );
 
-// Handle Webhooks
-stripeRouter.post(
-  "/webhook",
-  CheckoutController.handleWebhook.bind(CheckoutController)
-);
-
 // Invoice management
 stripeRouter.post(
   "/invoices",
