@@ -112,12 +112,12 @@ const Navigation = () => {
       <div className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b bg-white px-8">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
-          <Image
-            src={logo} // Update with the correct logo path
+          {/* <Image
+            //src={logo} // Update with the correct logo path
             width={30}
             height={30}
             alt="Logo"
-          />
+          /> */}
           <span className="font-serif text-2xl">CAKE DENIM</span>
         </div>
         {/* Center Navigation */}
