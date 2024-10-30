@@ -22,12 +22,6 @@ export interface CartItem {
   quantity: number;
 }
 
-export interface ShippingInfo {
-  name: string;
-  address: string;
-  deliveryMethod: DeliveryType;
-}
-
 export interface PaymentInfo {
   // Define your payment info structure here (example)
   method: string;
@@ -66,12 +60,28 @@ export interface NewOrder {
   orderItems: NewOrderItem[];
 }
 
-export interface BillingInfo {
-  address: string;
+export interface ShippingInfo {
+  firstName: string;
+  lastName: string;
+  address1: string;
+  address2: string;
   city: string;
   state: string;
   zipCode: string;
-  phone?: string;
+  country: string;
+  mobilePhone: string;
+  deliveryMethod: DeliveryType;
+}
+export interface BillingInfo {
+  firstName: string;
+  lastName: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  mobilePhone?: string;
 }
 export interface OrderItem {
   itemId: string;

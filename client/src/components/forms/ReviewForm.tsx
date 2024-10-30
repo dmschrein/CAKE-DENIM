@@ -59,11 +59,11 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         deliveryType: shippingInfo.deliveryMethod,
         shippingInfo,
         billingInfo: {
-          address: shippingInfo.address,
+          address1: "BillingAddress",
           city: "DefaultCity",
           state: "DefaultState",
           zipCode: "DefaultZip",
-          phone: "12345567890",
+          mobilePhone: "12345567890",
         },
         orderItems: items.map((item) => ({
           itemId: item.product.productId,
@@ -129,10 +129,20 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Shipping Information</h3>
         <p>
-          <strong>Name:</strong> {shippingInfo.name}
+          <strong>Name:</strong> {shippingInfo.firstName}{" "}
+          {shippingInfo.lastName}
         </p>
         <p>
-          <strong>Address:</strong> {shippingInfo.address}
+          <strong>Address:</strong> {shippingInfo.address1} <br />
+          {shippingInfo.address2} <br />
+          {shippingInfo.city}
+          {shippingInfo.state},{shippingInfo.zipCode}
+          <br />
+          {shippingInfo.country}
+        </p>
+
+        <p>
+          <strong>Phone:</strong> {shippingInfo.mobilePhone}
         </p>
         <p>
           <strong>Delivery Method:</strong> {shippingInfo.deliveryMethod}

@@ -1,9 +1,5 @@
 import { useState, FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { useElements, CardElement, useStripe } from "@stripe/react-stripe-js";
-import { useCreatePaymentMutation, useCreateOrderMutation } from "@/state/api";
-import { useCart } from "@/providers/CartProvider";
-import { NewOrder, ShippingInfo } from "@/interfaces";
+import { ShippingInfo } from "@/interfaces";
 import { useSession } from "next-auth/react";
 
 interface ShippingFormProps {
@@ -18,8 +14,17 @@ export function CheckoutForm({
   nextStep,
 }: ShippingFormProps) {
   const { data: session } = useSession();
-  const [name, setName] = useState(shippingInfo?.name || "");
-  const [address, setAddress] = useState(shippingInfo?.address || "");
+  const [firstName, setFirstName] = useState(shippingInfo?.firstName || "");
+  const [lastName, setLastName] = useState(shippingInfo?.lastName || "");
+  const [address1, setAddress1] = useState(shippingInfo?.address1 || "");
+  const [address2, setAddress2] = useState(shippingInfo?.address2 || "");
+  const [city, setCity] = useState(shippingInfo?.city || "");
+  const [state, setState] = useState(shippingInfo?.state || "");
+  const [zipCode, setZipCode] = useState(shippingInfo?.zipCode || "");
+  const [country, setCountry] = useState(shippingInfo?.country || "");
+  const [mobilePhone, setMobilePhone] = useState(
+    shippingInfo?.mobilePhone || "",
+  );
   const [deliveryMethod, setDeliveryMethod] = useState(
     shippingInfo?.deliveryMethod || "FREE_STANDARD",
   );
@@ -28,11 +33,29 @@ export function CheckoutForm({
   const handleShippingSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (name && address && deliveryMethod) {
+    if (
+      firstName &&
+      lastName &&
+      address1 &&
+      address2 &&
+      city &&
+      state &&
+      zipCode &&
+      country &&
+      mobilePhone &&
+      deliveryMethod
+    ) {
       // Set shipping info in parent state and move to next step
       setShippingInfo({
-        name,
-        address,
+        firstName,
+        lastName,
+        address1,
+        address2,
+        city,
+        state,
+        zipCode,
+        country,
+        mobilePhone,
         deliveryMethod,
       });
       nextStep(); // Move to payment step
@@ -60,21 +83,83 @@ export function CheckoutForm({
         {/* Shipping Information */}
         <div className="mb-4 flex flex-col">
           <h3 className="mb-2 text-lg font-semibold">Shipping Information</h3>
+          <div className="mb-2 flex flex-row space-x-2">
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+              required
+              className="w-full border p-2"
+            />
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
+              required
+              className="w-full border p-2"
+            />
+          </div>
+
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Full Name"
+            value={address1}
+            onChange={(e) => setAddress1(e.target.value)}
+            placeholder="Address 1*"
             required
-            className="w-full border p-2"
+            className="mb-2 w-full border p-2"
           />
           <input
             type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Shipping Address"
+            value={address2}
+            onChange={(e) => setAddress2(e.target.value)}
+            placeholder="Address 2"
+            className="mb-2 border p-2 first-letter:w-full"
+          />
+          <div className="mb-2 flex flex-row space-x-2">
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="City*"
+              required
+              className="mb-2 w-full border p-2"
+            />
+            <input
+              type="text"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              placeholder="State*"
+              required
+              className="mb-2 w-full border p-2"
+            />
+          </div>
+          <div className="mb-2 flex flex-row space-x-2">
+            <input
+              type="text"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              placeholder="ZIP Code*"
+              required
+              className="mb-2 w-full border p-2"
+            />
+            <input
+              type="text"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              placeholder="Country*"
+              required
+              className="mb-2 w-full border p-2"
+            />
+          </div>
+          <input
+            type="text"
+            value={mobilePhone}
+            onChange={(e) => setMobilePhone(e.target.value)}
+            placeholder="Mobile Phone*"
             required
-            className="w-full border p-2"
+            className="mb-2 w-full border p-2"
           />
         </div>
 
