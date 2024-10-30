@@ -1,13 +1,14 @@
-// Import necessary components and hooks
-
 "use client";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { CheckoutForm } from "@/components/forms/checkout-form"; // Update with your actual path to CheckoutForm
+import { CheckoutForm } from "@/components/forms/checkout-form";
 import { useCart } from "@/providers/CartProvider";
 import Image from "next/image";
-import { useCallback } from "react";
+import { useState } from "react";
+import PaymentForm from "@/components/forms/PaymentForm";
+import ReviewForm from "@/components/forms/ReviewForm";
+import { ShippingInfo, PaymentInfo } from "@/interfaces";
 
 // Load Stripe using the publishable key
 const stripePromise = loadStripe(
@@ -15,16 +16,19 @@ const stripePromise = loadStripe(
 );
 
 export default function CheckoutPage() {
-  // Assuming price and store are provided, perhaps fetched from your backend or passed as props
-  // const price = { amount: 5000 }; // $50 in cents for example
-  // const store = { id: "store-id", name: "My Store" }; // Store details
+  const [currentStep, setCurrentStep] = useState(1);
+  const [shippingInfo, setShippingInfo] = useState<ShippingInfo | null>(null);
+  const [paymentMethodId, setPaymentMethodId] = useState<string | null>(null);
+
+  const nextStep = () => setCurrentStep((prev) => prev + 1);
+  const previousStep = () => setCurrentStep((prev) => prev - 1);
 
   const { items } = useCart();
+
   const calculateTotalPrice = () => {
     if (!items || items.length === 0) {
-      return 0; // if no items, return 0
+      return 0;
     }
-    // Reduce the items array to sum up the total price of all items
     return items.reduce(
       (acc, item) => acc + item.product.price * item.count,
       0,
@@ -32,33 +36,79 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="flex h-screen min-h-screen w-full items-start space-x-10 p-5">
-      <div className="flex w-full flex-col md:flex-row">
-        {/* Ensure Stripe Elements are wrapped in the Elements component */}
+    <div className="flex w-full items-start justify-center space-x-20">
+      {/* Left side: Checkout forms */}
+      <div className="w-full">
         <Elements stripe={stripePromise}>
-          <CheckoutForm />
+          <div className="flex flex-col space-y-6">
+            {currentStep === 1 && (
+              <CheckoutForm
+                shippingInfo={shippingInfo}
+                setShippingInfo={setShippingInfo}
+                nextStep={nextStep}
+              />
+            )}
+
+            {currentStep === 2 && (
+              <PaymentForm
+                setPaymentMethodId={setPaymentMethodId}
+                nextStep={nextStep}
+                previousStep={previousStep}
+              />
+            )}
+
+            {currentStep === 3 && (
+              <ReviewForm
+                shippingInfo={shippingInfo!}
+                paymentMethodId={paymentMethodId!}
+                previousStep={previousStep}
+              />
+            )}
+          </div>
         </Elements>
       </div>
 
-      {/* Cart Details */}
-      <div className="w-200 bg-white p-10 shadow-md">
+      {/* Right side: Order Summary */}
+      <div className="w-1/2 rounded-lg bg-white p-8 shadow-md">
+        <h2 className="mb-4 text-xl font-bold">Order Summary</h2>
         {items && items.length > 0 ? (
-          items.map((item) => (
-            <div key={item.product.productId} className="mb-4">
-              <Image
-                src={item.product.imageURL}
-                alt={item.product.name}
-                width={80}
-                height={80}
-              />
-              <p>{item.product.name}</p>
-              <p>{item.product.description}</p>
-              <p>{item.product.category}</p>
-              <p>Quantity: {item.count}</p>
-              <p>Price: ${item.product.price}</p>
-              <p>Total: ${item.product.price * item.count}</p>
+          <div>
+            {items.map((item) => (
+              <div
+                key={item.product.productId}
+                className="mb-4 flex items-center"
+              >
+                <Image
+                  src={item.product.imageURL}
+                  alt={item.product.name}
+                  width={80}
+                  height={80}
+                  className="mr-4"
+                />
+                <div>
+                  <p className="font-bold">{item.product.name}</p>
+                  <p className="text-gray-600">Quantity: {item.count}</p>
+                  <p className="text-gray-600">Price: ${item.product.price}</p>
+                  <p className="font-bold">
+                    Total: ${item.product.price * item.count}
+                  </p>
+                </div>
+              </div>
+            ))}
+            <div className="mt-6 border-t pt-4">
+              <p className="font-bold">Subtotal: ${calculateTotalPrice()}</p>
+              <p className="font-bold">
+                Tax: ${(calculateTotalPrice() * 0.1).toFixed(2)}
+              </p>
+              <p className="font-bold">Shipping: FREE</p>
+              <p className="text-lg font-bold">
+                Order Total: ${(calculateTotalPrice() * 1.1).toFixed(2)}
+              </p>
             </div>
-          ))
+            <button className="mt-6 w-full bg-black p-3 text-white">
+              Review order
+            </button>
+          </div>
         ) : (
           <p>Your cart is empty.</p>
         )}

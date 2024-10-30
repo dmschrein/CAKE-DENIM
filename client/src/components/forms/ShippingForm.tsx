@@ -17,15 +17,13 @@ export default function ShippingForm({
   const [name, setName] = useState(shippingInfo?.name || "");
   const [address, setAddress] = useState(shippingInfo?.address || "");
   const [deliveryMethod, setDeliveryMethod] = useState(
-    shippingInfo?.deliveryMethod || "Free standard",
+    shippingInfo?.deliveryMethod,
   );
 
   const handleShippingSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Ensure that the data is full populated before moving to the next step
     if (name && address && deliveryMethod) {
-      // Collect the shipping details from the form
       setShippingInfo({
         name,
         address,
@@ -51,6 +49,7 @@ export default function ShippingForm({
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
           required
+          className="w-full border p-2"
         />
       </div>
       <div className="space-y-4">
@@ -61,34 +60,34 @@ export default function ShippingForm({
           onChange={(e) => setAddress(e.target.value)}
           placeholder="Shipping Address"
           required
+          className="w-full border p-2"
         />
       </div>
-
-      <h3 className="text-lg font-semibold">Delivery Methods</h3>
-      <div className="space-y-3">
-        <ul>
-          <label>
-            <input
-              type="radio"
-              value="Free standard"
-              checked={deliveryMethod === "Free standard"}
-              onChange={() => setDeliveryMethod("Free standard")}
-            />
-            Free standard (3-6 business days)
-          </label>
-        </ul>
-        <ul>
-          <label>
-            <input
-              type="radio"
-              name="delivery"
-              value="Express"
-              checked={deliveryMethod === "Express"}
-              onChange={() => setDeliveryMethod("Express")}
-            />
-            Express (2 business days) - $25
-          </label>
-        </ul>
+      <div className="mb-4 flex flex-col">
+        <h3 className="text-lg font-semibold">Delivery Methods</h3>
+        <div className="flex items-center space-y-3">
+          <ul>
+            <label>
+              <input
+                type="radio"
+                value="Free standard"
+                checked={deliveryMethod === "FREE_STANDARD"}
+                onChange={() => setDeliveryMethod("FREE_STANDARD")}
+              />
+              Free standard (3-6 business days)
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="delivery"
+                value="Express"
+                checked={deliveryMethod === "EXPRESS"}
+                onChange={() => setDeliveryMethod("EXPRESS")}
+              />
+              Express (2 business days) - $25
+            </label>
+          </ul>
+        </div>
       </div>
 
       <button type="submit" className="w-full bg-black p-2 text-white">

@@ -1,65 +1,83 @@
-// PaymentForm.tsx
-
 import { PaymentInfo } from "@/interfaces";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 
 interface PaymentFormProps {
-  paymentInfo: PaymentInfo | null;
-  setPaymentInfo: (info: PaymentInfo) => void;
+  setPaymentMethodId: (id: string) => void; // Pass the payment method ID to the review form
   nextStep: () => void;
   previousStep: () => void;
 }
 
 const PaymentForm: React.FC<PaymentFormProps> = ({
-  paymentInfo,
-  setPaymentInfo,
+  setPaymentMethodId,
   nextStep,
   previousStep,
 }) => {
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>(
-    paymentInfo?.method || "",
-  );
+  const stripe = useStripe();
+  const elements = useElements();
+  const [error, setError] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedPaymentMethod(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setPaymentInfo({
-      method: selectedPaymentMethod,
-      cardLast4Digits: "1234", // Example, in a real app this comes from Stripe or the payment provider
-    });
+    if (!stripe || !elements) {
+      setError("Card details not entered.");
+      setIsProcessing(false);
+      return;
+    }
+    const cardElement = elements.getElement(CardElement);
+    if (!cardElement) {
+      setError("Card details not entered.");
+      setIsProcessing(false);
+      return;
+    }
+    // Create the payment method using Stripe
+    const { error: stripeError, paymentMethod } =
+      await stripe.createPaymentMethod({
+        type: "card",
+        card: cardElement,
+      });
+    if (stripeError) {
+      setError(stripeError.message || "Failed to process payment.");
+      setIsProcessing(false);
+      return;
+    }
+    setPaymentMethodId(paymentMethod?.id || "");
+    setIsProcessing(false);
     nextStep();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Payment</h3>
-      <label>
-        <input
-          type="radio"
-          value="Credit Card"
-          checked={selectedPaymentMethod === "Credit Card"}
-          onChange={handlePaymentChange}
-        />
-        Credit Card
-      </label>
-      <label>
-        <input
-          type="radio"
-          value="PayPal"
-          checked={selectedPaymentMethod === "PayPal"}
-          onChange={handlePaymentChange}
-        />
-        PayPal
-      </label>
+    <div className="flex w-full items-center justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-lg space-y-6 rounded-lg p-8"
+      >
+        <h2 className="mb-4 text-2xl font-bold">Payment</h2>
 
-      <button type="submit">Next</button>
-      <button type="button" onClick={previousStep}>
-        Back
-      </button>
-    </form>
+        <div className="mb-4 flex flex-col">
+          <label className="mb-2 text-sm font-medium">Card Details:</label>
+          <CardElement className="rounded-md border border-gray-300 p-3" />
+        </div>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        <button
+          type="submit"
+          className="w-full bg-black p-2 text-white"
+          disabled={isProcessing}
+        >
+          {isProcessing ? "Processing..." : "Next"}
+        </button>
+        <button
+          type="button"
+          onClick={previousStep}
+          className="mt-2 w-full bg-gray-400 p-2 text-white"
+        >
+          Back
+        </button>
+      </form>
+    </div>
   );
 };
 
