@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 import PaymentForm from "@/components/forms/PaymentForm";
 import ReviewForm from "@/components/forms/ReviewForm";
-import { ShippingInfo, PaymentInfo } from "@/interfaces";
+import { ShippingInfo, PaymentInfo, BillingInfo } from "@/interfaces";
 
 // Load Stripe using the publishable key
 const stripePromise = loadStripe(
@@ -18,6 +18,7 @@ const stripePromise = loadStripe(
 export default function CheckoutPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [shippingInfo, setShippingInfo] = useState<ShippingInfo | null>(null);
+  const [billingInfo, setBillingInfo] = useState<BillingInfo | null>(null);
   const [paymentMethodId, setPaymentMethodId] = useState<string | null>(null);
 
   const nextStep = () => setCurrentStep((prev) => prev + 1);
@@ -36,21 +37,33 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="flex w-full items-start justify-center space-x-20">
+    <div className="flex w-full max-w-2xl items-start justify-center space-x-20">
       {/* Left side: Checkout forms */}
       <div className="w-full">
         <Elements stripe={stripePromise}>
           <div className="flex flex-col space-y-6">
             {currentStep === 1 && (
-              <CheckoutForm
+              // <CheckoutForm
+              //   shippingInfo={shippingInfo}
+              //   setShippingInfo={setShippingInfo}
+              //   nextStep={nextStep}
+              // />
+
+              <PaymentForm
                 shippingInfo={shippingInfo}
-                setShippingInfo={setShippingInfo}
+                billingInfo={billingInfo}
+                setBillingInfo={setBillingInfo}
+                setPaymentMethodId={setPaymentMethodId}
                 nextStep={nextStep}
+                previousStep={previousStep}
               />
             )}
 
             {currentStep === 2 && (
               <PaymentForm
+                shippingInfo={shippingInfo}
+                billingInfo={billingInfo}
+                setBillingInfo={setBillingInfo}
                 setPaymentMethodId={setPaymentMethodId}
                 nextStep={nextStep}
                 previousStep={previousStep}
@@ -69,7 +82,7 @@ export default function CheckoutPage() {
       </div>
 
       {/* Right side: Order Summary */}
-      <div className="w-1/2 rounded-lg bg-white p-8 shadow-md">
+      {/* <div className="w-1/2 rounded-lg bg-white p-8 shadow-md">
         <h2 className="mb-4 text-xl font-bold">Order Summary</h2>
         {items && items.length > 0 ? (
           <div>
@@ -112,7 +125,7 @@ export default function CheckoutPage() {
         ) : (
           <p>Your cart is empty.</p>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
