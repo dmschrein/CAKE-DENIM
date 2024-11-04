@@ -32,6 +32,7 @@ export function CheckoutForm({
   const [error, setError] = useState<string | null>(null);
 
   const handleShippingSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log("Shipping Info: ", shippingInfo);
     e.preventDefault();
 
     if (

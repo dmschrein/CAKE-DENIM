@@ -43,20 +43,20 @@ export default function CheckoutPage() {
         <Elements stripe={stripePromise}>
           <div className="flex flex-col space-y-6">
             {currentStep === 1 && (
-              // <CheckoutForm
-              //   shippingInfo={shippingInfo}
-              //   setShippingInfo={setShippingInfo}
-              //   nextStep={nextStep}
-              // />
-
-              <PaymentForm
+              <CheckoutForm
                 shippingInfo={shippingInfo}
-                billingInfo={billingInfo}
-                setBillingInfo={setBillingInfo}
-                setPaymentMethodId={setPaymentMethodId}
+                setShippingInfo={setShippingInfo}
                 nextStep={nextStep}
-                previousStep={previousStep}
               />
+
+              // <PaymentForm
+              //   shippingInfo={shippingInfo}
+              //   billingInfo={billingInfo}
+              //   setBillingInfo={setBillingInfo}
+              //   setPaymentMethodId={setPaymentMethodId}
+              //   nextStep={nextStep}
+              //   previousStep={previousStep}
+              // />
             )}
 
             {currentStep === 2 && (

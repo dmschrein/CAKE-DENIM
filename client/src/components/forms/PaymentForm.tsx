@@ -28,6 +28,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
 
+  console.log("Shipping Info: ", shippingInfo);
   const handleBillingInfoChange = () => {
     setUseShippingAsBilling(!useShippingAsBilling);
 
@@ -100,6 +101,37 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         >
           Back
         </button>
+        {/* Shipping Info summary */}
+        <div className="p-4">
+          <h2>Shipping & delivery</h2>
+          {shippingInfo ? (
+            <div className="text-sm text-gray-700">
+              <p>
+                {shippingInfo.firstName} {shippingInfo.lastName}
+              </p>
+              <p>
+                {shippingInfo.address1} <br />
+                {shippingInfo.address2 && `${shippingInfo.address2}`} <br />
+                {shippingInfo.city},{shippingInfo.state}
+                {""}
+                {shippingInfo.zipCode}
+                <br />
+                {shippingInfo.country}
+              </p>
+
+              <p>
+                <strong>Phone:</strong> {shippingInfo.mobilePhone}
+              </p>
+              <p>
+                <strong>Delivery Method:</strong> {shippingInfo.deliveryMethod}
+              </p>
+            </div>
+          ) : (
+            <p className="text-sm text-gray-500">
+              No shipping information available.
+            </p>
+          )}
+        </div>
 
         {/* Form Container */}
         <form onSubmit={handleSubmit} className="flex w-full space-x-8">

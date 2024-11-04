@@ -3,11 +3,12 @@ import { useRouter } from "next/navigation";
 import { useElements, CardElement, useStripe } from "@stripe/react-stripe-js";
 import { useCreatePaymentMutation, useCreateOrderMutation } from "@/state/api";
 import { useCart } from "@/providers/CartProvider";
-import { NewOrder, ShippingInfo } from "@/interfaces";
+import { BillingInfo, NewOrder, ShippingInfo } from "@/interfaces";
 import { useSession } from "next-auth/react";
 
 interface ReviewFormProps {
   shippingInfo: ShippingInfo;
+  billingInfo: BillingInfo;
   paymentMethodId: string; //Receive the paymentMethodId from the PaymentForm
   previousStep: () => void;
 }
