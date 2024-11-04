@@ -115,7 +115,7 @@ const SignIn = () => {
     await signIn("credentials", {
       email: userInfo.email,
       password: userInfo.password,
-      callbackUrl: "/checkout", // redirect after sign-in
+      callbackUrl: "/checkout-begin?stage=shipping#shipping", // redirect after sign-in
     });
   };
   const handleCreateAccount = () => {

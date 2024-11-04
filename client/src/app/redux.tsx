@@ -6,7 +6,7 @@ import {
   useSelector,
   Provider,
 } from "react-redux";
-import globalReducer from "@/state";
+//import globalReducer from "@/state";
 import { api } from "@/state/api"; // Ensure this is imported correctly
 import { setupListeners } from "@reduxjs/toolkit/query";
 import {
@@ -46,12 +46,11 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  global: globalReducer,
+  //global: globalReducer,
   [api.reducerPath]: api.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>; // Explicitly define RootState
-
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -67,12 +66,10 @@ export const makeStore = () => {
   });
 };
 
-
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppDispatch = AppStore["dispatch"];
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
 
 export default function StoreProvider({
   children,

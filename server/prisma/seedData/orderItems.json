@@ -1,21 +1,21 @@
 [
   {
-    "orderItemId": 1,
-    "orderId": 1,
+    "orderItemId": "1abc",
+    "orderId": "1abc",
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
     "quantity": 2,
     "price": 148.0
   },
   {
-    "orderItemId": 2,
-    "orderId": 2,
+    "orderItemId": "2abc",
+    "orderId": "2abc",
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
     "quantity": 5,
     "price": 148.0
   },
   {
-    "orderItemId": 3,
-    "orderId": 2,
+    "orderItemId": "3abc",
+    "orderId": "3abc",
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
     "quantity": 3,
     "price": 128.0
