@@ -4,11 +4,12 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { CheckoutForm } from "@/components/forms/checkout-form";
 import { useCart } from "@/providers/CartProvider";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PaymentForm from "@/components/forms/PaymentForm";
 import ReviewForm from "@/components/forms/ReviewForm";
-import { ShippingInfo, PaymentInfo, BillingInfo } from "@/interfaces";
+import { ShippingInfo, BillingInfo } from "@/interfaces";
+import OrderSummary from "@/components/layout/OrderSummary";
 
 // Load Stripe using the publishable key
 const stripePromise = loadStripe(
@@ -16,6 +17,7 @@ const stripePromise = loadStripe(
 );
 
 export default function CheckoutPage() {
+  const { data: session } = useSession();
   const [currentStep, setCurrentStep] = useState(1);
   const [shippingInfo, setShippingInfo] = useState<ShippingInfo | null>(null);
   const [billingInfo, setBillingInfo] = useState<BillingInfo | null>(null);
@@ -37,28 +39,39 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="flex w-full max-w-2xl items-start justify-center space-x-20">
-      {/* Left side: Checkout forms */}
-      <div className="w-full">
-        <Elements stripe={stripePromise}>
-          <div className="flex flex-col space-y-6">
+    <div className="mx-auto flex w-full max-w-6xl flex-col items-center space-y-4 p-6">
+      {/* Navigation and Signed-in Text */}
+      <div className="flex w-full max-w-6xl flex-col space-y-2">
+        {/* Back Button */}
+        <div className="mb-4 flex w-full justify-between">
+          {currentStep > 1 && (
+            <button
+              onClick={previousStep}
+              className="rounded bg-gray-400 p-2 text-white"
+            >
+              Back
+            </button>
+          )}
+        </div>
+        {session?.user?.email && (
+          <div className="text-md mx-20 mb-4 text-gray-600">
+            Signed in as {session.user.email}
+          </div>
+        )}
+      </div>
+
+      <Elements stripe={stripePromise}>
+        <div className="flex w-full space-x-8">
+          {/* Left side: Checkout Forms */}
+          <div className="flex-1">
+            <hr className="mb-8 border-gray-300" />
             {currentStep === 1 && (
               <CheckoutForm
                 shippingInfo={shippingInfo}
                 setShippingInfo={setShippingInfo}
                 nextStep={nextStep}
               />
-
-              // <PaymentForm
-              //   shippingInfo={shippingInfo}
-              //   billingInfo={billingInfo}
-              //   setBillingInfo={setBillingInfo}
-              //   setPaymentMethodId={setPaymentMethodId}
-              //   nextStep={nextStep}
-              //   previousStep={previousStep}
-              // />
             )}
-
             {currentStep === 2 && (
               <PaymentForm
                 shippingInfo={shippingInfo}
@@ -69,63 +82,22 @@ export default function CheckoutPage() {
                 previousStep={previousStep}
               />
             )}
-
             {currentStep === 3 && (
               <ReviewForm
                 shippingInfo={shippingInfo!}
+                billingInfo={billingInfo}
                 paymentMethodId={paymentMethodId!}
                 previousStep={previousStep}
               />
             )}
           </div>
-        </Elements>
-      </div>
 
-      {/* Right side: Order Summary */}
-      {/* <div className="w-1/2 rounded-lg bg-white p-8 shadow-md">
-        <h2 className="mb-4 text-xl font-bold">Order Summary</h2>
-        {items && items.length > 0 ? (
-          <div>
-            {items.map((item) => (
-              <div
-                key={item.product.productId}
-                className="mb-4 flex items-center"
-              >
-                <Image
-                  src={item.product.imageURL}
-                  alt={item.product.name}
-                  width={80}
-                  height={80}
-                  className="mr-4"
-                />
-                <div>
-                  <p className="font-bold">{item.product.name}</p>
-                  <p className="text-gray-600">Quantity: {item.count}</p>
-                  <p className="text-gray-600">Price: ${item.product.price}</p>
-                  <p className="font-bold">
-                    Total: ${item.product.price * item.count}
-                  </p>
-                </div>
-              </div>
-            ))}
-            <div className="mt-6 border-t pt-4">
-              <p className="font-bold">Subtotal: ${calculateTotalPrice()}</p>
-              <p className="font-bold">
-                Tax: ${(calculateTotalPrice() * 0.1).toFixed(2)}
-              </p>
-              <p className="font-bold">Shipping: FREE</p>
-              <p className="text-lg font-bold">
-                Order Total: ${(calculateTotalPrice() * 1.1).toFixed(2)}
-              </p>
-            </div>
-            <button className="mt-6 w-full bg-black p-3 text-white">
-              Review order
-            </button>
-          </div>
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
-      </div> */}
+          {/* Right side: Order Summary */}
+          {/* <div className="w-1/3 border-l-2 border-gray-300 p-4">
+            <OrderSummary />
+          </div> */}
+        </div>
+      </Elements>
     </div>
   );
 }

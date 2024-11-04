@@ -1,33 +1,32 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useElements, CardElement, useStripe } from "@stripe/react-stripe-js";
+import { useStripe } from "@stripe/react-stripe-js";
 import { useCreatePaymentMutation, useCreateOrderMutation } from "@/state/api";
 import { useCart } from "@/providers/CartProvider";
 import { BillingInfo, NewOrder, ShippingInfo } from "@/interfaces";
 import { useSession } from "next-auth/react";
+import OrderSummary from "../layout/OrderSummary";
 
 interface ReviewFormProps {
   shippingInfo: ShippingInfo;
-  billingInfo: BillingInfo;
-  paymentMethodId: string; //Receive the paymentMethodId from the PaymentForm
+  billingInfo: BillingInfo | null;
+  paymentMethodId: string; // Receive the paymentMethodId from the PaymentForm
   previousStep: () => void;
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = ({
   shippingInfo,
+  billingInfo,
   paymentMethodId,
   previousStep,
 }) => {
   const stripe = useStripe();
   const router = useRouter();
   const { data: session } = useSession();
-
   const [error, setError] = useState<string | null>(null);
   const [isProcessing, setProcessing] = useState(false);
-
   const [createPayment] = useCreatePaymentMutation();
   const [createOrder] = useCreateOrderMutation();
-
   const { items } = useCart();
 
   const calculateTotalPrice = () => {
@@ -51,7 +50,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
     }
 
     try {
-      // Step 1: Create an order with the shipping info
       const paymentAmount = calculateTotalPrice() * 100;
       const newOrder: NewOrder = {
         userId: session?.user?.id || "guestUserId",
@@ -59,13 +57,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         totalAmount: paymentAmount,
         deliveryType: shippingInfo.deliveryMethod,
         shippingInfo,
-        billingInfo: {
-          address1: "BillingAddress",
-          city: "DefaultCity",
-          state: "DefaultState",
-          zipCode: "DefaultZip",
-          mobilePhone: "12345567890",
-        },
+        billingInfo: billingInfo || shippingInfo, // check logic
         orderItems: items.map((item) => ({
           itemId: item.product.productId,
           quantity: item.count,
@@ -82,27 +74,23 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         return;
       }
 
-      // Step 2: Create Payment Intent and get the client secret using the payment method ID from PaymentForm
       const { data: paymentResponse } = await createPayment({
         email: session?.user?.email || "guest@example.com",
         paymentMethodId,
         amount: paymentAmount,
         currency: "usd",
-        orderId: orderId,
+        orderId,
       });
 
       const clientSecret = paymentResponse?.client_secret;
-
       if (!clientSecret) {
         setError("Failed to retrieve payment intent from the server.");
         setProcessing(false);
         return;
       }
 
-      // Step 4: Confirm the Payment Intent with Stripe
       const { error: confirmationError, paymentIntent } =
         await stripe.confirmCardPayment(clientSecret);
-
       if (confirmationError) {
         setError(confirmationError.message || "Failed to confirm payment.");
         setProcessing(false);
@@ -110,7 +98,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
       }
 
       if (paymentIntent?.status === "succeeded") {
-        // Payment succeeded, redirect to success page
         router.push("/checkout/success");
       } else {
         setError("Payment processing failed. Please try again.");
@@ -124,55 +111,63 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
   };
 
   return (
-    <div className="mx-auto max-w-lg space-y-6 p-6">
-      <h2 className="mb-4 text-2xl font-bold">Review Your Order</h2>
+    <div className="flex h-screen w-screen justify-center p-10">
+      <form className="flex w-full max-w-6xl space-x-8">
+        {/* Left Section: Review Details */}
+        <div className="flex w-2/3 flex-col space-y-6">
+          <h2 className="text-2xl font-bold">Review Your Order</h2>
 
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Shipping Information</h3>
-        <p>
-          <strong>Name:</strong> {shippingInfo.firstName}{" "}
-          {shippingInfo.lastName}
-        </p>
-        <p>
-          <strong>Address:</strong> {shippingInfo.address1} <br />
-          {shippingInfo.address2} <br />
-          {shippingInfo.city}
-          {shippingInfo.state},{shippingInfo.zipCode}
-          <br />
-          {shippingInfo.country}
-        </p>
+          {/* Shipping Information */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Shipping Information</h3>
+            <p>
+              <strong>Name:</strong> {shippingInfo.firstName}{" "}
+              {shippingInfo.lastName}
+            </p>
+            <p>
+              <strong>Address:</strong> {shippingInfo.address1} <br />
+              {shippingInfo.address2 && `${shippingInfo.address2}`} <br />
+              {shippingInfo.city}, {shippingInfo.state} {shippingInfo.zipCode}{" "}
+              <br />
+              {shippingInfo.country}
+            </p>
+            <p>
+              <strong>Phone:</strong> {shippingInfo.mobilePhone}
+            </p>
+            <p>
+              <strong>Delivery Method:</strong> {shippingInfo.deliveryMethod}
+            </p>
+          </div>
 
-        <p>
-          <strong>Phone:</strong> {shippingInfo.mobilePhone}
-        </p>
-        <p>
-          <strong>Delivery Method:</strong> {shippingInfo.deliveryMethod}
-        </p>
-      </div>
+          {/* Order Summary */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Order Summary</h3>
+            <p>
+              <strong>Total Price:</strong> ${calculateTotalPrice().toFixed(2)}
+            </p>
+          </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+          {error && <p className="text-red-500">{error}</p>}
 
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Order Summary</h3>
-        <p>
-          <strong>Total Price:</strong> $
-          {(calculateTotalPrice() / 100).toFixed(2)}
-        </p>
-      </div>
-
-      <button
-        onClick={handleConfirmOrder}
-        className="w-full bg-green-600 p-2 text-white"
-        disabled={isProcessing}
-      >
-        {isProcessing ? "Processing..." : "Confirm Order"}
-      </button>
-      <button
-        onClick={previousStep}
-        className="mt-2 w-full bg-gray-400 p-2 text-white"
-      >
-        Back
-      </button>
+          {/* Confirm and Back Buttons */}
+          <div className="flex flex-col space-y-2"></div>
+        </div>
+        {/* Vertical Divider */}
+        <div className="mx-5 border-l-2 border-black"></div>
+        {/* Right Section: Order Summary */}
+        <div className="flex w-1/3 flex-col justify-between">
+          <div>
+            <OrderSummary />
+            <button
+              onClick={handleConfirmOrder}
+              className="w-full bg-black p-2 text-white"
+              disabled={isProcessing}
+            >
+              {isProcessing ? "Processing..." : "Place Order"}
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };

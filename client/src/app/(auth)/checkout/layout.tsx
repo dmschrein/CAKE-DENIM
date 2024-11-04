@@ -5,8 +5,8 @@ export default function CheckoutLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen max-w-2xl justify-center">
-      <div className="w-full">{children}</div>
+    <div className="flex min-h-screen max-w-2xl justify-center">
+      <div className="w-full max-w-6xl">{children}</div>
     </div>
   );
 }

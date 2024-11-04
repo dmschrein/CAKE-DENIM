@@ -67,7 +67,7 @@ export function CheckoutForm({
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-100">
+    <div className="flex h-screen w-screen items-center justify-center">
       <form
         id="shipping-form"
         onSubmit={handleShippingSubmit}
@@ -75,13 +75,6 @@ export function CheckoutForm({
       >
         {/* Left Section: Main Form Content */}
         <div className="flex w-2/3 flex-col space-y-6">
-          {/* Signed in email */}
-          {session?.user?.email && (
-            <div className="text-md text-gray-600">
-              Signed in as {session?.user?.email}
-            </div>
-          )}
-
           {error && <p style={{ color: "red" }}>{error}</p>}
 
           {/* Shipping Information */}
@@ -273,7 +266,7 @@ export function CheckoutForm({
         {/* Vertical Divider */}
         <div className="mx-5 border-l-2 border-black"></div>
         {/* Right Section: Order Summary */}
-        <div className="w-2/5">
+        <div className="w-1/3">
           <OrderSummary />
           {/* Submit Button */}
           <button type="submit" className="mt-6 w-full bg-black p-2 text-white">

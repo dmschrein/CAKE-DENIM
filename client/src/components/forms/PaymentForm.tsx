@@ -28,7 +28,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   const [isProcessing, setIsProcessing] = useState(false);
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
 
-  console.log("Shipping Info: ", shippingInfo);
   const handleBillingInfoChange = () => {
     setUseShippingAsBilling(!useShippingAsBilling);
 
@@ -90,125 +89,101 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-100">
-      {/* Container for Back Button and Form */}
-      <div className="flex w-full max-w-6xl flex-col p-4">
-        {/* Back Button */}
-        <button
-          type="button"
-          onClick={previousStep}
-          className="mb-10 self-start rounded bg-gray-400 p-2 text-white"
-        >
-          Back
-        </button>
-        {/* Shipping Info summary */}
-        <div className="p-4">
-          <h2>Shipping & delivery</h2>
-          {shippingInfo ? (
+    <div className="flex h-screen w-screen items-center justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex h-full w-full max-w-6xl space-x-8 p-10"
+      >
+        {/* Left Section: Payment Info */}
+        <div className="flex w-2/3 flex-col space-y-6">
+          {/* Payment Information */}
+          <div>
+            <h3 className="mb-2 text-lg font-semibold">
+              Shipping & Billing Information
+            </h3>
             <div className="text-sm text-gray-700">
               <p>
-                {shippingInfo.firstName} {shippingInfo.lastName}
+                {shippingInfo?.firstName} {shippingInfo?.lastName}
               </p>
+              <p>{shippingInfo?.address1}</p>
+              {shippingInfo?.address2 && <p>{shippingInfo.address2}</p>}
               <p>
-                {shippingInfo.address1} <br />
-                {shippingInfo.address2 && `${shippingInfo.address2}`} <br />
-                {shippingInfo.city},{shippingInfo.state}
-                {""}
-                {shippingInfo.zipCode}
-                <br />
-                {shippingInfo.country}
+                {shippingInfo?.city}, {shippingInfo?.state}{" "}
+                {shippingInfo?.zipCode}
               </p>
-
+              <p>{shippingInfo?.country}</p>
               <p>
-                <strong>Phone:</strong> {shippingInfo.mobilePhone}
-              </p>
-              <p>
-                <strong>Delivery Method:</strong> {shippingInfo.deliveryMethod}
+                <strong>Phone:</strong> {shippingInfo?.mobilePhone}
               </p>
             </div>
-          ) : (
-            <p className="text-sm text-gray-500">
-              No shipping information available.
-            </p>
-          )}
-        </div>
+          </div>
 
-        {/* Form Container */}
-        <form onSubmit={handleSubmit} className="flex w-full space-x-8">
-          {/* Left Section: Billing Info and Payment */}
-          <div className="flex w-2/3 flex-col space-y-6">
-            {session?.user?.email && (
-              <div className="text-md text-gray-600">
-                Signed in as {session?.user?.email}
+          {/* Billing Info Toggle */}
+          <div className="my-4">
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={useShippingAsBilling}
+                onChange={handleBillingInfoChange}
+                className="mr-2"
+              />
+              Use shipping address as billing address
+            </label>
+          </div>
+
+          {!useShippingAsBilling && (
+            <div className="space-y-2">
+              <div className="flex flex-row space-x-2">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  value={billingInfo?.firstName || ""}
+                  onChange={(e) =>
+                    setBillingInfo({
+                      ...billingInfo!,
+                      firstName: e.target.value,
+                    })
+                  }
+                  className="w-full rounded border p-2"
+                />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  value={billingInfo?.lastName || ""}
+                  onChange={(e) =>
+                    setBillingInfo({
+                      ...billingInfo!,
+                      lastName: e.target.value,
+                    })
+                  }
+                  className="w-full rounded border p-2"
+                />
               </div>
-            )}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-
-            {/* Billing Info Toggle */}
-            <div className="my-4">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={useShippingAsBilling}
-                  onChange={handleBillingInfoChange}
-                  className="mr-2"
-                />
-                Use shipping address as billing address
-              </label>
-            </div>
-
-            {!useShippingAsBilling && (
-              <div className="space-y-2">
-                <div className="flex flex-row space-x-2">
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    value={billingInfo?.firstName || ""}
-                    onChange={(e) =>
-                      setBillingInfo({
-                        ...billingInfo!,
-                        firstName: e.target.value,
-                      })
-                    }
-                    className="w-full rounded border p-2"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    value={billingInfo?.lastName || ""}
-                    onChange={(e) =>
-                      setBillingInfo({
-                        ...billingInfo!,
-                        lastName: e.target.value,
-                      })
-                    }
-                    className="w-full rounded border p-2"
-                  />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Address 1"
-                  value={billingInfo?.address1 || ""}
-                  onChange={(e) =>
-                    setBillingInfo({
-                      ...billingInfo!,
-                      address1: e.target.value,
-                    })
-                  }
-                  className="w-full rounded border p-2"
-                />
-                <input
-                  type="text"
-                  placeholder="Address 2"
-                  value={billingInfo?.address2 || ""}
-                  onChange={(e) =>
-                    setBillingInfo({
-                      ...billingInfo!,
-                      address2: e.target.value,
-                    })
-                  }
-                  className="w-full rounded border p-2"
-                />
+              <input
+                type="text"
+                placeholder="Address 1"
+                value={billingInfo?.address1 || ""}
+                onChange={(e) =>
+                  setBillingInfo({
+                    ...billingInfo!,
+                    address1: e.target.value,
+                  })
+                }
+                className="w-full rounded border p-2"
+              />
+              <input
+                type="text"
+                placeholder="Address 2"
+                value={billingInfo?.address2 || ""}
+                onChange={(e) =>
+                  setBillingInfo({
+                    ...billingInfo!,
+                    address2: e.target.value,
+                  })
+                }
+                className="w-full rounded border p-2"
+              />
+              <div className="flex flex-row space-x-2">
                 <input
                   type="text"
                   placeholder="City"
@@ -221,89 +196,85 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
                   }
                   className="w-full rounded border p-2"
                 />
-                <div className="mb-2 flex flex-row space-x-2">
-                  <input
-                    type="text"
-                    placeholder="State"
-                    value={billingInfo?.state || ""}
-                    onChange={(e) =>
-                      setBillingInfo({
-                        ...billingInfo!,
-                        state: e.target.value,
-                      })
-                    }
-                    className="w-full rounded border p-2"
-                  />
-                  <input
-                    type="text"
-                    placeholder="ZIP Code"
-                    value={billingInfo?.zipCode || ""}
-                    onChange={(e) =>
-                      setBillingInfo({
-                        ...billingInfo!,
-                        zipCode: e.target.value,
-                      })
-                    }
-                    className="w-full rounded border p-2"
-                  />
-                </div>
                 <input
                   type="text"
-                  placeholder="Country"
-                  value={billingInfo?.country || ""}
+                  placeholder="State"
+                  value={billingInfo?.state || ""}
                   onChange={(e) =>
                     setBillingInfo({
                       ...billingInfo!,
-                      country: e.target.value,
-                    })
-                  }
-                  className="w-full rounded border p-2"
-                />
-                <input
-                  type="text"
-                  placeholder="Mobile Phone"
-                  value={billingInfo?.mobilePhone || ""}
-                  onChange={(e) =>
-                    setBillingInfo({
-                      ...billingInfo!,
-                      mobilePhone: e.target.value,
+                      state: e.target.value,
                     })
                   }
                   className="w-full rounded border p-2"
                 />
               </div>
-            )}
-
-            {/* Payment Form */}
-            <div className="w-full">
-              <h2 className="mb-4 text-2xl font-bold">Payment</h2>
-              <div className="mb-4 flex flex-col">
-                <label className="mb-2 text-sm font-medium">
-                  Card Details:
-                </label>
-                <CardElement className="rounded-md border border-gray-300 p-3" />
-              </div>
+              <input
+                type="text"
+                placeholder="ZIP Code"
+                value={billingInfo?.zipCode || ""}
+                onChange={(e) =>
+                  setBillingInfo({
+                    ...billingInfo!,
+                    zipCode: e.target.value,
+                  })
+                }
+                className="w-full rounded border p-2"
+              />
+              <input
+                type="text"
+                placeholder="Country"
+                value={billingInfo?.country || ""}
+                onChange={(e) =>
+                  setBillingInfo({
+                    ...billingInfo!,
+                    country: e.target.value,
+                  })
+                }
+                className="w-full rounded border p-2"
+              />
+              <input
+                type="text"
+                placeholder="Mobile Phone"
+                value={billingInfo?.mobilePhone || ""}
+                onChange={(e) =>
+                  setBillingInfo({
+                    ...billingInfo!,
+                    mobilePhone: e.target.value,
+                  })
+                }
+                className="w-full rounded border p-2"
+              />
             </div>
+          )}
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+          {/* Payment Section */}
+          <div>
+            <h3 className="mb-4 text-lg font-semibold">Payment</h3>
+            <div className="flex flex-col">
+              <label className="mb-2 text-sm font-medium">Card Details</label>
+              <CardElement className="rounded-md border border-gray-300 p-3" />
+            </div>
           </div>
 
-          {/* Vertical Divider */}
-          <div className="mx-5 border-l-2 border-black"></div>
+          {error && <p className="text-red-500">{error}</p>}
+        </div>
 
-          {/* Right Section: Order Summary and Next Button */}
-          <div className="w-1/3">
-            <OrderSummary />
-            <button
-              type="submit"
-              className="mt-6 w-full bg-black p-2 text-white"
-              disabled={isProcessing}
-            >
-              {isProcessing ? "Processing..." : "Next"}
-            </button>
-          </div>
-        </form>
-      </div>
+        {/* Vertical Divider */}
+        <div className="mx-5 border-l-2 border-black"></div>
+
+        {/* Right Section: Order Summary */}
+        <div className="sticky top-10 w-1/3">
+          <OrderSummary />
+          <button
+            type="submit"
+            className="mt-6 w-full bg-black p-2 text-white"
+            disabled={isProcessing}
+          >
+            {isProcessing ? "Processing..." : "Next"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
