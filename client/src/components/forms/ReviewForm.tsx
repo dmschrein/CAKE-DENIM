@@ -60,6 +60,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         orderItems: items.map((item) => ({
           itemId: item.product.productId,
           quantity: item.count,
+          price: item.product.price,
         })),
         status: "Pending",
       };

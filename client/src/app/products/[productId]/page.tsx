@@ -1,47 +1,88 @@
-// client/src/app/products/[productsId]/page.tsx
+// client/src/app/products/[productId]/page.tsx
+
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation"; // Use useParams instead of useRouter
-import { useGetProductByIdQuery } from "@/state/api";
-import BuyingOptions from "@/components/common/BuyingOptions";
+import {
+  useGetProductByIdQuery,
+  useGetVariantsByProductIdQuery,
+} from "@/state/api";
+import { Product } from "@/interfaces";
 // import { useAppDispatch } from "@/app/redux";
 // import addToCart from "@/state";
-//import AddToCartButton from "@/components/common/AddToCartButton";
+// import AddToCartButton from "@/components/common/AddToCartButton";
 
 const ProductsPage = () => {
   const { productId } = useParams(); // Retrieve productId directly
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   console.log("Product Detail Page Product ID: ", productId);
+
   // Fetch product by productId
   const {
     data: product,
-    error,
-    isLoading,
+    error: productError,
+    isLoading: productLoading,
   } = useGetProductByIdQuery(productId as string);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading product</div>;
+  // Fetch variants using the product variants
+  const {
+    data: variants,
+    error: variantsError,
+    isLoading: variantsLoading,
+  } = useGetVariantsByProductIdQuery(productId as string);
+
+  if (productLoading || variantsLoading) return <div>Loading...</div>;
+  // Display error messages if fetching product or variants fails
+  if (productError) return <div>Error loading product</div>;
+  if (variantsError) return <div>Error loading product variants</div>;
 
   if (!product) {
     return <div>Product not found</div>;
   }
 
+  if (variantsError) return <div>Error loading variants</div>;
+
+  if (!variants) {
+    return <div>Product variants not found</div>;
+  }
+
+  console.log("Product Variants: ", variants);
+
+  const uniqueColors = Array.from(new Set(variants.map((v) => v.color)));
+  const uniqueSizes = Array.from(new Set(variants.map((v) => v.size)));
+
+  // Filter the correct variant based on selected size and color
+  const selectedVariant = variants.find(
+    (variant) =>
+      variant.size === selectedSize && variant.color === selectedColor,
+  );
+
   // const dispatch = useAppDispatch();
 
-  // const handleAddToCart = () => {
-  //   dispatch(
-  //     addToCart({
-  //       productId: product.productId,
-  //       name: product.name,
-  //       price: product.price,
-  //       imageURL: product.imageURL,
-  //       quantity: 1,
-  //     })
-  //   );
-  // };
+  const handleAddToCart = () => {
+    if (!selectedVariant) {
+      alert("Please select both color and size.");
+      return;
+    }
+
+    // Dispatch action to add the selected variant to the cart
+    // dispatch(
+    //   addToCart({
+    //     productId: product.productId,
+    //     variantId: selectedVariant.variantId,
+    //     name: product.name,
+    //     price: selectedVariant.price,
+    //     imageURL: product.imageURL,
+    //     quantity: 1,
+    //   })
+    // );
+    console.log("Added to cart:", selectedVariant);
+  };
 
   return (
     <div className="flex flex-col space-x-8 md:flex-row">
@@ -56,30 +97,14 @@ const ProductsPage = () => {
         />
         {/* Thumbnails */}
         <div className="flex flex-col space-y-2">
-          <Image
-            src={product.imageURL || "/assets/cakebabe.png"}
-            alt="Thumbnail"
-            width={100}
-            height={150}
-          />
-          <Image
-            src={product.imageURL || "/assets/cakebabe.png"}
-            alt="Thumbnail"
-            width={100}
-            height={150}
-          />
-          <Image
-            src={product.imageURL || "/assets/cakebabe.png"}
-            alt="Thumbnail"
-            width={100}
-            height={150}
-          />
-          <Image
-            src={product.imageURL || "/assets/cakebabe.png"}
-            alt="Thumbnail"
-            width={100}
-            height={150}
-          />
+          {[...Array(4)].map((_, i) => (
+            <Image
+              src={product.imageURL || "/assets/cakebabe.png"}
+              alt="Thumbnail"
+              width={100}
+              height={150}
+            />
+          ))}
         </div>
       </div>
       {/* Product Text Description */}
@@ -94,47 +119,63 @@ const ProductsPage = () => {
         </p>
         {/* Product Description */}
         <p className="mt-6">{product.description}</p>
-        {/* <ul className="list-disc list-inside mt-4">
-          {product.features?.map((feature, index) => (
-            <li key={index}>{feature}</li>
-          ))}
-        </ul> */}
 
         {/* Color Selection */}
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Color</h3>
           <div className="mt-2 flex space-x-2">
-            <button className="h-8 w-8 rounded-full border border-gray-300 bg-black"></button>
+            {uniqueColors.map((color, index) => (
+              <button
+                key={index}
+                className={`h-8 w-8 rounded-full border ${
+                  selectedColor === color
+                    ? "border-blue-500"
+                    : "border-gray-300"
+                }`}
+                style={{ backgroundColor: color }}
+                onClick={() => setSelectedColor(color)}
+              />
+            ))}
           </div>
         </div>
+
         {/* Size Selection */}
         <div className="mt-4">
           <h3 className="text-lg font-semibold">Size</h3>
-          <div>
-            {["00", "0", "2", "4", "6", "8", "10", "12"].map((size, index) => (
+          <div className="flex flex-wrap gap-2">
+            {uniqueSizes.map((size, index) => (
               <Button
                 key={index}
                 variant="link"
                 size="sm"
-                type="submit"
-                className="rounded p-2 text-center"
+                type="button"
+                className={`rounded p-2 ${
+                  selectedSize === size ? "bg-blue-500 text-white" : ""
+                }`}
+                onClick={() => setSelectedSize(size)}
               >
                 {size}
               </Button>
             ))}
           </div>
         </div>
+
         {/* Add to Bag Button */}
-        <div className="flex flex-row space-x-2">
-          {/* <AddToCartButton product={product} /> */}
-          <BuyingOptions product={product} />
+        <div className="mt-6 flex flex-row space-x-2">
+          <Button
+            onClick={handleAddToCart}
+            variant="default"
+            size="lg"
+            className="bg-black py-3 text-white"
+          >
+            Add to Cart
+          </Button>
           {/* Save Button */}
           <Button
-            // onClick={handleAddToCart}
             variant="outline"
             size="lg"
             type="button"
-            className="mt-6 bg-gray-200 py-3 text-black"
+            className="bg-gray-200 py-3 text-black"
           >
             SAVE
           </Button>

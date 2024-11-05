@@ -14,6 +14,7 @@ export class OrderService {
         status,
         shippingInfo,
         billingInfo,
+        orderItems,
       } = data;
 
       // Get the user using email from the auth login session
@@ -55,7 +56,28 @@ export class OrderService {
         },
       });
 
-      // Create the order with the user ID and newly created shippingInfoId and billingInfoId
+      // Fetch each variant and create OrderItems with variant information
+      const items = await Promise.all(
+        orderItems.map(async (item: any) => {
+          const variant = await prisma.variants.findUnique({
+            where: { variantId: item.variantId },
+          });
+
+          if (!variant) {
+            throw new Error(`Variant with ID ${item.variantId} not found`);
+          }
+
+          return {
+            variantId: variant.variantId,
+            size: variant.size,
+            color: variant.color,
+            price: variant.price,
+            quantity: item.quantity,
+          };
+        })
+      );
+
+      // Create the order with the user ID, shippingInfoId, billingInfoId, and OrderItems
       const order = await prisma.orders.create({
         data: {
           userId: user.userId,
@@ -66,9 +88,11 @@ export class OrderService {
           paymentId,
           payment,
           status,
+          OrderItems: {
+            create: items,
+          },
         },
       });
-
       console.log("Order created successfully: ", order);
       return order;
     } catch (error: any) {

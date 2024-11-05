@@ -1,4 +1,3 @@
-
 // server/src/controllers/productControllers.ts
 
 import { Request, Response } from "express";
@@ -22,7 +21,6 @@ export const getProducts = async (
         },
 
         category: category || undefined, // Filter by category if provided
-
       },
     });
     res.json(products);
@@ -50,6 +48,37 @@ export const getProductById = async (
     res.json(product);
   } catch (error) {
     res.status(500).json({ message: "Error retrieving products" });
+  }
+};
+
+export const getVariantsById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const productId = req.params.productId;
+
+    // Fetch only variants associated with the specified productId
+    const productVariants = await prisma.productVariants.findMany({
+      where: {
+        productId: productId,
+      },
+      include: {
+        variant: true, // Includes the detailed Variant information
+      },
+    });
+
+    if (!productVariants || productVariants.length === 0) {
+      res.status(404).json({ message: "No variants found for this product" });
+      return;
+    }
+
+    // Extract and return only the variant details from the response
+    const variants = productVariants.map((pv) => pv.variant);
+    res.json(variants);
+  } catch (error) {
+    console.error("Error retrieving product variants:", error);
+    res.status(500).json({ message: "Error retrieving product variants" });
   }
 };
 

@@ -12,6 +12,7 @@ import {
   NewOrder,
   PaymentData,
   PaymentResponse,
+  Variant,
 } from "@/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
@@ -27,6 +28,7 @@ export const api = createApi({
     "Expenses",
     "Payments",
     "Orders",
+    "Variants",
   ],
 
   /*
@@ -95,10 +97,34 @@ export const api = createApi({
           const { data } = await queryFulfilled;
           console.log("Product fetched successfully:", data);
         } catch (error) {
-          console.error("Error fetched producted by ID: ", error);
+          console.error("Error fetched product by ID: ", error);
         }
       },
     }),
+    /*
+     * This query sends a GET request to /products
+     * The response will be an array of Variants[]
+     *
+     */
+    getVariantsByProductId: build.query<Variant[], string>({
+      query: (productId) => {
+        console.log("Fetching product variants by product ID:", productId);
+        return { url: `/products/${productId}/variants` };
+      },
+      providesTags: (_, __, productId) => [{ type: "Variants", id: productId }],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Product variants fetched successfully:", data);
+        } catch (error) {
+          console.error(
+            "Error fetching product variants by product ID:",
+            error,
+          );
+        }
+      },
+    }),
+
     /*
      * * This mutation sends a POST request to /users with a NewUser object in the request body
      * and expects a User object in response.
@@ -268,6 +294,7 @@ export const {
   useGetHomePageMetricsQuery,
   useGetProductsQuery,
   useGetProductByIdQuery,
+  useGetVariantsByProductIdQuery,
   useGetUserByEmailQuery,
   useCreateUserMutation,
   useGetUsersQuery,

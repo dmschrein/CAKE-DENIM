@@ -15,6 +15,15 @@ export interface Product {
   category?: string;
   createdAt: string;
   updatedAt: string;
+  ProductVariants: { variant: Variant }[];
+}
+
+export interface Variant {
+  variantId: string;
+  size: string;
+  color: string;
+  price: number;
+  stockQuantity: number;
 }
 
 export interface CartItem {
@@ -90,6 +99,7 @@ export interface OrderItem {
 export interface NewOrderItem {
   itemId: string;
   quantity: number;
+  price: number;
 }
 
 export interface ReviewFormProps {
