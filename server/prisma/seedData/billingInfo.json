@@ -1,0 +1,26 @@
+[
+  {
+    "id": "3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+    "firstName": "Darrel",
+    "lastName": "Schreiner",
+    "address1": "1234 Veteran Ave",
+    "address2": "Apt 404",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90024",
+    "country": "USA",
+    "mobilePhone": "(405) 248-8465"
+  },
+  {
+    "id": "4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "address1": "456 Market St",
+    "address2": "Apt 202",
+    "city": "San Francisco",
+    "state": "CA",
+    "zipCode": "94105",
+    "country": "USA",
+    "mobilePhone": "(415) 555-5678"
+  }
+]

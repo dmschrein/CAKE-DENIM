@@ -55,7 +55,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         userId: session?.user?.id || "guestUserId",
         email: session?.user?.email || "guest@example.com",
         totalAmount: paymentAmount,
-        deliveryType: shippingInfo.deliveryMethod,
         shippingInfo,
         billingInfo: billingInfo || shippingInfo, // check logic
         orderItems: items.map((item) => ({

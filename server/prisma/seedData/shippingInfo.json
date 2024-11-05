@@ -1,0 +1,28 @@
+[
+  {
+    "id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+    "firstName": "Darrel",
+    "lastName": "Schreiner",
+    "address1": "1234 Veteran Ave",
+    "address2": "Apt 404",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90024",
+    "country": "USA",
+    "mobilePhone": "(405) 248-8465",
+    "deliveryMethod": "FREE_STANDARD"
+  },
+  {
+    "id": "2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+    "firstName": "John",
+    "lastName": "Doe",
+    "address1": "123 Main St",
+    "address2": "Suite 100",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA",
+    "mobilePhone": "(212) 555-1234",
+    "deliveryMethod": "EXPRESS"
+  }
+]

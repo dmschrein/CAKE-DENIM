@@ -154,17 +154,50 @@ enum DeliveryType {
 }
 
 model Orders {
-  orderId      String       @id @default(uuid())
-  userId       String
-  totalAmount  Float
-  deliveryType DeliveryType @default(FREE_STANDARD)
-  paymentId    String?
-  payment      PaymentInfo? @relation(fields: [paymentId], references: [paymentId])
-  status       String
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  Users        Users        @relation(fields: [userId], references: [userId])
-  OrderItems   OrderItems[]
+  orderId        String       @id @default(uuid())
+  email          String
+  userId         String
+  shippingInfo   ShippingInfo @relation(fields: [shippingInfoId], references: [id])
+  billingInfo    BillingInfo  @relation(fields: [billingInfoId], references: [id])
+  totalAmount    Float
+  paymentId      String?
+  payment        PaymentInfo? @relation(fields: [paymentId], references: [paymentId])
+  status         String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  Users          Users        @relation(fields: [userId], references: [userId])
+  OrderItems     OrderItems[]
+  shippingInfoId String
+  billingInfoId  String
+}
+
+model ShippingInfo {
+  id             String       @id @default(uuid())
+  firstName      String
+  lastName       String
+  address1       String
+  address2       String
+  city           String
+  state          String
+  zipCode        String
+  country        String
+  mobilePhone    String
+  deliveryMethod DeliveryType @default(FREE_STANDARD)
+  Orders         Orders[]
+}
+
+model BillingInfo {
+  id          String   @id @default(uuid())
+  firstName   String
+  lastName    String
+  address1    String
+  address2    String
+  city        String
+  state       String
+  zipCode     String
+  country     String
+  mobilePhone String?
+  Orders      Orders[]
 }
 
 enum PaymentType {

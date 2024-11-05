@@ -40,7 +40,6 @@ export interface Order {
   orderId: string;
   userId: string;
   totalAmount: number;
-  deliveryType: DeliveryType;
   paymentId?: string;
   status: string;
   createdAt: string;
@@ -52,7 +51,6 @@ export interface NewOrder {
   userId: string;
   email: string;
   totalAmount: number;
-  deliveryType?: DeliveryType;
   shippingInfo: ShippingInfo;
   billingInfo: BillingInfo;
   paymentId?: string;

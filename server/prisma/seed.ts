@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
+
 const prisma = new PrismaClient();
 
 async function deleteAllData(orderedFileNames: string[]) {
@@ -30,7 +31,9 @@ async function main() {
     "orderItems.json",
     "productCategories.json",
     "carts.json",
-    "orders.json",
+    "orders.json", // Delete Orders first
+    "shippingInfo.json", // Delete ShippingInfo after Orders
+    "billingInfo.json", // Delete BillingInfo after Orders
     "productVariants.json",
     "categories.json",
     "variants.json",
@@ -46,6 +49,8 @@ async function main() {
     "products.json",
     "productVariants.json",
     "reviews.json",
+    "shippingInfo.json", // Added
+    "billingInfo.json", // Added
     "orders.json",
     "carts.json",
     "productCategories.json",
@@ -67,6 +72,19 @@ async function main() {
     }
 
     for (const data of jsonData) {
+      if (modelName === "orderItems") {
+        // Check if the orderId exists in Orders before creating OrderItems
+        const orderExists = await prisma.orders.findUnique({
+          where: { orderId: data.orderId },
+        });
+        if (!orderExists) {
+          console.error(
+            `Order with orderId ${data.orderId} not found. Skipping this OrderItem.`
+          );
+          continue;
+        }
+      }
+
       await model.create({
         data,
       });
@@ -76,6 +94,7 @@ async function main() {
   }
 }
 
+// Run the main function and handle errors
 main()
   .catch((e) => {
     console.error(e);

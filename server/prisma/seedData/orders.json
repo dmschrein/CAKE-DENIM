@@ -1,23 +1,32 @@
 [
   {
-    "orderId": "1abc",
+    "orderId": "484a118c-d0bd-428f-b539-8ba0add54232",
     "userId": "1",
+    "email": "darrel@example.com",
+    "shippingInfoId": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+    "billingInfoId": "3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
     "totalAmount": 500.0,
     "status": "Processed",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
-    "orderId": "2abc",
+    "orderId": "2abc484a118c-d0bd-428f-b539-8ba0add54232",
     "userId": "2",
+    "email": "john@example.com",
+    "shippingInfoId": "2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+    "billingInfoId": "4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
     "totalAmount": 1500.0,
     "status": "Processed",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
-    "orderId": "3abc",
+    "orderId": "3abc484a118c-d0bd-428f-b539-8ba0add54232",
     "userId": "3",
+    "email": "jane@example.com",
+    "shippingInfoId": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+    "billingInfoId": "3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
     "totalAmount": 2500.0,
     "status": "Fulfilled",
     "createdAt": "2023-04-01T12:00:00Z",
