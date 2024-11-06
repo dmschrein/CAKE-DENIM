@@ -267,7 +267,7 @@ export function CheckoutForm({
         <div className="mx-5 border-l-2 border-black"></div>
         {/* Right Section: Order Summary */}
         <div className="w-1/3">
-          <OrderSummary />
+          <OrderSummary shippingInfo={shippingInfo} />
           {/* Submit Button */}
           <button type="submit" className="mt-6 w-full bg-black p-2 text-white">
             Next

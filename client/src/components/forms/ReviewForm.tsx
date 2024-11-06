@@ -157,7 +157,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         {/* Right Section: Order Summary */}
         <div className="flex w-1/3 flex-col justify-between">
           <div>
-            <OrderSummary />
+            <OrderSummary shippingInfo={shippingInfo} />
             <button
               onClick={handleConfirmOrder}
               className="w-full bg-black p-2 text-white"

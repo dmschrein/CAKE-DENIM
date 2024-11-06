@@ -19,6 +19,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
     items: cartItems, // List of items in the cart
     updateCart, // Function to update cart items
     removeFromCart, // Function to remove an item from the cart
+    clearCart,
     countTotalPrice, // Function to calculate the total price of items in the cart
   } = useCart();
 
@@ -36,7 +37,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
       style={{ right: visible ? "0" : "-100%" }}
       className="fixed right-0 top-0 z-50 flex min-h-screen w-96 flex-col bg-white shadow-md transition-all"
     >
-      {/* Header section with cart title and clear cart button */}
+      {/* Header section with cart title and close cart button */}
       <div className="flex justify-between p-4">
         <h1 className="mt-4 text-xl font-semibold uppercase text-blue-950">
           In your bag ({cartItems.length})
@@ -51,6 +52,20 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
         </button>
       </div>
 
+      {/* Clear Cart Button */}
+      <div className="flex justify-end p-4">
+        <button
+          onClick={() => {
+            clearCart();
+            if (onRequestClose) {
+              onRequestClose();
+            }
+          }}
+          className="text-sm uppercase text-red-500 hover:text-red-700"
+        >
+          Clear Cart
+        </button>
+      </div>
       {/* Divider Line */}
       <div className="h-0.5 w-full bg-gray-200" />
 
@@ -80,12 +95,31 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
                       : "N/A"}
                   </span>
                 </div>
+                {/* Display color and size if variant exists */}
+                {cartItem.variant ? (
+                  <div className="text-sm text-gray-500">
+                    <p>Color: {cartItem.variant.color}</p>
+                    <p>Size: {cartItem.variant.size}</p>
+                  </div>
+                ) : (
+                  <div className="text-sm text-gray-500">
+                    <p>Color: Not specified</p>
+                    <p>Size: Not specified</p>
+                  </div>
+                )}
               </div>
 
               <div className="ml-auto">
                 {/* Remove item button */}
                 <button
-                  onClick={() => removeFromCart(cartItem.product)}
+                  onClick={() =>
+                    cartItem.variant &&
+                    removeFromCart(
+                      cartItem.product,
+                      cartItem.variant.color,
+                      cartItem.variant.size,
+                    )
+                  }
                   className="text-xs uppercase hover:underline"
                 >
                   Remove
@@ -93,11 +127,31 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
 
                 {/* Quantity control buttons */}
                 <div className="flex items-center justify-between">
-                  <button onClick={() => updateCart(cartItem.product, -1)}>
+                  <button
+                    onClick={() =>
+                      cartItem.variant &&
+                      updateCart(
+                        cartItem.product,
+                        cartItem.variant.color,
+                        cartItem.variant.size,
+                        -1,
+                      )
+                    }
+                  >
                     -
                   </button>
                   <span className="text-xs">{cartItem.count}</span>
-                  <button onClick={() => updateCart(cartItem.product, 1)}>
+                  <button
+                    onClick={() =>
+                      cartItem.variant &&
+                      updateCart(
+                        cartItem.product,
+                        cartItem.variant.color,
+                        cartItem.variant.size,
+                        1,
+                      )
+                    }
+                  >
                     +
                   </button>
                 </div>

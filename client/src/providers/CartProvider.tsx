@@ -5,17 +5,27 @@ import {
   useState,
   useEffect,
 } from "react";
-import { Product } from "../interfaces";
+import { Product, Variant } from "../interfaces";
 
 type cartItem = {
   product: Product;
+  variant: { color: Variant["color"]; size: Variant["size"] };
   count: number;
 };
 
 interface CartContext {
   items: cartItem[];
-  updateCart(product: Product, qty: number): void;
-  removeFromCart(product: Product): void;
+  updateCart(
+    product: Product,
+    color: Variant["color"],
+    size: Variant["size"],
+    qty: number,
+  ): void;
+  removeFromCart(
+    product: Product,
+    color: Variant["color"],
+    size: Variant["size"],
+  ): void;
   countAllItems(): number;
   countTotalPrice(): string;
   clearCart(): void;
@@ -41,9 +51,17 @@ const CartContext = createContext<CartContext>({
 const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<cartItem[]>([]);
 
-  const removeFromCart = (product: Product) => {
+  const removeFromCart = (
+    product: Product,
+    color: Variant["color"],
+    size: Variant["size"],
+  ) => {
+    const productId = product.productId;
     const newProducts = cartItems.filter(
-      (item) => item.product.productId !== product.productId,
+      (item) =>
+        item.product.productId !== productId ||
+        item.variant.color !== color ||
+        item.variant.size !== size,
     );
     setCartItems(newProducts);
     updateCartInLS(newProducts);
@@ -54,39 +72,52 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     updateCartInLS([]);
   };
 
-  const updateCart = (product: Product, qty: number) => {
-    console.log("Adding to cart:", product);
-    const finalCartItems = [...cartItems];
-    const index = cartItems.findIndex(
-      (item) => product.productId === item.product.productId,
-    );
+  const updateCart = (
+    product: Product,
+    color: Variant["color"],
+    size: Variant["size"],
+    qty: number,
+  ) => {
+    console.log("updateCart called with:");
+    console.log("  product:", product);
+    console.log("  color:", color);
+    console.log("  size:", size);
+    console.log("  qty:", qty);
 
+    if (!color || !size) {
+      console.warn("Missing color or size in updateCart function");
+      return;
+    }
+
+    const finalCartItems = [...cartItems];
+    console.log("finalCartItems: ", finalCartItems);
+    const index = cartItems.findIndex(
+      (item) =>
+        item.product.productId === product.productId &&
+        item.variant.color === color &&
+        item.variant.size === size,
+    );
+    console.log("Items:", index);
     if (index === -1) {
-      finalCartItems.push({ count: qty, product });
+      console.log("Adding new item to cart");
+      finalCartItems.push({
+        product,
+        variant: { color, size },
+        count: qty,
+      });
     } else {
+      console.log("Updating existing item in cart");
       finalCartItems[index].count += qty;
     }
 
     if (finalCartItems[index]?.count === 0) {
-      removeFromCart(product);
+      removeFromCart(product, color, size);
     } else {
       setCartItems(finalCartItems);
       console.log("Cart items after update: ", finalCartItems);
       updateCartInLS(finalCartItems);
     }
   };
-
-  // const removeFromCart = (product: Product, qty: number) => {
-  //   const newProducts = cartItems.map((item) => {
-  //     if (product.id === item.product.id) {
-  //       item.count -= qty;
-  //     }
-
-  //     return item;
-  //   });
-
-  //   setCartItems(newProducts);
-  // };
 
   const countAllItems = () => {
     return cartItems.reduce((total, cartItem) => total + cartItem.count, 0);
@@ -109,8 +140,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
       try {
         const storedCartItems = JSON.parse(result);
         const validCartItems = storedCartItems.filter(
-          (items: cartItem) =>
-            items.product && items.product.price !== undefined,
+          (item: cartItem) => item.product && item.product.price !== undefined,
         );
         console.log("Filtered valid items from localStorage: ", validCartItems);
         setCartItems(validCartItems);
