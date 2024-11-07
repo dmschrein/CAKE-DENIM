@@ -27,7 +27,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
   const [isProcessing, setProcessing] = useState(false);
   const [createPayment] = useCreatePaymentMutation();
   const [createOrder] = useCreateOrderMutation();
-  const { items } = useCart();
+  const { items, clearCart } = useCart();
 
   console.log("Items in cart: ", items);
   {
@@ -125,6 +125,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
       }
 
       if (paymentIntent?.status === "succeeded") {
+        clearCart();
         router.push("/checkout/success");
       } else {
         setError("Payment processing failed. Please try again.");
