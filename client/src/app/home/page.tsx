@@ -15,10 +15,11 @@ export default function HomePage() {
         {/* TODO: Update Popup to not show if the user is logged in */}
         <PopupModal />
         <Image
-          src="/assets/cdbanner.jpg"
+          src="/assets/banner-374.jpg"
           width={1920}
           height={1080}
-          alt="plur logo"
+          alt="Hero banner showing a feature denim jacket product"
+          priority
         />
         {/* TODO: Update to use FeatureProducts Function */}
         <ul className="grid h-full w-full gap-1 pt-1 md:grid-cols-4">

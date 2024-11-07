@@ -1,5 +1,65 @@
 [
   {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-XS-i1",
+    "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1"
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-S-i1",
+    "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1"
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-M-i1",
+    "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1"
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-L-i1",
+    "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1"
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-XL-i1",
+    "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1"
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-XS-i1",
+    "productId": "per18-cd7f0fb5-ws0-pr1d1"
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-S-il",
+    "productId": "per18-cd7f0fb5-ws0-pr1d1"
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-M-i1",
+    "productId": "per18-cd7f0fb5-ws0-pr1d1"
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-L-i1",
+    "productId": "per18-cd7f0fb5-ws0-pr1d1"
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-XL-i1",
+    "productId": "per18-cd7f0fb5-ws0-pr1d1"
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-XS-i1",
+    "productId": "faw19-cd2f0-fb5ws6-pr1d1"
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-S-i1",
+    "productId": "faw19-cd2f0-fb5ws6-pr1d1"
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-M-i1",
+    "productId": "faw19-cd2f0-fb5ws6-pr1d1"
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-L-i1",
+    "productId": "faw19-cd2f0-fb5ws6-pr1d1"
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-XL-i1",
+    "productId": "faw19-cd2f0-fb5ws6-pr1d1"
+  },
+  {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
     "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1"
   },
@@ -102,7 +162,6 @@
   {
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-36P-i1",
     "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1"
-
   },
   {
     "variantId": "mor2-cd1f1wb2-fb1ws1-pr1d1-24-i1",
@@ -591,6 +650,5 @@
   {
     "variantId": "cag11-cd2f0wb0-fb7ws0-pr1d1-XL-dfl1",
     "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1"
-
   }
 ]

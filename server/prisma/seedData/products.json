@@ -119,5 +119,38 @@
     "imageURL": "",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1",
+    "name": "The Kennedy Jacket",
+    "description": "Raw Denim Oversized Convertible Jacket",
+    "price": 320.0,
+    "stockQuantity": 100,
+    "category": "Jackets",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "per18-cd7f0fb5-ws0-pr1d1",
+    "name": "The Peron Shirt",
+    "description": "Raw Denim Shirt",
+    "price": 248.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
+  },
+  {
+    "productId": "faw19-cd2f0-fb5ws6-pr1d1",
+    "name": "The Fawcett Shirt",
+    "description": "Washed Denim Shirt",
+    "price": 228.0,
+    "stockQuantity": 100,
+    "category": "Tops",
+    "imageURL": "",
+    "createdAt": "2024-10-04T12:00:00Z",
+    "updatedAt": "2024-11-05T12:00:00Z"
   }
 ]
