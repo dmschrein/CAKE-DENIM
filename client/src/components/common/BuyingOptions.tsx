@@ -6,21 +6,28 @@ import { Product, Variant } from "../../interfaces";
 
 interface Props {
   product: Product;
+  variantId: Variant["variantId"] | null | undefined;
   color: Variant["color"] | null;
   size: Variant["size"] | null;
 }
-
-const BuyingOptions: FC<Props> = ({ product, color, size }) => {
+{
+  /* 6. Rendered with product, variantId, color, size */
+}
+const BuyingOptions: FC<Props> = ({ product, variantId, color, size }) => {
   const { updateCart } = useCart();
 
+  {
+    /* 6. Called when the Add to Car button is clicked */
+  }
   const onAddToCartClick = () => {
-    if (!color || !size) {
+    if (!variantId || !color || !size) {
       alert("Please select a color and a size.");
       return;
     }
     console.log("Variant Info: ", color, size);
-    // Update cart with the specific variant
-    updateCart(product, color, size, 1);
+    // updateCart from the useCart hook to add the item to the cart with the
+    // specified details (product, variantId, color, size, and quantity of 1
+    updateCart(product, variantId, color, size, 1);
   };
 
   return (

@@ -140,6 +140,8 @@ model OrderItems {
   orderItemId String   @id @default(uuid())
   orderId     String
   variantId   String
+  size        String // Add this line if you need size stored directly in OrderItems
+  color       String // Add this line if you need color stored directly in OrderItems
   quantity    Int
   price       Float
   Order       Orders   @relation(fields: [orderId], references: [orderId])

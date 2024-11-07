@@ -12,7 +12,9 @@ interface Props {
   onRequestClose?(): void; // Optional callback function for closing the side cart
 }
 
-// Functional component definition for the SideCart
+{
+  /* SideCart component to display the subtotal, tax, shipping cost, and the final order total. */
+}
 const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
   // Destructure cart-related functions and data from the custom useCart hook
   const {
@@ -116,6 +118,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
                     cartItem.variant &&
                     removeFromCart(
                       cartItem.product,
+                      cartItem.variant.variantId,
                       cartItem.variant.color,
                       cartItem.variant.size,
                     )
@@ -132,6 +135,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
                       cartItem.variant &&
                       updateCart(
                         cartItem.product,
+                        cartItem.variant.variantId,
                         cartItem.variant.color,
                         cartItem.variant.size,
                         -1,
@@ -146,6 +150,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
                       cartItem.variant &&
                       updateCart(
                         cartItem.product,
+                        cartItem.variant.variantId,
                         cartItem.variant.color,
                         cartItem.variant.size,
                         1,

@@ -9,7 +9,11 @@ import { Product, Variant } from "../interfaces";
 
 type cartItem = {
   product: Product;
-  variant: { color: Variant["color"]; size: Variant["size"] };
+  variant: {
+    variantId: Variant["variantId"];
+    color: Variant["color"];
+    size: Variant["size"];
+  };
   count: number;
 };
 
@@ -17,12 +21,14 @@ interface CartContext {
   items: cartItem[];
   updateCart(
     product: Product,
+    variant: Variant["variantId"],
     color: Variant["color"],
     size: Variant["size"],
     qty: number,
   ): void;
   removeFromCart(
     product: Product,
+    variant: Variant["variantId"],
     color: Variant["color"],
     size: Variant["size"],
   ): void;
@@ -48,11 +54,17 @@ const CartContext = createContext<CartContext>({
   },
 });
 
+{
+  /* 7. CartProvider manages the cart state, including adding, removing, updating items,
+   * and clearning the cart. It uses localStorage to persist cart items across sessions.
+   */
+}
 const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<cartItem[]>([]);
 
   const removeFromCart = (
     product: Product,
+    variantId: Variant["variantId"],
     color: Variant["color"],
     size: Variant["size"],
   ) => {
@@ -60,6 +72,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     const newProducts = cartItems.filter(
       (item) =>
         item.product.productId !== productId ||
+        item.variant.variantId !== variantId ||
         item.variant.color !== color ||
         item.variant.size !== size,
     );
@@ -74,18 +87,20 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCart = (
     product: Product,
+    variantId: Variant["variantId"],
     color: Variant["color"],
     size: Variant["size"],
     qty: number,
   ) => {
     console.log("updateCart called with:");
     console.log("  product:", product);
+    console.log("  variantId:", variantId);
     console.log("  color:", color);
     console.log("  size:", size);
     console.log("  qty:", qty);
 
-    if (!color || !size) {
-      console.warn("Missing color or size in updateCart function");
+    if (!variantId || !color || !size) {
+      console.warn("Missing variantId or color or size in updateCart function");
       return;
     }
 
@@ -94,6 +109,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     const index = cartItems.findIndex(
       (item) =>
         item.product.productId === product.productId &&
+        item.variant.variantId === variantId &&
         item.variant.color === color &&
         item.variant.size === size,
     );
@@ -102,7 +118,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
       console.log("Adding new item to cart");
       finalCartItems.push({
         product,
-        variant: { color, size },
+        variant: { variantId, color, size },
         count: qty,
       });
     } else {
@@ -111,7 +127,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (finalCartItems[index]?.count === 0) {
-      removeFromCart(product, color, size);
+      removeFromCart(product, variantId, color, size);
     } else {
       setCartItems(finalCartItems);
       console.log("Cart items after update: ", finalCartItems);

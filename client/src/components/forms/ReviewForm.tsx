@@ -29,14 +29,39 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
   const [createOrder] = useCreateOrderMutation();
   const { items } = useCart();
 
-  const calculateTotalPrice = () => {
-    if (!items || items.length === 0) {
-      return 0;
-    }
+  console.log("Items in cart: ", items);
+  {
+    /* Functions to calculate the Total Order */
+  }
+  const calculateSubtotal = () => {
     return items.reduce(
       (acc, item) => acc + item.product.price * item.count,
       0,
     );
+  };
+
+  const calculateTax = (subtotal: number) => {
+    return +(subtotal * 0.1).toFixed(2);
+  };
+
+  const calculateShippingCost = (deliveryMethod: string) => {
+    switch (deliveryMethod) {
+      case "GROUND":
+        return 10;
+      case "EXPRESS":
+        return 25;
+      case "NEXT_DAY":
+        return 40;
+      default:
+        return 0;
+    }
+  };
+
+  const calculateTotalPrice = () => {
+    const subtotal = calculateSubtotal();
+    const tax = calculateTax(subtotal);
+    const shipping = calculateShippingCost(shippingInfo.deliveryMethod);
+    return subtotal + tax + shipping;
   };
 
   const handleConfirmOrder = async () => {
@@ -58,9 +83,11 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         shippingInfo,
         billingInfo: billingInfo || shippingInfo, // check logic
         orderItems: items.map((item) => ({
-          itemId: item.product.productId,
-          quantity: item.count,
+          variantId: item.variant.variantId,
+          size: item.variant.size,
+          color: item.variant.color,
           price: item.product.price,
+          quantity: item.count,
         })),
         status: "Pending",
       };

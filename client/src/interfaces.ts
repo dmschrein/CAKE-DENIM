@@ -91,15 +91,19 @@ export interface BillingInfo {
   mobilePhone?: string;
 }
 export interface OrderItem {
-  itemId: string;
-  quantity: number;
+  variantId: Variant["variantId"];
+  size: string;
+  color: string;
   price: number;
+  quantity: number;
 }
 
 export interface NewOrderItem {
-  itemId: string;
-  quantity: number;
+  variantId: Variant["variantId"];
+  size: string;
+  color: string;
   price: number;
+  quantity: number;
 }
 
 export interface ReviewFormProps {

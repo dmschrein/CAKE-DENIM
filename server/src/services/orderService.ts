@@ -59,6 +59,7 @@ export class OrderService {
       // Fetch each variant and create OrderItems with variant information
       const items = await Promise.all(
         orderItems.map(async (item: any) => {
+          console.log("Order items: ", orderItems);
           const variant = await prisma.variants.findUnique({
             where: { variantId: item.variantId },
           });
