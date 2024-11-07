@@ -126,7 +126,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
 
       if (paymentIntent?.status === "succeeded") {
         clearCart();
-        router.push("/checkout/success");
+        console.log("order Id", orderId);
+        router.push(`/checkout/success?orderId=${orderId}`);
       } else {
         setError("Payment processing failed. Please try again.");
       }
