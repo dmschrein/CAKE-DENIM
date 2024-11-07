@@ -27,16 +27,41 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
   const [isProcessing, setProcessing] = useState(false);
   const [createPayment] = useCreatePaymentMutation();
   const [createOrder] = useCreateOrderMutation();
-  const { items } = useCart();
+  const { items, clearCart } = useCart();
 
-  const calculateTotalPrice = () => {
-    if (!items || items.length === 0) {
-      return 0;
-    }
+  console.log("Items in cart: ", items);
+  {
+    /* Functions to calculate the Total Order */
+  }
+  const calculateSubtotal = () => {
     return items.reduce(
       (acc, item) => acc + item.product.price * item.count,
       0,
     );
+  };
+
+  const calculateTax = (subtotal: number) => {
+    return +(subtotal * 0.1).toFixed(2);
+  };
+
+  const calculateShippingCost = (deliveryMethod: string) => {
+    switch (deliveryMethod) {
+      case "GROUND":
+        return 10;
+      case "EXPRESS":
+        return 25;
+      case "NEXT_DAY":
+        return 40;
+      default:
+        return 0;
+    }
+  };
+
+  const calculateTotalPrice = () => {
+    const subtotal = calculateSubtotal();
+    const tax = calculateTax(subtotal);
+    const shipping = calculateShippingCost(shippingInfo.deliveryMethod);
+    return subtotal + tax + shipping;
   };
 
   const handleConfirmOrder = async () => {
@@ -55,11 +80,13 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         userId: session?.user?.id || "guestUserId",
         email: session?.user?.email || "guest@example.com",
         totalAmount: paymentAmount,
-        deliveryType: shippingInfo.deliveryMethod,
         shippingInfo,
         billingInfo: billingInfo || shippingInfo, // check logic
         orderItems: items.map((item) => ({
-          itemId: item.product.productId,
+          variantId: item.variant.variantId,
+          size: item.variant.size,
+          color: item.variant.color,
+          price: item.product.price,
           quantity: item.count,
         })),
         status: "Pending",
@@ -98,7 +125,9 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
       }
 
       if (paymentIntent?.status === "succeeded") {
-        router.push("/checkout/success");
+        clearCart();
+        console.log("order Id", orderId);
+        router.push(`/checkout/success?orderId=${orderId}`);
       } else {
         setError("Payment processing failed. Please try again.");
       }
@@ -157,7 +186,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         {/* Right Section: Order Summary */}
         <div className="flex w-1/3 flex-col justify-between">
           <div>
-            <OrderSummary />
+            <OrderSummary shippingInfo={shippingInfo} />
             <button
               onClick={handleConfirmOrder}
               className="w-full bg-black p-2 text-white"

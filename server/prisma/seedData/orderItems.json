@@ -1,23 +1,29 @@
 [
   {
-    "orderItemId": "1abc",
-    "orderId": "1abc",
+    "orderItemId": "1abc484a118c-d0bd-428f-b539-8ba0add54232",
+    "orderId": "484a118c-d0bd-428f-b539-8ba0add54232",
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
-    "quantity": 2,
-    "price": 148.0
+    "size": "26",
+    "color": "Indigo",
+    "price": 148.0,
+    "quantity": 2
   },
   {
-    "orderItemId": "2abc",
-    "orderId": "2abc",
+    "orderItemId": "2abc2abc484a118c-d0bd-428f-b539-8ba0add54232",
+    "orderId": "2abc484a118c-d0bd-428f-b539-8ba0add54232",
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
-    "quantity": 5,
-    "price": 148.0
+    "size": "29",
+    "color": "Indigo",
+    "price": 148.0,
+    "quantity": 5
   },
   {
-    "orderItemId": "3abc",
-    "orderId": "3abc",
+    "orderItemId": "3abc3abc484a118c-d0bd-428f-b539-8ba0add54232",
+    "orderId": "3abc484a118c-d0bd-428f-b539-8ba0add54232",
     "variantId": "ng1-cd1f10wb2-fb1ws0-pr1d1-24-i1",
-    "quantity": 3,
-    "price": 128.0
+    "size": "30P",
+    "color": "Indigo",
+    "price": 128.0,
+    "quantity": 3
   }
 ]

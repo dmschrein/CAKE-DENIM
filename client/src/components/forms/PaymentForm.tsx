@@ -265,7 +265,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
         {/* Right Section: Order Summary */}
         <div className="sticky top-10 w-1/3">
-          <OrderSummary />
+          <OrderSummary shippingInfo={shippingInfo} />
           <button
             type="submit"
             className="mt-6 w-full bg-black p-2 text-white"

@@ -15,6 +15,15 @@ export interface Product {
   category?: string;
   createdAt: string;
   updatedAt: string;
+  ProductVariants: { variant: Variant }[];
+}
+
+export interface Variant {
+  variantId: string;
+  size: string;
+  color: string;
+  price: number;
+  stockQuantity: number;
 }
 
 export interface CartItem {
@@ -40,7 +49,6 @@ export interface Order {
   orderId: string;
   userId: string;
   totalAmount: number;
-  deliveryType: DeliveryType;
   paymentId?: string;
   status: string;
   createdAt: string;
@@ -52,7 +60,6 @@ export interface NewOrder {
   userId: string;
   email: string;
   totalAmount: number;
-  deliveryType?: DeliveryType;
   shippingInfo: ShippingInfo;
   billingInfo: BillingInfo;
   paymentId?: string;
@@ -84,13 +91,18 @@ export interface BillingInfo {
   mobilePhone?: string;
 }
 export interface OrderItem {
-  itemId: string;
-  quantity: number;
+  variantId: Variant["variantId"];
+  size: string;
+  color: string;
   price: number;
+  quantity: number;
 }
 
 export interface NewOrderItem {
-  itemId: string;
+  variantId: Variant["variantId"];
+  size: string;
+  color: string;
+  price: number;
   quantity: number;
 }
 

@@ -1,30 +1,97 @@
-// server/src/services/orderService.ts
-
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export class OrderService {
-  // create a new order when checkout is successful
+  // Create a new order when checkout is successful
   async createOrder(data: any) {
     try {
-      const { totalAmount, deliveryType, paymentId, payment, status } = data;
-      // get the customer using email from auth log in session and create an order for the user
+      const {
+        totalAmount,
+        email,
+        paymentId,
+        payment,
+        status,
+        shippingInfo,
+        billingInfo,
+        orderItems,
+      } = data;
+
+      // Get the user using email from the auth login session
       const user = await prisma.users.findUnique({
         where: { email: data.email },
       });
       if (!user) {
         throw new Error("User not found");
       }
-      // Create the order with the user id
+
+      // Create new shipping info
+      const createdShippingInfo = await prisma.shippingInfo.create({
+        data: {
+          firstName: shippingInfo.firstName,
+          lastName: shippingInfo.lastName,
+          address1: shippingInfo.address1,
+          address2: shippingInfo.address2,
+          city: shippingInfo.city,
+          state: shippingInfo.state,
+          zipCode: shippingInfo.zipCode,
+          country: shippingInfo.country,
+          mobilePhone: shippingInfo.mobilePhone,
+          deliveryMethod: shippingInfo.deliveryMethod,
+        },
+      });
+
+      // Create new billing info
+      const createdBillingInfo = await prisma.billingInfo.create({
+        data: {
+          firstName: billingInfo.firstName,
+          lastName: billingInfo.lastName,
+          address1: billingInfo.address1,
+          address2: billingInfo.address2,
+          city: billingInfo.city,
+          state: billingInfo.state,
+          zipCode: billingInfo.zipCode,
+          country: billingInfo.country,
+          mobilePhone: billingInfo.mobilePhone,
+        },
+      });
+
+      // Fetch each variant and create OrderItems with variant information
+      const items = await Promise.all(
+        orderItems.map(async (item: any) => {
+          console.log("Order items: ", orderItems);
+          const variant = await prisma.variants.findUnique({
+            where: { variantId: item.variantId },
+          });
+
+          if (!variant) {
+            throw new Error(`Variant with ID ${item.variantId} not found`);
+          }
+
+          return {
+            variantId: variant.variantId,
+            size: variant.size,
+            color: variant.color,
+            price: variant.price,
+            quantity: item.quantity,
+          };
+        })
+      );
+
+      // Create the order with the user ID, shippingInfoId, billingInfoId, and OrderItems
       const order = await prisma.orders.create({
         data: {
           userId: user.userId,
+          email,
+          shippingInfoId: createdShippingInfo.id,
+          billingInfoId: createdBillingInfo.id,
           totalAmount,
-          deliveryType,
           paymentId,
           payment,
           status,
+          OrderItems: {
+            create: items,
+          },
         },
       });
       console.log("Order created successfully: ", order);
