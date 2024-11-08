@@ -70,6 +70,13 @@ async function main() {
       console.error(`No Prisma model matches the file name: ${fileName}`);
       continue;
     }
+    // Check the variantIds for debuggin
+    if (modelName === "productVariants") {
+      console.log(
+        "Seeding ProductVariants with the following variantIds:",
+        jsonData.map((v: any) => v.variantId)
+      );
+    }
 
     for (const data of jsonData) {
       if (modelName === "orderItems") {
@@ -84,7 +91,19 @@ async function main() {
           continue;
         }
       }
-
+      if (modelName === "productVariants") {
+        for (const variant of jsonData) {
+          const variantExists = await prisma.variants.findUnique({
+            where: { variantId: variant.variantId },
+          });
+          if (!variantExists) {
+            console.error(
+              `Variant with variantId ${variant.variantId} not found. Skipping this ProductVariant.`
+            );
+            continue;
+          }
+        }
+      }
       await model.create({
         data,
       });

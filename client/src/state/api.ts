@@ -86,6 +86,50 @@ export const api = createApi({
         },
       },
     ),
+    /*
+     * The query sends a GET request to /products and optionally includes a search parameter.
+     * The response will be an array of Product[].
+     * If a search term is provided, it appends ?search=<search> as a query string to the URL.
+     * providesTags: ["Products"] caches the products and tags them under "Products" for potential invalidation later.
+     */
+    searchProducts: build.query<Product[], { search: string }>({
+      query: ({ search }) => ({
+        url: "/products",
+        params: { search },
+      }),
+      providesTags: ["Products"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Products fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching products: ", error);
+        }
+      },
+    }),
+    /*
+     * The query sends a GET request to /products.
+     * The response will be an array of Product[].
+     * If a search term is provided, it appends ?search=<search> as a query string to the URL.
+     * providesTags: ["Products"] caches the products and tags them under "Products" for potential invalidation later.
+     */
+    getAllProducts: build.query<Product[], void>({
+      query: () => {
+        console.log("Fetching all products...");
+        return {
+          url: "/products",
+        };
+      },
+      providesTags: ["Products"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Products fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching products: ", error);
+        }
+      },
+    }),
     getProductById: build.query<Product, string>({
       query: (productId) => {
         console.log("Fetching product by ID: ", productId);
@@ -294,6 +338,7 @@ export const {
   useGetHomePageMetricsQuery,
   useGetProductsQuery,
   useGetProductByIdQuery,
+  useSearchProductsQuery,
   useGetVariantsByProductIdQuery,
   useGetUserByEmailQuery,
   useCreateUserMutation,

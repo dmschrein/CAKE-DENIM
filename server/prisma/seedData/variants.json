@@ -1036,5 +1036,110 @@
     "color": "Daisy Floral",
     "price": 150.0,
     "stockQuantity": 100
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-XS-i1",
+    "size": "XS",
+    "color": "Indigo",
+    "price": 320.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-S-i1",
+    "size": "S",
+    "color": "Indigo",
+    "price": 320.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-M-i1",
+    "size": "M",
+    "color": "Indigo",
+    "price": 320.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-L-i1",
+    "size": "L",
+    "color": "Indigo",
+    "price": 320.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "ken20-cd1f50wb0-fb4ws0-pr1d1-XL-i1",
+    "size": "XL",
+    "color": "Indigo",
+    "price": 320.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-XS-i1",
+    "size": "XS",
+    "color": "Indigo",
+    "price": 320.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-S-il",
+    "size": "S",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-M-i1",
+    "size": "M",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-L-i1",
+    "size": "L",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "per18-cd7f0fb5-ws0-pr1d1-XL-i1",
+    "size": "XL",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-XS-i1",
+    "size": "XS",
+    "color": "Indigo",
+    "price": 320.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-S-i1",
+    "size": "S",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-M-i1",
+    "size": "M",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-L-i1",
+    "size": "L",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
+  },
+  {
+    "variantId": "faw19-cd2f0-fb5ws6-pr1d1-XL-i1",
+    "size": "XL",
+    "color": "Indigo",
+    "price": 248.0,
+    "stockQuantity": 100
   }
 ]
