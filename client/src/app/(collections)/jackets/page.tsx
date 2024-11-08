@@ -30,10 +30,7 @@ const JacketsCollection = () => {
       updatedAt: product.updatedAt || new Date().toISOString(),
     })) || [];
   return (
-    <CollectionPage
-      collectionName="Jackets"
-      products={formattedJackets}
-    ></CollectionPage>
+    <CollectionPage collectionName="Jackets" products={formattedJackets} />
   );
 };
 
