@@ -1,8 +1,12 @@
 import React from "react";
+import { Order } from "@/interfaces";
 
-type Props = {};
+type OrderHistoryProps = {
+  userOrders: Order[] | null;
+};
 
-const OrderHistory = (props: Props) => {
+const OrderHistory: React.FC<OrderHistoryProps> = ({ userOrders }) => {
+  // make call to get user's order history using email
   return <div>OrderHistory</div>;
 };
 

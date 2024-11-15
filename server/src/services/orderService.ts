@@ -100,4 +100,19 @@ export class OrderService {
       throw new Error(`Failed to create order: ${error.message}`);
     }
   }
+  // get an order by user id
+  async getOrders(userId: string) {
+    try {
+      // Get the orders using userId
+      const orders = await prisma.orders.findMany({
+        where: { userId },
+        include: {
+          OrderItems: true,
+        },
+      });
+      return orders;
+    } catch (error: any) {
+      throw new Error(`Failed to retrieve orders: ${error.message}`);
+    }
+  }
 }

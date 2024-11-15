@@ -197,12 +197,13 @@ const Navigation = () => {
            */}
           {isLoggedIn ? (
             // if user is not logged in, render sign out button
-            <button
-              onClick={handleSignOutClicked}
-              className="text-sm underline"
-            >
-              Sign Out
-            </button>
+            // <button
+            //   onClick={handleSignOutClicked}
+            //   className="text-sm underline"
+            // >
+            //   Sign Out
+            // </button>
+            <Link href={`/account`}>My Account</Link>
           ) : (
             // if the user is already logged in, change Sign In to Account on Nav bar
             <button onClick={handleSignin} className="text-sm underline">

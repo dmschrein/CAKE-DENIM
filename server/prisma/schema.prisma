@@ -136,18 +136,6 @@ model Reviews {
   Products  Products @relation(fields: [productId], references: [productId]) // foreign key
 }
 
-model OrderItems {
-  orderItemId String   @id @default(uuid())
-  orderId     String
-  variantId   String
-  size        String // Add this line if you need size stored directly in OrderItems
-  color       String // Add this line if you need color stored directly in OrderItems
-  quantity    Int
-  price       Float
-  Order       Orders   @relation(fields: [orderId], references: [orderId])
-  variant     Variants @relation(fields: [variantId], references: [variantId])
-}
-
 enum DeliveryType {
   FREE_STANDARD
   GROUND
@@ -171,6 +159,18 @@ model Orders {
   OrderItems     OrderItems[]
   shippingInfoId String
   billingInfoId  String
+}
+
+model OrderItems {
+  orderItemId String   @id @default(uuid())
+  orderId     String
+  variantId   String
+  size        String // Add this line if you need size stored directly in OrderItems
+  color       String // Add this line if you need color stored directly in OrderItems
+  quantity    Int
+  price       Float
+  Order       Orders   @relation(fields: [orderId], references: [orderId])
+  variant     Variants @relation(fields: [variantId], references: [variantId])
 }
 
 model ShippingInfo {

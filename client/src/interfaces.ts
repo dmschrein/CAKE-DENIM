@@ -140,6 +140,9 @@ export interface User {
   firstName: string;
   lastName: string;
   userType: UserType;
+  phone: string;
+  gender: string;
+  orders: Order[]
 }
 
 // NewUser for create mutation
