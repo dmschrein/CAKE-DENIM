@@ -241,7 +241,7 @@ export const api = createApi({
     getUserByEmail: build.query<User, string>({
       query: (email) => {
         console.log("Fetching user by email:", email);
-        return { url: `/users?${email}` };
+        return { url: `/users?email=${encodeURIComponent(email)}` };
       },
       providesTags: (_, __, email) => [{ type: "Users", id: email }],
       onQueryStarted: async (_args, { queryFulfilled }) => {
@@ -330,6 +330,26 @@ export const api = createApi({
         }
       },
     }),
+    /*
+     * This query gets the Orders associated with an email
+     */
+    getOrdersByUserId: build.query<Order[], string>({
+      query: (userId) => {
+        console.log("Fetching orders from user: ", userId);
+        return {
+          url: `/orders?userId=${encodeURIComponent(userId)}`,
+        };
+      },
+      providesTags: (_, __, userId) => [{ type: "Orders", id: userId }],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Order fetched successfully: ", data);
+        } catch (error) {
+          console.error("Error fetching order by userId: ", error);
+        }
+      },
+    }),
   }),
 });
 
@@ -345,6 +365,7 @@ export const {
   useGetUsersQuery,
   useCreateGuestUserMutation,
   useUpdateUserMutation,
+  useGetOrdersByUserIdQuery,
   useCreatePaymentMutation,
   useCreateOrderMutation,
 } = api;

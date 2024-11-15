@@ -2,13 +2,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-black py-20 border-t border-gray-300">
+    <footer className="border-t border-gray-300 bg-white py-20 text-black">
       {/* Upper section with icons */}
-      <ul className="container mx-auto grid md:grid-cols-4 gap-6 text-center mb-20">
+      <ul className="container mx-auto mb-20 grid gap-6 text-center md:grid-cols-4">
         <div>
-          <div className="flex justify-center mb-2">
+          <div className="mb-2 flex justify-center">
             {/* Icon for free shipping */}
-            <span className="material-icons">local_shipping</span>
           </div>
           <h3 className="font-bold">Free shipping</h3>
           <p className="text-sm text-gray-600">
@@ -16,25 +15,22 @@ const Footer = () => {
           </p>
         </div>
         <div>
-          <div className="flex justify-center mb-2">
-            {/* Icon for Ref stores */}
-            <span className="material-icons">store</span>
+          <div className="mb-2 flex justify-center">
+            {/* Icon for stores */}
           </div>
           <h3 className="font-bold">Ref stores</h3>
           <p className="text-sm text-gray-600">We&apos;re all over the place</p>
         </div>
         <div>
-          <div className="flex justify-center mb-2">
+          <div className="mb-2 flex justify-center">
             {/* Icon for climate action */}
-            <span className="material-icons">cloud</span>
           </div>
           <h3 className="font-bold">We&apos;re committed to climate action</h3>
           <p className="text-sm text-gray-600">And we have big plans</p>
         </div>
         <div>
-          <div className="flex justify-center mb-2">
+          <div className="mb-2 flex justify-center">
             {/* Icon for customer love */}
-            <span className="material-icons">mail_outline</span>
           </div>
           <h3 className="font-bold">Customer love</h3>
           <p className="text-sm text-gray-600">We got you via email or text</p>
@@ -43,7 +39,7 @@ const Footer = () => {
       {/* Bottom section to manage the links and newsletter sign up */}
       <div className="grid md:grid-cols-2">
         {/* Left section with navigation and social links */}
-        <div className="container mx-auto grid md:grid-cols-4 gap-6 text-center md:text-left mb-10">
+        <div className="container mx-auto mb-10 grid gap-6 text-center md:grid-cols-4 md:text-left">
           <div>
             <h4 className="font-semibold">About</h4>
             <ul className="text-sm text-gray-600">
@@ -80,20 +76,20 @@ const Footer = () => {
         </div>
 
         {/* Right section with newsletter sign-up */}
-        <div className="container mx-auto text-center mb-10">
-          <div className="inline-flex border border-black rounded-lg overflow-hidden">
+        <div className="container mx-auto mb-10 text-center">
+          <div className="inline-flex overflow-hidden rounded-lg border border-black">
             <input
               type="text"
               placeholder="We make great emails"
-              className="p-2 px-4 w-60 focus:outline-none"
+              className="w-60 p-2 px-4 focus:outline-none"
             />
-            <button className="bg-black text-white p-2 px-4">Sign up</button>
+            <button className="bg-black p-2 px-4 text-white">Sign up</button>
           </div>
         </div>
       </div>
 
       {/* Bottom section with legal links */}
-      <div className="container mx-auto text-center text-gray-600 text-sm">
+      <div className="container mx-auto text-center text-sm text-gray-600">
         <p className="mb-2">
           <span className="mr-4">Do Not Sell My Info</span>
           <span className="mr-4">Terms</span>

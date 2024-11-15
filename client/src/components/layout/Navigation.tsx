@@ -28,48 +28,36 @@ const components: {
   title: string;
   image: string;
   href: string;
-  description: string;
 }[] = [
   {
-    title: "Alert Dialog",
+    title: "Fall Basics",
     image: "/assets/cakebabe.png",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+    href: "/products/jeans",
   },
   {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
+    title: "Gift Guide",
+    href: "/products/jeans",
     image: "/assets/cakebabe.png",
-    description:
-      "For sighted users to preview content available behind a link.",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "CAKE Travel Essentials",
+    href: "/products/jeans",
     image: "/assets/cakebabe.png",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
+    title: "Escape with US",
+    href: "/products/jeans",
     image: "/assets/cakebabe.png",
-    description: "Visually or semantically separates content.",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
+    title: "Sexy Sustainables",
+    href: "/products/jeans",
     image: "/assets/cakebabe.png",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    title: "Desirable Denim",
+    href: "/products/jeans",
     image: "/assets/cakebabe.png",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
 ];
 
@@ -109,7 +97,7 @@ const Navigation = () => {
       </div>
 
       {/* Main Navigation */}
-      <div className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b bg-white px-8">
+      <div className="sticky top-0 z-40 flex h-20 w-full items-center justify-between border-b bg-white px-8">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
           <Image
@@ -129,38 +117,35 @@ const Navigation = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>SHOP</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="fixed left-0 right-0 grid gap-5 bg-orange-100 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
+                    <ul className="fixed left-0 right-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
                       <li>
-                        <ListItem href="/collections/jeans" title="Jeans">
+                        <ListItem href="/jeans" title="Jeans">
                           Sustainable denim jeans for every occasion.
                         </ListItem>
-                        <ListItem href="/collections/tops" title="Tops">
+                        <ListItem href="/tops" title="Tops">
                           Tencel and modal tops.
-                        </ListItem>
-                        <ListItem href="/collections/dresses" title="Dresses">
-                          Dresses for your vacations.
                         </ListItem>
                       </li>
                       <li>
-                        <ListItem href="/collections/shoes" title="Shoes">
-                          Comfortable and sustainable shoes.
+                        <ListItem href="/jackets" title="Jackets">
+                          Comfortable and convertible jackets.
                         </ListItem>
-                        <ListItem
-                          href="/collections/accessories"
-                          title="Accessories"
-                        >
-                          Ethical accessories for every outfit.
-                        </ListItem>
-                        <ListItem href="/collections/bags" title="Bags">
-                          Durable, stylish bags for all occasions.
+                        <ListItem href="/dresses" title="Dresses">
+                          Dresses for your vacations.
                         </ListItem>
                       </li>
                       <li>
                         <NavigationMenuLink asChild>
                           <a
                             className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/"
+                            href="/jackets"
                           >
+                            <Image
+                              src="/assets/kennedy3-71.jpg"
+                              width={500}
+                              height={500}
+                              alt="Jacket Featured Collection"
+                            />
                             <div>Featured</div>
                             <p className="text-sm leading-tight text-muted-foreground">
                               Our beautifully designed convertible collection.
@@ -175,23 +160,21 @@ const Navigation = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>COLLECTIONS</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="fixed left-0 grid gap-5 bg-orange-100 p-10 md:w-[800px] md:grid-cols-6 lg:w-full">
+                    <ul className="fixed left-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] md:grid-cols-6 lg:w-full">
                       {components.map((component) => (
                         <ListItem
                           key={component.title}
                           title={component.title}
                           image={component.image}
                           href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
+                        ></ListItem>
                       ))}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link href="/collections/new" legacyBehavior passHref>
+                  <Link href="/products/shopAll" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
@@ -214,12 +197,13 @@ const Navigation = () => {
            */}
           {isLoggedIn ? (
             // if user is not logged in, render sign out button
-            <button
-              onClick={handleSignOutClicked}
-              className="text-sm underline"
-            >
-              Sign Out
-            </button>
+            // <button
+            //   onClick={handleSignOutClicked}
+            //   className="text-sm underline"
+            // >
+            //   Sign Out
+            // </button>
+            <Link href={`/account`}>My Account</Link>
           ) : (
             // if the user is already logged in, change Sign In to Account on Nav bar
             <button onClick={handleSignin} className="text-sm underline">
@@ -282,9 +266,9 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="relative mb-2 h-24 w-24">
+          <div className="relative mb-2 h-44 w-28">
             <Image
-              src={"/assets/cakebabe.png"}
+              src={"/assets/cakebabe.png"} // TODO: Update image to get it from s3
               alt={title}
               layout="fill"
               objectFit="cover"

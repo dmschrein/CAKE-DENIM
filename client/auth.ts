@@ -54,6 +54,8 @@ const authConfig: NextAuthConfig = {
             return {
               id: newUser.userId,
               email: newUser.email,
+              firstName: newUser.firstName || "Guest",
+              lastName: newUser.lastName || "",
             };
           }
 
@@ -75,6 +77,8 @@ const authConfig: NextAuthConfig = {
             return {
               id: user.userId,
               email: user.email,
+              firstName: user.firstName || "Guest",
+              lastName: user.lastName || "",
             };
           }
 
@@ -102,7 +106,8 @@ const authConfig: NextAuthConfig = {
           return {
             id: user.userId,
             email: user.email,
-            name: `${user.firstName} ${user.lastName}`,
+            firstName: user.firstName || "Guest",
+            lastName: user.lastName || "",
           };
         } catch (error) {
           console.error("🔴 Error authorizing user:", error);
@@ -111,6 +116,24 @@ const authConfig: NextAuthConfig = {
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      // Add custom properties to the session object
+      session.user.id = token.sub as string;
+      session.user.firstName = token.firstName as string;
+      session.user.lastName = token.lastName as string;
+      return session;
+    },
+    async jwt({ token, user }) {
+      // Add the user information to the JWT token
+      if (user) {
+        token.sub = user.id;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+      }
+      return token;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   debug: true,
 };
