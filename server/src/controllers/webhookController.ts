@@ -1,21 +1,33 @@
 import { Request, Response } from "express";
 import Stripe from "stripe";
-import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
-// import bodyParser from "body-parser";
+import AWS from "aws-sdk";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2024-09-30.acacia",
-});
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+{
+  /* AWS Parameters for production deployment */
+}
+const ssm = new AWS.SSM();
+const getParameter = async (name: string): Promise<string> => {
+  const result = await ssm
+    .getParameter({
+      Name: name,
+      WithDecryption: true,
+    })
+    .promise();
+  return result.Parameter?.Value || "";
+};
 
 const prisma = new PrismaClient();
 
 class WebhookController {
-  private prisma: PrismaClient;
+  private prisma: PrismaClient; //remove?
+  private stripe: Stripe;
+  private endpointSecret: string | undefined;
 
-  constructor() {
+  constructor(stripe: Stripe, endpointSecret: string) {
     this.prisma = new PrismaClient();
+    this.stripe = stripe;
+    this.endpointSecret = endpointSecret;
   }
 
   // Handle Webhooks
@@ -23,7 +35,7 @@ class WebhookController {
     console.log("🟢🟢Webhook is being handled.");
     let event = req.body;
 
-    if (endpointSecret) {
+    if (this.endpointSecret) {
       const sig = req.headers["stripe-signature"];
       if (!sig) {
         res.status(400).send("Missing Stripe signature header");
@@ -34,10 +46,10 @@ class WebhookController {
       try {
         console.log("Raw body received: ", req.body.toString());
         // Construct the event using Stripe's signature and raw body
-        event = stripe.webhooks.constructEvent(
+        event = this.stripe.webhooks.constructEvent(
           req.body,
           sig,
-          endpointSecret || ""
+          this.endpointSecret || ""
         );
       } catch (err: any) {
         console.error(
@@ -90,4 +102,19 @@ class WebhookController {
   }
 }
 
-export default new WebhookController();
+// Export an async initializer for the controller
+export const createWebhookController = async (): Promise<WebhookController> => {
+  try {
+    const stripeSecretKey = await getParameter("/stripe/secret_key");
+    const stripeWebhookSecret = await getParameter("/stripe/webhook_secret");
+
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: "2024-09-30.acacia",
+    });
+
+    return new WebhookController(stripe, stripeWebhookSecret);
+  } catch (error) {
+    console.error("Failed to initialize Stripe keys:", error);
+    throw new Error("Failed to initialize WebhookController");
+  }
+};
