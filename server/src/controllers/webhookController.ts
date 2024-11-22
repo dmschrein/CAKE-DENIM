@@ -109,7 +109,7 @@ export const createWebhookController = async (): Promise<WebhookController> => {
     const stripeWebhookSecret = await getParameter("/stripe/webhook_secret");
 
     const stripe = new Stripe(stripeSecretKey, {
-      apiVersion: "2024-11-20.acacia",
+      apiVersion: "2024-09-30.acacia",
     });
 
     return new WebhookController(stripe, stripeWebhookSecret);
