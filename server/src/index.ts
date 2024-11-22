@@ -22,6 +22,10 @@ import { createWebhookController } from "./controllers/webhookController";
 dotenv.config();
 const app = express();
 
+console.log("STRIPE_SECRET_KEY:", process.env.STRIPE_SECRET_KEY);
+console.log("STRIPE_WEBHOOK_SECRET:", process.env.STRIPE_WEBHOOK_SECRET);
+console.log("STRIPE_API_KEY:", process.env.STRIPE_API_KEY);
+
 (async () => {
   try {
     /* Initialize WebhookController */

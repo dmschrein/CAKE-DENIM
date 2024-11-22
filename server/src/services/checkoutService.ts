@@ -4,8 +4,8 @@ import Stripe from "stripe";
 import { getUsers } from "../controllers/userController";
 import { PrismaClient } from "@prisma/client";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  // apiVersion: "2023-08-16", // Use the latest stable version
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+  apiVersion: "2024-09-30.acacia",
 });
 
 const prisma = new PrismaClient();
