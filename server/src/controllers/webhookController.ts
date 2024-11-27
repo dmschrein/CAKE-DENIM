@@ -6,26 +6,24 @@ import AWS from "aws-sdk";
 {
   /* AWS Parameters for production deployment */
 }
-const ssm = new AWS.SSM();
-const getParameter = async (name: string): Promise<string> => {
-  const result = await ssm
-    .getParameter({
-      Name: name,
-      WithDecryption: true,
-    })
+const secretManager = new AWS.SecretsManager();
+const getSecret = async (secretName: string): Promise<string> => {
+  const response = await secretManager
+    .getSecretValue({ SecretId: secretName })
     .promise();
-  return result.Parameter?.Value || "";
+  if (!response.SecretString) {
+    throw new Error(`Secret ${secretName} is missing or invalid.`);
+  }
+  return response.SecretString;
 };
 
 const prisma = new PrismaClient();
 
 class WebhookController {
-  private prisma: PrismaClient; //remove?
   private stripe: Stripe;
   private endpointSecret: string | undefined;
 
   constructor(stripe: Stripe, endpointSecret: string) {
-    this.prisma = new PrismaClient();
     this.stripe = stripe;
     this.endpointSecret = endpointSecret;
   }
@@ -42,9 +40,7 @@ class WebhookController {
         return; // Just exit the function, don't return anything explicitly
       }
 
-      console.log("🟢🟢Trying to create the event.");
       try {
-        console.log("Raw body received: ", req.body.toString());
         // Construct the event using Stripe's signature and raw body
         event = this.stripe.webhooks.constructEvent(
           req.body,
@@ -52,15 +48,12 @@ class WebhookController {
           this.endpointSecret || ""
         );
       } catch (err: any) {
-        console.error(
-          "⛔️ Webhook signature verification failed: ",
-          err.message
-        );
+        console.error("Webhook signature verification failed: ", err.message);
         res.status(400).send(`Webhook Error: ${err.message}`);
         return; // Exit after sending the response
       }
 
-      console.log("🟢🟢Event is being handled.", event.type);
+      console.log("Webhook event type is being handled.", event.type);
 
       // Handle the event
       switch (event.type) {
@@ -105,16 +98,16 @@ class WebhookController {
 // Export an async initializer for the controller
 export const createWebhookController = async (): Promise<WebhookController> => {
   try {
-    const stripeSecretKey = await getParameter("/stripe/secret_key");
-    const stripeWebhookSecret = await getParameter("/stripe/webhook_secret");
+    const stripeSecretKey = await getSecret("/stripe/secret_key");
+    const stripeWebhookSecret = await getSecret("/stripe/webhook_secret");
 
     const stripe = new Stripe(stripeSecretKey, {
       apiVersion: "2024-09-30.acacia",
     });
 
     return new WebhookController(stripe, stripeWebhookSecret);
-  } catch (error) {
-    console.error("Failed to initialize Stripe keys:", error);
+  } catch (error: any) {
+    console.error("Failed to initialize Stripe keys:", error.message);
     throw new Error("Failed to initialize WebhookController");
   }
 };
