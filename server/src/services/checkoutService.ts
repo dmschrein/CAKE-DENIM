@@ -3,6 +3,7 @@
 import Stripe from "stripe";
 import { PrismaClient } from "@prisma/client";
 import AWS from "aws-sdk";
+import { getSSMParameter } from "../utils/secrets";
 
 {
   /* Update for  */
@@ -14,19 +15,6 @@ import AWS from "aws-sdk";
 {
   /* AWS Secrets Manager setup for deployment*/
 }
-const secretsManager = new AWS.SecretsManager();
-
-const getSecret = async (secretName: string): Promise<string> => {
-  const response = await secretsManager
-    .getSecretValue({
-      SecretId: secretName,
-    })
-    .promise();
-  if (!response.SecretString) {
-    throw new Error(`Secret ${secretName} is missing or invalid.`);
-  }
-  return response.SecretString;
-};
 
 const prisma = new PrismaClient();
 
@@ -40,7 +28,7 @@ export class CheckoutService {
     });
   }
   public async initializeStripe() {
-    const stripeSecretKey = await getSecret("/stripe/secret_key");
+    const stripeSecretKey = await getSSMParameter("/stripe/secret_key");
     this.stripe = new Stripe(stripeSecretKey, {
       apiVersion: "2024-09-30.acacia",
     });
