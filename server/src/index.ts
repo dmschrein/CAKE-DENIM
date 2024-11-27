@@ -19,9 +19,9 @@ import { createWebhookController } from "./controllers/webhookController";
 (async () => {
   try {
     // Load secrets dynamically
-    process.env.STRIPE_SECRET_KEY = await getSSMParameter("/stripe/secret_key");
+    process.env.STRIPE_SECRET_KEY = await getSSMParameter("stripe/secret_key");
     process.env.STRIPE_WEBHOOK_SECRET = await getSSMParameter(
-      "/stripe/webhook_secret"
+      "stripe/webhook_secret"
     );
 
     const app = express();

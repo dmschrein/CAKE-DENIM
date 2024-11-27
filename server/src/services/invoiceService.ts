@@ -11,7 +11,7 @@ export class InvoiceService {
   }
 
   public async initializeStripe() {
-    const stripeSecretKey = await getSSMParameter("/stripe/secret_key");
+    const stripeSecretKey = await getSSMParameter("stripe/secret_key");
     this.stripe = new Stripe(stripeSecretKey, {
       apiVersion: "2024-09-30.acacia",
     });

@@ -89,8 +89,8 @@ export const createWebhookController = async (): Promise<WebhookController> => {
     console.log("🔄 Initializing WebhookController...");
 
     // Fetch Stripe secrets from SSM
-    const stripeSecretKey = await getSSMParameter("/stripe/secret_key");
-    const stripeWebhookSecret = await getSSMParameter("/stripe/webhook_secret");
+    const stripeSecretKey = await getSSMParameter("stripe/secret_key");
+    const stripeWebhookSecret = await getSSMParameter("stripe/webhook_secret");
 
     const stripe = new Stripe(stripeSecretKey, {
       apiVersion: "2024-09-30.acacia",
