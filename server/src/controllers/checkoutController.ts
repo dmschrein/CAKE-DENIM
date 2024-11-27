@@ -7,12 +7,13 @@ import dotenv from "dotenv";
 import { CheckoutService } from "../services/checkoutService";
 import { InvoiceService } from "../services/invoiceService";
 import { PrismaClient } from "@prisma/client";
+
 // import bodyParser from "body-parser";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2024-09-30.acacia",
-});
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+//   apiVersion: "2024-09-30.acacia",
+// });
+// const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 export const config = {
   api: {
@@ -26,13 +27,12 @@ class CheckoutController {
   private checkoutService: CheckoutService;
   // TODO: add additional services if needed
   private invoiceService: InvoiceService;
-  private prisma: PrismaClient;
 
   constructor() {
     this.checkoutService = new CheckoutService();
     this.invoiceService = new InvoiceService();
-    this.prisma = new PrismaClient();
   }
+
   // Checkout management
   public async createCheckout(req: Request, res: Response): Promise<void> {
     try {
