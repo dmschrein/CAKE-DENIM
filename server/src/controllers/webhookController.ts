@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import Stripe from "stripe";
 import { PrismaClient } from "@prisma/client";
-import { getSSMParameter } from "../utils/secrets";
+import { getSSMParameterValue } from "../utils/secrets";
+import logger from "../utils/logger";
 
 const prisma = new PrismaClient();
 
@@ -16,13 +17,13 @@ class WebhookController {
 
   // Handle Webhooks
   public async handleWebhook(req: Request, res: Response): Promise<void> {
-    console.log("🟢 Webhook is being handled.");
+    logger.info("🟢 Webhook is being handled.");
     let event = req.body;
 
     if (this.endpointSecret) {
       const sig = req.headers["stripe-signature"] as string;
       if (!sig) {
-        console.error("Missing Stripe signature header");
+        logger.error("Missing Stripe signature header");
         res.status(400).send("Missing Stripe signature header");
         return;
       }
@@ -35,49 +36,48 @@ class WebhookController {
           this.endpointSecret
         );
       } catch (err: any) {
-        console.error("Webhook signature verification failed:", err.message);
+        logger.error("Webhook signature verification failed:", err.message);
         res.status(400).send(`Webhook Error: ${err.message}`);
         return;
       }
 
-      console.log("Processing Webhook event:", event.type);
+      logger.info("Processing Webhook event:", event.type);
 
       // Handle the event
       switch (event.type) {
         case "payment_intent.succeeded": {
           const paymentIntent = event.data.object as Stripe.PaymentIntent;
-          console.log("🔔 PaymentIntent was successful:", paymentIntent.id);
+          logger.info("🔔 PaymentIntent was successful:", paymentIntent.id);
 
           // Get orderId from metadata
           const orderId = paymentIntent.metadata?.orderId;
           if (!orderId) {
-            console.error("orderId missing from paymentIntent metadata.");
+            logger.error("orderId missing from paymentIntent metadata.");
             res.status(400).send("Missing orderId in metadata");
             return;
           }
 
-          console.log("Updating order status to 'Paid' for orderId:", orderId);
           try {
             const updatedOrder = await prisma.orders.update({
               where: { orderId },
               data: { status: "Paid" },
             });
-            console.log("✅ Order updated successfully:", updatedOrder.orderId);
+            logger.info("✅ Order updated successfully:", updatedOrder.orderId);
             res.status(200).json({ received: true });
           } catch (err) {
-            console.error("Error updating order in database:", err);
+            logger.error("Error updating order in database:", err);
             res.status(500).json({ error: "Failed to update order" });
           }
           break;
         }
 
         default:
-          console.warn(`Unhandled event type: ${event.type}`);
+          logger.warn(`Unhandled event type: ${event.type}`);
           res.status(400).send(`Unhandled event type: ${event.type}`);
           break;
       }
     } else {
-      console.error("Stripe Webhook Secret not configured");
+      logger.error("Stripe Webhook Secret not configured");
       res.status(500).send("Webhook endpoint not properly configured");
     }
   }
@@ -86,21 +86,26 @@ class WebhookController {
 // Export an async initializer for the controller
 export const createWebhookController = async (): Promise<WebhookController> => {
   try {
-    console.log("🔄 Initializing WebhookController...");
+    logger.info("🔄 Initializing WebhookController...");
 
     // Fetch Stripe secrets from SSM
-    const stripeSecretKey = await getSSMParameter("/stripe/secret_key");
-    const stripeWebhookSecret = await getSSMParameter("/stripe/webhook_secret");
+    const stripeSecretKey = await getSSMParameterValue("/stripe/secret_key");
+    const stripeWebhookSecret = await getSSMParameterValue(
+      "/stripe/webhook_secret"
+    );
 
+    if (!stripeSecretKey || !stripeWebhookSecret) {
+      throw new Error("Stripe secrets are missing.");
+    }
     const stripe = new Stripe(stripeSecretKey, {
-      apiVersion: "2024-09-30.acacia",
+      apiVersion: "2024-11-20.acacia",
     });
 
-    console.log("🟢 WebhookController initialized successfully.");
+    logger.info("🟢 WebhookController initialized successfully.");
 
     return new WebhookController(stripe, stripeWebhookSecret);
   } catch (error: any) {
-    console.error("❌ Failed to initialize WebhookController:", error.message);
+    logger.error("❌ Failed to initialize WebhookController:", error.message);
     throw new Error("WebhookController initialization failed");
   }
 };

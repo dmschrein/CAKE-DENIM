@@ -3,18 +3,8 @@
 import Stripe from "stripe";
 import { PrismaClient } from "@prisma/client";
 import AWS from "aws-sdk";
-import { getSSMParameter } from "../utils/secrets";
-
-{
-  /* Update for  */
-}
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-//   apiVersion: "2024-09-30.acacia",
-// });
-
-{
-  /* AWS Secrets Manager setup for deployment*/
-}
+import { getSSMParameterValue } from "../utils/secrets";
+import logger from "../utils/logger";
 
 const prisma = new PrismaClient();
 
@@ -23,15 +13,32 @@ export class CheckoutService {
   private stripe: Stripe;
 
   constructor() {
-    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-      apiVersion: "2024-09-30.acacia",
+    // Initialize Stripe with a placeholder key; it will be dynamically set later
+    const secretKey = process.env.STRIPE_SECRET_KEY || "";
+    if (!secretKey) {
+      logger.warn("Stripe Secret Key is not set at initialization.");
+    }
+    this.stripe = new Stripe(secretKey, {
+      apiVersion: "2024-11-20.acacia",
     });
   }
-  public async initializeStripe() {
-    const stripeSecretKey = await getSSMParameter("/stripe/secret_key");
-    this.stripe = new Stripe(stripeSecretKey, {
-      apiVersion: "2024-09-30.acacia",
-    });
+
+  public async initializeStripe(): Promise<void> {
+    try {
+      const stripeSecretKey =
+        process.env.STRIPE_SECRET_KEY ||
+        (await getSSMParameterValue("/stripe/secret_key"));
+      if (!stripeSecretKey) {
+        throw new Error("Stripe Secret Key is missing.");
+      }
+      this.stripe = new Stripe(stripeSecretKey, {
+        apiVersion: "2024-11-20.acacia",
+      });
+      logger.info("Stripe initialized successfully for CheckoutService.");
+    } catch (error) {
+      logger.error("Failed to initialize Stripe in CheckoutService", { error });
+      throw new Error("Stripe initialization failed.");
+    }
   }
 
   async createCheckout(data: any) {
@@ -63,9 +70,6 @@ export class CheckoutService {
         where: { email: data.email },
         data: { stripeCustomerId: user.stripeCustomerId },
       });
-      console.log("createCheckout executed");
-      // Create a payment intent for the order using the user ID as the Stripe customer ID
-      console.log("paymentIntent executed");
 
       // Create the payment intent
       const paymentIntent = await this.stripe.paymentIntents.create({
@@ -83,17 +87,15 @@ export class CheckoutService {
           userId: user.userId,
         },
       });
-      console.log("PaymentIntent created: ", paymentIntent);
+      logger.info("PaymentIntent created: ", paymentIntent);
       if (!paymentIntent.client_secret) {
-        console.error("client_secret is missing in Stripe response");
+        logger.error("client_secret is missing in Stripe response");
         throw new Error("Failed to retrieve client secret from Stripe");
       }
-      console.log(
-        "🟢🟢Payment Intent Client Secret: ",
-        paymentIntent.client_secret
-      );
+
       return paymentIntent;
     } catch (error: any) {
+      logger.error("Error creating checkout", { error });
       throw new Error(`Failed to create payment: ${error.message}`);
     }
   }
