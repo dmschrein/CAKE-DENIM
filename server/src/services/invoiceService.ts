@@ -42,6 +42,7 @@ export class InvoiceService {
 
   async createInvoice(data: any) {
     try {
+      await this.initializeStripe();
       const { customerId, items, autoAdvance = true } = data;
 
       // Step 1: Validate input data (basic validation, you can add more as needed)
