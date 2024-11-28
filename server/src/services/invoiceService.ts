@@ -1,20 +1,43 @@
 import Stripe from "stripe";
-import { getSSMParameter } from "../utils/secrets";
+import logger from "../utils/logger";
+import { getSSMParameterValue, getSecretValue } from "../utils/secrets";
 
 export class InvoiceService {
   private stripe: Stripe;
 
   constructor() {
-    this.stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-      apiVersion: "2024-09-30.acacia",
+    // Initialize Stripe with a placeholder key; ti will updated during runtime
+    const secretKey = process.env.STRIPE_SECRET_KEY || "";
+    if (!secretKey) {
+      logger.warn("Stripe Secret Key is not set at initialization.");
+    }
+    this.stripe = new Stripe(secretKey, {
+      apiVersion: "2024-11-20.acacia",
     });
   }
 
-  public async initializeStripe() {
-    const stripeSecretKey = await getSSMParameter("stripe/secret_key");
-    this.stripe = new Stripe(stripeSecretKey, {
-      apiVersion: "2024-09-30.acacia",
-    });
+  /**
+   * Dynamically loads the Stripe secret and updates the Stripe instance
+   */
+  public async initializeStripe(): Promise<void> {
+    try {
+      logger.info("Initializing Stripe for InvoiceService...");
+      const stripeSecretKey =
+        process.env.STRIPE_SECRET_KEY ||
+        (await getSSMParameterValue("/stripe/secret_key")) ||
+        (await getSecretValue("/stripe/secret_key"));
+
+      if (!stripeSecretKey) {
+        throw new Error("Stripe Secret Key is missing.");
+      }
+      this.stripe = new Stripe(stripeSecretKey, {
+        apiVersion: "2024-11-20.acacia",
+      });
+      logger.info("Stripe initialized successfully for InvoiceService.");
+    } catch (error) {
+      logger.error("Failed to initialize Stripe in InvoiceService", { error });
+      throw new Error("Stripe initialization failed.");
+    }
   }
 
   async createInvoice(data: any) {

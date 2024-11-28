@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 import { CheckoutService } from "../services/checkoutService";
 import { InvoiceService } from "../services/invoiceService";
 import { PrismaClient } from "@prisma/client";
+import logger from "../utils/logger";
+import { loadSecretsToEnv } from "../utils/secrets";
 
 // import bodyParser from "body-parser";
 
@@ -33,16 +35,27 @@ class CheckoutController {
     this.invoiceService = new InvoiceService();
   }
 
+  public async initialize(): Promise<void> {
+    try {
+      logger.info("Loading secrets for CheckoutController...");
+      await loadSecretsToEnv();
+      logger.info("Secrets loaded successfully for CheckoutController.");
+    } catch (error) {
+      logger.error("Failed to initialize CheckoutController", { error });
+      throw new Error("CheckoutController initialization failed.");
+    }
+  }
+
   // Checkout management
   public async createCheckout(req: Request, res: Response): Promise<void> {
     try {
       const data = req.body;
-      console.log("Received checkout data:", data);
+      logger.debug("Received checkout data", { data });
       const result = await this.checkoutService.createCheckout(data);
-      console.log("Successfully created checkout:", result);
+      logger.info("Successfully created checkout", { result });
       res.status(201).json(result);
     } catch (error: any) {
-      console.log("Error creating checkout: ", error);
+      logger.error("Error creating checkout: ", error);
       res.status(500).json({ error: error.message });
     }
   }
@@ -51,11 +64,12 @@ class CheckoutController {
   public async createInvoice(req: Request, res: Response): Promise<void> {
     try {
       const data = req.body;
-      console.log("Received invoice data:", data);
+      logger.debug("Received invoice data:", data);
       const result = await this.invoiceService.createInvoice(data);
-      console.log("Successfully created invoice:", result);
+      logger.info("Successfully created invoice:", result);
       res.status(201).json(result);
     } catch (error: any) {
+      logger.error("Error creating invoice", { error });
       res.status(500).json({ error: error.message });
     }
   }

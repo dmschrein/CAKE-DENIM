@@ -5,7 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import winston from "winston";
 import rateLimit from "express-rate-limit";
-import { getSSMParameter } from "./utils/secrets";
+import { loadSecretsToEnv } from "./utils/secrets";
 
 /* ROUTE IMPORTS */
 import homeRoutes from "./routes/homeRoutes";
@@ -18,11 +18,9 @@ import { createWebhookController } from "./controllers/webhookController";
 
 (async () => {
   try {
+    // Load secrets into environment variables
+    await loadSecretsToEnv();
     // Load secrets dynamically
-    process.env.STRIPE_SECRET_KEY = await getSSMParameter("stripe/secret_key");
-    process.env.STRIPE_WEBHOOK_SECRET = await getSSMParameter(
-      "stripe/webhook_secret"
-    );
 
     const app = express();
 
