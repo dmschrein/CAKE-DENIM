@@ -62,40 +62,27 @@ export async function getSSMParameterValue(
 // Load secrets and parameters into environment variables
 export async function loadSecretsToEnv() {
   try {
-    // Attempt to load secrets
-    const stripeSecretKey =
+    console.log("Fetching Stripe secret keys from SSM and Secrets Manager...");
+    process.env.STRIPE_SECRET_KEY =
       process.env.STRIPE_SECRET_KEY ||
-      (await getSSMParameterValue(stripeSecretKeyName)) ||
-      (await getSecretValue(stripeSecretKeyName));
+      (await getSSMParameterValue("/stripe/secret_key")) ||
+      (await getSecretValue("/stripe/secret_key"));
 
-    if (!stripeSecretKey) {
-      throw new Error("Stripe Secret Key is missing.");
-    }
+    console.log("STRIPE_SECRET_KEY loaded:", process.env.STRIPE_SECRET_KEY);
 
-    process.env.STRIPE_SECRET_KEY = stripeSecretKey;
-    logger.info(
-      "Stripe secret key loaded successfully into environment variables"
-    );
-  } catch (error) {
-    logger.error("Failed to load STRIPE_SECRET_KEY", { error });
-    throw error;
-  }
-  try {
-    const stripeWebhookSecret =
+    process.env.STRIPE_WEBHOOK_SECRET =
       process.env.STRIPE_WEBHOOK_SECRET ||
-      (await getSSMParameterValue(stripeWebhookSecretName)) ||
-      (await getSecretValue(stripeWebhookSecretName));
+      (await getSSMParameterValue("/stripe/webhook_secret")) ||
+      (await getSecretValue("/stripe/webhook_secret"));
 
-    if (!stripeWebhookSecret) {
-      throw new Error("Stripe Webhook secret is missing.");
-    }
-    process.env.STRIPE_WEBHOOK_SECRET = stripeWebhookSecret;
-
-    logger.info(
-      "Webhook secret loaded successfully into environment variables"
+    console.log(
+      "STRIPE_WEBHOOK_SECRET loaded:",
+      process.env.STRIPE_WEBHOOK_SECRET
     );
+
+    logger.info("Secrets loaded successfully into environment variables");
   } catch (error) {
-    logger.error("Failed to load STRIPE_WEBHOOK_SECRET", error);
+    logger.error("Error loading secrets into environment variables", error);
     throw error;
   }
 }

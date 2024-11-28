@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import { CheckoutService } from "../services/checkoutService";
-import { InvoiceService } from "../services/invoiceService";
+// import { InvoiceService } from "../services/invoiceService";
 import { PrismaClient } from "@prisma/client";
 import logger from "../utils/logger";
 import { loadSecretsToEnv } from "../utils/secrets";
@@ -28,11 +28,11 @@ const prisma = new PrismaClient();
 class CheckoutController {
   private checkoutService: CheckoutService;
   // TODO: add additional services if needed
-  private invoiceService: InvoiceService;
+  //private invoiceService: InvoiceService;
 
   constructor() {
     this.checkoutService = new CheckoutService();
-    this.invoiceService = new InvoiceService();
+    //this.invoiceService = new InvoiceService();
   }
 
   public async initialize(): Promise<void> {
@@ -61,18 +61,18 @@ class CheckoutController {
   }
 
   // Invoice Management
-  public async createInvoice(req: Request, res: Response): Promise<void> {
-    try {
-      const data = req.body;
-      logger.debug("Received invoice data:", data);
-      const result = await this.invoiceService.createInvoice(data);
-      logger.info("Successfully created invoice:", result);
-      res.status(201).json(result);
-    } catch (error: any) {
-      logger.error("Error creating invoice", { error });
-      res.status(500).json({ error: error.message });
-    }
-  }
+  // public async createInvoice(req: Request, res: Response): Promise<void> {
+  //   try {
+  //     const data = req.body;
+  //     logger.debug("Received invoice data:", data);
+  //     const result = await this.invoiceService.createInvoice(data);
+  //     logger.info("Successfully created invoice:", result);
+  //     res.status(201).json(result);
+  //   } catch (error: any) {
+  //     logger.error("Error creating invoice", { error });
+  //     res.status(500).json({ error: error.message });
+  //   }
+  // }
 }
 
 export default new CheckoutController();

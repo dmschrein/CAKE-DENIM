@@ -18,10 +18,13 @@ import { createWebhookController } from "./controllers/webhookController";
 
 (async () => {
   try {
-    // Load secrets into environment variables
-    console.log("🔄 Loading secrets...");
+    // Load secrets dynamically
+    console.log("Loading secrets into environment variables...");
     await loadSecretsToEnv();
-    console.log("✅ Secrets loaded successfully.");
+    console.log("Secrets loaded:", {
+      stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+      stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+    });
 
     const app = express();
 
