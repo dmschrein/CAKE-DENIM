@@ -19,8 +19,9 @@ import { createWebhookController } from "./controllers/webhookController";
 (async () => {
   try {
     // Load secrets into environment variables
+    console.log("🔄 Loading secrets...");
     await loadSecretsToEnv();
-    // Load secrets dynamically
+    console.log("✅ Secrets loaded successfully.");
 
     const app = express();
 

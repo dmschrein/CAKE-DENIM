@@ -63,19 +63,39 @@ export async function getSSMParameterValue(
 export async function loadSecretsToEnv() {
   try {
     // Attempt to load secrets
-    process.env.STRIPE_SECRET_KEY =
+    const stripeSecretKey =
       process.env.STRIPE_SECRET_KEY ||
       (await getSSMParameterValue(stripeSecretKeyName)) ||
       (await getSecretValue(stripeSecretKeyName));
 
-    process.env.STRIPE_WEBHOOK_SECRET =
+    if (!stripeSecretKey) {
+      throw new Error("Stripe Secret Key is missing.");
+    }
+
+    process.env.STRIPE_SECRET_KEY = stripeSecretKey;
+    logger.info(
+      "Stripe secret key loaded successfully into environment variables"
+    );
+  } catch (error) {
+    logger.error("Failed to load STRIPE_SECRET_KEY", { error });
+    throw error;
+  }
+  try {
+    const stripeWebhookSecret =
       process.env.STRIPE_WEBHOOK_SECRET ||
       (await getSSMParameterValue(stripeWebhookSecretName)) ||
       (await getSecretValue(stripeWebhookSecretName));
 
-    logger.info("Secrets loaded successfully into environment variables");
+    if (!stripeWebhookSecret) {
+      throw new Error("Stripe Webhook secret is missing.");
+    }
+    process.env.STRIPE_WEBHOOK_SECRET = stripeWebhookSecret;
+
+    logger.info(
+      "Webhook secret loaded successfully into environment variables"
+    );
   } catch (error) {
-    logger.error("Error loading secrets into environment variables", error);
+    logger.error("Failed to load STRIPE_WEBHOOK_SECRET", error);
     throw error;
   }
 }
