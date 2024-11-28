@@ -14,9 +14,9 @@ stripeRouter.post(
 );
 
 // Invoice management
-stripeRouter.post(
-  "/invoices",
-  CheckoutController.createInvoice.bind(CheckoutController)
-);
+// stripeRouter.post(
+//   "/invoices",
+//   CheckoutController.createInvoice.bind(CheckoutController)
+// );
 
 export default stripeRouter;
