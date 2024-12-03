@@ -18,7 +18,6 @@ import { HeartIcon } from "@radix-ui/react-icons";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 // import { setIsSidebarCollapsed } from "@/state";
 // import { useAppDispatch, useAppSelector } from "@/app/redux";
-import logo from "@/assets/norlogo27.png";
 import { useCart } from "@/providers/CartProvider";
 import SideCart from "./SideCart";
 import { SigninForm } from "../forms/SigninForm";
@@ -31,33 +30,33 @@ const components: {
 }[] = [
   {
     title: "Fall Basics",
-    image: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     href: "/products/jeans",
   },
   {
     title: "Gift Guide",
     href: "/products/jeans",
-    image: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
   },
   {
     title: "CAKE Travel Essentials",
     href: "/products/jeans",
-    image: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
   },
   {
     title: "Escape with US",
     href: "/products/jeans",
-    image: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
   },
   {
     title: "Sexy Sustainables",
     href: "/products/jeans",
-    image: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
   },
   {
     title: "Desirable Denim",
     href: "/products/jeans",
-    image: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
   },
 ];
 
@@ -101,7 +100,7 @@ const Navigation = () => {
         {/* Logo Section */}
         <div className="flex items-center gap-4">
           <Image
-            src="/assets/norlogo27.png" // Update with the correct logo path
+            src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/norlogo27.png" // Update with the correct logo path
             width={30}
             height={30}
             alt="Logo"
@@ -141,7 +140,7 @@ const Navigation = () => {
                             href="/jackets"
                           >
                             <Image
-                              src="/assets/kennedy3-71.jpg"
+                              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy3-71.jpg"
                               width={500}
                               height={500}
                               alt="Jacket Featured Collection"
@@ -268,7 +267,9 @@ const ListItem = React.forwardRef<
         >
           <div className="relative mb-2 h-44 w-28">
             <Image
-              src={"/assets/cakebabe.png"} // TODO: Update image to get it from s3
+              src={
+                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
+              } // TODO: Update image to get it from s3
               alt={title}
               layout="fill"
               objectFit="cover"

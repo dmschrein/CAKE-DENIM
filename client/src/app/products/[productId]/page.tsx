@@ -104,7 +104,10 @@ const ProductsPage = () => {
       {/* Product Image Gallery */}
       <div className="flex flex-row space-x-2">
         <Image
-          src={product.imageURL || "/assets/cakebabe.png"}
+          src={
+            product.imageURL ||
+            "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
+          }
           alt={product.name}
           width={600}
           height={800}
@@ -113,7 +116,10 @@ const ProductsPage = () => {
           {[...Array(4)].map((_, i) => (
             <Image
               key={i}
-              src={product.imageURL || "/assets/cakebabe.png"}
+              src={
+                product.imageURL ||
+                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
+              }
               alt="Thumbnail"
               width={100}
               height={150}

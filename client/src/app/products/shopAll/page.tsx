@@ -50,7 +50,8 @@ const ShopAll = () => {
       description: product.description || "No description available",
       price: product.price,
       stockQuantity: product.stockQuantity || 0,
-      imageURL: "/assets/kennedy2-71.jpg",
+      imageURL:
+        "https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy2-71.jpg",
       category: product.category || "Uncategorized",
       createdAt: product.createdAt || new Date().toISOString(),
       updatedAt: product.updatedAt || new Date().toISOString(),

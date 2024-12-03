@@ -91,7 +91,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ shippingInfo }) => {
               className="mb-4 flex items-center"
             >
               <Image
-                src="/assets/ochoa.png"
+                src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/ochoa.png"
                 alt={item.product.name}
                 width={180}
                 height={240}
