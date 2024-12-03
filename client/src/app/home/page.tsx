@@ -11,22 +11,22 @@ export default function HomePage() {
   const products = [
     {
       id: "her3-cd1f1wb2-fb1ws2-pr1d1",
-      image: "/assets/hersel1-63.jpg",
+      image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/hersel1-63.jpg",
       alt: "Raw Denim Shirt",
     },
     {
       id: "och8-cd8f3wb0-fb3ws0-pr1d1",
-      image: "/assets/ochoa.png",
+      image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/ochoa.png",
       alt: "Ochoa Body Suit",
     },
     {
       id: "mor2-cd1f1wb2-fb1ws1-pr1d1",
-      image: "/assets/jeansback.png",
+      image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/jeansback.png",
       alt: "Jeans Back",
     },
     {
       id: "per18-cd7f0fb5-ws0-pr1d1",
-      image: "/assets/peron1-102.jpg",
+      image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/peron1-102.jpg",
       alt: "Peron Product",
     },
   ];
@@ -40,7 +40,7 @@ export default function HomePage() {
         <PopupModal />
         <div className="relative">
           <Image
-            src="/assets/banner-374.jpg"
+            src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/banner-374.jpg"
             width={1920}
             height={1080}
             alt="Hero banner showing a feature denim jacket product"
@@ -70,7 +70,7 @@ export default function HomePage() {
         <ul className="grid h-full w-full gap-1 pt-1 md:grid-cols-2">
           <div className="relative">
             <Image
-              src="/assets/dress.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png"
               width={950}
               height={1130}
               alt="image2"
@@ -83,7 +83,7 @@ export default function HomePage() {
           </div>
           <div className="relative">
             <Image
-              src="/assets/jumpsuit.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/jumpsuit.png"
               width={950}
               height={1130}
               alt="image2"
@@ -96,7 +96,7 @@ export default function HomePage() {
         <ul className="grid h-full w-full gap-1 pt-1 md:grid-cols-3">
           <Link href={"/blog"}>
             <Image
-              src="/assets/cakebabe.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
               width={601}
               height={752}
               alt="image1"
@@ -104,7 +104,7 @@ export default function HomePage() {
           </Link>
           <Link href={"/blog"}>
             <Image
-              src="/assets/cakebabe.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
               width={601}
               height={752}
               alt="image2"
@@ -112,7 +112,7 @@ export default function HomePage() {
           </Link>
           <Link href={"/blog"}>
             <Image
-              src="/assets/cakebabe.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
               width={601}
               height={752}
               alt="image2"

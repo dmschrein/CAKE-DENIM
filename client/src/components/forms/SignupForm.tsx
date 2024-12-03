@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import cakebabe from "@/assets/cakebabe.png";
 import { useCreateUserMutation } from "@/state/api";
 
 interface SignUpFormProps {
@@ -63,7 +62,9 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
           {/* Image section */}
           <div className="mb-4 flex justify-center">
             <Image
-              src={cakebabe}
+              src={
+                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
+              }
               width={748}
               height={850}
               alt="Signup"

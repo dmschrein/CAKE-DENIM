@@ -1,4 +1,3 @@
-
 // client/src/app/(collections)/dresses/page.tsx
 "use client";
 
@@ -26,7 +25,7 @@ const DressesCollection = () => {
       description: product.description || "No description available",
       price: product.price,
       stockQuantity: product.stockQuantity || 0,
-      imageURL: "/assets/dress.png",
+      imageURL: "https://s3-cakedenim.s3.us-west-1.amazonaws.com//dress.png",
       category: product.category || "Uncategorized",
       createdAt: product.createdAt || new Date().toISOString(),
       updatedAt: product.updatedAt || new Date().toISOString(),
@@ -36,7 +35,6 @@ const DressesCollection = () => {
   return (
     <CollectionPage collectionName="Dresses" products={formattedDresses} />
   );
-
 };
 
 export default DressesCollection;

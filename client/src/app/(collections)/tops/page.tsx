@@ -24,7 +24,7 @@ const TopsCollection = () => {
       description: product.description || "No description available",
       price: product.price,
       stockQuantity: product.stockQuantity || 0,
-      imageURL: "/assets/ochoa.png",
+      imageURL: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/ochoa.png",
       category: product.category || "Uncategorized",
       createdAt: product.createdAt || new Date().toISOString(),
       updatedAt: product.updatedAt || new Date().toISOString(),

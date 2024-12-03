@@ -5,19 +5,19 @@ import React from "react";
 // Example category data, you can modify this as needed for your use case
 const categories = [
   {
-    image: "/src/assets/dress.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
     category: "Wide Jeans",
   },
   {
-    image: "/src/assets/dress.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
     category: "Straight Jeans",
   },
   {
-    image: "/src/assets/dress.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
     category: "Short Dresses",
   },
   {
-    image: "/src/assets/dress.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
     category: "Long Dresses",
   },
 ];

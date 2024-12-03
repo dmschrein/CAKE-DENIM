@@ -8,7 +8,7 @@ const blogPosts = [
     title: "SLICE Vol. 01",
     subtitle: "Book Lovers",
     date: "Sep '24",
-    imgSrc: "/assets/bookstand.png",
+    imgSrc: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/bookstand.png",
     alt: "Blog Post 1",
   },
   {
@@ -16,7 +16,7 @@ const blogPosts = [
     title: "SLICE Vol. 02",
     subtitle: "Wanderlust",
     date: "Aug '24",
-    imgSrc: "/assets/bridgeitaly.png",
+    imgSrc: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/bridgeitaly.png",
     alt: "Blog Post 2",
   },
   {
@@ -24,7 +24,7 @@ const blogPosts = [
     title: "SLICE Vol. 03",
     subtitle: "Travel Log",
     date: "Sep '24",
-    imgSrc: "/assets/dancing.png",
+    imgSrc: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dancing.png",
     alt: "Blog Post 3",
   },
   {
@@ -32,7 +32,7 @@ const blogPosts = [
     title: "SLICE Vol. 04",
     subtitle: "Summer Reflections",
     date: "Sep '24",
-    imgSrc: "/assets/girlsparis.png",
+    imgSrc: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/girlsparis.png",
     alt: "Blog Post 4",
   },
   // Add more blog post objects here, up to 14
@@ -40,8 +40,8 @@ const blogPosts = [
 
 export default function BlogPage() {
   return (
-    <section className="h-full w-full flex items-center justify-center flex-col">
-      <div className="grid grid-cols-2 w-full">
+    <section className="flex h-full w-full flex-col items-center justify-center">
+      <div className="grid w-full grid-cols-2">
         {blogPosts.map((post) => (
           <div key={post.id} className="relative">
             {/* Blog Image */}
@@ -50,16 +50,18 @@ export default function BlogPage() {
               width={700}
               height={450}
               alt={post.alt}
-              className="w-full h-auto"
+              className="h-auto w-full"
             />
             {/* Blog Info */}
             <div className="absolute bottom-0 left-0 right-0 bg-transparent text-white">
               <hr className="border-white" />
               <div className="flex justify-between px-4 py-2">
                 <p className="text-sm">
-                  {post.title} <span className="italic">{post.subtitle}</span> {/* Title in normal, subtitle in italics */}
+                  {post.title} <span className="italic">{post.subtitle}</span>{" "}
+                  {/* Title in normal, subtitle in italics */}
                 </p>
-                <p className="text-sm italic">{post.date}</p>  {/* Italic for date */}
+                <p className="text-sm italic">{post.date}</p>{" "}
+                {/* Italic for date */}
               </div>
             </div>
           </div>
