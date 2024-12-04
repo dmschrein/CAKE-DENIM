@@ -6,7 +6,6 @@ import {
   HomePageMetrics,
   User,
   NewUser,
-  UserType,
   GuestUser,
   Order,
   NewOrder,
@@ -205,7 +204,8 @@ export const api = createApi({
           body: updatedUserData,
         };
       },
-      invalidatesTags: (result, error, { userId }) => [
+      // eslint-disable-line
+      invalidatesTags: (_result, _error, { userId }) => [
         { type: "Users", id: userId },
       ],
       onQueryStarted: async (_args, { queryFulfilled }) => {

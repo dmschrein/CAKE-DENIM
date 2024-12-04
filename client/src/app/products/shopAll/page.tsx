@@ -2,11 +2,11 @@
 
 import CollectionPage from "@/components/common/CollectionPage";
 import { useGetProductsQuery, useSearchProductsQuery } from "@/state/api";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 const ShopAll = () => {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const [search] = useState("");
+
   const {
     data: allProducts,
     error: allProductsError,
@@ -43,19 +43,23 @@ const ShopAll = () => {
   // Apply client-side filtering based on search input
   const productsToDisplay = search ? filteredProducts : allProducts;
 
-  const formattedProducts =
-    productsToDisplay?.map((product) => ({
-      productId: product.productId,
-      name: product.name,
-      description: product.description || "No description available",
-      price: product.price,
-      stockQuantity: product.stockQuantity || 0,
-      imageURL:
-        "https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy2-71.jpg",
-      category: product.category || "Uncategorized",
-      createdAt: product.createdAt || new Date().toISOString(),
-      updatedAt: product.updatedAt || new Date().toISOString(),
-    })) || [];
+  // Memoize formattedProducts to avoid unnecessary recalculations
+  const formattedProducts = useMemo(() => {
+    return (
+      productsToDisplay?.map((product) => ({
+        productId: product.productId,
+        name: product.name,
+        description: product.description || "No description available",
+        price: product.price,
+        stockQuantity: product.stockQuantity || 0,
+        imageURL:
+          "https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy2-71.jpg",
+        category: product.category || "Uncategorized",
+        createdAt: product.createdAt || new Date().toISOString(),
+        updatedAt: product.updatedAt || new Date().toISOString(),
+      })) || []
+    );
+  }, [productsToDisplay]);
 
   useEffect(() => {
     console.log("Products to display:", formattedProducts);

@@ -3,13 +3,11 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { CheckoutForm } from "@/components/forms/checkout-form";
-import { useCart } from "@/providers/CartProvider";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PaymentForm from "@/components/forms/PaymentForm";
 import ReviewForm from "@/components/forms/ReviewForm";
 import { ShippingInfo, BillingInfo } from "@/interfaces";
-import OrderSummary from "@/components/layout/OrderSummary";
 
 // Load Stripe using the publishable key
 const stripePromise = loadStripe(
@@ -25,18 +23,6 @@ export default function CheckoutPage() {
 
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const previousStep = () => setCurrentStep((prev) => prev - 1);
-
-  const { items } = useCart();
-
-  const calculateTotalPrice = () => {
-    if (!items || items.length === 0) {
-      return 0;
-    }
-    return items.reduce(
-      (acc, item) => acc + item.product.price * item.count,
-      0,
-    );
-  };
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col items-center space-y-4 p-6">
