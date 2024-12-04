@@ -27,6 +27,23 @@ lint-server: build-server
 test-server: build-server
 	docker run --rm $(SERVER_IMAGE) npm run test
 
+# Build client project to check for build failures
+.PHONY: validate-client-build
+validate-client-build: build-client
+	@echo "Building client project..."
+	docker run --rm $(CLIENT_IMAGE) npm run build
+
+# Build server project to check for build failures
+.PHONY: validate-server-build
+validate-server-build: build-server
+	@echo "Building server project..."
+	docker run --rm $(SERVER_IMAGE) npm run build
+
+# Validate client and server builds
+.PHONY: validate-build
+validate-build: validate-client-build validate-server-build
+	@echo "Build validation completed successfully."
+
 # Ensure everything is error-free
 .PHONY: validate
 validate: lint-client lint-server test-server

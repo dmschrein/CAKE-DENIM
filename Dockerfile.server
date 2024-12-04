@@ -4,15 +4,20 @@ FROM node:20-alpine
 # Set the working directory for the container
 WORKDIR /app
 
-# Copy and install server dependencies
+# Copy package.json and package-lock.json first to leverage Docker layer caching
 COPY server/package*.json ./
+
+# Install dependencies
 RUN npm install --legacy-peer-deps
+
+# Rebuild native dependencies for the target platform
+RUN npm rebuild bcrypt --build-from-source
 
 # Copy the server source code
 COPY server/ .
 
-# Expose the server's port (e.g., 4000)
-EXPOSE 4000
+# Expose the application port (if needed)
+EXPOSE 3000
 
-# Start the server
-CMD ["npm", "start"]
+# Run the server
+CMD ["npm", "run", "start"]

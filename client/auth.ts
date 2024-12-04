@@ -1,6 +1,6 @@
 import nextAuth, { NextAuthConfig } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const authConfig: NextAuthConfig = {
   providers: [
@@ -90,7 +90,7 @@ const authConfig: NextAuthConfig = {
 
           // Compare the password with the hash
           console.log("🟡 Verifying password...");
-          const isValidPassword = await bcrypt.compare(
+          const isValidPassword = bcrypt.compareSync(
             password,
             user.passwordHash,
           );

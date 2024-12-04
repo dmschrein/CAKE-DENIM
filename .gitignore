@@ -13,6 +13,7 @@ client/.pnp.js
 
 # testing
 /coverage
+server/server.log
 
 # next.js
 client/.next/
