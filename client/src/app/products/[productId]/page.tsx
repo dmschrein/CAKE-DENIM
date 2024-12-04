@@ -10,7 +10,6 @@ import {
   useGetProductByIdQuery,
   useGetVariantsByProductIdQuery,
 } from "@/state/api";
-import { Product } from "@/interfaces";
 import BuyingOptions from "@/components/common/BuyingOptions";
 
 const ProductsPage = () => {
@@ -90,14 +89,6 @@ const ProductsPage = () => {
     (variant) =>
       variant.size === selectedSize && variant.color === selectedColor,
   );
-
-  const handleAddToCart = () => {
-    if (!selectedVariant) {
-      alert("Please select both color and size.");
-      return;
-    }
-    console.log("Adding to cart with variant:", selectedVariant);
-  };
 
   return (
     <div className="flex flex-col space-x-8 md:flex-row">

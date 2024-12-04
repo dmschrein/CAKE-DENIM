@@ -3,16 +3,17 @@
 import AccountHome from "@/components/layout/AccountHome";
 import OrderHistory from "@/components/layout/OrderHistory";
 import Profile from "@/components/layout/Profile";
-import { Button } from "@/components/ui/button";
-import { OrderSummary, User } from "@/interfaces";
 import { useGetUserByEmailQuery, useGetOrdersByUserIdQuery } from "@/state/api";
 import { signOut, useSession } from "next-auth/react";
 
 import React, { FC, useState } from "react";
 
-// TODO:
-// Add side bar that has account details (home), (order history), saved(favorites)
-// addresses, password
+{
+  /* TODO:
+   * Add side bar that has account details (home), (order history), saved(favorites)
+   * addresses, password
+   */
+}
 
 const Account: FC = () => {
   const { data: session } = useSession();
@@ -29,7 +30,6 @@ const Account: FC = () => {
 
   const userId = userDetails?.userId;
   const {
-    data: orderDetails,
     isLoading: orderLoading,
     isError: orderError,
   } = useGetOrdersByUserIdQuery(userId as string);
@@ -74,21 +74,22 @@ const Account: FC = () => {
         return (
           <div>
             <h2>Update password</h2>
-            //TODO: password layout with update option
+            {/*TODO: password layout with update option*/}
           </div>
         );
       case "address-book":
         return (
           <div>
             <h2>Address book</h2>
-            //TODO: password layout with update option
+            {/*TODO: password layout with update option*/}
           </div>
         );
       case "favorites":
         return (
           <div>
-            <h2>Favorite Products</h2>; // TODO: redirect to layout component
-            with user's favorite products
+            <h2>Favorite Products</h2>;{" "}
+            {/* TODO: redirect to layout component */}
+            with user&apos;s favorite products
           </div>
         );
       case "payment":
@@ -101,7 +102,7 @@ const Account: FC = () => {
         return (
           <div>
             <h2>
-              Based on your purchase history, here's your CAKE Scale impact
+              Based on your purchase history, here&apos;s your CAKE Scale impact
             </h2>
           </div>
         );

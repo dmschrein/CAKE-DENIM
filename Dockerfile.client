@@ -1,0 +1,17 @@
+# Use a Node.js base image
+FROM node:20-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only package.json and package-lock.json for dependency installation
+COPY client/package*.json ./
+
+# Force a clean install of dependencies
+RUN npm install --legacy-peer-deps && npm cache clean --force
+
+# Copy the rest of the client source code
+COPY client/ .
+
+# Run the linter
+CMD ["npm", "run", "lint"]

@@ -1,5 +1,6 @@
 // client/src/app/products/[productsId]/layout.tsx
 
+import Link from "next/link";
 import React from "react";
 
 type LayoutProps = {
@@ -11,7 +12,7 @@ const ProductLayout = ({ children }: LayoutProps) => {
     <div className="container mx-auto px-4 py-6">
       {/* Breadcrumb navigation */}
       <nav className="mb-4">
-        <a href="/">Home</a> / <a href="/shop">SHOP</a> / ABRIL GOWN
+        <Link href="/">Home</Link> / <Link href="/shop">SHOP</Link> / ABRIL GOWN
       </nav>
       {children}
     </div>
