@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 const saltRounds = 10;
@@ -55,7 +55,7 @@ export const updateUser = async (
     // Hash the password if it is being updated
     let passwordHash;
     if (password) {
-      passwordHash = await bcrypt.hash(password, saltRounds);
+      passwordHash = await bcrypt.hashSync(password, saltRounds);
     }
     // Update the user
     const updatedUser = await prisma.users.update({
