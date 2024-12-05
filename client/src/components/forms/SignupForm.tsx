@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import { useCreateUserMutation } from "@/state/api";
+import CustomImage from "../common/CustomImage";
 
 interface SignUpFormProps {
   handleClose: () => void;
@@ -61,14 +61,14 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
         <>
           {/* Image section */}
           <div className="mb-4 flex justify-center">
-            <Image
+            <CustomImage
               src={
                 "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
               }
+              fallbackSrc="/assets/cakebabe.png"
               width={748}
               height={850}
               alt="Signup"
-              className="w-full rounded-t-lg object-cover"
             />
           </div>
 

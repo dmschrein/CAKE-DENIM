@@ -76,7 +76,7 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
   formTitle,
   callBackUrl,
 }) => {
-  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
+  const [_showCreateAccountModal, setShowCreateAccountModal] = useState(false);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -110,6 +110,7 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
       callbackUrl: callBackUrl, // take user to check out if
     });
   };
+
   // handle input change and update userInfo state
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value } = target;
@@ -121,6 +122,10 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
     console.log("Create Account button clicked");
     setShowCreateAccountModal(true);
   };
+
+  // const _closeModal = () => {
+  //   setShowCreateAccountModal(false);
+  // };
 
   return (
     <div className="flex min-h-screen items-start justify-center space-x-10 p-5">

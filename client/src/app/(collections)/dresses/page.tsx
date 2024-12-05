@@ -25,7 +25,7 @@ const DressesCollection = () => {
       description: product.description || "No description available",
       price: product.price,
       stockQuantity: product.stockQuantity || 0,
-      imageURL: "https://s3-cakedenim.s3.us-west-1.amazonaws.com//dress.png",
+      imageURL: product.imageURL || "/assets/dress.png",
       category: product.category || "Uncategorized",
       createdAt: product.createdAt || new Date().toISOString(),
       updatedAt: product.updatedAt || new Date().toISOString(),

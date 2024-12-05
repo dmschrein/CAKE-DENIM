@@ -1,6 +1,5 @@
 import { useState, FormEvent } from "react";
 import { ShippingInfo } from "@/interfaces";
-import { useSession } from "next-auth/react";
 import OrderSummary from "../layout/OrderSummary";
 
 interface ShippingFormProps {
@@ -14,7 +13,6 @@ export function CheckoutForm({
   setShippingInfo,
   nextStep,
 }: ShippingFormProps) {
-  const { data: session } = useSession();
   const [firstName, setFirstName] = useState(shippingInfo?.firstName || "");
   const [lastName, setLastName] = useState(shippingInfo?.lastName || "");
   const [address1, setAddress1] = useState(shippingInfo?.address1 || "");
@@ -176,7 +174,7 @@ export function CheckoutForm({
                     name="deliveryMethod"
                     value="FREE_STANDARD"
                     checked={deliveryMethod === "FREE_STANDARD"}
-                    onChange={(e) => setDeliveryMethod("FREE_STANDARD")}
+                    onChange={(_e) => setDeliveryMethod("FREE_STANDARD")}
                     className="mr-2"
                   />
                   <div>
@@ -199,7 +197,7 @@ export function CheckoutForm({
                     name="deliveryMethod"
                     value="GROUND"
                     checked={deliveryMethod === "GROUND"}
-                    onChange={(e) => setDeliveryMethod("GROUND")}
+                    onChange={(_e) => setDeliveryMethod("GROUND")}
                     className="mr-2"
                   />
                   <div>
@@ -222,7 +220,7 @@ export function CheckoutForm({
                     name="deliveryMethod"
                     value="EXPRESS"
                     checked={deliveryMethod === "EXPRESS"}
-                    onChange={(e) => setDeliveryMethod("EXPRESS")}
+                    onChange={(_e) => setDeliveryMethod("EXPRESS")}
                     className="mr-2"
                   />
                   <div>
@@ -247,7 +245,7 @@ export function CheckoutForm({
                     name="deliveryMethod"
                     value="NEXT_DAY"
                     checked={deliveryMethod === "NEXT_DAY"}
-                    onChange={(e) => setDeliveryMethod("NEXT_DAY")}
+                    onChange={(_e) => setDeliveryMethod("NEXT_DAY")}
                     className="mr-2"
                   />
                   <div>

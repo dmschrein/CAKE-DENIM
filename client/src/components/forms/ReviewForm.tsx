@@ -18,7 +18,6 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
   shippingInfo,
   billingInfo,
   paymentMethodId,
-  previousStep,
 }) => {
   const stripe = useStripe();
   const router = useRouter();

@@ -1,6 +1,5 @@
 import React from "react";
 import { User } from "@/interfaces";
-import { useGetUserByEmailQuery } from "@/state/api";
 
 type Props = {
   userDetails: User | null;

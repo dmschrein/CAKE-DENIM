@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import React from "react";
 import { useCart } from "@/providers/CartProvider";
 import Image from "next/image";
 import { ShippingInfo } from "@/interfaces";
@@ -15,31 +14,8 @@ interface OrderSummaryProps {
 const OrderSummary: React.FC<OrderSummaryProps> = ({ shippingInfo }) => {
   console.log("Order Summary component is rendered");
   const { items } = useCart();
-  const router = useRouter();
-  const pathname = usePathname();
-  const [isProcessing, setIsProcessing] = useState(false);
 
   console.log("Order Summary Items: ", items);
-
-  const handleNextClick = async () => {
-    if (pathname === "/checkout/review") {
-      setIsProcessing(true);
-      try {
-        // TODO: Add order processing logic here
-        router.push("/checkout/success");
-      } catch (error) {
-        console.error("Order processing failed:", error);
-      } finally {
-        setIsProcessing(false);
-      }
-    } else {
-      if (pathname === "/checkout") {
-        router.push("/checkout/payment");
-      } else if (pathname === "/checkout/payment") {
-        router.push("/checkout/review");
-      }
-    }
-  };
 
   const calculateSubtotal = () => {
     return items.reduce(
@@ -91,7 +67,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ shippingInfo }) => {
               className="mb-4 flex items-center"
             >
               <Image
-                src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/ochoa.png"
+                src={item.product.imageURL || "assets/ochoa.png"}
                 alt={item.product.name}
                 width={180}
                 height={240}

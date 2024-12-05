@@ -22,10 +22,16 @@ const RecentlyViewedCarousel = () => {
 
   if (!recentlyViewed.length) return null; // No recently viewed items, hide the carousel.
 
+  const formattedRecentlyViewed = recentlyViewed.map((product) => ({
+    image: product.image,
+    fallbackSrc: "/assets/jeansback.png",
+    category: product.category,
+  }));
+
   return (
     <div className="mb-10">
-      <h2 className="text-2xl font-semibold mb-4">Recently Viewed Items</h2>
-      <CarouselSize categories={recentlyViewed} />
+      <h2 className="mb-4 text-2xl font-semibold">Recently Viewed Items</h2>
+      <CarouselSize categories={formattedRecentlyViewed} />
     </div>
   );
 };

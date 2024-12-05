@@ -24,10 +24,16 @@ const SimilarItemsCarousel = ({ category }: { category: string }) => {
 
   if (!similarItems.length) return null; // No similar items, hide the carousel.
 
+  const formattedSimilarItems = similarItems.map((product) => ({
+    image: product.image,
+    fallbackSrc: "/assets/kennedy2-71.jpg",
+    category: product.category,
+  }));
+
   return (
     <div className="mb-10">
-      <h2 className="text-2xl font-semibold mb-4">Similar Items</h2>
-      <CarouselSize categories={similarItems} />
+      <h2 className="mb-4 text-2xl font-semibold">Similar Items</h2>
+      <CarouselSize categories={formattedSimilarItems} />
     </div>
   );
 };

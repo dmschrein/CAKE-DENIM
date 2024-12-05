@@ -6,18 +6,22 @@ import React from "react";
 const categories = [
   {
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
+    fallbackSrc: "/assets/dress.png",
     category: "Wide Jeans",
   },
   {
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
+    fallbackSrc: "/assets/dress.png",
     category: "Straight Jeans",
   },
   {
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
+    fallbackSrc: "/assets/dress.png",
     category: "Short Dresses",
   },
   {
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png",
+    fallbackSrc: "/assets/dress.png",
     category: "Long Dresses",
   },
 ];

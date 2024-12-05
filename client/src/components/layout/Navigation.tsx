@@ -1,8 +1,7 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
@@ -22,41 +21,49 @@ import { useCart } from "@/providers/CartProvider";
 import SideCart from "./SideCart";
 import { SigninForm } from "../forms/SigninForm";
 import CreateAccountForm from "../forms/CreateAccountForm";
+import CustomImage from "../common/CustomImage";
 
 const components: {
   title: string;
   image: string;
+  fallbackSrc: string;
   href: string;
 }[] = [
   {
     title: "Fall Basics",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
+    fallbackSrc: "/assets/cakebabe.png",
     href: "/products/jeans",
   },
   {
     title: "Gift Guide",
     href: "/products/jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
+    fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "CAKE Travel Essentials",
     href: "/products/jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
+    fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Escape with US",
     href: "/products/jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
+    fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Sexy Sustainables",
     href: "/products/jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
+    fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Desirable Denim",
     href: "/products/jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
+    fallbackSrc: "/assets/cakebabe.png",
   },
 ];
 
@@ -78,10 +85,6 @@ const Navigation = () => {
     setShowCreateAccountModal(false);
   };
 
-  const handleSignOutClicked = async () => {
-    await signOut({ callbackUrl: "/" });
-  };
-
   const handleCreateAccount = () => {
     console.log("Create Account button clicked");
     setShowSigninModal(false);
@@ -99,8 +102,11 @@ const Navigation = () => {
       <div className="sticky top-0 z-40 flex h-20 w-full items-center justify-between border-b bg-white px-8">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
-          <Image
-            src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/norlogo27.png" // Update with the correct logo path
+          <CustomImage
+            src={
+              "https://s3-cakedenim.s3.us-west-1.amazonaws.com/norlogo27.png"
+            } // Update with the correct logo path
+            fallbackSrc={"/assets/norlogo27.png"}
             width={30}
             height={30}
             alt="Logo"
@@ -139,8 +145,9 @@ const Navigation = () => {
                             className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                             href="/jackets"
                           >
-                            <Image
+                            <CustomImage
                               src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy3-71.jpg"
+                              fallbackSrc="/assets/kennedy3-71.jpg"
                               width={500}
                               height={500}
                               alt="Jacket Featured Collection"
@@ -266,13 +273,12 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="relative mb-2 h-44 w-28">
-            <Image
+            <CustomImage
               src={
                 "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-              } // TODO: Update image to get it from s3
+              }
+              fallbackSrc={"/assets/cakebabe.png"}
               alt={title}
-              layout="fill"
-              objectFit="cover"
             />
           </div>
 
