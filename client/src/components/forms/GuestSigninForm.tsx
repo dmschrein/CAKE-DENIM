@@ -74,8 +74,8 @@ const GuestSigninForm: React.FC = () => {
     email: "",
     newsletterOptIn: false,
   });
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
+  const [_submitted, setSubmitted] = useState(false);
+  const [_error, setError] = useState(false);
 
   // Fetch user by email if it exists
   const {

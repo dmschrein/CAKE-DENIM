@@ -5,7 +5,7 @@
     "description": "Raw Relaxed Skinny - Midrise with Contour Waistband",
     "price": 178.0,
     "stockQuantity": 100,
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale.png",
     "category": "Jeans",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
@@ -17,7 +17,7 @@
     "price": 198.0,
     "stockQuantity": 100,
     "category": "Jeans",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-219.jpg",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -28,7 +28,7 @@
     "price": 228.0,
     "stockQuantity": 100,
     "category": "Jeans",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/hersel1-63.jpg",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
   },
@@ -39,7 +39,7 @@
     "price": 38.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -50,7 +50,7 @@
     "price": 35.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/emcshirt.png",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -61,7 +61,7 @@
     "price": 128.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/blackwell1-110.jpg",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -72,7 +72,7 @@
     "price": 34.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/whitetop.png",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -83,7 +83,7 @@
     "price": 78.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/ochoa.png",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -94,7 +94,7 @@
     "price": 84.0,
     "stockQuantity": 100,
     "category": "Dresses",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/sweater.png",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -105,7 +105,7 @@
     "price": 130.0,
     "stockQuantity": 100,
     "category": "Bottoms",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/whiteskirt.png",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -116,7 +116,7 @@
     "price": 150.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/whitetop.png",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -127,7 +127,7 @@
     "price": 320.0,
     "stockQuantity": 100,
     "category": "Jackets",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy1-64.jpg",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -138,7 +138,7 @@
     "price": 248.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/peron1-102.jpg",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
@@ -149,7 +149,7 @@
     "price": 228.0,
     "stockQuantity": 100,
     "category": "Tops",
-    "imageURL": "",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/peron1-102.jpg",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   }

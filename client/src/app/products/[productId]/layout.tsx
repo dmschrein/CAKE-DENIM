@@ -12,7 +12,8 @@ const ProductLayout = ({ children }: LayoutProps) => {
     <div className="container mx-auto px-4 py-6">
       {/* Breadcrumb navigation */}
       <nav className="mb-4">
-        <Link href="/">Home</Link> / <Link href="/shop">SHOP</Link> / ABRIL GOWN
+        <Link href="/">Home</Link> / <Link href="/products/shopAll">SHOP</Link>{" "}
+        / ABRIL GOWN
       </nav>
       {children}
     </div>

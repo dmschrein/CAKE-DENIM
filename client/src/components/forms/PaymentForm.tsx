@@ -1,6 +1,5 @@
 import { ShippingInfo, BillingInfo } from "@/interfaces";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 import OrderSummary from "../layout/OrderSummary";
 
@@ -19,9 +18,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   setBillingInfo,
   setPaymentMethodId,
   nextStep,
-  previousStep,
 }) => {
-  const { data: session } = useSession();
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState<string | null>(null);

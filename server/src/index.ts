@@ -28,11 +28,16 @@ import { createWebhookController } from "./controllers/webhookController";
 
     const app = express();
 
+    // Determine if we are in development or production mode
+    const isDevelopment = process.env.NODE_ENV === "development";
+
     // Security middleware
     app.use(helmet());
     app.use(
       cors({
-        origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+        origin:
+          process.env.CORS_ORIGIN ||
+          (isDevelopment ? "http://localhost:3000" : ""),
         methods: "GET, POST, PUT, DELETE",
         credentials: true,
       })
@@ -48,11 +53,19 @@ import { createWebhookController } from "./controllers/webhookController";
       ],
     });
     app.use(
-      morgan("common", { stream: { write: (message) => logger.info(message) } })
+      morgan("common", {
+        stream: { write: (message) => logger.info(message.trim()) },
+      })
     );
 
     // Rate limiting
-    app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+    app.use(
+      rateLimit({
+        windowMs: 15 * 60 * 1000,
+        max: 100,
+        message: "Too many requests, please try again later.",
+      })
+    );
 
     /* Initialize WebhookController */
     const webhookController = await createWebhookController();
@@ -77,8 +90,23 @@ import { createWebhookController } from "./controllers/webhookController";
 
     /* START SERVER */
     const port = Number(process.env.PORT) || 3001;
+
     const server = app.listen(port, "0.0.0.0", () => {
-      console.log(`Server running on port ${port}`);
+      console.log(
+        `🚀 Server is running in ${
+          isDevelopment ? "development" : "production"
+        } mode on port ${port}`
+      );
+    });
+
+    // Handle EADDRINUSE error
+    server.on("error", (error: any) => {
+      if (error.code === "EADDRINUSE") {
+        console.error(`Port ${port} is already in use.`);
+        process.exit(1);
+      } else {
+        throw error;
+      }
     });
 
     // Graceful shutdown
@@ -92,7 +120,7 @@ import { createWebhookController } from "./controllers/webhookController";
       server.close(() => process.exit(0));
     });
   } catch (error) {
-    console.error("Failed to initialize the application:", error);
+    console.error("❌ Failed to initialize the application:", error);
     process.exit(1);
   }
 })();

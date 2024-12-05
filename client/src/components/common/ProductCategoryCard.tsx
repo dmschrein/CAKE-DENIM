@@ -1,5 +1,6 @@
 import React from "react";
-import Image from "next/image";
+
+import CustomImage from "./CustomImage";
 
 const ProductCategoryCard = ({
   product,
@@ -8,13 +9,14 @@ const ProductCategoryCard = ({
 }) => {
   return (
     <div className="h-full w-full items-center">
-      <Image
+      <CustomImage
         src={product.image}
+        fallbackSrc={"/assets/hersel1-63.jpg"}
         alt={product.category}
         width={480}
         height={750}
       />
-      <h3 className="text-xl font-semibold mt-4">{product.category}</h3>
+      <h3 className="mt-4 text-xl font-semibold">{product.category}</h3>
     </div>
   );
 };
