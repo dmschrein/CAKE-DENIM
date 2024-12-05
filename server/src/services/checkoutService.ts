@@ -64,6 +64,11 @@ export class CheckoutService {
           data: { stripeCustomerId: user.stripeCustomerId },
         });
       }
+      // return URL
+      const returnUrl =
+        process.env.ENVIRONMENT === "development"
+          ? process.env.LOCAL_RETURN_URL
+          : process.env.PRODUCTION_RETURN_URL;
 
       // Create payment intent
       const paymentIntent = await this.stripe.paymentIntents.create({
@@ -74,6 +79,7 @@ export class CheckoutService {
         confirm: true,
         automatic_payment_methods: { enabled: true },
         metadata: { orderId: data.orderId, userId: user.userId },
+        return_url: returnUrl,
       });
 
       logger.info("PaymentIntent created successfully", { paymentIntent });
