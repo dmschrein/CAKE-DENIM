@@ -15,6 +15,7 @@
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.699.0",
     "@aws-sdk/client-ssm": "^3.699.0",
+    "@aws-sdk/credential-providers": "^3.699.0",
     "@prisma/client": "^5.20.0",
     "@stripe/stripe-js": "^4.9.0",
     "@trpc/server": "^10.45.2",

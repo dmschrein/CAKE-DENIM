@@ -16,7 +16,13 @@ RUN npm rebuild bcrypt --build-from-source
 # Copy the server source code
 COPY server/ .
 
-# Expose the application port (if needed)
+# Install Prisma CLI globally (if not already included in dependencies)
+RUN npm install -g prisma
+
+# Generate Prisma Client with the correct binary target
+RUN npx prisma generate
+
+# Expose the application port
 EXPOSE 3000
 
 # Run the server

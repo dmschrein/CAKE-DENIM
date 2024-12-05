@@ -5,10 +5,10 @@ import bodyParser from "body-parser";
 import CheckoutController from "../controllers/checkoutController";
 // import { handleStripeWebhook } from "../controllers/webhookController";
 
-const stripeRouter: Router = express.Router();
+const checkoutRouter: Router = express.Router();
 
 //  Checkout management
-stripeRouter.post(
+checkoutRouter.post(
   "/payments",
   CheckoutController.createCheckout.bind(CheckoutController)
 );
@@ -19,4 +19,4 @@ stripeRouter.post(
 //   CheckoutController.createInvoice.bind(CheckoutController)
 // );
 
-export default stripeRouter;
+export default checkoutRouter;

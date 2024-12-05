@@ -5,7 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import winston from "winston";
 import rateLimit from "express-rate-limit";
-import { loadSecretsToEnv } from "./utils/secrets";
+import { loadSecretsToEnv, validateAWSCredentials } from "./utils/secrets";
 
 /* ROUTE IMPORTS */
 import homeRoutes from "./routes/homeRoutes";
@@ -20,6 +20,7 @@ import { createWebhookController } from "./controllers/webhookController";
   try {
     // Load secrets dynamically
     console.log("Loading secrets into environment variables...");
+    await validateAWSCredentials(); // Validate credentials
     await loadSecretsToEnv();
     console.log("Secrets loaded:", {
       stripeSecretKey: process.env.STRIPE_SECRET_KEY,
@@ -31,13 +32,23 @@ import { createWebhookController } from "./controllers/webhookController";
     // Determine if we are in development or production mode
     const isDevelopment = process.env.NODE_ENV === "development";
 
+    // Allowed origins
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "https://main.d3pnxtvhsudm94.amplifyapp.com",
+    ];
+
     // Security middleware
     app.use(helmet());
     app.use(
       cors({
-        origin:
-          process.env.CORS_ORIGIN ||
-          (isDevelopment ? "http://localhost:3000" : ""),
+        origin: (origin, callback) => {
+          if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+          } else {
+            callback(new Error("Not allowed by CORS"));
+          }
+        },
         methods: "GET, POST, PUT, DELETE",
         credentials: true,
       })
@@ -83,7 +94,7 @@ import { createWebhookController } from "./controllers/webhookController";
     app.use("/api/stripe", checkoutRoutes);
 
     /* Error handling middleware */
-    app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
       console.error(err.stack);
       res.status(500).json({ message: "An error occurred on the server." });
     });

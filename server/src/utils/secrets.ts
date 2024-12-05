@@ -3,6 +3,7 @@ import {
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
 import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
+import { fromNodeProviderChain } from "@aws-sdk/credential-providers";
 import { config } from "dotenv";
 import logger from "./logger";
 
@@ -50,11 +51,19 @@ export async function getSSMParameterValue(
       new GetParameterCommand({ Name: parameterName, WithDecryption: true })
     );
     return response.Parameter?.Value || "";
-  } catch (error) {
+  } catch (error: any) {
     logger.error("Failed to fetch parameter from SSM", {
       parameterName,
-      error,
+      error: error.message || error,
     });
+
+    if (process.env.NODE_ENV === "development") {
+      logger.warn(
+        `Falling back to local environment variable for ${parameterName}`
+      );
+      return process.env[parameterName];
+    }
+
     throw new Error(`Error fetching parameter: ${parameterName}`);
   }
 }
@@ -65,24 +74,44 @@ export async function loadSecretsToEnv() {
     console.log("Fetching Stripe secret keys from SSM and Secrets Manager...");
     process.env.STRIPE_SECRET_KEY =
       process.env.STRIPE_SECRET_KEY ||
-      (await getSSMParameterValue("/stripe/secret_key")) ||
-      (await getSecretValue("/stripe/secret_key"));
+      (await getSSMParameterValue(stripeSecretKeyName).catch(() => "")) ||
+      (await getSecretValue(stripeSecretKeyName).catch(() => ""));
 
-    console.log("STRIPE_SECRET_KEY loaded:", process.env.STRIPE_SECRET_KEY);
+    console.log("STRIPE_SECRET_KEY loaded:", !!process.env.STRIPE_SECRET_KEY);
 
     process.env.STRIPE_WEBHOOK_SECRET =
       process.env.STRIPE_WEBHOOK_SECRET ||
-      (await getSSMParameterValue("/stripe/webhook_secret")) ||
-      (await getSecretValue("/stripe/webhook_secret"));
+      (await getSSMParameterValue(stripeWebhookSecretName).catch(() => "")) ||
+      (await getSecretValue(stripeWebhookSecretName).catch(() => ""));
 
     console.log(
       "STRIPE_WEBHOOK_SECRET loaded:",
-      process.env.STRIPE_WEBHOOK_SECRET
+      !!process.env.STRIPE_WEBHOOK_SECRET
     );
+
+    if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
+      logger.error("Critical Stripe secrets are missing.");
+      throw new Error("Failed to load Stripe secrets");
+    }
 
     logger.info("Secrets loaded successfully into environment variables");
   } catch (error) {
-    logger.error("Error loading secrets into environment variables", error);
+    logger.error("Error loading secrets into environment variables", { error });
     throw error;
   }
 }
+
+export async function validateAWSCredentials() {
+  try {
+    const credentialsProvider = fromNodeProviderChain();
+    const credentials = await credentialsProvider();
+    console.log("AWS credentials resolved successfully:", credentials);
+  } catch (error: any) {
+    console.error("Failed to resolve AWS credentials:", error.message);
+    throw error;
+  }
+}
+
+(async () => {
+  await validateAWSCredentials();
+})();

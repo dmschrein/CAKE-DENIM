@@ -1,8 +1,7 @@
 import express, { Router, Request, Response } from "express";
-import bodyParser from "body-parser";
 import { createWebhookController } from "../controllers/webhookController";
 
-const stripeRouter: Router = express.Router();
+const webhookRouter: Router = express.Router();
 
 (async () => {
   try {
@@ -10,7 +9,7 @@ const stripeRouter: Router = express.Router();
     const webhookController = await createWebhookController();
 
     // Define the webhook route
-    stripeRouter.post(
+    webhookRouter.post(
       "/webhook",
       express.raw({ type: "application/json" }), // Parse raw body required by Stripe
       async (req: Request, res: Response) => {
@@ -29,4 +28,4 @@ const stripeRouter: Router = express.Router();
   }
 })();
 
-export default stripeRouter;
+export default webhookRouter;

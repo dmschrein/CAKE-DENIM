@@ -88,15 +88,17 @@ export const createWebhookController = async (): Promise<WebhookController> => {
   try {
     logger.info("🔄 Initializing WebhookController...");
 
-    // Fetch Stripe secrets from SSM
-    const stripeSecretKey = await getSSMParameterValue("/stripe/secret_key");
-    const stripeWebhookSecret = await getSSMParameterValue(
-      "/stripe/webhook_secret"
-    );
+    const stripeSecretKey =
+      (await getSSMParameterValue("/stripe/secret_key")) ||
+      process.env.STRIPE_SECRET_KEY;
+    const stripeWebhookSecret =
+      (await getSSMParameterValue("/stripe/webhook_secret")) ||
+      process.env.STRIPE_WEBHOOK_SECRET;
 
     if (!stripeSecretKey || !stripeWebhookSecret) {
-      throw new Error("Stripe secrets are missing.");
+      throw new Error("Critical Stripe secrets are missing.");
     }
+
     const stripe = new Stripe(stripeSecretKey, {
       apiVersion: "2024-11-20.acacia",
     });
