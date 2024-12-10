@@ -35,6 +35,7 @@ import { createWebhookController } from "./controllers/webhookController";
     // Allowed origins
     const allowedOrigins = [
       "http://localhost:3000",
+      "https://cake-denim.vercel.app",
       "https://main.d3pnxtvhsudm94.amplifyapp.com",
     ];
 
