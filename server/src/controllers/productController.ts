@@ -35,6 +35,9 @@ export const getProductById = async (
 ): Promise<void> => {
   try {
     const productId = req.params.productId;
+
+    console.log("Fetching product with ID:", productId); // Debug log
+
     const product = await prisma.products.findUnique({
       // find one
       where: {
