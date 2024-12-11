@@ -61,30 +61,35 @@ export const api = createApi({
      * If a search term is provided, it appends ?search=<search> as a query string to the URL.
      * providesTags: ["Products"] caches the products and tags them under "Products" for potential invalidation later.
      */
-
-    getProducts: build.query<Product[], { search?: string; category?: string }>(
-      {
-        query: ({ search, category }) => {
-          console.log("Getting products with data: ", { search, category });
-          return {
-            url: "/products",
-            params: {
-              ...(search && { search }),
-              ...(category && { category }),
-            },
-          };
-        },
-        providesTags: ["Products"],
-        onQueryStarted: async (_args, { queryFulfilled }) => {
-          try {
-            const { data } = await queryFulfilled;
-            console.log("Products fetched successfully:", data);
-          } catch (error) {
-            console.error("Error fetching products: ", error);
-          }
-        },
+    getProducts: build.query<
+      { products: Product[]; subcategories: { id: string; name: string }[] },
+      { search?: string; category?: string; subcategory?: string }
+    >({
+      query: ({ search, category, subcategory }) => {
+        console.log("Getting products with data: ", {
+          search,
+          category,
+          subcategory,
+        });
+        return {
+          url: "/products",
+          params: {
+            ...(search && { search }),
+            ...(category && { category }),
+            ...(subcategory && { subcategory }),
+          },
+        };
       },
-    ),
+      providesTags: ["Products"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Products fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching products: ", error);
+        }
+      },
+    }),
     /*
      * The query sends a GET request to /products and optionally includes a search parameter.
      * The response will be an array of Product[].

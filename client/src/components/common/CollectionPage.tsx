@@ -2,7 +2,7 @@
 
 import CollectionCard from "@/components/common/CollectionCard";
 import React from "react";
-//import CategoryCard from "./CategoryFilterCard";
+import CategoryCard from "./CategoryFilterCard";
 
 interface Product {
   productId: string;
@@ -37,10 +37,10 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
         {/* Collection Section
          * TODO: Include when we have more categories and add subcategories
          */}
-        {/* <div className="flex justify-center">
-          <div className="mt-20 px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-8">
+        <div className="flex justify-center">
+          <div className="mt-20 grid grid-cols-1 gap-8 px-20 sm:grid-cols-2 md:grid-cols-6">
             {products.map((product) => (
-              <div key={product.productId} className="mx-auto">
+              <div key={product.category} className="mx-auto">
                 <CategoryCard
                   key={product.productId}
                   product={{
@@ -53,7 +53,7 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
               </div>
             ))}
           </div>
-        </div> */}
+        </div>
         <div className="mt-20 grid grid-cols-1 items-center justify-center gap-8 px-10 md:grid-cols-2">
           {products.map((product) => (
             <CollectionCard

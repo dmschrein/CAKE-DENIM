@@ -12,7 +12,63 @@
     "categoryId": "bm001"
   },
   {
-    "productId": "ng1-cd1f10wb2-fb1ws0-pr1d1",
-    "categoryId": "w001"
+    "productId": "mor2-cd1f1wb2-fb1ws1-pr1d1",
+    "categoryId": "jn001"
+  },
+  {
+    "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
+    "categoryId": "jn001"
+  },
+  {
+    "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+    "categoryId": "tp002"
+  },
+  {
+    "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
+    "categoryId": "wm001"
+  },
+  {
+    "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+    "categoryId": "tp002"
+  },
+  {
+    "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
+    "categoryId": "ux003"
+  },
+  {
+    "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
+    "categoryId": "tp002"
+  },
+  {
+    "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
+    "categoryId": "tp002"
+  },
+  {
+    "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
+    "categoryId": "tp002"
+  },
+  {
+    "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
+    "categoryId": "ds003"
+  },
+  {
+    "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
+    "categoryId": "bm001"
+  },
+  {
+    "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
+    "categoryId": "tp002"
+  },
+  {
+    "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1",
+    "categoryId": "jk003"
+  },
+  {
+    "productId": "per18-cd7f0fb5-ws0-pr1d1",
+    "categoryId": "tp002"
+  },
+  {
+    "productId": "faw19-cd2f0-fb5ws6-pr1d1",
+    "categoryId": "tp002"
   }
 ]

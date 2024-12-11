@@ -124,18 +124,24 @@ const Navigation = () => {
                   <NavigationMenuContent>
                     <ul className="fixed left-0 right-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
                       <li>
-                        <ListItem href="/jeans" title="Jeans">
+                        <ListItem href="/products?category=Jeans" title="Jeans">
                           Sustainable denim jeans for every occasion.
                         </ListItem>
-                        <ListItem href="/tops" title="Tops">
+                        <ListItem href="/products?category=Tops" title="Tops">
                           Tencel and modal tops.
                         </ListItem>
                       </li>
                       <li>
-                        <ListItem href="/jackets" title="Jackets">
+                        <ListItem
+                          href="/products?category=Jackets"
+                          title="Jackets"
+                        >
                           Comfortable and convertible jackets.
                         </ListItem>
-                        <ListItem href="/dresses" title="Dresses">
+                        <ListItem
+                          href="/products?category=Dresses"
+                          title="Dresses"
+                        >
                           Dresses for your vacations.
                         </ListItem>
                       </li>

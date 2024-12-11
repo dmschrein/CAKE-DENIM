@@ -74,19 +74,19 @@ model RegisteredUser {
 }
 
 model Products {
-  productId       String              @id
+  productId       String                 @id
   name            String
   description     String
   price           Float
   stockQuantity   Int
   imageURL        String
-  category        String?
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
   Reviews         Reviews[]
   Users           Users[]
   Categories      ProductCategories[]
   ProductVariants ProductVariants[]
+  SubCategories   ProductSubCategories[]
 }
 
 model Variants {
@@ -110,10 +110,32 @@ model ProductVariants {
 }
 
 model Categories {
-  categoryId   String              @id
-  categoryName String
-  description  String?
-  products     ProductCategories[]
+  categoryId    String              @id
+  categoryName  String
+  description   String?
+  products      ProductCategories[]
+  subcategories SubCategories[] // one category can have multiple subcategories
+}
+
+model SubCategories {
+  subcategoryId   String                 @id @default(uuid())
+  subcategoryName String
+  categoryId      String //Foreign key to parent category
+  categoryName    String
+  category        Categories             @relation(fields: [categoryId], references: [categoryId])
+  description     String?
+  products        ProductSubCategories[] //Products related to this subcategory
+}
+
+//acts as a join table between Products and SubCategories
+// many-to-many relationship
+model ProductSubCategories {
+  productId     String
+  subcategoryId String
+  product       Products      @relation(fields: [productId], references: [productId])
+  subcategory   SubCategories @relation(fields: [subcategoryId], references: [subcategoryId])
+
+  @@id([productId, subcategoryId])
 }
 
 model ProductCategories {

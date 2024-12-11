@@ -62,6 +62,12 @@ npx prisma migrate dev --name init
 npm run seed
 ```
 
+## Update the prisma database
+
+```
+
+```
+
 ## Test Backend Routes
 
 ### Test for Registered Customer

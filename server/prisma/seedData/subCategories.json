@@ -1,0 +1,100 @@
+[
+  {
+    "subcategoryId": "rwdm001",
+    "subcategoryName": "Raw Denim",
+    "categoryId": "jn001",
+    "categoryName": "Raw Denim",
+    "description": "Raw Denim Jeans"
+  },
+  {
+    "subcategoryId": "dwdm001",
+    "subcategoryName": "Dark Wash",
+    "categoryId": "jn001",
+    "categoryName": "Jeans",
+    "description": "Dark Wash Jeans"
+  },
+  {
+    "subcategoryId": "mrdm001",
+    "subcategoryName": "Mid Rise",
+    "categoryId": "jn001",
+    "categoryName": "Jeans",
+    "description": "Dark Wash Jeans"
+  },
+  {
+    "subcategoryId": "dsdm001",
+    "subcategoryName": "Distressed Wash",
+    "categoryId": "jn001",
+    "categoryName": "Jeans",
+    "description": "Distressed Wash Jeans"
+  },
+  {
+    "subcategoryId": "sttp002",
+    "subcategoryName": "Statement Tees",
+    "categoryId": "tp002",
+    "categoryName": "Tops",
+    "description": "Statement Tees"
+  },
+  {
+    "subcategoryId": "cttp002",
+    "subcategoryName": "Crop Tops",
+    "categoryId": "tp002",
+    "categoryName": "Tops",
+    "description": "Statement Tees"
+  },
+  {
+    "subcategoryId": "dstp002",
+    "subcategoryName": "Denim Shirts",
+    "categoryId": "tp002",
+    "categoryName": "Tops",
+    "description": "Denim Shirts"
+  },
+  {
+    "subcategoryId": "butp002",
+    "subcategoryName": "Button Ups",
+    "categoryId": "tp002",
+    "categoryName": "Tops",
+    "description": "Denim Shirts"
+  },
+  {
+    "subcategoryId": "bsw001",
+    "subcategoryName": "Bodysuits",
+    "categoryId": "w001",
+    "categoryName": "Women",
+    "description": "Women"
+  },
+  {
+    "subcategoryId": "tttp003",
+    "subcategoryName": "Tank Tops",
+    "categoryId": "tp002",
+    "categoryName": "Tops",
+    "description": "Tops"
+  },
+  {
+    "subcategoryId": "mdds003",
+    "subcategoryName": "Midi Dresses",
+    "categoryId": "ds003",
+    "categoryName": "Dress",
+    "description": "Dress"
+  },
+  {
+    "subcategoryId": "osjk003",
+    "subcategoryName": "Oversized Jackets",
+    "categoryId": "jk003",
+    "categoryName": "Jacket",
+    "description": "Jacket"
+  },
+  {
+    "subcategoryId": "dssh001",
+    "subcategoryName": "Distressed Wash",
+    "categoryId": "sh001",
+    "categoryName": "Shorts",
+    "description": "Shorts"
+  },
+  {
+    "subcategoryId": "skbm001",
+    "subcategoryName": "Skirts",
+    "categoryId": "bm001",
+    "categoryName": "Bottoms",
+    "description": "Bottoms"
+  }
+]
