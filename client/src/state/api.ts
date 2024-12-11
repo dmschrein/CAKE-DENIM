@@ -62,20 +62,24 @@ export const api = createApi({
      * providesTags: ["Products"] caches the products and tags them under "Products" for potential invalidation later.
      */
     getProducts: build.query<
-      { products: Product[]; subcategories: { id: string; name: string }[] },
-      { search?: string; category?: string; subcategory?: string }
+      {
+        products: Product[];
+        subcategories: { id: string; name: string }[];
+        categories: { id: string; name: string };
+      },
+      { search?: string; categoryId?: string; subcategory?: string }
     >({
-      query: ({ search, category, subcategory }) => {
+      query: ({ search, categoryId, subcategory }) => {
         console.log("Getting products with data: ", {
           search,
-          category,
+          categoryId,
           subcategory,
         });
         return {
           url: "/products",
           params: {
             ...(search && { search }),
-            ...(category && { category }),
+            ...(categoryId && { categoryId }),
             ...(subcategory && { subcategory }),
           },
         };

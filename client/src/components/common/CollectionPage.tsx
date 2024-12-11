@@ -2,28 +2,20 @@
 
 import CollectionCard from "@/components/common/CollectionCard";
 import React from "react";
-import CategoryCard from "./CategoryFilterCard";
-
-interface Product {
-  productId: string;
-  name: string;
-  description: string;
-  price: number;
-  stockQuantity: number;
-  imageURL: string;
-  category?: string;
-  createdAt: string;
-  updatedAt: string;
-}
+//import CategoryCard from "./CategoryFilterCard";
+import { Product, SubCategory } from "@/interfaces";
+import CategoryFilterCard from "./CategoryFilterCard";
 
 interface CollectionPageProps {
   collectionName: string;
   products: Product[]; // TODO: update to use interfaces.ts
+  subcategories?: { id: string; name: string }[];
 }
 
 const CollectionPage: React.FC<CollectionPageProps> = ({
   collectionName,
   products,
+  subcategories = [],
 }) => {
   return (
     <div>
@@ -31,6 +23,7 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
         {/* Header */}
         <div className="mb-15 text-center">
           <h1 className="mb-15 text-center text-3xl font-bold">
+            Collection Name:
             {collectionName}
           </h1>
         </div>
@@ -39,18 +32,17 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
          */}
         <div className="flex justify-center">
           <div className="mt-20 grid grid-cols-1 gap-8 px-20 sm:grid-cols-2 md:grid-cols-6">
-            {products.map((product) => (
-              <div key={product.category} className="mx-auto">
-                <CategoryCard
-                  key={product.productId}
-                  product={{
-                    title: product.name,
-                    price: `$${product.price.toFixed(2)}`, // Ensure price is a string with formatting
-                    image: product.imageURL, // TODO: Update images for correct subcategory
-                    category: product.category || "Uncategorized",
-                  }}
-                />
-              </div>
+            <h3>Category Filter Cards</h3>
+            {subcategories.map((sub) => (
+              <CategoryFilterCard
+                key={sub.id}
+                product={{
+                  title: sub.name,
+                  price: "",
+                  image: "/placeholder.jpg", // Replace with appropriate image
+                  category: sub.id,
+                }}
+              />
             ))}
           </div>
         </div>

@@ -8,7 +8,7 @@ const ShopAll = () => {
   const [search] = useState("");
 
   const {
-    data: allProducts,
+    data: { products = [] } = {},
     error: allProductsError,
     isLoading: isLoadingAll,
   } = useGetProductsQuery({});
@@ -20,8 +20,8 @@ const ShopAll = () => {
   } = useSearchProductsQuery({ search }, { skip: search === "" });
 
   useEffect(() => {
-    console.log("Initial load: All products fetched:", allProducts);
-  }, [allProducts]);
+    console.log("Initial load: All products fetched:", products);
+  }, [products]);
 
   useEffect(() => {
     if (search) {
@@ -41,7 +41,7 @@ const ShopAll = () => {
   };
 
   // Apply client-side filtering based on search input
-  const productsToDisplay = search ? filteredProducts : allProducts;
+  const productsToDisplay = search ? filteredProducts : products;
 
   // Memoize formattedProducts to avoid unnecessary recalculations
   const formattedProducts = useMemo(() => {
@@ -53,7 +53,14 @@ const ShopAll = () => {
         price: product.price,
         stockQuantity: product.stockQuantity || 0,
         imageURL: product.imageURL || "/assets/hersel1-63.jpg",
-        category: product.category || "Uncategorized",
+        categories:
+          product.Categories?.map(
+            (cat) => cat?.category?.categoryId || "Uncategorized",
+          ) || [],
+        subcategories:
+          product.SubCategories?.map(
+            (sub) => sub?.subcategory?.subCategoryId || "Uncategorized",
+          ) || [],
         createdAt: product.createdAt || new Date().toISOString(),
         updatedAt: product.updatedAt || new Date().toISOString(),
       })) || []

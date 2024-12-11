@@ -5,7 +5,12 @@ import Link from "next/link";
 const CollectionCard = ({
   product,
 }: {
-  product: { productId: string; title: string; price: string; image: string };
+  product: {
+    productId: string;
+    title: string;
+    price: string;
+    image: string;
+  };
 }) => {
   console.log("CollectionCard Product ID: ", product.productId);
   return (

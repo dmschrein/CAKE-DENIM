@@ -8,13 +8,13 @@ import React from "react";
 const ProductsPage = () => {
   // Get the category from the url
   const searchParams = useSearchParams(); // returns a URLSearchParams
-  const category = searchParams.get("category") || "All"; // category is now a string
-  // Fetch the products using the category from the url
+  const categoryId = searchParams.get("categoryId") || "All"; // category is now a string
+  // Fetch the products and subcategories using the categoryId from the url
   const {
     data: { products = [], subcategories = [] } = {},
     error,
     isLoading,
-  } = useGetProductsQuery({ category });
+  } = useGetProductsQuery({ categoryId });
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading product</div>;
@@ -31,15 +31,24 @@ const ProductsPage = () => {
     price: product.price,
     stockQuantity: product.stockQuantity || 0,
     imageURL: product.imageURL,
-    categories: product.Categories?.map((cat) => cat.categoryId) || [],
-    subcategories: product.SubCategories?.map((sub) => sub.subCategoryId) || [],
+    categories:
+      product.Categories?.map(
+        (cat) => cat?.category?.categoryId || "Uncategorized",
+      ) || [],
+    subcategories:
+      product.SubCategories?.map(
+        (sub) => sub?.subcategory?.subCategoryId || "Uncategorized",
+      ) || [],
+    createdAt: product.createdAt || new Date().toISOString(),
+    updatedAt: product.updatedAt || new Date().toISOString(),
+    ProductVariants: product.ProductVariants || [],
   }));
 
   return (
     <div>
-      <h3>Product Page: {category}</h3>
+      <h3>Product Page: {categoryId}</h3>
       <CollectionPage
-        collectionName={category}
+        collectionName={categoryId}
         products={formattedProducts}
         subcategories={subcategories}
       />

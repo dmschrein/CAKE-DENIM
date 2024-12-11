@@ -16,7 +16,7 @@ export interface Product {
   SubCategories?: { subcategory: SubCategory }[];
   createdAt: string;
   updatedAt: string;
-  ProductVariants: { variant: Variant }[];
+  ProductVariants?: { variant: Variant }[];
 }
 
 export interface Category {

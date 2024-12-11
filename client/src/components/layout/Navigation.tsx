@@ -124,22 +124,28 @@ const Navigation = () => {
                   <NavigationMenuContent>
                     <ul className="fixed left-0 right-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
                       <li>
-                        <ListItem href="/products?category=Jeans" title="Jeans">
+                        <ListItem
+                          href="/products?categoryId=jn001"
+                          title="Jeans"
+                        >
                           Sustainable denim jeans for every occasion.
                         </ListItem>
-                        <ListItem href="/products?category=Tops" title="Tops">
+                        <ListItem
+                          href="/products?categoryId=tp002"
+                          title="Tops"
+                        >
                           Tencel and modal tops.
                         </ListItem>
                       </li>
                       <li>
                         <ListItem
-                          href="/products?category=Jackets"
+                          href="/products?categoryId=jk003"
                           title="Jackets"
                         >
                           Comfortable and convertible jackets.
                         </ListItem>
                         <ListItem
-                          href="/products?category=Dresses"
+                          href="/products?categoryId=ds003"
                           title="Dresses"
                         >
                           Dresses for your vacations.
@@ -149,7 +155,7 @@ const Navigation = () => {
                         <NavigationMenuLink asChild>
                           <a
                             className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/jackets"
+                            href="/products?categoryId=jk003"
                           >
                             <CustomImage
                               src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy3-71.jpg"
