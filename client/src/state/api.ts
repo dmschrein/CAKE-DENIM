@@ -67,19 +67,19 @@ export const api = createApi({
         subcategories: { id: string; name: string }[];
         categories: { id: string; name: string };
       },
-      { search?: string; categoryId?: string; subcategory?: string }
+      { search?: string; categoryName?: string; subcategory?: string }
     >({
-      query: ({ search, categoryId, subcategory }) => {
+      query: ({ search, categoryName, subcategory }) => {
         console.log("Getting products with data: ", {
           search,
-          categoryId,
+          categoryName,
           subcategory,
         });
         return {
           url: "/products",
           params: {
             ...(search && { search }),
-            ...(categoryId && { categoryId }),
+            ...(categoryName && { categoryName }),
             ...(subcategory && { subcategory }),
           },
         };

@@ -46,24 +46,32 @@ const ShopAll = () => {
   // Memoize formattedProducts to avoid unnecessary recalculations
   const formattedProducts = useMemo(() => {
     return (
-      productsToDisplay?.map((product) => ({
-        productId: product.productId,
-        name: product.name,
-        description: product.description || "No description available",
-        price: product.price,
-        stockQuantity: product.stockQuantity || 0,
-        imageURL: product.imageURL || "/assets/hersel1-63.jpg",
-        categories:
-          product.Categories?.map(
-            (cat) => cat?.category?.categoryId || "Uncategorized",
-          ) || [],
-        subcategories:
-          product.SubCategories?.map(
-            (sub) => sub?.subcategory?.subCategoryId || "Uncategorized",
-          ) || [],
-        createdAt: product.createdAt || new Date().toISOString(),
-        updatedAt: product.updatedAt || new Date().toISOString(),
-      })) || []
+      productsToDisplay?.map((product) => {
+        console.log(
+          "Raw SubCategories for product:",
+          product.name,
+          product.SubCategories,
+        );
+        console.log("Raw Categories for product:", product.Categories);
+        return {
+          productId: product.productId,
+          name: product.name,
+          description: product.description || "No description available",
+          price: product.price,
+          stockQuantity: product.stockQuantity || 0,
+          imageURL: product.imageURL || "/assets/hersel1-63.jpg",
+          categories:
+            product.Categories?.map(
+              (cat) => cat?.category?.categoryName || "Uncategorized",
+            ) || [],
+          subcategories:
+            product.SubCategories?.map(
+              (sub) => sub?.subcategory?.subcategoryName || "Uncategorized",
+            ) || [],
+          createdAt: product.createdAt || new Date().toISOString(),
+          updatedAt: product.updatedAt || new Date().toISOString(),
+        };
+      }) || []
     );
   }, [productsToDisplay]);
 

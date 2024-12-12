@@ -10,7 +10,7 @@ const JacketsCollection = () => {
     data: jackets,
     error,
     isLoading,
-  } = useGetProductsQuery({ category: "Jackets" });
+  } = useGetProductsQuery({ categoryId: "jk003" });
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;

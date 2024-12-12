@@ -6,13 +6,16 @@ const CollectionCard = ({
   product,
 }: {
   product: {
+    // product comes from COllectionPage.tsx
     productId: string;
     title: string;
     price: string;
     image: string;
+    category: string;
   };
 }) => {
   console.log("CollectionCard Product ID: ", product.productId);
+
   return (
     <Link href={`/products/${product.productId}`} passHref>
       <div className="h-full w-full cursor-pointer items-center">

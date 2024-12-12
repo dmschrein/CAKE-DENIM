@@ -10,7 +10,7 @@ const JeansCollection = () => {
     data: jeans,
     error,
     isLoading,
-  } = useGetProductsQuery({ category: "Jeans" });
+  } = useGetProductsQuery({ categoryId: "jn001" });
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading products</div>;
@@ -18,7 +18,7 @@ const JeansCollection = () => {
   console.log("Jeans Collection Product Data: ", jeans);
   // Map the API product structure to match the expected type by CollectionPage
   const formattedJeans =
-    jeans?.map((product) => ({
+    jeans?.map((product: any) => ({
       productId: product.productId,
       name: product.name,
       description: product.description || "No description available", // Default if description is missing

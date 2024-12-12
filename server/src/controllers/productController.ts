@@ -9,7 +9,8 @@ export const getProducts = async (
 ): Promise<void> => {
   try {
     const search = req.query.search?.toString();
-    const categoryId = req.query.categoryId?.toString();
+    const categoryName = req.query.categoryName?.toString();
+    // const categoryName = req.query.category?.toString();
 
     // Fetch products based on the search and category filters
     const products = await prisma.products.findMany({
@@ -20,75 +21,68 @@ export const getProducts = async (
         },
         Categories: {
           some: {
-            categoryId: categoryId || undefined,
+            category: {
+              categoryName: {
+                equals: categoryName,
+                mode: "insensitive",
+              },
+            },
           },
         },
       },
       include: {
-        Categories: true, // Include categories in the response
+        Categories: {
+          include: {
+            category: {
+              select: { categoryName: true, categoryId: true },
+            },
+          },
+        }, // Include categories in the response
         SubCategories: {
           include: {
             subcategory: {
               select: { subcategoryName: true, subcategoryId: true },
             },
           },
-        }, // Include subcategories in the response
-      },
-    });
-
-    // Fetch distinct subcategories for the current category
-    const subcategories = await prisma.productSubCategories.findMany({
-      where: categoryId
-        ? {
-            subcategory: {
-              categoryId,
-            },
-          }
-        : undefined,
-      distinct: ["subcategoryId"],
-      select: {
-        subcategory: {
-          select: {
-            subcategoryId: true,
-            subcategoryName: true,
-          },
         },
       },
     });
 
-    // Fetch distinct categories
-    const categories = await prisma.productCategories.findMany({
-      distinct: ["categoryId"],
-      select: {
-        category: {
-          select: {
-            categoryId: true,
-            categoryName: true,
-          },
-        },
-      },
-    });
-
-    // Format subcategories and categories
-    const formattedCategories = categories.map((cat) => ({
-      id: cat.category?.categoryId,
-      name: cat.category?.categoryName,
-    }));
-    const formattedSubcategories = subcategories.map((sub) => ({
-      id: sub.subcategory?.subcategoryId,
-      name: sub.subcategory?.subcategoryName,
-    }));
-
+    const categories = products.flatMap((product) =>
+      product.Categories.map((pc) => pc.category)
+    );
+    const subcategories = products.flatMap((product) =>
+      product.SubCategories.map((psc) => psc.subcategory)
+    );
     res.json({
       products,
-      categories: formattedCategories,
-      subcategories: formattedSubcategories,
+      categories,
+      subcategories,
     });
   } catch (error) {
     console.error("Error retrieving products: ", error);
     res.status(500).json({ message: "Error retrieving products" });
   }
 };
+
+// export const getProductsByCategoryName = async (
+//   req: Request,
+//   res: Response
+// ): Promise<void> => {
+//   try {
+//     const categoryName = req.params.categoryName;
+//     console.log("Fetching category: ", categoryName)
+//     const category = await prisma.categories.findUnique({
+//       // find the products in this category
+//       where: {
+//         categoryName: categoryName,
+//       },
+//     });
+//     if (!categoryName) {
+//       res.status(404).json({message: "Category not found"})
+//     }
+//   }
+// };
 
 export const getProductById = async (
   req: Request,

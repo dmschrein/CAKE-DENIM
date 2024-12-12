@@ -8,13 +8,17 @@ import React from "react";
 const ProductsPage = () => {
   // Get the category from the url
   const searchParams = useSearchParams(); // returns a URLSearchParams
-  const categoryId = searchParams.get("categoryId") || "All"; // category is now a string
+  const categoryName = searchParams.get("categoryName") || "All"; // category is now a string
   // Fetch the products and subcategories using the categoryId from the url
   const {
-    data: { products = [], subcategories = [] } = {},
+    data: { products = [], categories, subcategories = [] } = {},
     error,
     isLoading,
-  } = useGetProductsQuery({ categoryId });
+  } = useGetProductsQuery({ categoryName });
+
+  console.log("Products returned:", products);
+  console.log("SubCategories returned:", subcategories);
+  console.log("Categories returned:", categories);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading product</div>;
@@ -37,18 +41,19 @@ const ProductsPage = () => {
       ) || [],
     subcategories:
       product.SubCategories?.map(
-        (sub) => sub?.subcategory?.subCategoryId || "Uncategorized",
+        (sub) => sub?.subcategory?.subcategoryId || "Uncategorized",
       ) || [],
     createdAt: product.createdAt || new Date().toISOString(),
     updatedAt: product.updatedAt || new Date().toISOString(),
     ProductVariants: product.ProductVariants || [],
   }));
 
+  console.log(formattedProducts);
   return (
     <div>
-      <h3>Product Page: {categoryId}</h3>
+      <h3>Product Page: {}</h3>
       <CollectionPage
-        collectionName={categoryId}
+        collectionName={categoryName}
         products={formattedProducts}
         subcategories={subcategories}
       />

@@ -25,8 +25,8 @@ export interface Category {
 }
 
 export interface SubCategory {
-  subCategoryId: string;
-  subCategoryName: string;
+  subcategoryId: string;
+  subcategoryName: string;
 }
 
 export interface Variant {
