@@ -12,7 +12,7 @@ const router = Router();
 
 // New route for fetching products by category name
 router.get("/collection/:primaryCategory", getProductsByPrimaryCategory);
-router.get("/", getProducts);
+router.get("/shopAll", getProducts);
 router.get("/:productId", getProductById);
 router.get("/:productId/variants", getVariantsById); // New route for fetching variants by productId
 router.post("/", createProduct);
