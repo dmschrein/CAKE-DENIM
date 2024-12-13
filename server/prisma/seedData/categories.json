@@ -16,8 +16,8 @@
   },
   {
     "categoryId": "w001",
-    "categoryName": "Womens",
-    "description": "Womens"
+    "categoryName": "Women",
+    "description": "Women"
   },
   {
     "categoryId": "tp002",
@@ -28,6 +28,11 @@
     "categoryId": "ux003",
     "categoryName": "Unisex",
     "description": "Unisex"
+  },
+  {
+    "categoryId": "wm001",
+    "categoryName": "Women",
+    "description": "Women's Clothing"
   },
   {
     "categoryId": "ds003",

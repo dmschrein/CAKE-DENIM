@@ -4,119 +4,120 @@ import path from "path";
 
 const prisma = new PrismaClient();
 
-async function deleteAllData(orderedFileNames: string[]) {
-  const modelNames = orderedFileNames.map((fileName) => {
-    const modelName = path.basename(fileName, path.extname(fileName));
-    return modelName.charAt(0).toUpperCase() + modelName.slice(1);
-  });
+async function deleteAllData() {
+  await prisma.cartItems.deleteMany({});
+  await prisma.orderItems.deleteMany({});
+  await prisma.productSubCategories.deleteMany({});
+  await prisma.productCategories.deleteMany({});
+  await prisma.carts.deleteMany({});
+  await prisma.orders.deleteMany({});
+  await prisma.shippingInfo.deleteMany({});
+  await prisma.billingInfo.deleteMany({});
+  await prisma.productVariants.deleteMany({});
+  await prisma.subCategories.deleteMany({});
+  await prisma.categories.deleteMany({});
+  await prisma.variants.deleteMany({});
+  await prisma.reviews.deleteMany({});
+  await prisma.products.deleteMany({});
+  await prisma.users.deleteMany({});
+  console.log("All data cleared.");
+}
 
-  for (const modelName of modelNames) {
-    const model: any = prisma[modelName as keyof typeof prisma];
-    if (model) {
-      await model.deleteMany({});
-      console.log(`Cleared data from ${modelName}`);
-    } else {
-      console.error(
-        `Model ${modelName} not found. Please ensure the model name is correctly specified.`
-      );
+async function seedModel(
+  filePath: string,
+  model: any,
+  transformData?: (data: any) => any
+) {
+  const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  for (const item of data) {
+    try {
+      const finalData = transformData ? transformData(item) : item;
+      await model.create({ data: finalData });
+    } catch (error) {
+      console.error(`Error seeding ${model.name}:`, error);
     }
   }
 }
 
 async function main() {
-  const dataDirectory = path.join(__dirname, "seedData");
+  const seedDataPath = path.join(__dirname, "seedData");
 
-  const orderedFileNames = [
-    "cartItems.json",
-    "orderItems.json",
-    "productCategories.json",
-    "carts.json",
-    "orders.json", // Delete Orders first
-    "shippingInfo.json", // Delete ShippingInfo after Orders
-    "billingInfo.json", // Delete BillingInfo after Orders
-    "productVariants.json",
-    "categories.json",
-    "variants.json",
-    "reviews.json",
-    "products.json",
-    "users.json",
-  ];
+  await deleteAllData();
 
-  const orderedFileNamesSeed = [
-    "users.json",
-    "categories.json",
-    "variants.json",
-    "products.json",
-    "productVariants.json",
-    "reviews.json",
-    "shippingInfo.json", // Added
-    "billingInfo.json", // Added
-    "orders.json",
-    "carts.json",
-    "productCategories.json",
-    "orderItems.json",
-    "cartItems.json",
-  ];
+  console.log("Seeding Users...");
+  await seedModel(path.join(seedDataPath, "users.json"), prisma.users);
 
-  await deleteAllData(orderedFileNames);
+  console.log("Seeding Categories...");
+  await seedModel(
+    path.join(seedDataPath, "categories.json"),
+    prisma.categories
+  );
 
-  for (const fileName of orderedFileNamesSeed) {
-    const filePath = path.join(dataDirectory, fileName);
-    const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    const modelName = path.basename(fileName, path.extname(fileName));
-    const model: any = prisma[modelName as keyof typeof prisma];
+  console.log("Seeding SubCategories...");
+  await seedModel(
+    path.join(seedDataPath, "subCategories.json"),
+    prisma.subCategories
+  );
 
-    if (!model) {
-      console.error(`No Prisma model matches the file name: ${fileName}`);
-      continue;
-    }
-    // Check the variantIds for debuggin
-    if (modelName === "productVariants") {
-      console.log(
-        "Seeding ProductVariants with the following variantIds:",
-        jsonData.map((v: any) => v.variantId)
-      );
-    }
+  console.log("Seeding Products...");
+  await seedModel(path.join(seedDataPath, "products.json"), prisma.products);
 
-    for (const data of jsonData) {
-      if (modelName === "orderItems") {
-        // Check if the orderId exists in Orders before creating OrderItems
-        const orderExists = await prisma.orders.findUnique({
-          where: { orderId: data.orderId },
-        });
-        if (!orderExists) {
-          console.error(
-            `Order with orderId ${data.orderId} not found. Skipping this OrderItem.`
-          );
-          continue;
-        }
-      }
-      if (modelName === "productVariants") {
-        for (const variant of jsonData) {
-          const variantExists = await prisma.variants.findUnique({
-            where: { variantId: variant.variantId },
-          });
-          if (!variantExists) {
-            console.error(
-              `Variant with variantId ${variant.variantId} not found. Skipping this ProductVariant.`
-            );
-            continue;
-          }
-        }
-      }
-      await model.create({
-        data,
-      });
-    }
+  console.log("Seeding ProductCategories...");
+  await seedModel(
+    path.join(seedDataPath, "productCategories.json"),
+    prisma.productCategories
+  );
 
-    console.log(`Seeded ${modelName} with data from ${fileName}`);
-  }
+  console.log("Seeding ProductSubCategories...");
+  await seedModel(
+    path.join(seedDataPath, "productSubCategories.json"),
+    prisma.productSubCategories
+  );
+
+  console.log("Seeding ShippingInfo...");
+  await seedModel(
+    path.join(seedDataPath, "shippingInfo.json"),
+    prisma.shippingInfo
+  );
+
+  console.log("Seeding BillingInfo...");
+  await seedModel(
+    path.join(seedDataPath, "billingInfo.json"),
+    prisma.billingInfo
+  );
+
+  console.log("Seeding Variants...");
+  await seedModel(path.join(seedDataPath, "variants.json"), prisma.variants);
+
+  console.log("Seeding ProductVariants...");
+  await seedModel(
+    path.join(seedDataPath, "productVariants.json"),
+    prisma.productVariants
+  );
+
+  console.log("Seeding Reviews...");
+  await seedModel(path.join(seedDataPath, "reviews.json"), prisma.reviews);
+
+  console.log("Seeding Orders...");
+  await seedModel(path.join(seedDataPath, "orders.json"), prisma.orders);
+
+  console.log("Seeding OrderItems...");
+  await seedModel(
+    path.join(seedDataPath, "orderItems.json"),
+    prisma.orderItems
+  );
+
+  console.log("Seeding Carts...");
+  await seedModel(path.join(seedDataPath, "carts.json"), prisma.carts);
+
+  console.log("Seeding CartItems...");
+  await seedModel(path.join(seedDataPath, "cartItems.json"), prisma.cartItems);
 }
 
-// Run the main function and handle errors
+// Run the main function
 main()
-  .catch((e) => {
-    console.error(e);
+  .catch((error) => {
+    console.error(error);
   })
   .finally(async () => {
     await prisma.$disconnect();

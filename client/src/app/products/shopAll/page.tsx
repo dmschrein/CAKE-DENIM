@@ -8,7 +8,7 @@ const ShopAll = () => {
   const [search] = useState("");
 
   const {
-    data: allProducts,
+    data: { products = [] } = {},
     error: allProductsError,
     isLoading: isLoadingAll,
   } = useGetProductsQuery({});
@@ -20,8 +20,8 @@ const ShopAll = () => {
   } = useSearchProductsQuery({ search }, { skip: search === "" });
 
   useEffect(() => {
-    console.log("Initial load: All products fetched:", allProducts);
-  }, [allProducts]);
+    console.log("Initial load: All products fetched:", products);
+  }, [products]);
 
   useEffect(() => {
     if (search) {
@@ -41,22 +41,38 @@ const ShopAll = () => {
   };
 
   // Apply client-side filtering based on search input
-  const productsToDisplay = search ? filteredProducts : allProducts;
+  const productsToDisplay = search ? filteredProducts : products;
 
   // Memoize formattedProducts to avoid unnecessary recalculations
   const formattedProducts = useMemo(() => {
     return (
-      productsToDisplay?.map((product) => ({
-        productId: product.productId,
-        name: product.name,
-        description: product.description || "No description available",
-        price: product.price,
-        stockQuantity: product.stockQuantity || 0,
-        imageURL: product.imageURL || "/assets/hersel1-63.jpg",
-        category: product.category || "Uncategorized",
-        createdAt: product.createdAt || new Date().toISOString(),
-        updatedAt: product.updatedAt || new Date().toISOString(),
-      })) || []
+      productsToDisplay?.map((product) => {
+        console.log(
+          "Raw SubCategories for product:",
+          product.name,
+          product.SubCategories,
+        );
+        console.log("Raw Categories for product:", product.Categories);
+        return {
+          productId: product.productId,
+          name: product.name,
+          description: product.description || "No description available",
+          price: product.price,
+          stockQuantity: product.stockQuantity || 0,
+          imageURL: product.imageURL || "/assets/hersel1-63.jpg",
+          primaryCategory: product.primaryCategory,
+          categories:
+            product.Categories?.map(
+              (cat) => cat?.category?.categoryName || "Uncategorized",
+            ) || [],
+          subcategories:
+            product.SubCategories?.map(
+              (sub) => sub?.subcategory?.subcategoryName || "Uncategorized",
+            ) || [],
+          createdAt: product.createdAt || new Date().toISOString(),
+          updatedAt: product.updatedAt || new Date().toISOString(),
+        };
+      }) || []
     );
   }, [productsToDisplay]);
 

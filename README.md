@@ -62,6 +62,12 @@ npx prisma migrate dev --name init
 npm run seed
 ```
 
+## Update the prisma database
+
+```
+npx prisma migrate dev
+```
+
 ## Test Backend Routes
 
 ### Test for Registered Customer
@@ -90,4 +96,12 @@ curl -X POST http://localhost:8000/api/stripe/payments \
           "currency": "usd",
           "orderId": "order123"
         }'
+```
+
+## Docker Commands
+
+#### Docker prune:
+
+```
+docker image prune -a
 ```

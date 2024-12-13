@@ -3,18 +3,7 @@
 import CollectionCard from "@/components/common/CollectionCard";
 import React from "react";
 //import CategoryCard from "./CategoryFilterCard";
-
-interface Product {
-  productId: string;
-  name: string;
-  description: string;
-  price: number;
-  stockQuantity: number;
-  imageURL: string;
-  category?: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { Product } from "@/interfaces";
 
 interface CollectionPageProps {
   collectionName: string;
@@ -25,6 +14,9 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
   collectionName,
   products,
 }) => {
+  console.log("collectionName: ", collectionName);
+  console.log("products: ", products);
+
   return (
     <div>
       <main className="container mx-auto py-10">
@@ -37,23 +29,22 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
         {/* Collection Section
          * TODO: Include when we have more categories and add subcategories
          */}
-        {/* <div className="flex justify-center">
-          <div className="mt-20 px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-8">
-            {products.map((product) => (
-              <div key={product.productId} className="mx-auto">
-                <CategoryCard
-                  key={product.productId}
-                  product={{
-                    title: product.name,
-                    price: `$${product.price.toFixed(2)}`, // Ensure price is a string with formatting
-                    image: product.imageURL, // TODO: Update images for correct subcategory
-                    category: product.category || "Uncategorized",
-                  }}
-                />
-              </div>
-            ))}
+        <div className="flex justify-center">
+          <div className="mt-20 grid grid-cols-1 gap-8 px-20 sm:grid-cols-2 md:grid-cols-6">
+            {/* <h3>Category Filter Cards</h3>
+            {subcategories.map((sub) => (
+              <CategoryFilterCard
+                key={sub.id}
+                product={{
+                  title: sub.name,
+                  price: "",
+                  image: "/placeholder.jpg", // Replace with appropriate image
+                  category: sub.id,
+                }}
+              />
+            ))} */}
           </div>
-        </div> */}
+        </div>
         <div className="mt-20 grid grid-cols-1 items-center justify-center gap-8 px-10 md:grid-cols-2">
           {products.map((product) => (
             <CollectionCard
@@ -63,6 +54,10 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
                 title: product.name,
                 price: `$${product.price.toFixed(2)}`, // Convert price to a string with two decimal places
                 image: product.imageURL, //TODO: update image path later
+                category:
+                  product.Categories?.map(
+                    (cat) => cat.category.categoryName,
+                  ).join(", ") || "Uncategorized",
               }}
             />
           ))}

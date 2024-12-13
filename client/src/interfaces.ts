@@ -12,10 +12,22 @@ export interface Product {
   price: number; // Ensure this is always defined
   stockQuantity: number;
   imageURL: string;
-  category?: string;
+  primaryCategory: string;
+  Categories?: { category: Category }[];
+  SubCategories?: { subcategory: SubCategory }[];
   createdAt: string;
   updatedAt: string;
-  ProductVariants: { variant: Variant }[];
+  ProductVariants?: { variant: Variant }[];
+}
+
+export interface Category {
+  categoryId: string;
+  categoryName: string;
+}
+
+export interface SubCategory {
+  subcategoryId: string;
+  subcategoryName: string;
 }
 
 export interface Variant {
@@ -142,7 +154,7 @@ export interface User {
   userType: UserType;
   phone: string;
   gender: string;
-  orders: Order[]
+  orders: Order[];
 }
 
 // NewUser for create mutation

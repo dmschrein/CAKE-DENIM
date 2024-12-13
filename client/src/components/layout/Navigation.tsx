@@ -33,35 +33,35 @@ const components: {
     title: "Fall Basics",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
   },
   {
     title: "Gift Guide",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "CAKE Travel Essentials",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Escape with US",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Sexy Sustainables",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Desirable Denim",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
@@ -124,26 +124,35 @@ const Navigation = () => {
                   <NavigationMenuContent>
                     <ul className="fixed left-0 right-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
                       <li>
-                        <ListItem href="/jeans" title="Jeans">
+                        <ListItem
+                          href="/products/collection/Jeans"
+                          title="Jeans"
+                        >
                           Sustainable denim jeans for every occasion.
                         </ListItem>
-                        <ListItem href="/tops" title="Tops">
+                        <ListItem href="/products/collection/Tops" title="Tops">
                           Tencel and modal tops.
                         </ListItem>
                       </li>
                       <li>
-                        <ListItem href="/jackets" title="Jackets">
+                        <ListItem
+                          href="/products/collection/Jackets"
+                          title="Jackets"
+                        >
                           Comfortable and convertible jackets.
                         </ListItem>
-                        <ListItem href="/dresses" title="Dresses">
+                        <ListItem
+                          href="/products/collection/Dresses"
+                          title="Dresses"
+                        >
                           Dresses for your vacations.
                         </ListItem>
                       </li>
                       <li>
                         <NavigationMenuLink asChild>
-                          <a
+                          <Link
                             className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/jackets"
+                            href="/products/collection/Jackets"
                           >
                             <CustomImage
                               src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy3-71.jpg"
@@ -156,7 +165,7 @@ const Navigation = () => {
                             <p className="text-sm leading-tight text-muted-foreground">
                               Our beautifully designed convertible collection.
                             </p>
-                          </a>
+                          </Link>
                         </NavigationMenuLink>
                       </li>
                     </ul>
