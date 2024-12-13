@@ -3,8 +3,7 @@
 import CollectionCard from "@/components/common/CollectionCard";
 import React from "react";
 //import CategoryCard from "./CategoryFilterCard";
-import { Product, SubCategory } from "@/interfaces";
-import CategoryFilterCard from "./CategoryFilterCard";
+import { Product } from "@/interfaces";
 
 interface CollectionPageProps {
   collectionName: string;
