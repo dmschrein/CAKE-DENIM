@@ -28,6 +28,7 @@ export const api = createApi({
     "Payments",
     "Orders",
     "Variants",
+    "ProductsByCategory",
   ],
 
   /*
@@ -94,6 +95,33 @@ export const api = createApi({
         }
       },
     }),
+
+    /*
+     * The query sends a GET request to /products/collection/${categoryName} to return products of a specific category
+     * The response will be an array of Product[]
+     * providesTags: ["Products"] caches the products and tages them under "Products" for potential invalidation later
+     */
+    getProductsByPrimaryCategory: build.query<{ products: Product[] }, string>({
+      query: (primaryCategory) => {
+        console.log("Getting products for category: ", primaryCategory);
+        return {
+          url: `/products/collection/${primaryCategory}`,
+        };
+      },
+      providesTags: (_, __, primaryCategory) => [
+        { type: "Products", name: primaryCategory },
+      ],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+
+          console.log("Products for category fetched successfully: ", data);
+        } catch (error) {
+          console.error("Error fetching products for category: ", error);
+        }
+      },
+    }),
+
     /*
      * The query sends a GET request to /products and optionally includes a search parameter.
      * The response will be an array of Product[].
@@ -377,4 +405,5 @@ export const {
   useGetOrdersByUserIdQuery,
   useCreatePaymentMutation,
   useCreateOrderMutation,
+  useGetProductsByPrimaryCategoryQuery,
 } = api;

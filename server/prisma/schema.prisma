@@ -80,6 +80,7 @@ model Products {
   price           Float
   stockQuantity   Int
   imageURL        String
+  primaryCategory String
   createdAt       DateTime               @default(now())
   updatedAt       DateTime               @updatedAt
   Reviews         Reviews[]

@@ -33,35 +33,35 @@ const components: {
     title: "Fall Basics",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
   },
   {
     title: "Gift Guide",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "CAKE Travel Essentials",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Escape with US",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Sexy Sustainables",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Desirable Denim",
-    href: "/products/jeans",
+    href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
     fallbackSrc: "/assets/cakebabe.png",
   },
@@ -125,27 +125,24 @@ const Navigation = () => {
                     <ul className="fixed left-0 right-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
                       <li>
                         <ListItem
-                          href="/products?categoryId=jn001"
+                          href="/products/collection/Jeans"
                           title="Jeans"
                         >
                           Sustainable denim jeans for every occasion.
                         </ListItem>
-                        <ListItem
-                          href="/products?categoryId=tp002"
-                          title="Tops"
-                        >
+                        <ListItem href="/products/collection/Tops" title="Tops">
                           Tencel and modal tops.
                         </ListItem>
                       </li>
                       <li>
                         <ListItem
-                          href="/products?categoryId=jk003"
+                          href="/products/collection/Jackets"
                           title="Jackets"
                         >
                           Comfortable and convertible jackets.
                         </ListItem>
                         <ListItem
-                          href="/products?categoryId=ds003"
+                          href="/products/collection/Dresses"
                           title="Dresses"
                         >
                           Dresses for your vacations.

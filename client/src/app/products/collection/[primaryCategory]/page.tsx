@@ -1,40 +1,42 @@
 "use client";
 
 import CollectionPage from "@/components/common/CollectionPage";
-import { useGetProductsQuery } from "@/state/api";
-import { useSearchParams } from "next/navigation";
+import { Product } from "@/interfaces";
+import { useGetProductsByPrimaryCategoryQuery } from "@/state/api";
+import { useParams } from "next/navigation";
 import React from "react";
 
-const ProductsPage = () => {
-  // Get the category from the url
-  const searchParams = useSearchParams(); // returns a URLSearchParams
-  const categoryName = searchParams.get("categoryName") || "All"; // category is now a string
-  // Fetch the products and subcategories using the categoryId from the url
+const ProductsCollectionPage = () => {
+  // Extract categoryName from useParams and ensure it is a string
+  const { primaryCategory } = useParams();
+  console.log("categoryName:", primaryCategory);
+
+  // Fetch the products for the given category name
   const {
-    data: { products = [], categories, subcategories = [] } = {},
+    data: { products = [] } = {},
     error,
     isLoading,
-  } = useGetProductsQuery({ categoryName });
+  } = useGetProductsByPrimaryCategoryQuery(primaryCategory as string);
 
+  console.log("Category Name:", primaryCategory);
   console.log("Products returned:", products);
-  console.log("SubCategories returned:", subcategories);
-  console.log("Categories returned:", categories);
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading product</div>;
+  if (error) return <div>Error loading products</div>;
 
-  if (!products) {
-    return <div>Product not found</div>;
+  if (!products || products.length === 0) {
+    return <div>No products found for category: {primaryCategory}</div>;
   }
 
-  // format the category products
-  const formattedProducts = products.map((product) => ({
+  // Format the category products
+  const formattedProducts = products.map((product: Product) => ({
     productId: product.productId,
     name: product.name,
     description: product.description || "No description available",
     price: product.price,
     stockQuantity: product.stockQuantity || 0,
     imageURL: product.imageURL,
+    primaryCategory: product.primaryCategory,
     categories:
       product.Categories?.map(
         (cat) => cat?.category?.categoryId || "Uncategorized",
@@ -48,17 +50,16 @@ const ProductsPage = () => {
     ProductVariants: product.ProductVariants || [],
   }));
 
-  console.log(formattedProducts);
+  console.log("Formatted Products:", formattedProducts);
+
   return (
     <div>
-      <h3>Product Page: {}</h3>
       <CollectionPage
-        collectionName={categoryName}
+        collectionName={primaryCategory as string}
         products={formattedProducts}
-        subcategories={subcategories}
       />
     </div>
   );
 };
 
-export default ProductsPage;
+export default ProductsCollectionPage;

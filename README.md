@@ -65,7 +65,7 @@ npm run seed
 ## Update the prisma database
 
 ```
-
+npx prisma migrate dev
 ```
 
 ## Test Backend Routes

@@ -24,7 +24,6 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
         {/* Header */}
         <div className="mb-15 text-center">
           <h1 className="mb-15 text-center text-3xl font-bold">
-            Collection Name:
             {collectionName}
           </h1>
         </div>
@@ -56,7 +55,10 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
                 title: product.name,
                 price: `$${product.price.toFixed(2)}`, // Convert price to a string with two decimal places
                 image: product.imageURL, //TODO: update image path later
-                category: product.Categories,
+                category:
+                  product.Categories?.map(
+                    (cat) => cat.category.categoryName,
+                  ).join(", ") || "Uncategorized",
               }}
             />
           ))}

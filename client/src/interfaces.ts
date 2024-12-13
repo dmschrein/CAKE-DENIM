@@ -12,6 +12,7 @@ export interface Product {
   price: number; // Ensure this is always defined
   stockQuantity: number;
   imageURL: string;
+  primaryCategory: string;
   Categories?: { category: Category }[];
   SubCategories?: { subcategory: SubCategory }[];
   createdAt: string;

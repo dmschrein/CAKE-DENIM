@@ -65,24 +65,65 @@ export const getProducts = async (
   }
 };
 
-// export const getProductsByCategoryName = async (
-//   req: Request,
-//   res: Response
-// ): Promise<void> => {
-//   try {
-//     const categoryName = req.params.categoryName;
-//     console.log("Fetching category: ", categoryName)
-//     const category = await prisma.categories.findUnique({
-//       // find the products in this category
-//       where: {
-//         categoryName: categoryName,
-//       },
-//     });
-//     if (!categoryName) {
-//       res.status(404).json({message: "Category not found"})
-//     }
-//   }
-// };
+export const getProductsByPrimaryCategory = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const primaryCategory = req.params.primaryCategory; // Extract categoryName from the URL parameters
+
+    console.log("Fetching products for category:", primaryCategory);
+
+    // Find the products where the category name matches
+    const products = await prisma.products.findMany({
+      where: {
+        primaryCategory,
+      },
+      include: {
+        Categories: {
+          include: {
+            category: {
+              select: { categoryName: true, categoryId: true },
+            },
+          },
+        },
+        SubCategories: {
+          include: {
+            subcategory: {
+              select: { subcategoryName: true, subcategoryId: true },
+            },
+          },
+        },
+      },
+    });
+
+    // Check if no products were found
+    if (!products || products.length === 0) {
+      res.status(404).json({ message: "No products found for this category." });
+      return;
+    }
+
+    // Extract all unique categories and subcategories from the products
+    const categories = products.flatMap((product) =>
+      product.Categories.map((pc) => pc.category)
+    );
+    const subcategories = products.flatMap((product) =>
+      product.SubCategories.map((psc) => psc.subcategory)
+    );
+
+    // Return the products, categories, and subcategories
+    res.status(200).json({
+      products,
+      categories,
+      subcategories,
+    });
+  } catch (error) {
+    console.error("Error retrieving products by category name:", error);
+    res
+      .status(500)
+      .json({ message: "Error retrieving products by category name." });
+  }
+};
 
 export const getProductById = async (
   req: Request,
@@ -161,6 +202,7 @@ export const createProduct = async (
       price,
       stockQuantity,
       imageURL,
+      primaryCategory,
       categories,
       subCategories,
     } = req.body;
@@ -173,6 +215,7 @@ export const createProduct = async (
         price,
         stockQuantity,
         imageURL,
+        primaryCategory,
         Categories: {
           connect: categories.map((categoryId: string) => ({ categoryId })),
         },
