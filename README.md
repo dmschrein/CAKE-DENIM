@@ -97,3 +97,11 @@ curl -X POST http://localhost:8000/api/stripe/payments \
           "orderId": "order123"
         }'
 ```
+
+## Docker Commands
+
+#### Docker prune:
+
+```
+docker image prune -a
+```
