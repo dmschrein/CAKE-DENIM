@@ -42,7 +42,7 @@ const SignIn = () => {
               />
               <p>{item.product.name}</p>
               <p>{item.product.description}</p>
-              <p>{item.product.category}</p>
+              <p>{item.product.primaryCategory}</p>
               <p>Quantity: {item.count}</p>
               <p>Price: ${item.product.price}</p>
               <p>Total: ${item.product.price * item.count}</p>
