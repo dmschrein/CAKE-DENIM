@@ -11,6 +11,7 @@ import {
 const router = Router();
 
 // New route for fetching products by category name
+router.get("/", getProducts);
 router.get("/collection/:primaryCategory", getProductsByPrimaryCategory);
 router.get("/shopAll", getProducts);
 router.get("/:productId", getProductById);

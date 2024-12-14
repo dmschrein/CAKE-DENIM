@@ -77,7 +77,7 @@ export const api = createApi({
           subcategory,
         });
         return {
-          url: "/products/shopAll",
+          url: "/products",
           params: {
             ...(search && { search }),
             ...(categoryName && { categoryName }),
