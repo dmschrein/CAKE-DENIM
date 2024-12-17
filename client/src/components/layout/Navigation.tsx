@@ -22,6 +22,9 @@ import SideCart from "./SideCart";
 import { SigninForm } from "../forms/SigninForm";
 import CreateAccountForm from "../forms/CreateAccountForm";
 import CustomImage from "../common/CustomImage";
+import AuthParentForm from "../forms/AuthParentForm";
+import SigninFormCommon from "../forms/SigninFormCommon";
+import Modal from "../common/Modal";
 
 const components: {
   title: string;
@@ -70,8 +73,8 @@ const components: {
 const Navigation = () => {
   const { countAllItems } = useCart();
   const [showSideCart, setShowSideCart] = useState(false);
-  const [showSigninModal, setShowSigninModal] = useState(false);
-  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
+  const [showSigninModal, setShowSigninModal] = useState(false); // set to false until Sign in is clicked
+  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false); // set to false until Create account is clicked
   const cartItems = countAllItems();
 
   // Retrieve the user's session status from NextAuth
@@ -82,9 +85,13 @@ const Navigation = () => {
   const handleSignin = () => {
     console.log("Sign In button clicked");
     setShowSigninModal(true);
-    setShowCreateAccountModal(false);
   };
 
+  const closeSigninModal = () => {
+    setShowSigninModal(false);
+  };
+
+  // Switch between the sign in to the create account modal
   const handleCreateAccount = () => {
     console.log("Create Account button clicked");
     setShowSigninModal(false);
@@ -243,23 +250,44 @@ const Navigation = () => {
         visible={showSideCart}
         onRequestClose={() => setShowSideCart(false)}
       />
-      {/* Signin Modal */}
+      {/* Use New Modal*/}
       {showSigninModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <SigninForm
+        <Modal
+          isOpen={showSigninModal}
+          handleClose={() => setShowSigninModal(false)}
+        >
+          <SigninFormCommon
+            formTitle="Sign In"
+            callBackUrl="/account"
+            // handleClose={closeSigninModal}
+            // showCloseButton={true}
+            onCreateAccountClick={handleCreateAccount}
+          />
+        </Modal>
+      )}
+      {/* Signin Modal */}
+      {/* {showSigninModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"> */}
+      {/* Sign in  */}
+      {/* <SigninForm
             handleClose={() => setShowSigninModal(false)}
             onCreateAccountClick={handleCreateAccount} // if user clicks "Create Account" go to CreateAccountForm
           />
         </div>
-      )}
+      )} */}
 
       {/* Create Account Modal */}
       {showCreateAccountModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <Modal
+          isOpen={showCreateAccountModal}
+          handleClose={() => setShowCreateAccountModal(false)}
+        >
           <CreateAccountForm
+            formTitle="Create An Account"
             handleClose={() => setShowCreateAccountModal(false)} // close the create modal account
+            callBackUrl="/account"
           />
-        </div>
+        </Modal>
       )}
     </>
   );

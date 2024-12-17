@@ -10,10 +10,15 @@ import React, {
   ReactNode,
   useState,
 } from "react";
+import CreateAccountForm from "./CreateAccountForm";
+import Modal from "../common/Modal";
 
 type SigninFormProps = {
   formTitle: string;
   callBackUrl: string;
+  handleClose?: () => void;
+  showCloseButton?: boolean;
+  onCreateAccountClick: () => void;
 };
 
 // Props interface for AuthFormContainer component
@@ -75,12 +80,15 @@ const AuthInput: React.FC<AuthInputProps> = ({
 const SigninFormCommon: React.FC<SigninFormProps> = ({
   formTitle,
   callBackUrl,
+  handleClose,
+  onCreateAccountClick,
 }) => {
-  const [_showCreateAccountModal, setShowCreateAccountModal] = useState(false);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Custom hook to fetch user data by email when email changes
   const {
@@ -95,40 +103,31 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
 
     if (isLoading) return;
 
-    if (error) {
-      console.error("Error fetching user data: ", error);
-      alert("An error occurred while fetching user data. Please try again.");
+    if (error || !user) {
+      setErrorMessage("User not found. Please check your email or sign up.");
       return;
     }
-    if (!user) {
-      alert("User not found. Please check your email or sign up.");
-      return;
+
+    try {
+      await signIn("credentials", {
+        email: userInfo.email,
+        password: userInfo.password,
+        callbackUrl: callBackUrl, // take user to check out if
+      });
+    } catch (err) {
+      setErrorMessage("Error signing in. Please try again.");
     }
-    await signIn("credentials", {
-      email: userInfo.email,
-      password: userInfo.password,
-      callbackUrl: callBackUrl, // take user to check out if
-    });
   };
 
   // handle input change and update userInfo state
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value } = target;
     setUserInfo({ ...userInfo, [name]: value });
+    setErrorMessage("");
   };
-
-  // handle create Account
-  const handleCreateAccount = () => {
-    console.log("Create Account button clicked");
-    setShowCreateAccountModal(true);
-  };
-
-  // const _closeModal = () => {
-  //   setShowCreateAccountModal(false);
-  // };
 
   return (
-    <div className="flex min-h-screen items-start justify-center space-x-10 p-5">
+    <>
       <AuthFormContainer title={formTitle} onSubmit={handleSignIn}>
         <AuthInput
           name="email"
@@ -142,32 +141,32 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
           name="password"
           type="password"
           label="Password"
-          placeholder=""
+          placeholder="Your password"
           value={userInfo.password}
           onChange={handleChange}
         />
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         <button
           type="submit"
           className="w-full rounded bg-black p-2 text-white"
         >
           {isLoading ? "Loading..." : "Sign in"}
         </button>
+
+        {/* Links */}
         <div className="mt-8 flex justify-between">
           <Link href="#" className="text-blue-950 underline">
             Forgot password?
           </Link>
-
           <button
-            onClick={handleCreateAccount}
+            onClick={onCreateAccountClick}
             className="text-blue-950 underline"
           >
             Create an account
           </button>
         </div>
-
-        {error && <p>Error fetching user data.</p>}
       </AuthFormContainer>
-    </div>
+    </>
   );
 };
 

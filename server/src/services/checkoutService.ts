@@ -65,10 +65,27 @@ export class CheckoutService {
         });
       }
       // return URL
-      const returnUrl =
-        process.env.ENVIRONMENT === "development"
-          ? process.env.LOCAL_RETURN_URL
-          : process.env.PRODUCTION_RETURN_URL;
+      let returnUrl: string;
+
+      switch (process.env.ENVIRONMENT) {
+        case "development":
+          returnUrl = process.env.LOCAL_RETURN_URL || "";
+          break;
+        case "production":
+          returnUrl = process.env.PRODUCTION_RETURN_URL || "";
+          break;
+        case "staging":
+          returnUrl = process.env.STAGING_RETURN_URL || "";
+          break;
+        default:
+          throw new Error("Invalid environment configuration");
+      }
+
+      if (!returnUrl) {
+        throw new Error(
+          "Return URL is not defined for the current environment"
+        );
+      }
 
       // Create payment intent
       const paymentIntent = await this.stripe.paymentIntents.create({

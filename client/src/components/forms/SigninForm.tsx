@@ -1,4 +1,4 @@
-// src/components/forms/SigninForm.tsx
+// src/components/forms/SigninForm.tsx - Sign In modal
 
 import {
   useState,
@@ -16,17 +16,18 @@ import { useGetUserByEmailQuery } from "@/state/api";
 
 // Define properties for SigninForm component
 interface SigninFormProps {
-  handleClose: () => void;
-  onCreateAccountClick: () => void;
+  handleClose: () => void; // function to close the modal
+  onCreateAccountClick: () => void; // function to handle account creation flow
 }
 
-// Container component for the form with styling
+// Props for the AuthFormContainer (reusable form wrapper component)
 interface AuthFormContainerProps {
-  children: ReactNode;
-  title: string;
-  onSubmit?: DOMAttributes<HTMLFormElement>["onSubmit"];
+  children: ReactNode; // Content of the form (input fields, buttons, etc.)
+  title: string; // title to display at the top of the form
+  onSubmit?: DOMAttributes<HTMLFormElement>["onSubmit"]; // Submit handler for the form
 }
 
+// Reusable container for the form with styling
 const AuthFormContainer: FC<AuthFormContainerProps> = ({
   children,
   title,
@@ -42,12 +43,13 @@ const AuthFormContainer: FC<AuthFormContainerProps> = ({
 
 // Define properties for the input fields in the form
 interface AuthInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  value?: string;
-  placeholder?: string;
-  name: string;
+  label?: string; // Label for input field
+  value?: string;// Value of the input
+  placeholder?: string; // Placeholder text for the input
+  name: string; // Name attribute for the input
 }
 
+// Reusable input field component with label and styling
 const AuthInput: FC<AuthInputProps> = ({
   label,
   placeholder,
@@ -73,10 +75,11 @@ const AuthInput: FC<AuthInputProps> = ({
 };
 
 // Main component for the sign-in form
-export function SigninForm({ handleClose, onCreateAccountClick }: SigninFormProps) {
+export function SigninForm({ handleClose }: SigninFormProps) {
   const { data: session } = useSession(); // Retrieve session data to check if user is logged in
-  const [message, setMessage] = useState(""); // Store message for user feedback
-  const [userInfo, setUserInfo] = useState({ email: "", password: "" }); // Store user input for email and password
+  const [message, setMessage] = useState(""); // feedback message for user
+  const [userInfo, setUserInfo] = useState({ email: "", password: "" }); // State for user input for email and password
+  const [_showCreateAccountModal, setShowCreateAccountModal] = useState(false); // Track visibility of account creation modal
 
   // Fetch user data based on email input
   const { error, isLoading } = useGetUserByEmailQuery(userInfo.email, {
@@ -112,8 +115,15 @@ export function SigninForm({ handleClose, onCreateAccountClick }: SigninFormProp
     });
   };
 
+  // Open the account creation modal (currently not implemented)
+  const handleCreateAccount = () => {
+    console.log("Create Account button clicked");
+    setShowCreateAccountModal(true);
+  };
+
   return (
     <div className="relative w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
+      {/* Close button for the modal */}
       <button
         onClick={handleClose}
         className="absolute right-4 top-4 text-gray-600 hover:text-black"
@@ -127,6 +137,7 @@ export function SigninForm({ handleClose, onCreateAccountClick }: SigninFormProp
           title="Check your order status, create a return, start an exchange, or update your account."
           onSubmit={handleSignIn} // Trigger handleSignIn on form submission
         >
+          {/* Email input */}
           <AuthInput
             name="email"
             type="email"
@@ -135,6 +146,7 @@ export function SigninForm({ handleClose, onCreateAccountClick }: SigninFormProp
             value={userInfo.email}
             onChange={handleChange}
           />
+          {/* Password input */}
           <AuthInput
             name="password"
             type="password"
@@ -149,13 +161,14 @@ export function SigninForm({ handleClose, onCreateAccountClick }: SigninFormProp
           >
             {isLoading ? "Loading..." : "Sign in"}
           </button>
+          {/* Links for forgot password and account creation */}
           <div className="mt-4 text-center">
             <Link href="#" className="text-sm text-blue-950 underline">
               Forgot password?
             </Link>
             <br />
             <button
-              onClick={onCreateAccountClick}
+              onClick={handleCreateAccount}
               className="text-sm text-gray-500 underline"
             >
               Create an account
@@ -164,7 +177,7 @@ export function SigninForm({ handleClose, onCreateAccountClick }: SigninFormProp
           {error && <p>Error fetching user data.</p>}{" "}
           {/* Display error if data fetching fails */}
         </AuthFormContainer>
-        {/* Display message if provided */}
+        {/* Success message */}
         {message && <p className="text-center text-green-500">{message}</p>}
       </div>
     </div>

@@ -54,6 +54,16 @@ This link will direct you to the local instance of the CAKE-DENIM website, which
 
 # Setup Backend
 
+```
+cd server
+npm install
+```
+
+## Set up the database
+
+Install PostgreSQL
+Register the database.
+
 ## Generate the prisma database
 
 ```
