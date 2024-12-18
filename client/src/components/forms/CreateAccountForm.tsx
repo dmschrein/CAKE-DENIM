@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { useCreateUserMutation } from "@/state/api";
 import { signIn } from "next-auth/react";
 import { NewUser } from "@/interfaces";
+import { useRouter } from "next/navigation";
 
 type TouchedFields = {
   [K in keyof NewUser]: boolean;
@@ -11,12 +12,15 @@ type TouchedFields = {
 
 interface CreateAccountFormProps {
   formTitle: string;
-  callBackUrl: string;
   handleClose: () => void;
+  onCreateAccountSuccess?: () => void;
+  callBackUrl?: string;
 }
 
 const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   handleClose,
+  onCreateAccountSuccess,
+  callBackUrl = "/account",
 }) => {
   const [formData, setFormData] = useState<NewUser>({
     email: "",
@@ -42,6 +46,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [formValid, setFormValid] = useState(false);
+  const router = useRouter();
 
   const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
@@ -92,13 +97,20 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
         userType,
       }).unwrap();
 
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/account",
+        redirect: false,
       });
+      if (result?.error) {
+        throw new Error("User not created. Please try again.");
+      }
 
       handleClose();
+      if (onCreateAccountSuccess) {
+        onCreateAccountSuccess();
+      }
+      router.push(callBackUrl);
     } catch (error) {
       console.error("Failed to create user:", error);
     }

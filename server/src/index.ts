@@ -80,6 +80,7 @@ import { createWebhookController } from "./controllers/webhookController";
     );
 
     /* Initialize WebhookController */
+    // The initialization of webhookController is necessary for setting up webhook routes and any side effects
     const webhookController = await createWebhookController();
     app.use("/api/stripe/", webhookRoutes);
 

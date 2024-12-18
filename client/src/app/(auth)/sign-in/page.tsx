@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useCart } from "@/providers/CartProvider"; // custom hook to access cart data
-import SigninFormCommon from "@/components/forms/SigninFormCommon";
 import CreateAccountForm from "@/components/forms/CreateAccountForm";
 import GuestSigninForm from "@/components/forms/GuestSigninForm";
+import Modal from "@/components/common/Modal";
+import SignInFormContainer from "@/components/common/SignInFormContainer";
 
 // Component to create labeled input fields for forms
 
@@ -13,7 +14,8 @@ import GuestSigninForm from "@/components/forms/GuestSigninForm";
 const SignIn = () => {
   const { items } = useCart(); // Retrieve cart items using custom hook
   const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
-  // useState for mananging user input in sign-in form
+
+  const callbackUrl = "/checkout"; // TODO: Update once sign-in page is used other places
 
   return (
     <div className="flex min-h-screen items-start justify-center space-x-10 p-5">
@@ -23,10 +25,7 @@ const SignIn = () => {
         <GuestSigninForm />
 
         {/* Sign In Checkout */}
-        <SigninFormCommon
-          formTitle="Sign in for a faster checkout"
-          callBackUrl="/checkout"
-        />
+        <SignInFormContainer callbackUrl="/checkout" />
       </div>
 
       {/* Cart Details */}
@@ -54,11 +53,16 @@ const SignIn = () => {
       </div>
       {/* Create Account Modal */}
       {showCreateAccountModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <Modal
+          isOpen={showCreateAccountModal}
+          handleClose={() => setShowCreateAccountModal(false)}
+        >
           <CreateAccountForm
+            formTitle="Create An Account"
             handleClose={() => setShowCreateAccountModal(false)} // close the create modal account
+            callBackUrl={callbackUrl}
           />
-        </div>
+        </Modal>
       )}
     </div>
   );

@@ -67,18 +67,26 @@ export class CheckoutService {
       // return URL
       let returnUrl: string;
 
-      switch (process.env.ENVIRONMENT) {
-        case "development":
-          returnUrl = process.env.LOCAL_RETURN_URL || "";
+      switch (process.env.NODE_ENV) {
+        case "local":
+          returnUrl =
+            process.env.LOCAL_RETURN_URL ||
+            "http://localhost:3000/checkout/success";
           break;
         case "production":
-          returnUrl = process.env.PRODUCTION_RETURN_URL || "";
+          returnUrl =
+            process.env.PRODUCTION_RETURN_URL ||
+            "https://cake-denim.vercel.app/checkout/success";
           break;
-        case "staging":
-          returnUrl = process.env.STAGING_RETURN_URL || "";
+        case "development":
+          returnUrl =
+            process.env.DEVELOPMENT_RETURN_URL ||
+            "https://cake-denim-development.vercel.app/checkout/success";
           break;
         default:
-          throw new Error("Invalid environment configuration");
+          logger.warn("ENVIRONMENT not recognized. Using fallback URL.");
+          returnUrl = "https://cake-denim.vercel.app/checkout/success";
+          break;
       }
 
       if (!returnUrl) {
