@@ -77,7 +77,7 @@ export const api = createApi({
           subcategory,
         });
         return {
-          url: "/products",
+          url: "/api/products",
           params: {
             ...(search && { search }),
             ...(categoryName && { categoryName }),
@@ -105,7 +105,7 @@ export const api = createApi({
       query: (primaryCategory) => {
         console.log("Getting products for category: ", primaryCategory);
         return {
-          url: `/products/collection/${primaryCategory}`,
+          url: `/api/products/collection/${primaryCategory}`,
         };
       },
       providesTags: (_, __, primaryCategory) => [
@@ -130,7 +130,7 @@ export const api = createApi({
      */
     searchProducts: build.query<Product[], { search: string }>({
       query: ({ search }) => ({
-        url: "/products",
+        url: "/api/products",
         params: { search },
       }),
       providesTags: ["Products"],
@@ -153,7 +153,7 @@ export const api = createApi({
       query: () => {
         console.log("Fetching all products...");
         return {
-          url: "/products",
+          url: "/api/products",
         };
       },
       providesTags: ["Products"],
@@ -169,7 +169,7 @@ export const api = createApi({
     getProductById: build.query<Product, string>({
       query: (productId) => {
         console.log("Fetching product by ID: ", productId);
-        return { url: `/products/${productId}` };
+        return { url: `/api/products/${productId}` };
       },
       providesTags: (_, __, productId) => [{ type: "Products", id: productId }],
       onQueryStarted: async (_arg, { queryFulfilled }) => {
@@ -189,7 +189,7 @@ export const api = createApi({
     getVariantsByProductId: build.query<Variant[], string>({
       query: (productId) => {
         console.log("Fetching product variants by product ID:", productId);
-        return { url: `/products/${productId}/variants` };
+        return { url: `/api/products/${productId}/variants` };
       },
       providesTags: (_, __, productId) => [{ type: "Variants", id: productId }],
       onQueryStarted: async (_arg, { queryFulfilled }) => {
@@ -213,7 +213,7 @@ export const api = createApi({
       query: (newUser) => {
         console.log("Creating user with data:", newUser);
         return {
-          url: "/users",
+          url: "/api/users",
           method: "POST",
           body: newUser,
         };
@@ -260,7 +260,7 @@ export const api = createApi({
     getUsers: build.query<User[], void>({
       query: () => {
         console.log("Fetching all users...");
-        return "/users";
+        return "/api/users";
       },
       providesTags: ["Users"],
       onQueryStarted: async (_arg, { queryFulfilled }) => {
@@ -278,7 +278,7 @@ export const api = createApi({
     getUserByEmail: build.query<User, string>({
       query: (email) => {
         console.log("Fetching user by email:", email);
-        return { url: `/users?email=${encodeURIComponent(email)}` };
+        return { url: `/api/users?email=${encodeURIComponent(email)}` };
       },
       providesTags: (_, __, email) => [{ type: "Users", id: email }],
       onQueryStarted: async (_args, { queryFulfilled }) => {
@@ -290,6 +290,25 @@ export const api = createApi({
         }
       },
     }),
+
+    /*
+     * This query sends a GET request to /users with the userId as a paramter and expects an User objects in response.
+     */
+    getUserById: build.query<User, string>({
+      query: (userId) => {
+        console.log(`Fetching user with ID: ${userId}`);
+        return `/users/${userId}`;
+      },
+      providesTags: ["Users"],
+      onQueryStarted: async (_arg, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("User fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching user: ", error);
+        }
+      },
+    }),
     /*
      * This mutation sends a POST to /users with a GuestUser object in the request body
      * and expects a User object in response.
@@ -298,7 +317,7 @@ export const api = createApi({
       query: (guestUserData) => {
         console.log("Creating guest user with data:", guestUserData);
         return {
-          url: "/users",
+          url: "/api/users",
           method: "POST",
           body: guestUserData,
         };
@@ -352,7 +371,7 @@ export const api = createApi({
       query: (newOrder) => {
         console.log("Creating an order with data: ", newOrder);
         return {
-          url: "/orders",
+          url: "/api/orders",
           method: "POST",
           body: newOrder,
         };
@@ -374,7 +393,7 @@ export const api = createApi({
       query: (userId) => {
         console.log("Fetching orders from user: ", userId);
         return {
-          url: `/orders?userId=${encodeURIComponent(userId)}`,
+          url: `/api/orders?userId=${encodeURIComponent(userId)}`,
         };
       },
       providesTags: (_, __, userId) => [{ type: "Orders", id: userId }],
@@ -400,6 +419,7 @@ export const {
   useGetUserByEmailQuery,
   useCreateUserMutation,
   useGetUsersQuery,
+  useGetUserByIdQuery,
   useCreateGuestUserMutation,
   useUpdateUserMutation,
   useGetOrdersByUserIdQuery,

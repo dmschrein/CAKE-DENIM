@@ -43,6 +43,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
       }
     } catch (error) {
       console.error("Oops! Sign up failed!", error);
+      setError(true);
     }
   };
 
@@ -87,7 +88,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="email"
-              placeholder="Your email"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={`w-full border p-3 ${
