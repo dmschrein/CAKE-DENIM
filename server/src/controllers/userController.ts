@@ -5,6 +5,44 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 const saltRounds = 10;
 
+export const getUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const email = req.query.email?.toString();
+    if (email) {
+      const user = await prisma.users.findUnique({
+        where: { email },
+      });
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+      res.json(user);
+    } else {
+      // if no email, return all users
+      const users = await prisma.users.findMany();
+      res.json(users);
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving users" });
+  }
+};
+
+export const getUserById = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const user = await prisma.users.findUnique({
+      where: { userId },
+    });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+};
+
 export const createUser = async (
   req: Request,
   res: Response
@@ -73,27 +111,5 @@ export const updateUser = async (
   } catch (error) {
     console.error("Error updating user: ", error);
     res.status(500).json({ message: "Error updating user" });
-  }
-};
-
-export const getUsers = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const email = req.query.email?.toString();
-    if (email) {
-      const user = await prisma.users.findUnique({
-        where: { email },
-      });
-      if (!user) {
-        res.status(404).json({ message: "User not found" });
-        return;
-      }
-      res.json(user);
-    } else {
-      // if no email, return all users
-      const users = await prisma.users.findMany();
-      res.json(users);
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Error retrieving users" });
   }
 };

@@ -51,7 +51,8 @@ import { createWebhookController } from "./controllers/webhookController";
             callback(new Error("Not allowed by CORS"));
           }
         },
-        methods: "GET, POST, PUT, DELETE",
+        methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+        allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
       })
     );
@@ -90,10 +91,10 @@ import { createWebhookController } from "./controllers/webhookController";
     app.use(bodyParser.urlencoded({ extended: false }));
 
     /* ROUTES */
-    app.use("/home", homeRoutes);
-    app.use("/products", productRoutes);
-    app.use("/users", userRoutes);
-    app.use("/orders", orderRoutes);
+    app.use("/api/home", homeRoutes);
+    app.use("/api/products", productRoutes);
+    app.use("/api/users", userRoutes);
+    app.use("/api/orders", orderRoutes);
     app.use("/api/stripe", checkoutRoutes);
 
     /* Error handling middleware */

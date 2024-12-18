@@ -9,7 +9,10 @@ import {
 
 const router = Router();
 
+// Route to get all users
 router.get("/", getUsers);
+// Route to get a single user by ID
+router.get("/:userId", getUsers);
 router.post("/", createUser);
 router.patch("/:userId", updateUser);
 

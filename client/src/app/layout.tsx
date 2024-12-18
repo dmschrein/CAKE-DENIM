@@ -4,6 +4,7 @@ import { Lora } from "next/font/google";
 import "./globals.css";
 //import ModalProvider from "@/providers/modal-provider";
 import HomePageWrapper from "./homepageWrapper";
+import { Analytics } from "@vercel/analytics/react";
 
 const lora = Lora({ subsets: ["latin"] });
 
@@ -22,7 +23,10 @@ export default function RootLayout({
       {/* children comes from  */}
 
       <body className={lora.className}>
-        <HomePageWrapper>{children}</HomePageWrapper>
+        <HomePageWrapper>
+          {children}
+          <Analytics />
+        </HomePageWrapper>
       </body>
     </html>
   );
