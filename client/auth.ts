@@ -20,7 +20,7 @@ const authConfig: NextAuthConfig = {
           // Fetch user data from your backend API
           console.log(`🟡 Fetching user with email: ${email}`);
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/users?email=${encodeURIComponent(email)}`,
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users?email=${encodeURIComponent(email)}`,
           );
 
           console.log("🟡 API response status:", response.status);
@@ -30,7 +30,7 @@ const authConfig: NextAuthConfig = {
             console.log("🟡 User not found, creating a new GUEST user...");
             // TODO: Check if this is safe
             const createResponse = await fetch(
-              `${process.env.NEXT_PUBLIC_API_BASE_URL}/users`,
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/apii/users`,
               {
                 method: "POST",
                 headers: {
@@ -119,6 +119,7 @@ const authConfig: NextAuthConfig = {
   callbacks: {
     async session({ session, token }) {
       // Add custom properties to the session object
+      console.log("🟢 Generating session:", token);
       session.user.id = token.sub as string;
       session.user.firstName = token.firstName as string;
       session.user.lastName = token.lastName as string;
@@ -126,6 +127,7 @@ const authConfig: NextAuthConfig = {
     },
     async jwt({ token, user }) {
       // Add the user information to the JWT token
+      console.log("🟡 Adding user to token:", user);
       if (user) {
         token.sub = user.id;
         token.firstName = user.firstName;

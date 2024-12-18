@@ -65,7 +65,7 @@ npm install
 
 ## Set up the database
 
-Install PostgreSQL
+Install PostgreSQL 16
 Register the database.
 
 ## Generate the prisma database
