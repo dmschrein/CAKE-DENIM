@@ -36,6 +36,7 @@ import { createWebhookController } from "./controllers/webhookController";
     const allowedOrigins = [
       "http://localhost:3000",
       "https://cake-denim.vercel.app",
+      "https://cake-denim-git-development-darrel-schreiners-projects.vercel.app",
       "https://main.d3pnxtvhsudm94.amplifyapp.com",
     ];
 
@@ -80,6 +81,7 @@ import { createWebhookController } from "./controllers/webhookController";
     );
 
     /* Initialize WebhookController */
+    // The initialization of webhookController is necessary for setting up webhook routes and any side effects
     const webhookController = await createWebhookController();
     app.use("/api/stripe/", webhookRoutes);
 

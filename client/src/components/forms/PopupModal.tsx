@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SignupForm from "./SignupForm";
+import Modal from "../common/Modal";
 
 const PopupModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,30 +18,9 @@ const PopupModal = () => {
   };
 
   return (
-    <>
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-          onClick={handleClose}
-        >
-          <div
-            className="relative w-full max-w-sm rounded-lg bg-white p-6 shadow-xl"
-            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside the modal
-          >
-            {/* Close button in PopupModal */}
-            <button
-              className="absolute right-2 top-2 text-gray-400 hover:text-gray-600 focus:outline-none"
-              onClick={handleClose}
-            >
-              &times;
-            </button>
-
-            {/* Embed SignupForm */}
-            <SignupForm handleClose={handleClose} />
-          </div>
-        </div>
-      )}
-    </>
+    <Modal isOpen={isOpen} handleClose={handleClose}>
+      <SignupForm handleClose={handleClose} />
+    </Modal>
   );
 };
 

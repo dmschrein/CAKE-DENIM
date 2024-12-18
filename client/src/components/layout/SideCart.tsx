@@ -191,7 +191,8 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
             } else {
               // User is not authenticated, redirect to sign-in
               console.log("User is not authenticated, redirecting to sign-in");
-              router.push("/sign-in");
+              const signInUrl = `/sign-in?callbackUrl=${encodeURIComponent("/checkout")}`;
+              router.push(signInUrl);
             }
             // Close the cart if onRequestClose is provided
             if (onRequestClose) {

@@ -48,11 +48,25 @@ Once the development server is running, open your web browser and go to:
 
 ```
 http://localhost:3000/home
+
+test user:
+email: test11@gmail.com
+password: abc1234
 ```
 
 This link will direct you to the local instance of the CAKE-DENIM website, which is now running on your machine. You should see the homepage load in your browser.
 
 # Setup Backend
+
+```
+cd server
+npm install
+```
+
+## Set up the database
+
+Install PostgreSQL
+Register the database.
 
 ## Generate the prisma database
 
