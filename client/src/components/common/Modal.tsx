@@ -16,7 +16,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, handleClose, children }) => {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
       onClick={handleClose}
     >
-      <h3>Modal</h3>
       <div
         className="shawdow-lg relative w-full max-w-md rounded-lg bg-white p-8"
         onClick={(e) => e.stopPropagation()}

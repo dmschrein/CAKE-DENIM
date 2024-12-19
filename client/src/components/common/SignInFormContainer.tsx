@@ -17,6 +17,10 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
   callbackUrl = "/account",
   onSignInSuccess,
 }) => {
+  const [activeForm, setActiveForm] = useState<"signin" | "createAccount">(
+    "signin",
+  );
+  const [showModal, setShowModal] = useState(true);
   const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(true);
   const router = useRouter();
@@ -35,8 +39,7 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
       if (result?.error) {
         throw new Error("User not found. Please check your email or password.");
       }
-      // hide the sign in modal and redirect to the account page
-      setShowSignInModal(false);
+
       if (onSignInSuccess) {
         onSignInSuccess();
       }
@@ -47,8 +50,6 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
   };
 
   const [createUser, { isLoading: isCreatingUser }] = useCreateUserMutation();
-
-  const [formValid, setFormValid] = useState(false);
 
   const handleCreateAccount = async (userInfo: {
     email: string;
@@ -71,19 +72,12 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
       }
 
       // Create the user
-      const {
-        email,
-        password,
-        confirmPassword,
-        firstName,
-        lastName,
-        confirmEmail,
-      } = userInfo;
+      const { email, password, firstName, lastName } = userInfo;
       await createUser({
         email,
-        confirmEmail,
+        confirmEmail: userInfo.confirmEmail,
         password,
-        confirmPassword,
+        confirmPassword: userInfo.confirmPassword,
         firstName,
         lastName,
         userType: "REGISTERED",
@@ -91,47 +85,38 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
 
       // Automatically sign in after account creation
       await handleSignIn({ email, password });
-
-      // Close modals
-      setShowCreateAccountModal(false);
     } catch (error: any) {
       console.error("Failed to create account:", error.message);
     }
   };
 
-  const handleCloseAllModals = () => {
-    setShowSignInModal(false);
-    setShowCreateAccountModal(false);
+  const handleSwitchToCreateAccount = () => {
+    setActiveForm("createAccount");
   };
 
-  const handleCreateAccountClick = () => {
-    setShowCreateAccountModal(true);
+  const handleSwitchToSignIn = () => {
+    setActiveForm("signin");
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
     <div>
-      {showSignInModal && (
-        <Modal isOpen={showSignInModal} handleClose={handleCloseAllModals}>
-          <SigninFormCommon
-            formTitle="Sign in for a faster checkout"
-            handleSignIn={handleSignIn}
-            handleCreateAccountClick={handleCreateAccountClick}
-          />
-        </Modal>
-      )}
-      {/* Modal for Create Account */}
-      {showCreateAccountModal && (
-        <Modal
-          isOpen={showCreateAccountModal}
-          handleClose={handleCloseAllModals}
-        >
-          <CreateAccountForm
-            formTitle="Create An Account"
-            handleCreateAccount={handleCreateAccount}
-            handleClose={() => setShowCreateAccountModal(false)}
-            callBackUrl={callbackUrl}
-          />
-        </Modal>
+      {activeForm === "signin" ? (
+        <SigninFormCommon
+          formTitle="Sign in for a faster checkout"
+          handleSignIn={handleSignIn}
+          handleCreateAccountClick={handleSwitchToCreateAccount}
+        />
+      ) : (
+        <CreateAccountForm
+          formTitle="Create An Account"
+          handleCreateAccount={handleCreateAccount}
+          handleClose={handleSwitchToSignIn}
+          callBackUrl={callbackUrl}
+        />
       )}
     </div>
   );

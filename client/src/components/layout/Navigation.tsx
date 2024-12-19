@@ -69,7 +69,8 @@ const components: {
 const Navigation: React.FC = () => {
   const { countAllItems } = useCart();
   const [showSideCart, setShowSideCart] = useState(false);
-  const [showSigninModal, setShowSigninModal] = useState(false); // set to false until Sign in is clicked
+  const [isOpen, setIsOpen] = useState(true);
+  const [showModal, setShowModal] = useState(false); // set to false until Sign in is clicked
   //const [showCreateAccountModal, setShowCreateAccountModal] = useState(false); // set to false until Create account is clicked
   const cartItems = countAllItems();
 
@@ -80,11 +81,12 @@ const Navigation: React.FC = () => {
 
   const handleSignin = () => {
     console.log("Sign In button clicked");
-    setShowSigninModal(true);
+    setShowModal(true);
   };
 
   const handleCloseAllModals = () => {
-    setShowSigninModal(false);
+    setIsOpen(false);
+    setShowModal(false);
   };
 
   return (
@@ -240,8 +242,8 @@ const Navigation: React.FC = () => {
         onRequestClose={() => setShowSideCart(false)}
       />
       {/* Use New Modal*/}
-      {showSigninModal && (
-        <Modal isOpen={showSigninModal} handleClose={handleCloseAllModals}>
+      {showModal && (
+        <Modal isOpen={isOpen} handleClose={handleCloseAllModals}>
           <SignInFormContainer
             callbackUrl="/account"
             onSignInSuccess={handleCloseAllModals}
