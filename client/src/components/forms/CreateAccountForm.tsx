@@ -13,13 +13,14 @@ type TouchedFields = {
 interface CreateAccountFormProps {
   formTitle: string;
   handleClose: () => void;
-  onCreateAccountSuccess?: () => void;
+  handleCreateAccount: (formData: NewUser) => void;
   callBackUrl?: string;
 }
 
 const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
+  formTitle,
   handleClose,
-  onCreateAccountSuccess,
+  handleCreateAccount,
   callBackUrl = "/account",
 }) => {
   const [formData, setFormData] = useState<NewUser>({
@@ -42,13 +43,16 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     userType: false,
   });
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const [passwordEye, setPasswordEye] = useState(false);
   const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [formValid, setFormValid] = useState(false);
   const router = useRouter();
 
-  const [createUser, { isLoading, isError }] = useCreateUserMutation();
+  //const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,41 +84,55 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   const handleConfirmPasswordEye = () =>
     setConfirmPasswordEye(!confirmPasswordEye);
 
-  // Submit form
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleCreateAccountClick = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!formValid || !passwordsMatch) return;
+    setIsLoading(true);
+    setErrorMessage("");
 
     try {
-      const { email, password, firstName, lastName } = formData;
-      const userType = "REGISTERED";
-      await createUser({
-        email,
-        password,
-        firstName,
-        lastName,
-        userType,
-      }).unwrap();
-
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-      if (result?.error) {
-        throw new Error("User not created. Please try again.");
-      }
-
-      handleClose();
-      if (onCreateAccountSuccess) {
-        onCreateAccountSuccess();
-      }
-      router.push(callBackUrl);
-    } catch (error) {
-      console.error("Failed to create user:", error);
+      handleCreateAccount(formData);
+    } catch (error: any) {
+      setErrorMessage(error.message || "Something went wrong.");
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // Submit form
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   if (!formValid || !passwordsMatch) return;
+
+  //   try {
+  //     const { email, password, firstName, lastName } = formData;
+  //     const userType = "REGISTERED";
+  //     await createUser({
+  //       email,
+  //       password,
+  //       firstName,
+  //       lastName,
+  //       userType,
+  //     }).unwrap();
+
+  //     const result = await signIn("credentials", {
+  //       email,
+  //       password,
+  //       redirect: false,
+  //     });
+  //     if (result?.error) {
+  //       throw new Error("User not created. Please try again.");
+  //     }
+
+  //     handleClose();
+  //     if (onCreateAccountSuccess) {
+  //       onCreateAccountSuccess();
+  //     }
+  //     router.push(callBackUrl);
+  //   } catch (error) {
+  //     console.error("Failed to create user:", error);
+  //   }
+  // };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -130,7 +148,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
           Create An Account
         </h2>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <form onSubmit={handleCreateAccountClick} className="mt-4 space-y-4">
           {/* First Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -268,7 +286,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
             )}
           </div>
 
-          {isError && (
+          {errorMessage && (
             <p className="text-red-500">Error creating account. Try again.</p>
           )}
 

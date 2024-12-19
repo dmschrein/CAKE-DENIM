@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import SigninFormCommon from "../forms/SigninFormCommon";
 import Modal from "./Modal";
 import CreateAccountForm from "../forms/CreateAccountForm";
+import { useCreateUserMutation } from "@/state/api";
 
 interface SignInFormContainerProps {
   callbackUrl?: string;
@@ -45,6 +46,64 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
     }
   };
 
+  const [createUser, { isLoading: isCreatingUser }] = useCreateUserMutation();
+
+  const [formValid, setFormValid] = useState(false);
+
+  const handleCreateAccount = async (userInfo: {
+    email: string;
+    confirmEmail: string;
+    password: string;
+    confirmPassword: string;
+    firstName: string;
+    lastName: string;
+    userType: string;
+  }) => {
+    try {
+      // Ensure emails match
+      if (userInfo.email !== userInfo.confirmEmail) {
+        throw new Error("Emails do not match.");
+      }
+
+      // Ensure passwords match
+      if (userInfo.password !== userInfo.confirmPassword) {
+        throw new Error("Passwords do not match.");
+      }
+
+      // Create the user
+      const {
+        email,
+        password,
+        confirmPassword,
+        firstName,
+        lastName,
+        confirmEmail,
+      } = userInfo;
+      await createUser({
+        email,
+        confirmEmail,
+        password,
+        confirmPassword,
+        firstName,
+        lastName,
+        userType: "REGISTERED",
+      }).unwrap();
+
+      // Automatically sign in after account creation
+      await handleSignIn({ email, password });
+
+      // Close modals
+      setShowCreateAccountModal(false);
+    } catch (error: any) {
+      console.error("Failed to create account:", error.message);
+    }
+  };
+
+  const handleCloseAllModals = () => {
+    setShowSignInModal(false);
+    setShowCreateAccountModal(false);
+  };
+
   const handleCreateAccountClick = () => {
     setShowCreateAccountModal(true);
   };
@@ -52,20 +111,23 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
   return (
     <div>
       {showSignInModal && (
-        <SigninFormCommon
-          formTitle="Sign in for a faster checkout"
-          handleSignIn={handleSignIn}
-          handleCreateAccountClick={handleCreateAccountClick}
-        />
+        <Modal isOpen={showSignInModal} handleClose={handleCloseAllModals}>
+          <SigninFormCommon
+            formTitle="Sign in for a faster checkout"
+            handleSignIn={handleSignIn}
+            handleCreateAccountClick={handleCreateAccountClick}
+          />
+        </Modal>
       )}
       {/* Modal for Create Account */}
       {showCreateAccountModal && (
         <Modal
           isOpen={showCreateAccountModal}
-          handleClose={() => setShowCreateAccountModal(false)}
+          handleClose={handleCloseAllModals}
         >
           <CreateAccountForm
             formTitle="Create An Account"
+            handleCreateAccount={handleCreateAccount}
             handleClose={() => setShowCreateAccountModal(false)}
             callBackUrl={callbackUrl}
           />

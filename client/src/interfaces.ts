@@ -160,11 +160,11 @@ export interface User {
 // NewUser for create mutation
 export interface NewUser {
   email: string;
-  confirmEmail?: string;
-  password?: string;
-  confirmPassword?: string;
-  firstName?: string;
-  lastName?: string;
+  confirmEmail: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
   userType: UserType;
 }
 

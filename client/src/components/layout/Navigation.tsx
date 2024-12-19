@@ -70,7 +70,7 @@ const Navigation: React.FC = () => {
   const { countAllItems } = useCart();
   const [showSideCart, setShowSideCart] = useState(false);
   const [showSigninModal, setShowSigninModal] = useState(false); // set to false until Sign in is clicked
-  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false); // set to false until Create account is clicked
+  //const [showCreateAccountModal, setShowCreateAccountModal] = useState(false); // set to false until Create account is clicked
   const cartItems = countAllItems();
 
   // Retrieve the user's session status from NextAuth
@@ -81,6 +81,10 @@ const Navigation: React.FC = () => {
   const handleSignin = () => {
     console.log("Sign In button clicked");
     setShowSigninModal(true);
+  };
+
+  const handleCloseAllModals = () => {
+    setShowSigninModal(false);
   };
 
   return (
@@ -237,19 +241,16 @@ const Navigation: React.FC = () => {
       />
       {/* Use New Modal*/}
       {showSigninModal && (
-        <Modal
-          isOpen={showSigninModal}
-          handleClose={() => setShowSigninModal(false)}
-        >
+        <Modal isOpen={showSigninModal} handleClose={handleCloseAllModals}>
           <SignInFormContainer
             callbackUrl="/account"
-            onSignInSuccess={() => setShowSigninModal(false)}
+            onSignInSuccess={handleCloseAllModals}
           />
         </Modal>
       )}
 
       {/* Create Account Modal */}
-      {showCreateAccountModal && (
+      {/* {showCreateAccountModal && (
         <Modal
           isOpen={showCreateAccountModal}
           handleClose={() => setShowCreateAccountModal(false)}
@@ -257,9 +258,10 @@ const Navigation: React.FC = () => {
           <CreateAccountForm
             formTitle="Create An Account"
             handleClose={() => setShowCreateAccountModal(false)} // close the create modal account
+            
           />
         </Modal>
-      )}
+      )} */}
     </>
   );
 };
