@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SigninFormCommon from "../forms/SigninFormCommon";
-import Modal from "./Modal";
 import CreateAccountForm from "../forms/CreateAccountForm";
 import { useCreateUserMutation } from "@/state/api";
 
@@ -20,9 +19,6 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
   const [activeForm, setActiveForm] = useState<"signin" | "createAccount">(
     "signin",
   );
-  const [showModal, setShowModal] = useState(true);
-  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
-  const [showSignInModal, setShowSignInModal] = useState(true);
   const router = useRouter();
 
   const handleSignIn = async (userInfo: {
@@ -49,7 +45,7 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
     }
   };
 
-  const [createUser, { isLoading: isCreatingUser }] = useCreateUserMutation();
+  const [createUser] = useCreateUserMutation();
 
   const handleCreateAccount = async (userInfo: {
     email: string;
@@ -96,10 +92,6 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
 
   const handleSwitchToSignIn = () => {
     setActiveForm("signin");
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
   };
 
   return (

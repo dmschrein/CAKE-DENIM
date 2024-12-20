@@ -169,6 +169,9 @@ const GuestSigninForm: React.FC = () => {
         console.log("⭐️ Creating guest or email-only user...");
         const result = await createUser({
           email,
+          confirmEmail: email,
+          password,
+          confirmPassword,
           userType,
         }).unwrap();
         console.log("⭐️ Guest user created successfully: ", result);

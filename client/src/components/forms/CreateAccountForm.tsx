@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Button } from "../ui/button";
-import { useCreateUserMutation } from "@/state/api";
-import { signIn } from "next-auth/react";
 import { NewUser } from "@/interfaces";
-import { useRouter } from "next/navigation";
 
 type TouchedFields = {
   [K in keyof NewUser]: boolean;
@@ -18,10 +15,8 @@ interface CreateAccountFormProps {
 }
 
 const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
-  formTitle,
   handleClose,
   handleCreateAccount,
-  callBackUrl = "/account",
 }) => {
   const [formData, setFormData] = useState<NewUser>({
     email: "",
@@ -50,9 +45,6 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [formValid, setFormValid] = useState(false);
-  const router = useRouter();
-
-  //const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,42 +89,6 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
       setIsLoading(false);
     }
   };
-
-  // Submit form
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-
-  //   if (!formValid || !passwordsMatch) return;
-
-  //   try {
-  //     const { email, password, firstName, lastName } = formData;
-  //     const userType = "REGISTERED";
-  //     await createUser({
-  //       email,
-  //       password,
-  //       firstName,
-  //       lastName,
-  //       userType,
-  //     }).unwrap();
-
-  //     const result = await signIn("credentials", {
-  //       email,
-  //       password,
-  //       redirect: false,
-  //     });
-  //     if (result?.error) {
-  //       throw new Error("User not created. Please try again.");
-  //     }
-
-  //     handleClose();
-  //     if (onCreateAccountSuccess) {
-  //       onCreateAccountSuccess();
-  //     }
-  //     router.push(callBackUrl);
-  //   } catch (error) {
-  //     console.error("Failed to create user:", error);
-  //   }
-  // };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

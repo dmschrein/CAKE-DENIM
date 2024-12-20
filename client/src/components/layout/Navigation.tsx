@@ -17,7 +17,6 @@ import { HeartIcon } from "@radix-ui/react-icons";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useCart } from "@/providers/CartProvider";
 import SideCart from "./SideCart";
-import CreateAccountForm from "../forms/CreateAccountForm";
 import CustomImage from "../common/CustomImage";
 import Modal from "../common/Modal";
 import SignInFormContainer from "../common/SignInFormContainer";
