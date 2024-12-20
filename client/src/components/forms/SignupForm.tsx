@@ -13,7 +13,7 @@ interface SignUpFormProps {
 const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false); // Track form submission
-  const [error, setError] = useState(false); // Track if there's an error
+  const [error, setError] = useState(""); // Track if there's an error
 
   const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
@@ -22,16 +22,20 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
     console.log("Form submitted with email: ", email);
 
     if (!email) {
-      setError(true);
-      console.log("Error: No email provided");
+      console.log("Please enter a valid email address.");
       return;
     }
-    setError(false);
+    setError("");
     try {
       console.log("Attempting to create user...");
       const result = await createUser({
         email,
         userType: "EMAIL_ONLY",
+        confirmEmail: "",
+        password: "",
+        confirmPassword: "",
+        firstName: "",
+        lastName: "",
       }).unwrap();
       console.log("User created successfully: ", result);
       setSubmitted(true);
@@ -43,7 +47,7 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
       }
     } catch (error) {
       console.error("Oops! Sign up failed!", error);
-      setError(true);
+      setError("Sign-up failed. Please try again.");
     }
   };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 type ModalProps = {
   isOpen: boolean;
@@ -6,7 +6,11 @@ type ModalProps = {
   children: React.ReactNode;
 };
 const Modal: React.FC<ModalProps> = ({ isOpen, handleClose, children }) => {
+  useEffect(() => {
+    console.log("Modal isOpen:", isOpen);
+  }, [isOpen]);
   if (!isOpen) return null;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"

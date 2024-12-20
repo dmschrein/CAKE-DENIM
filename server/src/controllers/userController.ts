@@ -57,13 +57,62 @@ export const createUser = async (
     } = req.body; // Set default values for optional fields
 
     console.log("Received user data: ", { email, userType });
+
+    // Check if user already exists
+    const existingUser = await prisma.users.findUnique({
+      where: { email },
+    });
+
+    // If user exists and is trying to sign up using a different method
+    if (existingUser) {
+      switch (userType) {
+        case "EMAIL_ONLY":
+        case "GUEST":
+          // If the user exists and is EMAIL_ONLY or GUEST, return the existing user
+          console.log(
+            "Opt-in or Guest user already exists. Returning existing user."
+          );
+          res.status(200).json(existingUser);
+          return;
+        case "REGISTERED":
+          // if user exists and userType is REGISTER, ask user to log in
+          if (existingUser.userType === "REGISTERED") {
+            res.status(400).json({
+              message:
+                "Email already exists. Please log in or use other email.",
+            });
+            return;
+          } else {
+            // else if user exists (as GUEST or EMAIL_ONLY) but is creating an account. Update their information.
+            console.log("User is already in system. Update their information.");
+            const updatedUser = await prisma.users.update({
+              where: { email },
+              data: {
+                passwordHash: password
+                  ? await bcrypt.hash(password, saltRounds)
+                  : existingUser.passwordHash,
+                firstName: firstName || existingUser.firstName,
+                lastName: lastName || existingUser.lastName,
+                userType: "REGISTERED",
+              },
+            });
+            res.status(200).json(updatedUser);
+            return;
+          }
+        default:
+          res.status(400).json({
+            message: "Email already exists. Please log in or use other email.",
+          });
+          return;
+      }
+    }
     // Provide a default value for passwordHash if no password is provided
     const passwordHash = password
       ? await bcrypt.hash(password, saltRounds)
       : "";
 
     // Create user without specifying userId, with only email required
-    const user = await prisma.users.create({
+    const newUser = await prisma.users.create({
       data: {
         email,
         passwordHash,
@@ -72,8 +121,8 @@ export const createUser = async (
         userType,
       },
     });
-    console.log("User created successfully: ", user);
-    res.status(201).json(user); // Send the created user as the response
+    console.log("User created successfully: ", newUser);
+    res.status(201).json(newUser); // Send the created user as the response
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ message: "Error creating user" });

@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Button } from "../ui/button";
-import { useCreateUserMutation } from "@/state/api";
-import { signIn } from "next-auth/react";
 import { NewUser } from "@/interfaces";
-import { useRouter } from "next/navigation";
 
 type TouchedFields = {
   [K in keyof NewUser]: boolean;
@@ -13,14 +10,13 @@ type TouchedFields = {
 interface CreateAccountFormProps {
   formTitle: string;
   handleClose: () => void;
-  onCreateAccountSuccess?: () => void;
+  handleCreateAccount: (formData: NewUser) => void;
   callBackUrl?: string;
 }
 
 const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   handleClose,
-  onCreateAccountSuccess,
-  callBackUrl = "/account",
+  handleCreateAccount,
 }) => {
   const [formData, setFormData] = useState<NewUser>({
     email: "",
@@ -42,13 +38,13 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     userType: false,
   });
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const [passwordEye, setPasswordEye] = useState(false);
   const [confirmPasswordEye, setConfirmPasswordEye] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [formValid, setFormValid] = useState(false);
-  const router = useRouter();
-
-  const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,39 +76,17 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   const handleConfirmPasswordEye = () =>
     setConfirmPasswordEye(!confirmPasswordEye);
 
-  // Submit form
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleCreateAccountClick = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!formValid || !passwordsMatch) return;
+    setIsLoading(true);
+    setErrorMessage("");
 
     try {
-      const { email, password, firstName, lastName } = formData;
-      const userType = "REGISTERED";
-      await createUser({
-        email,
-        password,
-        firstName,
-        lastName,
-        userType,
-      }).unwrap();
-
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-      if (result?.error) {
-        throw new Error("User not created. Please try again.");
-      }
-
-      handleClose();
-      if (onCreateAccountSuccess) {
-        onCreateAccountSuccess();
-      }
-      router.push(callBackUrl);
-    } catch (error) {
-      console.error("Failed to create user:", error);
+      handleCreateAccount(formData);
+    } catch (error: any) {
+      setErrorMessage(error.message || "Something went wrong.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -130,7 +104,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
           Create An Account
         </h2>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <form onSubmit={handleCreateAccountClick} className="mt-4 space-y-4">
           {/* First Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -268,7 +242,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
             )}
           </div>
 
-          {isError && (
+          {errorMessage && (
             <p className="text-red-500">Error creating account. Try again.</p>
           )}
 

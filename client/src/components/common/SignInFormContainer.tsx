@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SigninFormCommon from "../forms/SigninFormCommon";
-import Modal from "./Modal";
 import CreateAccountForm from "../forms/CreateAccountForm";
+import { useCreateUserMutation } from "@/state/api";
 
 interface SignInFormContainerProps {
   callbackUrl?: string;
@@ -16,8 +16,9 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
   callbackUrl = "/account",
   onSignInSuccess,
 }) => {
-  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
-  const [showSignInModal, setShowSignInModal] = useState(true);
+  const [activeForm, setActiveForm] = useState<"signin" | "createAccount">(
+    "signin",
+  );
   const router = useRouter();
 
   const handleSignIn = async (userInfo: {
@@ -34,8 +35,7 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
       if (result?.error) {
         throw new Error("User not found. Please check your email or password.");
       }
-      // hide the sign in modal and redirect to the account page
-      setShowSignInModal(false);
+
       if (onSignInSuccess) {
         onSignInSuccess();
       }
@@ -45,31 +45,70 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
     }
   };
 
-  const handleCreateAccountClick = () => {
-    setShowCreateAccountModal(true);
+  const [createUser] = useCreateUserMutation();
+
+  const handleCreateAccount = async (userInfo: {
+    email: string;
+    confirmEmail: string;
+    password: string;
+    confirmPassword: string;
+    firstName: string;
+    lastName: string;
+    userType: string;
+  }) => {
+    try {
+      // Ensure emails match
+      if (userInfo.email !== userInfo.confirmEmail) {
+        throw new Error("Emails do not match.");
+      }
+
+      // Ensure passwords match
+      if (userInfo.password !== userInfo.confirmPassword) {
+        throw new Error("Passwords do not match.");
+      }
+
+      // Create the user
+      const { email, password, firstName, lastName } = userInfo;
+      await createUser({
+        email,
+        confirmEmail: userInfo.confirmEmail,
+        password,
+        confirmPassword: userInfo.confirmPassword,
+        firstName,
+        lastName,
+        userType: "REGISTERED",
+      }).unwrap();
+
+      // Automatically sign in after account creation
+      await handleSignIn({ email, password });
+    } catch (error: any) {
+      console.error("Failed to create account:", error.message);
+    }
+  };
+
+  const handleSwitchToCreateAccount = () => {
+    setActiveForm("createAccount");
+  };
+
+  const handleSwitchToSignIn = () => {
+    setActiveForm("signin");
   };
 
   return (
     <div>
-      {showSignInModal && (
+      {activeForm === "signin" ? (
         <SigninFormCommon
           formTitle="Sign in for a faster checkout"
           handleSignIn={handleSignIn}
-          handleCreateAccountClick={handleCreateAccountClick}
+          handleCreateAccountClick={handleSwitchToCreateAccount}
         />
-      )}
-      {/* Modal for Create Account */}
-      {showCreateAccountModal && (
-        <Modal
-          isOpen={showCreateAccountModal}
-          handleClose={() => setShowCreateAccountModal(false)}
-        >
-          <CreateAccountForm
-            formTitle="Create An Account"
-            handleClose={() => setShowCreateAccountModal(false)}
-            callBackUrl={callbackUrl}
-          />
-        </Modal>
+      ) : (
+        <CreateAccountForm
+          formTitle="Create An Account"
+          handleCreateAccount={handleCreateAccount}
+          handleClose={handleSwitchToSignIn}
+          callBackUrl={callbackUrl}
+        />
       )}
     </div>
   );

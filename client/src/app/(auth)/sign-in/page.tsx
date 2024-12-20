@@ -7,6 +7,7 @@ import CreateAccountForm from "@/components/forms/CreateAccountForm";
 import GuestSigninForm from "@/components/forms/GuestSigninForm";
 import Modal from "@/components/common/Modal";
 import SignInFormContainer from "@/components/common/SignInFormContainer";
+import { NewUser } from "@/interfaces";
 
 // Component to create labeled input fields for forms
 
@@ -61,6 +62,9 @@ const SignIn = () => {
             formTitle="Create An Account"
             handleClose={() => setShowCreateAccountModal(false)} // close the create modal account
             callBackUrl={callbackUrl}
+            handleCreateAccount={function (_formData: NewUser): void {
+              throw new Error("Function not implemented.");
+            }}
           />
         </Modal>
       )}
