@@ -138,11 +138,7 @@ const GuestSigninForm: React.FC = () => {
       let userType: "EMAIL_ONLY" | "GUEST";
 
       // Set the userType based on newsletterOptIn checkbox
-      if (newsletterOptIn) {
-        userType = "EMAIL_ONLY";
-      } else {
-        userType = "GUEST";
-      }
+      userType = newsletterOptIn ? "EMAIL_ONLY" : "GUEST";
 
       // if the user exists, sign them in
       console.log("⭐️ Guest userType: ", userType);
@@ -170,9 +166,11 @@ const GuestSigninForm: React.FC = () => {
         const result = await createUser({
           email,
           confirmEmail: email,
-          password,
-          confirmPassword,
+          password: "",
+          confirmPassword: "",
           userType,
+          firstName: "Guest",
+          lastName: "User",
         }).unwrap();
         console.log("⭐️ Guest user created successfully: ", result);
         setSubmitted(true);
