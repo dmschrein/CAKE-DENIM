@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { PrismaClient } from "@prisma/client";
 import { getSSMParameterValue } from "../utils/secrets";
 import logger from "../utils/logger";
+import { sign } from "crypto";
 
 const prisma = new PrismaClient();
 
@@ -12,75 +13,85 @@ class WebhookController {
 
   constructor(stripe: Stripe, endpointSecret: string) {
     this.stripe = stripe;
-    this.endpointSecret = endpointSecret;
+    //this.endpointSecret = endpointSecret;
   }
 
   // Handle Webhooks
   public async handleWebhook(req: Request, res: Response): Promise<void> {
     logger.info("🟢 Webhook is being handled.");
-    let event = req.body;
+    const signature = req.headers["stripe-signature"] || "";
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+    let event: Stripe.Event;
 
-    if (this.endpointSecret) {
-      const sig = req.headers["stripe-signature"] as string;
-      if (!sig) {
-        logger.error("Missing Stripe signature header");
-        res.status(400).send("Missing Stripe signature header");
-        return;
-      }
+    // if (this.endpointSecret) {
+    //   const sig = req.headers["stripe-signature"] as string;
+    //   if (!sig) {
+    //     logger.error("Missing Stripe signature header");
+    //     res.status(400).send("Missing Stripe signature header");
+    //     return;
+    //   }
 
-      try {
-        // Construct the event using Stripe's signature and raw body
-        event = this.stripe.webhooks.constructEvent(
-          req.body,
-          sig,
-          this.endpointSecret
-        );
-      } catch (err: any) {
-        logger.error("Webhook signature verification failed:", err.message);
-        res.status(400).send(`Webhook Error: ${err.message}`);
-        return;
-      }
+    logger.info("Raw body type: ", typeof req.body);
+    logger.info("Raw body: ", req.body);
+    logger.info("Stripe signature: ", signature);
 
-      logger.info("Processing Webhook event:", event.type);
+    try {
+      // Construct the event using Stripe's signature and raw body
+      event = this.stripe.webhooks.constructEvent(
+        req.body,
+        signature,
+        webhookSecret
+      );
+      logger.info("Stripe Event Received:", {
+        eventType: event.type,
+        eventId: event.id,
+      });
+    } catch (err: any) {
+      logger.error("Webhook signature verification failed:", err.message);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
 
-      // Handle the event
-      switch (event.type) {
-        case "payment_intent.succeeded": {
-          const paymentIntent = event.data.object as Stripe.PaymentIntent;
-          logger.info("🔔 PaymentIntent was successful:", paymentIntent.id);
+    logger.info("Processing Webhook event:", event.type);
 
-          // Get orderId from metadata
-          const orderId = paymentIntent.metadata?.orderId;
-          if (!orderId) {
-            logger.error("orderId missing from paymentIntent metadata.");
-            res.status(400).send("Missing orderId in metadata");
-            return;
-          }
+    // Handle the event
+    switch (event.type) {
+      case "payment_intent.succeeded": {
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        logger.info("🔔 PaymentIntent was successful:", paymentIntent.id);
 
-          try {
-            const updatedOrder = await prisma.orders.update({
-              where: { orderId },
-              data: { status: "Paid" },
-            });
-            logger.info("✅ Order updated successfully:", updatedOrder.orderId);
-            res.status(200).json({ received: true });
-          } catch (err) {
-            logger.error("Error updating order in database:", err);
-            res.status(500).json({ error: "Failed to update order" });
-          }
-          break;
+        // Get orderId from metadata
+        const orderId = paymentIntent.metadata?.orderId;
+        if (!orderId) {
+          logger.error("orderId missing from paymentIntent metadata.");
+          res.status(400).send("Missing orderId in metadata");
+          return;
         }
 
-        default:
-          logger.warn(`Unhandled event type: ${event.type}`);
-          res.status(400).send(`Unhandled event type: ${event.type}`);
-          break;
+        try {
+          const updatedOrder = await prisma.orders.update({
+            where: { orderId },
+            data: { status: "Paid" },
+          });
+          logger.info("✅ Order updated successfully:", updatedOrder.orderId);
+          res.status(200).json({ received: true });
+        } catch (err) {
+          logger.error("Error updating order in database:", err);
+          res.status(500).json({ error: "Failed to update order" });
+        }
+        break;
       }
-    } else {
-      logger.error("Stripe Webhook Secret not configured");
-      res.status(500).send("Webhook endpoint not properly configured");
+
+      default:
+        logger.warn(`Unhandled event type: ${event.type}`);
+        res.status(400).send(`Unhandled event type: ${event.type}`);
+        break;
     }
   }
+  // } else {
+  //   logger.error("Stripe Webhook Secret not configured");
+  //   res.status(500).send("Webhook endpoint not properly configured");
+  // }
 }
 
 // Export an async initializer for the controller

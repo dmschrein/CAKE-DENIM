@@ -5,16 +5,14 @@ const webhookRouter: Router = express.Router();
 
 (async () => {
   try {
-    // Initialize WebhookController
-    const webhookController = await createWebhookController();
+    const webhookController = await createWebhookController(); // create webhook controller
 
-    // Define the webhook route
     webhookRouter.post(
       "/webhook",
-      express.raw({ type: "application/json" }), // Parse raw body required by Stripe
+      express.raw({ type: "application/json" }), // Ensures raw body for Stripe
       async (req: Request, res: Response) => {
         try {
-          // Delegate the request to the controller
+          // delegate request to webhook
           await webhookController.handleWebhook(req, res);
         } catch (error) {
           console.error("Error handling webhook:", error);
