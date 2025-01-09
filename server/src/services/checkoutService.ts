@@ -18,7 +18,7 @@ export class CheckoutService {
       if (!stripeSecretKey) {
         throw new Error("Stripe Secret Key is missing.");
       }
-
+      console.log();
       this.stripe = new Stripe(stripeSecretKey, {
         apiVersion: "2024-11-20.acacia", // Corrected API version
       });
@@ -37,6 +37,10 @@ export class CheckoutService {
         await this.initializeStripe();
       }
 
+      console.log("Secrets loaded:", {
+        stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+        stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+      });
       // Fetch user details
       const user = await prisma.users.findUnique({
         where: { email: data.email },
