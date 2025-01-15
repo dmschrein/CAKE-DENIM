@@ -79,6 +79,11 @@ npm run seed
 ## Update the prisma database
 
 ```
+npm run seed
+npx prisma db push
+```
+
+```
 npx prisma migrate dev
 ```
 

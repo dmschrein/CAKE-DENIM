@@ -6,7 +6,7 @@ import {
   getProducts,
   getProductsByPrimaryCategory,
   getVariantsById, // Import the getVariantsById function
-} from "../controllers/productController";
+} from "../controllers/productController"; // Import the productController
 
 const router = Router();
 

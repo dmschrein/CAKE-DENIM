@@ -21,18 +21,20 @@ const ProductsPage = () => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
-  console.log("Product Detail Page Product ID: ", productId);
-
-  {
-    /* 2. API Queries called with productId to retrieve the product details and variants */
-  }
-  // Fetch product by productId
   const {
     data: product,
     error: productError,
     isLoading: productLoading,
   } = useGetProductByIdQuery(productId as string);
 
+  // Move mainImage state here, after product is fetched
+  const [mainImage, setMainImage] = useState(product?.imageURL || "");
+
+  console.log("Product Detail Page Product ID: ", productId);
+
+  {
+    /* 2. API Queries called with productId to retrieve the product details and variants */
+  }
   // Fetch variants using the product variants
   const {
     data: variants,
@@ -90,33 +92,39 @@ const ProductsPage = () => {
       variant.size === selectedSize && variant.color === selectedColor,
   );
 
+  const handleThumbnailClick = (image: string) => {
+    setMainImage(image);
+  };
+
   return (
     <div className="flex flex-col space-x-8 md:flex-row">
       {/* Product Image Gallery */}
-      <div className="flex flex-row space-x-2">
-        <Image
-          src={
-            product.imageURL ||
-            "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-          }
-          alt={product.name}
-          width={600}
-          height={800}
-        />
+      <div className="flex flex-row space-x-4">
+        {/* Thumbnails on the left */}
         <div className="flex flex-col space-y-2">
-          {[...Array(4)].map((_, i) => (
+          {product.imageURL2.map((image, index) => (
             <Image
-              key={i}
+              key={index}
               src={
-                product.imageURL ||
+                image ||
                 "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
               }
               alt="Thumbnail"
               width={100}
               height={150}
+              className="cursor-pointer hover:opacity-80"
+              onClick={() => handleThumbnailClick(image)}
             />
           ))}
         </div>
+
+        {/* Main image */}
+        <Image
+          src={mainImage || product.imageURL}
+          alt={product.name}
+          width={600}
+          height={800}
+        />
       </div>
 
       {/* Product Details */}
