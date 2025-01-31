@@ -1,9 +1,9 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useSession, signOut } from "next-auth/react"; // ✅ Import NextAuth session
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,52 +20,57 @@ import SideCart from "./SideCart";
 import CustomImage from "../common/CustomImage";
 import Modal from "../common/Modal";
 import SignInFormContainer from "../common/SignInFormContainer";
+// import { useAuth } from "@/context/AuthProvider";
 
 const components: {
   title: string;
   image: string;
-  fallbackSrc: string;
+  //fallbackSrc: string;
   href: string;
 }[] = [
   {
-    title: "Fall Basics",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    title: "Spring Basics",
+    image:
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale1-frontfull.jpg",
+
     href: "/products/collection/Jeans",
   },
   {
     title: "Gift Guide",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore1.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "CAKE Travel Essentials",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image:
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Escape with US",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa1-front.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Sexy Sustainables",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image:
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell2-front.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Desirable Denim",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel1-full.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
 ];
 
 const Navigation: React.FC = () => {
+  const { data: session, status } = useSession();
   const { countAllItems } = useCart();
   const [showSideCart, setShowSideCart] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -74,9 +79,8 @@ const Navigation: React.FC = () => {
   const cartItems = countAllItems();
 
   // Retrieve the user's session status from NextAuth
-  const { status } = useSession();
-  console.log("Navigation user status:", status);
   const isLoggedIn = status === "authenticated";
+  console.log("Navigation user status:", status);
 
   const handleSignin = () => {
     console.log("Sign In button clicked");
@@ -124,6 +128,7 @@ const Navigation: React.FC = () => {
                       <div className="grid grid-cols-2 gap-5">
                         <ListItem
                           href="/products/collection/Jeans"
+                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale1-frontfull.jpg"
                           title="Jeans"
                           className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
@@ -131,6 +136,7 @@ const Navigation: React.FC = () => {
                         </ListItem>
                         <ListItem
                           href="/products/collection/Tops"
+                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
                           title="Tops"
                           className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
@@ -141,18 +147,19 @@ const Navigation: React.FC = () => {
                       <div className="grid grid-cols-2 gap-5">
                         <ListItem
                           href="/products/collection/Jackets"
+                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg"
                           title="Jackets"
                           className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
                           Comfortable and convertible jackets.
                         </ListItem>
-                        <ListItem
+                        {/* <ListItem
                           href="/products/collection/Dresses"
                           title="Dresses"
                           className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
                           Dresses for your vacations.
-                        </ListItem>
+                        </ListItem> */}
                       </div>
                       {/* Featured Collection - full width*/}
                       <NavigationMenuLink asChild>
@@ -279,8 +286,11 @@ const Navigation: React.FC = () => {
 // ListItem component
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { image?: string; title: string }
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & {
+    image: string;
+    title: string;
+  }
+>(({ className, title, children, image, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -294,11 +304,11 @@ const ListItem = React.forwardRef<
         >
           <div className="relative mb-2 h-44 w-28">
             <CustomImage
-              src={
-                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-              }
-              fallbackSrc={"/assets/cakebabe.png"}
+              src={image}
+              //fallbackSrc="/assets/cakebabe.png"
               alt={title}
+              width={112}
+              height={176}
             />
           </div>
 
