@@ -65,7 +65,6 @@ export default function HomePage() {
             <Link key={product.id} href={`/products/${product.id}`}>
               <CustomImage
                 src={product.image}
-                fallbackSrc={product.fallbackSrc}
                 width={480}
                 height={707}
                 alt={product.alt}
