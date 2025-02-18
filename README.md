@@ -87,6 +87,12 @@ npx prisma db push
 npx prisma migrate dev
 ```
 
+## Start Prisma Studio
+
+```
+npx prisma studio
+```
+
 ## Test Backend Routes
 
 ### Test for Registered Customer
@@ -119,8 +125,53 @@ curl -X POST http://localhost:8000/api/stripe/payments \
 
 ## Docker Commands
 
-#### Docker prune:
+### Docker prune:
 
 ```
 docker image prune -a
+```
+
+### 🚀 Build the Client and Server Docker Images
+
+```
+make build-client
+make build-server
+```
+
+### 🛠️ Lint the Client and Server
+
+```
+make lint-client
+make lint-server
+```
+
+### ✅ Run Tests on the Server
+
+```
+make test-server
+```
+
+### 🔎 Validate Builds (Ensure No Build Errors)
+
+```
+make validate-client-build
+make validate-server-build
+```
+
+### 🛡️ Full Validation (Lint + Test)
+
+```bash
+make validate
+```
+
+    •	Runs:
+    1.	make lint-client
+    2.	make lint-server
+    3.	make test-server
+    •	Ensures everything is error-free before proceeding.
+
+### 🚀 Run Everything Before Pushing
+
+```
+make pre-push
 ```

@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
@@ -11,9 +11,11 @@ import {
   useGetVariantsByProductIdQuery,
 } from "@/state/api";
 import BuyingOptions from "@/components/common/BuyingOptions";
+import { useProductContext } from "@/context/ProductContext";
 
 const ProductsPage = () => {
   const { productId } = useParams(); // 1. Component initializes by using the useParams to extract the productId from the URL
+  const { setProductName } = useProductContext();
 
   {
     /* State hooks defined to keep track of the color and size selected by the user. */
@@ -27,10 +29,14 @@ const ProductsPage = () => {
     isLoading: productLoading,
   } = useGetProductByIdQuery(productId as string);
 
+  useEffect(() => {
+    if (product?.name) {
+      setProductName(product.name);
+    }
+  }, [product, setProductName]);
+
   // Move mainImage state here, after product is fetched
   const [mainImage, setMainImage] = useState(product?.imageURL || "");
-
-  console.log("Product Detail Page Product ID: ", productId);
 
   {
     /* 2. API Queries called with productId to retrieve the product details and variants */

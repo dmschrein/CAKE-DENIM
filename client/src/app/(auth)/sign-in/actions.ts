@@ -13,7 +13,7 @@ const loginSchema = z.object({
 });
 
 // Login function using NextAuth.js
-export async function login(prevState: any, formData: FormData) {
+export async function login(formData: FormData) {
   const result = loginSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {

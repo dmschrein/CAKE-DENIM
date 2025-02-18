@@ -5,6 +5,7 @@ import "./globals.css";
 //import ModalProvider from "@/providers/modal-provider";
 import HomePageWrapper from "./homepageWrapper";
 import { Analytics } from "@vercel/analytics/react";
+import { ProductProvider } from "@/context/ProductContext";
 
 const lora = Lora({ subsets: ["latin"] });
 
@@ -24,8 +25,10 @@ export default function RootLayout({
 
       <body className={lora.className}>
         <HomePageWrapper>
-          {children}
-          <Analytics />
+          <ProductProvider>
+            {children}
+            <Analytics />
+          </ProductProvider>
         </HomePageWrapper>
       </body>
     </html>
