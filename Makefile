@@ -52,3 +52,9 @@ validate: lint-client lint-server test-server
 .PHONY: pre-push
 pre-push: validate
 	@echo "All checks passed. Ready to push!"
+
+# Deploy to Vercel
+.PHONY: deploy-vercel
+deploy-vercel:
+	@echo "Deploying to Vercel..."
+	vercel --prod
