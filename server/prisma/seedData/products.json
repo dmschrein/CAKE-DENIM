@@ -5,7 +5,15 @@
     "description": "Raw Relaxed Skinny - Midrise with Contour Waistband",
     "price": 178.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale.png",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale1-frontfull.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale1-frontfull.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale2-fronthalf.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale3-backfull.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale4-backclose.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale5-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale6-halffront.jpg"
+    ],
     "primaryCategory": "Jeans",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
@@ -16,18 +24,34 @@
     "description": "Classic Dark Wash Skinny - Midrise with Contour Waistband",
     "price": 198.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-219.jpg",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-close-back.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-close-back.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-front1.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-side-pockets.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-front-half.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-back-full.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-front2.jpg"
+    ],
     "primaryCategory": "Jeans",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
   {
     "productId": "her3-cd1f1wb2-fb1ws2-pr1d1",
-    "name": "The Hershel",
+    "name": "The Herschel",
     "description": "Light Wash Distressed Skinny - Midrise with Contour Waistband",
     "price": 228.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/hersel1-63.jpg",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel1-full.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel1-full.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel2-full.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel3-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel4-back.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel5-back-close.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel6-front-close.jpg"
+    ],
     "primaryCategory": "Jeans",
     "createdAt": "2023-04-01T12:00:00Z",
     "updatedAt": "2023-04-01T12:00:00Z"
@@ -38,7 +62,15 @@
     "description": "Statement Women's Tee",
     "price": 38.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe2.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe3.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe4.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe5.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe6.jpg"
+    ],
     "primaryCategory": "Tops",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
@@ -49,7 +81,15 @@
     "description": "Statement Oversized Tee",
     "price": 35.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/emcshirt.png",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore1.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore1.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore2.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore3.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore4.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore5.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore6.jpg"
+    ],
     "primaryCategory": "Tops",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
@@ -60,73 +100,54 @@
     "description": "Denim Bralette - Crop Top",
     "price": 128.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/blackwell1-110.jpg",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell1-front.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell1-front.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell2-front.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell3-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell4-front-close.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell5-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell6-back.jpg"
+    ],
     "primaryCategory": "Tops",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
-  {
-    "productId": "bar7-cd2f0wb0-fb2ws0-pr1d1",
-    "name": "The Bari",
-    "description": "Sleeveless Tank",
-    "price": 34.0,
-    "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/whitetop.png",
-    "primaryCategory": "Tops",
-    "createdAt": "2024-10-04T12:00:00Z",
-    "updatedAt": "2024-11-05T12:00:00Z"
-  },
+
   {
     "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
     "name": "The Ochoa",
     "description": "Deep Plunge Ribbed Bodysuit",
     "price": 78.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/ochoa.png",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa1-front.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa2-front.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa3-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa4-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa5-back.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa6-back-full.jpg"
+    ],
     "primaryCategory": "Tops",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
-  {
-    "productId": "bre9-cd6f0wb0-fb6ws0-pr1d1",
-    "name": "The Brescia",
-    "description": "Knitted Midi Sweater Dress",
-    "price": 84.0,
-    "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/sweater.png",
-    "primaryCategory": "Dresses",
-    "createdAt": "2024-10-04T12:00:00Z",
-    "updatedAt": "2024-11-05T12:00:00Z"
-  },
-  {
-    "productId": "cag10-cd9f0wb0-fb7ws0-pr1d1",
-    "name": "The Cagliari Skirt",
-    "description": "Satin Mini Skirt",
-    "price": 130.0,
-    "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/whiteskirt.png",
-    "primaryCategory": "Bottoms",
-    "createdAt": "2024-10-04T12:00:00Z",
-    "updatedAt": "2024-11-05T12:00:00Z"
-  },
-  {
-    "productId": "cag11-cd2f0wb0-fb7ws0-pr1d1",
-    "name": "The Cagliari Blouse",
-    "description": "Satin Button Up Top",
-    "price": 150.0,
-    "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/whitetop.png",
-    "primaryCategory": "Tops",
-    "createdAt": "2024-10-04T12:00:00Z",
-    "updatedAt": "2024-11-05T12:00:00Z"
-  },
+
   {
     "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1",
     "name": "The Kennedy Jacket",
     "description": "Raw Denim Oversized Convertible Jacket",
     "price": 320.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy1-64.jpg",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy2-front-close.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy3-back.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy4-cropped-full.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy5-cropped-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy6-back.jpg"
+    ],
     "primaryCategory": "Jackets",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
@@ -137,7 +158,15 @@
     "description": "Raw Denim Shirt",
     "price": 248.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/peron1-102.jpg",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron1-full.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron1-full.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron1-front.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron3-front-close.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron4-back.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron5-close-front.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron6-back.jpg"
+    ],
     "primaryCategory": "Tops",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
@@ -148,7 +177,15 @@
     "description": "Washed Denim Shirt",
     "price": 228.0,
     "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/peron1-102.jpg",
+    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Fawcett1-front.jpg",
+    "imageURL2": [
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Fawcett1-front.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Fawcett2-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Fawcett3-front-close.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Fawcett4-back.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Fawcett5-side.jpg",
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Fawcett6-front-full.jpg"
+    ],
     "primaryCategory": "Tops",
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"

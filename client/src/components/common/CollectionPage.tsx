@@ -54,6 +54,7 @@ const CollectionPage: React.FC<CollectionPageProps> = ({
                 title: product.name,
                 price: `$${product.price.toFixed(2)}`, // Convert price to a string with two decimal places
                 image: product.imageURL, //TODO: update image path later
+                imageURL2: product.imageURL2,
                 category:
                   product.Categories?.map(
                     (cat) => cat.category.categoryName,

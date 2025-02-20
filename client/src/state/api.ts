@@ -278,15 +278,24 @@ export const api = createApi({
     getUserByEmail: build.query<User, string>({
       query: (email) => {
         console.log("Fetching user by email:", email);
-        return { url: `/api/users?email=${encodeURIComponent(email)}` };
+        return {
+          url: `/api/users?email=${encodeURIComponent(email)}`,
+          method: "GET",
+        };
       },
       providesTags: (_, __, email) => [{ type: "Users", id: email }],
       onQueryStarted: async (_args, { queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
           console.log("User fetched successfully: ", data);
-        } catch (error) {
+        } catch (error: any) {
           console.error("Error fetching user by email: ", error);
+          if (error instanceof Error) {
+            console.error("Error message: ", error.message);
+            console.error("Error stack: ", error.stack);
+          } else {
+            console.error("Error details: ", JSON.stringify(error, null, 2));
+          }
         }
       },
     }),

@@ -79,6 +79,8 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
         userType: "REGISTERED",
       }).unwrap();
 
+      console.log("🟢 User created successfully. Proceeding to sign in...");
+
       // Automatically sign in after account creation
       await handleSignIn({ email, password });
     } catch (error: any) {

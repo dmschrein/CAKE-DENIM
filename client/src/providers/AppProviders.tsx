@@ -7,6 +7,7 @@ import CartProvider from "@/providers/CartProvider";
 // import { ThemeProvider } from "./ThemeProvider"; remove this since we only need light mode
 import StoreProvider from "@/app/redux";
 import { SessionProvider } from "next-auth/react";
+// import { AuthProvider } from "../context/AuthProvider";
 
 interface Props {
   children: ReactNode;

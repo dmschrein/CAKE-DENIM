@@ -1,3 +1,4 @@
+// manages shopping cart state and logic
 import {
   ReactNode,
   createContext,

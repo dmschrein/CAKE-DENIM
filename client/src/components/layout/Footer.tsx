@@ -18,8 +18,10 @@ const Footer = () => {
           <div className="mb-2 flex justify-center">
             {/* Icon for stores */}
           </div>
-          <h3 className="font-bold">Ref stores</h3>
-          <p className="text-sm text-gray-600">We&apos;re all over the place</p>
+          <h3 className="font-bold">CAKE blog</h3>
+          <p className="text-sm text-gray-600">
+            We&apos;re worn all over the place
+          </p>
         </div>
         <div>
           <div className="mb-2 flex justify-center">

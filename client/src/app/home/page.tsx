@@ -11,26 +11,27 @@ export default function HomePage() {
   const products = [
     {
       id: "her3-cd1f1wb2-fb1ws2-pr1d1",
-      image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/hersel1-63.jpg",
-      fallbackSrc: "/assets/hersel1-63.jpg",
+      image:
+        "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel5-back-close.jpg",
+      //fallbackSrc: "/assets/hersel1-63.jpg",
       alt: "Raw Denim Shirt",
     },
     {
       id: "och8-cd8f3wb0-fb3ws0-pr1d1",
       image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/ochoa.png",
-      fallbackSrc: "/assets/ochoa.png",
+      //fallbackSrc: "/assets/ochoa.png",
       alt: "Ochoa Body Suit",
     },
     {
       id: "mor2-cd1f1wb2-fb1ws1-pr1d1",
       image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/jeansback.png",
-      fallbackSrc: "/assets/jeansback.png",
+      //fallbackSrc: "/assets/jeansback.png",
       alt: "Jeans Back",
     },
     {
       id: "per18-cd7f0fb5-ws0-pr1d1",
       image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/peron1-102.jpg",
-      fallbackSrc: "/assets/peron1-102.jpg",
+      //fallbackSrc: "/assets/peron1-102.jpg",
       alt: "Peron Product",
     },
   ];
@@ -64,7 +65,6 @@ export default function HomePage() {
             <Link key={product.id} href={`/products/${product.id}`}>
               <CustomImage
                 src={product.image}
-                fallbackSrc={product.fallbackSrc}
                 width={480}
                 height={707}
                 alt={product.alt}
@@ -76,22 +76,22 @@ export default function HomePage() {
         <ul className="grid h-full w-full gap-1 pt-1 md:grid-cols-2">
           <div className="relative">
             <CustomImage
-              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/dress.png"
-              fallbackSrc="/assets/dress.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron5-close-front.jpg"
+              //fallbackSrc="/assets/dress.png"
               width={950}
               height={1130}
               alt="image2"
             />
             <ShopButton
-              href={"/dresses"}
-              text={"DRESSES"}
+              href={"/collection/Tops"}
+              text={"TOPS"}
               subheading="SHOP NOW"
             />
           </div>
           <div className="relative">
             <CustomImage
-              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/jumpsuit.png"
-              fallbackSrc="/assets/jumpsuit.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-side-pockets.jpg"
+              //fallbackSrc="/assets/jumpsuit.png"
               width={950}
               height={1130}
               alt="image2"
@@ -104,8 +104,8 @@ export default function HomePage() {
         <ul className="grid h-full w-full gap-1 pt-1 md:grid-cols-3">
           <Link href={"/blog"}>
             <CustomImage
-              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-              fallbackSrc="/assets/cakebabe.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
+              //fallbackSrc="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
               width={601}
               height={752}
               alt="image1"
@@ -113,8 +113,8 @@ export default function HomePage() {
           </Link>
           <Link href={"/blog"}>
             <CustomImage
-              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-              fallbackSrc="/assets/cakebabe.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy2-front-close.jpg"
+              //fallbackSrc="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
               width={601}
               height={752}
               alt="image2"
@@ -122,8 +122,8 @@ export default function HomePage() {
           </Link>
           <Link href={"/blog"}>
             <CustomImage
-              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-              fallbackSrc="/assets/cakebabe.png"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell6-back.jpg"
+              //fallbackSrc="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
               width={601}
               height={752}
               alt="image2"

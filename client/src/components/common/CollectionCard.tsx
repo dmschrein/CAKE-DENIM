@@ -11,6 +11,7 @@ const CollectionCard = ({
     title: string;
     price: string;
     image: string;
+    imageURL2: string[];
     category: string;
   };
 }) => {
@@ -22,8 +23,8 @@ const CollectionCard = ({
         <Image
           src={product.image}
           alt={product.title}
-          width={680}
-          height={750}
+          width={600}
+          height={800}
           className="object-cover"
         />
         <h3 className="mt-4 text-xl font-semibold">{product.title}</h3>
