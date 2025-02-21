@@ -22,8 +22,11 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
       const users = await prisma.users.findMany();
       res.json(users);
     }
-  } catch (error) {
-    res.status(500).json({ message: "Error retrieving users" });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ message: error.message });
+    }
+    res.status(500).json({ message: "Unknown error retrieving users" });
   }
 };
 
@@ -38,8 +41,11 @@ export const getUserById = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({ error: "User not found" });
     }
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch user" });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ error: error.message });
+    }
+    res.status(500).json({ error: "Unknown failed to fetch user" });
   }
 };
 

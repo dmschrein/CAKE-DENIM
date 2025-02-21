@@ -60,6 +60,7 @@ const ShopAll = () => {
           price: product.price,
           stockQuantity: product.stockQuantity || 0,
           imageURL: product.imageURL || "/assets/hersel1-63.jpg",
+          imageURL2: product.imageURL2,
           primaryCategory: product.primaryCategory,
           categories:
             product.Categories?.map(

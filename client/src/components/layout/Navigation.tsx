@@ -1,9 +1,9 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react"; // ✅ Import NextAuth session
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,52 +20,57 @@ import SideCart from "./SideCart";
 import CustomImage from "../common/CustomImage";
 import Modal from "../common/Modal";
 import SignInFormContainer from "../common/SignInFormContainer";
+// import { useAuth } from "@/context/AuthProvider";
 
 const components: {
   title: string;
   image: string;
-  fallbackSrc: string;
+  //fallbackSrc: string;
   href: string;
 }[] = [
   {
-    title: "Fall Basics",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    title: "Spring Basics",
+    image:
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale1-frontfull.jpg",
+
     href: "/products/collection/Jeans",
   },
   {
     title: "Gift Guide",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore1.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "CAKE Travel Essentials",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image:
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Escape with US",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa1-front.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Sexy Sustainables",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image:
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell2-front.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Desirable Denim",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png",
-    fallbackSrc: "/assets/cakebabe.png",
+    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel1-full.jpg",
+    // fallbackSrc: "/assets/cakebabe.png",
   },
 ];
 
 const Navigation: React.FC = () => {
+  const { status } = useSession();
   const { countAllItems } = useCart();
   const [showSideCart, setShowSideCart] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -74,9 +79,8 @@ const Navigation: React.FC = () => {
   const cartItems = countAllItems();
 
   // Retrieve the user's session status from NextAuth
-  const { status } = useSession();
-  console.log("Navigation user status:", status);
   const isLoggedIn = status === "authenticated";
+  console.log("Navigation user status:", status);
 
   const handleSignin = () => {
     console.log("Sign In button clicked");
@@ -119,52 +123,63 @@ const Navigation: React.FC = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>SHOP</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="fixed left-0 right-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
-                      <li>
+                    <ul className="fixed left-0 right-0 top-[80px] grid gap-5 bg-[#000033] p-10 md:w-[800px] lg:w-full lg:grid-cols-3">
+                      {/* First row -grid with 2 columns */}
+                      <div className="grid grid-cols-2 gap-5">
                         <ListItem
                           href="/products/collection/Jeans"
+                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale1-frontfull.jpg"
                           title="Jeans"
+                          className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
                           Sustainable denim jeans for every occasion.
                         </ListItem>
-                        <ListItem href="/products/collection/Tops" title="Tops">
-                          Tencel and modal tops.
+                        <ListItem
+                          href="/products/collection/Tops"
+                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
+                          title="Tops"
+                          className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
+                        >
+                          The softest Tencel and Modal tops.
                         </ListItem>
-                      </li>
-                      <li>
+                      </div>
+                      {/* Second row -grid with 2 columns */}
+                      <div className="grid grid-cols-2 gap-5">
                         <ListItem
                           href="/products/collection/Jackets"
+                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg"
                           title="Jackets"
+                          className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
                           Comfortable and convertible jackets.
                         </ListItem>
-                        <ListItem
+                        {/* <ListItem
                           href="/products/collection/Dresses"
                           title="Dresses"
+                          className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
                           Dresses for your vacations.
-                        </ListItem>
-                      </li>
-                      <li>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/products/collection/Jackets"
-                          >
-                            <CustomImage
-                              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy3-71.jpg"
-                              fallbackSrc="/assets/kennedy3-71.jpg"
-                              width={500}
-                              height={500}
-                              alt="Jacket Featured Collection"
-                            />
-                            <div>Featured</div>
-                            <p className="text-sm leading-tight text-muted-foreground">
-                              Our beautifully designed convertible collection.
-                            </p>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
+                        </ListItem> */}
+                      </div>
+                      {/* Featured Collection - full width*/}
+                      <NavigationMenuLink asChild>
+                        <Link
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                          href="/products/collection/Jackets"
+                        >
+                          <CustomImage
+                            src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/kennedy3-71.jpg"
+                            fallbackSrc="/assets/kennedy3-71.jpg"
+                            width={500}
+                            height={500}
+                            alt="Jacket Featured Collection"
+                          />
+                          <div>Featured</div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Our beautifully designed convertible collection.
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -172,13 +187,14 @@ const Navigation: React.FC = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>COLLECTIONS</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="fixed left-0 grid gap-5 bg-blue-50 p-10 md:w-[800px] md:grid-cols-6 lg:w-full">
+                    <ul className="fixed left-0 top-[80px] grid gap-5 bg-[#000033] p-10 md:w-[800px] md:grid-cols-6 lg:w-full">
                       {components.map((component) => (
                         <ListItem
                           key={component.title}
                           title={component.title}
                           image={component.image}
                           href={component.href}
+                          className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         ></ListItem>
                       ))}
                     </ul>
@@ -270,8 +286,11 @@ const Navigation: React.FC = () => {
 // ListItem component
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { image?: string; title: string }
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & {
+    image: string;
+    title: string;
+  }
+>(({ className, title, children, image, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -285,15 +304,17 @@ const ListItem = React.forwardRef<
         >
           <div className="relative mb-2 h-44 w-28">
             <CustomImage
-              src={
-                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-              }
-              fallbackSrc={"/assets/cakebabe.png"}
+              src={image}
+              //fallbackSrc="/assets/cakebabe.png"
               alt={title}
+              width={112}
+              height={176}
             />
           </div>
 
-          <div className="text-sm font-medium leading-none">{title}</div>
+          <div className="text-sm font-medium leading-none text-gray-400">
+            {title}
+          </div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>

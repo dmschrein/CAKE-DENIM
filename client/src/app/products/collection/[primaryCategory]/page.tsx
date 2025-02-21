@@ -22,6 +22,8 @@ const ProductsCollectionPage = () => {
   console.log("Products returned:", products);
 
   if (isLoading) return <div>Loading...</div>;
+  if (products.length == 0)
+    return <div>No products found for category: {primaryCategory}</div>;
   if (error) return <div>Error loading products</div>;
 
   if (!products || products.length === 0) {
@@ -36,6 +38,7 @@ const ProductsCollectionPage = () => {
     price: product.price,
     stockQuantity: product.stockQuantity || 0,
     imageURL: product.imageURL,
+    imageURL2: product.imageURL2,
     primaryCategory: product.primaryCategory,
     categories:
       product.Categories?.map(

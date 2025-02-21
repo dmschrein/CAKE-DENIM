@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
 import { useCart } from "@/providers/CartProvider"; // Custom hook for accessing the cart context
-import { useSession } from "next-auth/react"; // Functions for authentication and session management from NextAuth.js
 import { useRouter } from "next/navigation"; // Hook for navigating between pages in Next.js
 import Image from "next/image"; // Component for optimized image rendering in Next.js
+// import { useAuth } from "@/context/AuthProvider";
 
 // Define the props the component will receive
 interface Props {
@@ -29,9 +28,10 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
   const router = useRouter();
 
   // Retrieve the user's session status from NextAuth
-  const { status } = useSession();
-  console.log("SideCart user status:", status);
-  const isLoggedIn = status === "authenticated"; // Boolean to check if the user is authenticated
+  // const { session, status } = useAuth();
+  const isLoggedIn = status === "authenticated";
+
+  if (!visible) return null;
 
   return (
     // Render the SideCart container, which will slide in from the right based on the visibility prop
@@ -186,7 +186,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
           onClick={() => {
             if (isLoggedIn) {
               // User is authenticated, proceed to checkout
-              console.log("User is authenticated, proceeding to checkout");
+              console.log("✅ User is authenticated, proceeding to checkout");
               router.push("/checkout");
             } else {
               // User is not authenticated, redirect to sign-in
