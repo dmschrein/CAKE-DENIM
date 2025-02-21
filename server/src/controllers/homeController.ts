@@ -41,6 +41,8 @@ export const getHomePageMetrics = async (
       blogImages,
     });
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving dashboard metrics" });
+    res
+      .status(500)
+      .json({ message: "Error retrieving dashboard metrics", error: error });
   }
 };

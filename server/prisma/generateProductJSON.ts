@@ -31,6 +31,26 @@ interface ProductVariantAttributes {
   stockQuantity: number;
 }
 
+interface ProductCSVRow {
+  ProductCode: string;
+  Category: string;
+  Fit: string;
+  Waistband: string;
+  Fabric: string;
+  WashFinish: string;
+  ProductionRound: string;
+  Destination: string;
+  ProductName: string;
+  Description: string;
+  Price: string;
+  StockQuantity: string;
+  ImageURL: string;
+  CreatedAt: string;
+  UpdatedAt: string;
+  VariantSizes: string;
+  VariantColors: string;
+}
+
 // Function to generate Product IDs based on fields
 const generateProductId = ({
   productCode,
@@ -65,45 +85,30 @@ const generateVariants = (
   productId: string,
   price: number
 ): ProductVariantAttributes[] => {
-  const variants: ProductVariantAttributes[] = [];
-  sizes.forEach((size) => {
-    colors.forEach((color) => {
-      const variantId = generateVariantId({
-        productId,
-        sizeId: size,
-        colorId: color,
-      });
-      console.log(
-        `Generating variant: ${variantId} for product ${productId} (Size: ${size}, Color: ${color})`
-      );
-      variants.push({
-        variantId,
-        productId,
-        sizeId: size,
-        colorId: color,
-        price,
-        stockQuantity: 100, // Example default stock, you can replace this value
-      });
-    });
-  });
-  return variants;
+  return sizes.flatMap((size) =>
+    colors.map((color) => ({
+      variantId: generateVariantId({ productId, sizeId: size, colorId: color }),
+      productId,
+      sizeId: size,
+      colorId: color,
+      price,
+      stockQuantity: 100, // Default stock, adjust as needed
+    }))
+  );
 };
 
 // Parse the CSV and generate product JSON
 const generateProductsFromCSV = () => {
   const products: any[] = [];
-
-  // Path to the CSV file
   const productsCsvPath = "./inputData/ProductsTable.csv";
 
-  // Ensure the seedData directory exists, create it if not
   if (!fs.existsSync("./seedData")) {
     fs.mkdirSync("./seedData");
   }
 
   fs.createReadStream(productsCsvPath)
     .pipe(csvParser())
-    .on("data", (row: any) => {
+    .on("data", (row: ProductCSVRow) => {
       const product: ProductAttributes = {
         productCode: row.ProductCode,
         categoryCode: row.Category,
@@ -120,8 +125,8 @@ const generateProductsFromCSV = () => {
         imageURL: row.ImageURL,
         createdAt: row.CreatedAt,
         updatedAt: row.UpdatedAt,
-        variantSizes: row.VariantSizes.split(", "), // Assumed sizes are comma-separated
-        variantColors: row.VariantColors.split(", "), // Assumed colors are comma-separated
+        variantSizes: row.VariantSizes.split(", "),
+        variantColors: row.VariantColors.split(", "),
       };
 
       const productId = generateProductId(product);
@@ -134,7 +139,6 @@ const generateProductsFromCSV = () => {
         product.price
       );
 
-      // Structure the product data for JSON format
       const productJSON = {
         productId,
         name: product.name,
@@ -164,7 +168,6 @@ const generateProductsFromCSV = () => {
       products.push(productJSON);
     })
     .on("end", () => {
-      // Write to JSON file
       console.log("Writing data to products.json...");
       fs.writeFileSync(
         "./seedData/products.json",

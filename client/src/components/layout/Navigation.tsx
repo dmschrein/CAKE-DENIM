@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useSession, signOut } from "next-auth/react"; // ✅ Import NextAuth session
+import { useSession } from "next-auth/react"; // ✅ Import NextAuth session
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -70,7 +70,7 @@ const components: {
 ];
 
 const Navigation: React.FC = () => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const { countAllItems } = useCart();
   const [showSideCart, setShowSideCart] = useState(false);
   const [isOpen, setIsOpen] = useState(true);

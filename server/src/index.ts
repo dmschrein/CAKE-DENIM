@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
@@ -14,7 +14,7 @@ import userRoutes from "./routes/userRoutes";
 import checkoutRoutes from "./routes/checkoutRoutes";
 import orderRoutes from "./routes/orderRoutes";
 import webhookRoutes from "./routes/webhookRoutes";
-import { createWebhookController } from "./controllers/webhookController";
+// import { createWebhookController } from "./controllers/webhookController";
 
 (async () => {
   try {
@@ -83,7 +83,7 @@ import { createWebhookController } from "./controllers/webhookController";
 
     /* Initialize WebhookController */
     // The initialization of webhookController is necessary for setting up webhook routes and any side effects
-    const webhookController = await createWebhookController();
+    // const webhookController = await createWebhookController();
     app.use("/api/stripe", webhookRoutes);
 
     /* Middleware applied globally */
@@ -98,7 +98,7 @@ import { createWebhookController } from "./controllers/webhookController";
     app.use("/api/stripe", checkoutRoutes);
 
     /* Error handling middleware */
-    app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+    app.use((err: Error, _req: Request, res: Response) => {
       console.error(err.stack);
       res.status(500).json({ message: "An error occurred on the server." });
     });
@@ -114,8 +114,8 @@ import { createWebhookController } from "./controllers/webhookController";
       );
     });
 
-    // Handle EADDRINUSE error
-    server.on("error", (error: any) => {
+    // Handle EADDRINUSE error with proper type
+    server.on("error", (error: NodeJS.ErrnoException) => {
       if (error.code === "EADDRINUSE") {
         console.error(`Port ${port} is already in use.`);
         process.exit(1);

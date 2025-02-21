@@ -2,11 +2,8 @@
 "use server";
 
 import { Request, Response } from "express";
-import Stripe from "stripe";
-import dotenv from "dotenv";
 import { CheckoutService } from "../services/checkoutService";
 // import { InvoiceService } from "../services/invoiceService";
-import { PrismaClient } from "@prisma/client";
 import logger from "../utils/logger";
 import { loadSecretsToEnv } from "../utils/secrets";
 
@@ -22,8 +19,6 @@ export const config = {
     bodyParser: false,
   },
 };
-
-const prisma = new PrismaClient();
 
 class CheckoutController {
   private checkoutService: CheckoutService;
@@ -54,9 +49,13 @@ class CheckoutController {
       const result = await this.checkoutService.createCheckout(data);
       logger.info("Successfully created checkout", { result });
       res.status(201).json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        logger.error("Error creating checkout: ", error);
+        res.status(500).json({ error: error.message });
+      }
       logger.error("Error creating checkout: ", error);
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: "Uknown error" });
     }
   }
 

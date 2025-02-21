@@ -39,6 +39,9 @@ export async function login(formData: FormData) {
   }
 
   redirect("/account"); // Redirect to account page on success
+
+  // Ensure a return value even after a redirect
+  return { errors: {} };
 }
 
 // Logout function using NextAuth.js

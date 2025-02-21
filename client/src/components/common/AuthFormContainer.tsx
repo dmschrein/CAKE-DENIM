@@ -18,7 +18,10 @@ const AuthFormContainer: React.FC<AuthFormContainerProps> = ({
   title,
   onSubmit,
 }) => {
-  const [state, loginAction] = useActionState(login, undefined);
+  const [state, loginAction] = useActionState(
+    async (_prevState: any, formData: FormData) => await login(formData),
+    { errors: {} }, // Initial state with no errors
+  );
   return (
     <div className="space-y-6 bg-white p-10 shadow-md">
       <h1 className="text-3xl text-gray-800">{title}</h1>

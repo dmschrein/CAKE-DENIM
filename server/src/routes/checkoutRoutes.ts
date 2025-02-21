@@ -1,7 +1,6 @@
 "use server";
 // src/routes/checkoutRoutes.ts
 import express, { Router } from "express";
-import bodyParser from "body-parser";
 import CheckoutController from "../controllers/checkoutController";
 // import { handleStripeWebhook } from "../controllers/webhookController";
 

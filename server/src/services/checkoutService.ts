@@ -5,6 +5,14 @@ import logger from "../utils/logger";
 
 const prisma = new PrismaClient();
 
+interface CheckoutData {
+  email: string;
+  paymentMethodId: string;
+  amount: number;
+  currency?: string;
+  orderId: string;
+}
+
 export class CheckoutService {
   private stripe!: Stripe; // Delay initialization until secrets are available
 
@@ -20,7 +28,7 @@ export class CheckoutService {
       }
       console.log();
       this.stripe = new Stripe(stripeSecretKey, {
-        apiVersion: "2024-11-20.acacia", // Corrected API version
+        apiVersion: "2025-01-27.acacia", // Corrected API version
       });
 
       logger.info("Stripe initialized successfully for CheckoutService.");
@@ -30,7 +38,7 @@ export class CheckoutService {
     }
   }
 
-  public async createCheckout(data: any): Promise<Stripe.PaymentIntent> {
+  public async createCheckout(data: unknown): Promise<Stripe.PaymentIntent> {
     try {
       // Ensure Stripe is initialized before proceeding
       if (!this.stripe) {
@@ -41,9 +49,13 @@ export class CheckoutService {
         stripeSecretKey: process.env.STRIPE_SECRET_KEY,
         stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
       });
+      // Validate and cast data to CheckoutData
+      const { email, paymentMethodId, amount, currency, orderId } =
+        data as CheckoutData;
+
       // Fetch user details
       const user = await prisma.users.findUnique({
-        where: { email: data.email },
+        where: { email: email },
       });
 
       if (!user) {
@@ -54,9 +66,9 @@ export class CheckoutService {
       if (!user.stripeCustomerId) {
         const customer = await this.stripe.customers.create({
           email: user.email,
-          payment_method: data.paymentMethodId,
+          payment_method: paymentMethodId,
           invoice_settings: {
-            default_payment_method: data.paymentMethodId,
+            default_payment_method: paymentMethodId,
           },
         });
 
@@ -64,7 +76,7 @@ export class CheckoutService {
 
         // Update user in database
         await prisma.users.update({
-          where: { email: data.email },
+          where: { email: email },
           data: { stripeCustomerId: user.stripeCustomerId },
         });
       }
@@ -101,13 +113,13 @@ export class CheckoutService {
 
       // Create payment intent
       const paymentIntent = await this.stripe.paymentIntents.create({
-        amount: data.amount, // Smallest currency unit (e.g., cents)
-        currency: data.currency || "usd",
+        amount: amount, // Smallest currency unit (e.g., cents)
+        currency: currency || "usd",
         customer: user.stripeCustomerId,
-        payment_method: data.paymentMethodId,
+        payment_method: paymentMethodId,
         confirm: true,
         automatic_payment_methods: { enabled: true },
-        metadata: { orderId: data.orderId, userId: user.userId },
+        metadata: { orderId: orderId, userId: user.userId },
         return_url: returnUrl,
       });
 
@@ -118,9 +130,13 @@ export class CheckoutService {
       }
 
       return paymentIntent;
-    } catch (error: any) {
-      logger.error("Error creating checkout", { error });
-      throw new Error(`Failed to create payment: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        logger.error("Error creating chekckout", { error });
+        throw new Error(`Failed to create payment: ${error.message}`);
+      }
+      logger.error("Unknown error during create checkout", { error });
+      throw new Error(`Create Payment Error: Unknown error`);
     }
   }
 }

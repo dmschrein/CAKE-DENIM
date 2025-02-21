@@ -3,7 +3,6 @@ import Stripe from "stripe";
 import { PrismaClient } from "@prisma/client";
 import { getSSMParameterValue } from "../utils/secrets";
 import logger from "../utils/logger";
-import { sign } from "crypto";
 
 const prisma = new PrismaClient();
 
@@ -13,7 +12,7 @@ class WebhookController {
 
   constructor(stripe: Stripe, endpointSecret: string) {
     this.stripe = stripe;
-    //this.endpointSecret = endpointSecret;
+    this.endpointSecret = endpointSecret;
   }
 
   // Handle Webhooks
@@ -46,9 +45,14 @@ class WebhookController {
         eventType: event.type,
         eventId: event.id,
       });
-    } catch (err: any) {
-      logger.error("Webhook signature verification failed:", err.message);
-      res.status(400).send(`Webhook Error: ${err.message}`);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        logger.error("Webhook signature verification failed:", err.message);
+        res.status(400).send(`Webhook Error: ${err.message}`);
+      } else {
+        logger.error("Unknown error during webhook signature verification");
+        res.status(400).send("Webhook Error: Unknown error");
+      }
       return;
     }
 
@@ -75,9 +79,16 @@ class WebhookController {
           });
           logger.info("✅ Order updated successfully:", updatedOrder.orderId);
           res.status(200).json({ received: true });
-        } catch (err) {
-          logger.error("Error updating order in database:", err);
-          res.status(500).json({ error: "Failed to update order" });
+        } catch (err: unknown) {
+          if (err instanceof Error) {
+            logger.error("Error updating order in database:", err.message);
+            res.status(500).json({ error: "Failed to update order" });
+          } else {
+            logger.error("Unknown error updating order in database");
+            res
+              .status(500)
+              .json({ error: "Failed to update order: Unknown error" });
+          }
         }
         break;
       }
@@ -111,14 +122,19 @@ export const createWebhookController = async (): Promise<WebhookController> => {
     }
 
     const stripe = new Stripe(stripeSecretKey, {
-      apiVersion: "2024-11-20.acacia",
+      apiVersion: "2025-01-27.acacia",
     });
 
     logger.info("🟢 WebhookController initialized successfully.");
 
     return new WebhookController(stripe, stripeWebhookSecret);
-  } catch (error: any) {
-    logger.error("❌ Failed to initialize WebhookController:", error.message);
-    throw new Error("WebhookController initialization failed");
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      logger.error("❌ Failed to initialize WebhookController:", error.message);
+      throw new Error("WebhookController initialization failed");
+    } else {
+      logger.error("❌ Unknown error initializing WebhookController");
+      throw new Error("WebhookController initialization failed: Unknown error");
+    }
   }
 };

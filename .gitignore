@@ -21,7 +21,8 @@ client/.next/
 
 # production
 /build
-
+server/dist
+server/prisma
 # misc
 .DS_Store
 *.pem
