@@ -84,6 +84,7 @@ const Navigation: React.FC = () => {
 
   const handleSignin = () => {
     console.log("Sign In button clicked");
+    setIsOpen(true);
     setShowModal(true);
   };
 
