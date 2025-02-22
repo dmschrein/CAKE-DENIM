@@ -12,6 +12,8 @@ type SigninFormProps = {
   handleClose?: () => void;
   showCloseButton?: boolean;
   handleCreateAccountClick: () => void;
+  signInError?: string;
+  onInputChange?: () => void;
 };
 
 // Props interface for AuthInput component
@@ -20,12 +22,13 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
   formTitle,
   handleSignIn,
   handleCreateAccountClick,
+  signInError,
+  onInputChange,
 }) => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
-
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,17 +36,14 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
+    onInputChange?.();
   };
 
   const handleSignInClick = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setErrorMessage(""); // Reset error message before sign-in attempt
-
     try {
-      handleSignIn(userInfo);
-    } catch (error: any) {
-      setErrorMessage(error.message);
+      await handleSignIn(userInfo);
     } finally {
       setIsLoading(false);
     }
@@ -75,14 +75,16 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
           value={userInfo.password}
           onChange={handleChange}
         />
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        {signInError && (
+          <p className="mt-2 text-sm text-red-500">{signInError}</p>
+        )}{" "}
+        {/* ✅ Show error */}
         <button
           type="submit"
           className="w-full rounded bg-black p-2 text-white"
         >
           {isLoading ? "Loading..." : "Sign in"}
         </button>
-
         {/* Links */}
         <div className="mt-8 flex justify-between">
           <Link href="#" className="text-blue-950 underline">

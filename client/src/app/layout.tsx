@@ -6,6 +6,7 @@ import "./globals.css";
 import HomePageWrapper from "./homepageWrapper";
 import { Analytics } from "@vercel/analytics/react";
 import { ProductProvider } from "@/context/ProductContext";
+import { Toaster } from "@/components/ui/toaster";
 
 const lora = Lora({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <HomePageWrapper>
           <ProductProvider>
             {children}
+            <Toaster />
             <Analytics />
           </ProductProvider>
         </HomePageWrapper>

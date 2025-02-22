@@ -12,11 +12,15 @@ interface CreateAccountFormProps {
   handleClose: () => void;
   handleCreateAccount: (formData: NewUser) => void;
   callBackUrl?: string;
+  createAccountError?: string; // ✅ Accept error
+  onInputChange?: () => void; // ✅ Callback for clearing error
 }
 
 const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   handleClose,
   handleCreateAccount,
+  createAccountError,
+  onInputChange, // ✅ Use this to clear errors
 }) => {
   const [formData, setFormData] = useState<NewUser>({
     email: "",
@@ -50,6 +54,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    onInputChange?.(); // ✅ Clear error when user types
   };
 
   // Validate passwords match on input
@@ -242,8 +247,8 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
             )}
           </div>
 
-          {errorMessage && (
-            <p className="text-red-500">Error creating account. Try again.</p>
+          {createAccountError && (
+            <p className="mt-2 text-sm text-red-500">{createAccountError}</p> // ✅ Show error message
           )}
 
           <Button
