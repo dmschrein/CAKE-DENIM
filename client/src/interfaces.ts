@@ -155,6 +155,7 @@ export interface User {
   userType: UserType;
   phone: string;
   gender: string;
+  createdAt: string;
   orders: Order[];
 }
 
