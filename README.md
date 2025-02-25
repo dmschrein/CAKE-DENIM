@@ -83,8 +83,11 @@ npm run seed
 npx prisma db push
 ```
 
+## Add a column to a table
+
 ```
-npx prisma migrate dev
+npx prisma migrate dev --name <add_column_to_table>
+npx prisma generate
 ```
 
 ## Start Prisma Studio

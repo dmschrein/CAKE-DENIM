@@ -1,9 +1,8 @@
-// import OrderHistory from "./components/OrderHistory";
-// import Profile from "./components/Profile";
-// import EditPassword from "./components/EditPassword";
-// import AddressBook from "./components/AddressBook";
-// import Favorites from "./components/Favorites";
-// import SavedPayments from "./components/SavedPayments";
+import Profile from "@/components/account/Profile";
+import EditPassword from "@/components/account/EditPassword";
+import AddressBook from "@/components/account/AddressBook";
+import Favorites from "@/components/account/Favorites";
+import SavedPayments from "@/components/account/SavedPayments";
 // import CakeScale from "./components/CakeScale";
 import AccountHome from "@/components/account/AccountHome";
 import OrderHistory from "@/components/account/OrderHistory";
@@ -54,16 +53,16 @@ const AccountContent: React.FC<AccountContentProps> = ({
           isError={orderError}
         />
       );
-    // case "profile":
-    //   return <Profile userDetails={userDetails} />;
-    // case "password":
-    //   return <EditPassword />;
-    // case "address-book":
-    //   return <AddressBook />;
-    // case "favorites":
-    //   return <Favorites />;
-    // case "payment":
-    //   return <SavedPayments />;
+    case "profile":
+      return <Profile userDetails={userDetails} />;
+    case "password":
+      return <EditPassword />;
+    case "address-book":
+      return <AddressBook />;
+    case "favorites":
+      return <Favorites />;
+    case "payment":
+      return <SavedPayments />;
     // case "cake-scale":
     //   return <CakeScale />;
     default:

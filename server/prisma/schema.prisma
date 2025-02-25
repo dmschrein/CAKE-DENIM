@@ -90,6 +90,7 @@ model Products {
   Categories      ProductCategories[]
   ProductVariants ProductVariants[]
   SubCategories   ProductSubCategories[]
+  OrderItems      OrderItems[]
 }
 
 model Variants {
@@ -190,12 +191,14 @@ model OrderItems {
   orderItemId String   @id @default(uuid())
   orderId     String
   variantId   String
+  productId   String
   size        String // Add this line if you need size stored directly in OrderItems
   color       String // Add this line if you need color stored directly in OrderItems
   quantity    Int
   price       Float
   Order       Orders   @relation(fields: [orderId], references: [orderId])
   variant     Variants @relation(fields: [variantId], references: [variantId])
+  product     Products @relation(fields: [productId], references: [productId])
 }
 
 model ShippingInfo {
@@ -234,9 +237,11 @@ enum PaymentType {
 }
 
 model PaymentInfo {
-  paymentId   String      @id @default(uuid())
-  paymentType PaymentType @default(CREDIT_CARD)
-  Orders      Orders[]
+  paymentId       String      @id @default(uuid())
+  paymentType     PaymentType @default(CREDIT_CARD)
+  method          String
+  cardLast4Digits String
+  Orders          Orders[]
 }
 
 model CartItems {

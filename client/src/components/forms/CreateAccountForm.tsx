@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Button } from "../ui/button";
-import { NewUser } from "@/interfaces";
+import { NewUser } from "shared/src/interfaces";
 
 type TouchedFields = {
   [K in keyof NewUser]: boolean;

@@ -12,7 +12,7 @@ import {
   PaymentData,
   PaymentResponse,
   Variant,
-} from "@/interfaces";
+} from "shared/src/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
 export const api = createApi({

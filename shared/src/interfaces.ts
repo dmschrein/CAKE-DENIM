@@ -109,6 +109,7 @@ export interface OrderItem {
   color: string;
   price: number;
   quantity: number;
+  product: Product;
 }
 
 export interface NewOrderItem {
@@ -149,14 +150,14 @@ export interface HomePageMetrics {
 export interface User {
   userId: string;
   email: string;
-  password: string;
+  password?: string;
   firstName: string;
   lastName: string;
-  userType: UserType;
-  phone: string;
-  gender: string;
+  userType?: UserType;
+  phone?: string;
+  gender?: string;
   createdAt: string;
-  orders: Order[];
+  orders?: Order[];
 }
 
 // NewUser for create mutation

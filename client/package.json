@@ -82,6 +82,7 @@
     "react-router-dom": "^6.27.0",
     "recharts": "^2.12.7",
     "redux-persist": "^6.0.0",
+    "shared": "file:../shared",
     "sonner": "^1.5.0",
     "stripe": "^17.2.1",
     "svix": "^1.37.0",

@@ -3,12 +3,7 @@ import NextAuth from "next-auth";
 
 declare module "next-auth" {
   interface Session {
-    user: {
-      id: string;
-      email: string;
-      firstName: string;
-      lastName: string;
-    };
+    user: User; // Use the application-wide User type
   }
 
   interface User {
@@ -16,5 +11,10 @@ declare module "next-auth" {
     email: string;
     firstName: string;
     lastName: string;
+    userType?: string;
+    phone?: string;
+    gender?: string;
+    createdAt?: string;
+    orders?: Order[];
   }
 }

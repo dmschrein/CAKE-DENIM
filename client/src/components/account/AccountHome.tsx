@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "@/interfaces";
+import { User } from "shared/src/interfaces";
 
 type Props = {
   userDetails: User | null;
