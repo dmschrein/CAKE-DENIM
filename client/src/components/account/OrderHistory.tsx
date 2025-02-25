@@ -11,18 +11,27 @@ type Props = {
 const OrderHistory: React.FC<Props> = ({ orders, isLoading, isError }) => {
   if (isLoading) return <div>Loading your orders...</div>;
   if (isError || !orders.length) return <div>No orders found.</div>;
-  console.log("ORDERS:", orders);
+  console.log("ORDERS DATA:", orders);
   return (
     <div className="rounded-lg bg-white p-6 shadow-md">
       <h2 className="mb-4 text-xl font-semibold">Order History</h2>
       <ul>
-        {orders.map((order) => (
-          <li key={order.orderId} className="rounded-md border p-4">
-            {order.orderItems?.map((orderItem) => {
-              const product = orderItem.product;
-              const imageUrl = product.imageURL || product.imageURL2?.[0]; // Fallback to imageURL2[0]
-              return (
-                <div key={product.productId} className="mb-4">
+        {orders.map((order) => {
+          console.log("ORDER:", order.orderId);
+          const OrderItems = order.orderItems; // Get the first item
+          console.log("Order Items:", OrderItems);
+          const firstOrderItem = order.orderItems?.[0]; // Get product data
+          console.log("First Order Item:", order.orderItems);
+          const product = firstOrderItem.product;
+          console.log("Product: ", product);
+          const imageUrl =
+            product?.imageURL ??
+            (Array.isArray(product?.imageURL2) ? product.imageURL2[0] : null);
+          console.log("Image URL: ", imageUrl);
+          return (
+            <li key={order.orderId} className="rounded-md border p-4">
+              {product ? (
+                <div className="mb-4">
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
@@ -30,6 +39,7 @@ const OrderHistory: React.FC<Props> = ({ orders, isLoading, isError }) => {
                       width={96}
                       height={96}
                       className="h-24 w-24 object-cover"
+                      unoptimized // Allow external images without Next.js optimization
                     />
                   ) : (
                     <div className="flex h-24 w-24 items-center justify-center bg-gray-200">
@@ -40,26 +50,24 @@ const OrderHistory: React.FC<Props> = ({ orders, isLoading, isError }) => {
                     <strong>Product:</strong> {product.name}
                   </p>
                 </div>
-              );
-            })}
-            <p>
-              <strong>Order ID:</strong>
-              {order.orderId}
-            </p>
-            <p>
-              <strong>Order Date:</strong>
-              {order.createdAt}
-            </p>
-            <p>
-              <strong>Total:</strong>
-              {order.totalAmount}
-            </p>
-            <p>
-              <strong>Status:</strong>
-              {order.status}
-            </p>
-          </li>
-        ))}
+              ) : (
+                <p>⚠️ No product found for this order.</p>
+              )}
+              <p>
+                <strong>Order ID:</strong> {order.orderId}
+              </p>
+              <p>
+                <strong>Order Date:</strong> {order.createdAt}
+              </p>
+              <p>
+                <strong>Total:</strong> {order.totalAmount}
+              </p>
+              <p>
+                <strong>Status:</strong> {order.status}
+              </p>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

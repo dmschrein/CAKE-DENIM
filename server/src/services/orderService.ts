@@ -146,7 +146,16 @@ export class OrderService {
           },
         },
       });
-      return orders;
+
+      // Ensure the returned structure is formatted correctly
+      const formattedOrders = orders.map((order) => ({
+        ...order,
+        orderItems: order.OrderItems, // Map OrderItems to orderItems
+      }));
+
+      console.log("Formatted Orders:", formattedOrders);
+
+      return formattedOrders;
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Failed to retrieve orders: ${error.message}`);
