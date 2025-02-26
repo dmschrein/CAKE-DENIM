@@ -415,6 +415,28 @@ export const api = createApi({
         }
       },
     }),
+    updatePassword: build.mutation<
+      { message: string }, // Expected response
+      { userId: string; currentPassword: string; newPassword: string } // Payload
+    >({
+      query: ({ userId, currentPassword, newPassword }) => {
+        console.log("Updating password for user:", userId);
+        return {
+          url: `/api/users/${userId}/password`,
+          method: "PATCH",
+          body: { currentPassword, newPassword },
+        };
+      },
+      invalidatesTags: ["Users"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Password updated successfully:", data);
+        } catch (error) {
+          console.error("Error updating password:", error);
+        }
+      },
+    }),
   }),
 });
 
@@ -435,4 +457,5 @@ export const {
   useCreatePaymentMutation,
   useCreateOrderMutation,
   useGetProductsByPrimaryCategoryQuery,
+  useUpdatePasswordMutation,
 } = api;

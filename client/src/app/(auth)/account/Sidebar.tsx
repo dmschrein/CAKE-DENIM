@@ -16,10 +16,7 @@ const sections: { id: Section; label: string }[] = [
   { id: "order-history", label: "Order History" },
   { id: "profile", label: "Profile" },
   { id: "password", label: "Password" },
-  { id: "address-book", label: "Address Book" },
   { id: "favorites", label: "Favorites" },
-  { id: "payment", label: "Payment" },
-  { id: "cake-scale", label: "CAKE Scale" },
 ];
 
 type Props = {

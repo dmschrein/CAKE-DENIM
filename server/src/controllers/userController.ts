@@ -182,9 +182,28 @@ export const updateUser = async (
 ): Promise<void> => {
   try {
     const { userId } = req.params; // provided by session
-    const { email, password, firstName, lastName, userType } = req.body;
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      userType,
+      phone,
+      gender,
+      preferredSize,
+      birthday,
+    } = req.body;
 
     console.log("Received user data: ", { email, userType });
+    // Fetch user from the database
+    const user = await prisma.users.findUnique({
+      where: { userId },
+    });
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
 
     // Hash the password if it is being updated
     let passwordHash;
@@ -196,10 +215,29 @@ export const updateUser = async (
       where: { userId },
       data: {
         email,
-        passwordHash: passwordHash || undefined, // Only update if password is provided
+        passwordHash: passwordHash || undefined, // Update only if password is provided
         firstName,
         lastName,
         userType,
+        phone,
+        gender,
+        preferredSize,
+        birthday: birthday
+          ? {
+              upsert: {
+                create: {
+                  month: birthday.month,
+                  day: birthday.day,
+                  year: birthday.year,
+                },
+                update: {
+                  month: birthday.month,
+                  day: birthday.day,
+                  year: birthday.year,
+                },
+              },
+            }
+          : undefined, // Update only if provided
       },
     });
     console.log("User updated successfully: ", updatedUser);
@@ -207,5 +245,59 @@ export const updateUser = async (
   } catch (error) {
     console.error("Error updating user: ", error);
     res.status(500).json({ message: "Error updating user" });
+  }
+};
+
+export const updatePassword = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const { currentPassword, newPassword } = req.body;
+
+    if (!userId || !currentPassword || !newPassword) {
+      res.status(400).json({ message: "All fields are required." });
+      return;
+    }
+
+    const user = await prisma.users.findUnique({
+      where: { userId },
+    });
+
+    if (!user || !user.passwordHash) {
+      res.status(404).json({ message: "User not found." });
+      return;
+    }
+
+    // Verify the current password
+    const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!isMatch) {
+      res.status(400).json({ message: "Incorrect current password." });
+      return;
+    }
+
+    // Prevent setting the same password
+    const isSamePassword = await bcrypt.compare(newPassword, user.passwordHash);
+    if (isSamePassword) {
+      res.status(400).json({
+        message: "New password cannot be the same as the old password.",
+      });
+      return;
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+    // Update password in the database
+    await prisma.users.update({
+      where: { userId },
+      data: { passwordHash: hashedPassword },
+    });
+
+    res.status(200).json({ message: "Password updated successfully." });
+  } catch (error) {
+    console.error("Error updating password:", error);
+    res.status(500).json({ message: "Error updating password." });
   }
 };

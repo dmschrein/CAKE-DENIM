@@ -63,12 +63,12 @@ const AccountContent: React.FC<AccountContentProps> = ({
       );
     case "password":
       return <EditPassword />;
-    case "address-book":
-      return <AddressBook />;
+    // case "address-book":
+    //   return <AddressBook />;
     case "favorites":
       return <Favorites />;
-    case "payment":
-      return <SavedPayments />;
+    // case "payment":
+    //   return <SavedPayments />;
     // case "cake-scale":
     //   return <CakeScale />;
     default:
