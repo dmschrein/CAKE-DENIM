@@ -1,7 +1,7 @@
 "use client";
 
 import CollectionPage from "@/components/common/CollectionPage";
-import { Product } from "@/interfaces";
+import { Product } from "shared/src/interfaces";
 import { useGetProductsByPrimaryCategoryQuery } from "@/state/api";
 import { useParams } from "next/navigation";
 import React from "react";

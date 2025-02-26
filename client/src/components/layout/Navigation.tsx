@@ -84,6 +84,7 @@ const Navigation: React.FC = () => {
 
   const handleSignin = () => {
     console.log("Sign In button clicked");
+    setIsOpen(true);
     setShowModal(true);
   };
 
@@ -217,7 +218,7 @@ const Navigation: React.FC = () => {
         {/* Right Side Options */}
         <div className="flex items-center gap-6">
           <div className="flex items-center">
-            <Link href="/saved">Favorites</Link>
+            <Link href="/account?tab=favorites">Favorites</Link>
             <HeartIcon className="h-4 w-4" />
           </div>
           {/* Check if user is logged in

@@ -20,6 +20,15 @@ enum UserType {
   REGISTERED
 }
 
+// Add Gender Enum
+enum Gender {
+  MALE
+  FEMALE
+  NON_BINARY
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
 // User (Customers) Model
 model Users {
   userId           String     @id @default(uuid())
@@ -27,16 +36,29 @@ model Users {
   passwordHash     String?
   firstName        String?
   lastName         String?
+  phone            String?
+  gender           Gender?
   addressId        String?
   address          Address?   @relation(fields: [addressId], references: [addressId])
   userType         UserType   @default(REGISTERED)
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
   stripeCustomerId String?
+  birthdayId       String?
+  birthday         Birthday?  @relation(fields: [birthdayId], references: [birthdayId])
+  preferredSize    String?
   Reviews          Reviews[] // each user can have multiple reviews
   Orders           Orders[]
   Cart             Carts?
   favoriteProducts Products[]
+}
+
+model Birthday {
+  birthdayId String  @id @default(uuid())
+  month      String
+  day        String
+  year       String
+  Users      Users[]
 }
 
 model Address {
@@ -90,6 +112,7 @@ model Products {
   Categories      ProductCategories[]
   ProductVariants ProductVariants[]
   SubCategories   ProductSubCategories[]
+  OrderItems      OrderItems[]
 }
 
 model Variants {
@@ -190,12 +213,14 @@ model OrderItems {
   orderItemId String   @id @default(uuid())
   orderId     String
   variantId   String
+  productId   String
   size        String // Add this line if you need size stored directly in OrderItems
   color       String // Add this line if you need color stored directly in OrderItems
   quantity    Int
   price       Float
   Order       Orders   @relation(fields: [orderId], references: [orderId])
   variant     Variants @relation(fields: [variantId], references: [variantId])
+  product     Products @relation(fields: [productId], references: [productId])
 }
 
 model ShippingInfo {
@@ -234,9 +259,11 @@ enum PaymentType {
 }
 
 model PaymentInfo {
-  paymentId   String      @id @default(uuid())
-  paymentType PaymentType @default(CREDIT_CARD)
-  Orders      Orders[]
+  paymentId       String      @id @default(uuid())
+  paymentType     PaymentType @default(CREDIT_CARD)
+  method          String
+  cardLast4Digits String
+  Orders          Orders[]
 }
 
 model CartItems {

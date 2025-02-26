@@ -3,6 +3,7 @@
 import { useCart } from "@/providers/CartProvider"; // Custom hook for accessing the cart context
 import { useRouter } from "next/navigation"; // Hook for navigating between pages in Next.js
 import Image from "next/image"; // Component for optimized image rendering in Next.js
+import { useSession } from "next-auth/react";
 // import { useAuth } from "@/context/AuthProvider";
 
 // Define the props the component will receive
@@ -28,7 +29,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
   const router = useRouter();
 
   // Retrieve the user's session status from NextAuth
-  // const { session, status } = useAuth();
+  const { status } = useSession();
   const isLoggedIn = status === "authenticated";
 
   if (!visible) return null;

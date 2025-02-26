@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PaymentForm from "@/components/forms/PaymentForm";
 import ReviewForm from "@/components/forms/ReviewForm";
-import { ShippingInfo, BillingInfo } from "@/interfaces";
+import { ShippingInfo, BillingInfo } from "shared/src/interfaces";
 
 // Load Stripe using the publishable key
 const stripePromise = loadStripe(

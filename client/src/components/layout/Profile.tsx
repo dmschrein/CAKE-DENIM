@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
-import { User } from "@/interfaces";
+import { User } from "shared/src/interfaces";
 import {
   FormControl,
   FormField,

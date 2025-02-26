@@ -7,7 +7,7 @@ import CreateAccountForm from "@/components/forms/CreateAccountForm";
 import GuestSigninForm from "@/components/forms/GuestSigninForm";
 import Modal from "@/components/common/Modal";
 import SignInFormContainer from "@/components/common/SignInFormContainer";
-import { NewUser } from "@/interfaces";
+import { NewUser } from "shared/src/interfaces";
 
 // Component to create labeled input fields for forms
 

@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { ShippingInfo } from "@/interfaces";
+import { ShippingInfo } from "shared/src/interfaces";
 import OrderSummary from "../layout/OrderSummary";
 
 interface ShippingFormProps {

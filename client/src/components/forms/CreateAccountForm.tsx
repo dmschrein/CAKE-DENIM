@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Button } from "../ui/button";
-import { NewUser } from "@/interfaces";
+import { NewUser } from "shared/src/interfaces";
 
 type TouchedFields = {
   [K in keyof NewUser]: boolean;
@@ -12,11 +12,15 @@ interface CreateAccountFormProps {
   handleClose: () => void;
   handleCreateAccount: (formData: NewUser) => void;
   callBackUrl?: string;
+  createAccountError?: string; // ✅ Accept error
+  onInputChange?: () => void; // ✅ Callback for clearing error
 }
 
 const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   handleClose,
   handleCreateAccount,
+  createAccountError,
+  onInputChange, // ✅ Use this to clear errors
 }) => {
   const [formData, setFormData] = useState<NewUser>({
     email: "",
@@ -50,6 +54,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    onInputChange?.(); // ✅ Clear error when user types
   };
 
   // Validate passwords match on input
@@ -84,7 +89,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     try {
       handleCreateAccount(formData);
     } catch (error: any) {
-      setErrorMessage(error.message || "Something went wrong.");
+      setErrorMessage(errorMessage || "Something went wrong.");
     } finally {
       setIsLoading(false);
     }
@@ -242,8 +247,8 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
             )}
           </div>
 
-          {errorMessage && (
-            <p className="text-red-500">Error creating account. Try again.</p>
+          {createAccountError && (
+            <p className="mt-2 text-sm text-red-500">{createAccountError}</p> // ✅ Show error message
           )}
 
           <Button

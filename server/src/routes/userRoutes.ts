@@ -5,6 +5,9 @@ import {
   createUser,
   getUsers,
   updateUser,
+  updatePassword,
+  updateFavorites,
+  getFavorites,
 } from "../controllers/userController";
 
 const router = Router();
@@ -15,5 +18,8 @@ router.get("/", getUsers);
 router.get("/:userId", getUsers);
 router.post("/", createUser);
 router.patch("/:userId", updateUser);
+router.patch("/:userId/password", updatePassword);
+router.patch("/:userId/favorites", updateFavorites);
+router.get("/:userId/favorites", getFavorites);
 
 export default router;

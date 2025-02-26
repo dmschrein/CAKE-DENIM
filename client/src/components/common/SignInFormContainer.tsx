@@ -16,6 +16,10 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
   callbackUrl = "/account",
   onSignInSuccess,
 }) => {
+  const [signInError, setSignInError] = useState<string | undefined>(undefined); // ✅ Change null to undefined
+  const [createAccountError, setCreateAccountError] = useState<
+    string | undefined
+  >(undefined); // ✅ Change null to undefined
   const [activeForm, setActiveForm] = useState<"signin" | "createAccount">(
     "signin",
   );
@@ -26,6 +30,8 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
     password: string;
   }) => {
     try {
+      setSignInError(undefined);
+
       const result = await signIn("credentials", {
         email: userInfo.email,
         password: userInfo.password,
@@ -33,7 +39,8 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
       });
 
       if (result?.error) {
-        throw new Error("User not found. Please check your email or password.");
+        setSignInError("User not found. Please check your email or password.");
+        return;
       }
 
       if (onSignInSuccess) {
@@ -41,7 +48,7 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
       }
       router.push(callbackUrl);
     } catch (error) {
-      throw error; // Pass the error back to SigninFormCommon
+      setSignInError("Somthing went wrong. Please try again.");
     }
   };
 
@@ -57,14 +64,15 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
     userType: string;
   }) => {
     try {
+      setCreateAccountError(undefined); // ✅ Clear error before attempting sign-up
       // Ensure emails match
       if (userInfo.email !== userInfo.confirmEmail) {
-        throw new Error("Emails do not match.");
+        setCreateAccountError("Emails do not match.");
       }
 
       // Ensure passwords match
       if (userInfo.password !== userInfo.confirmPassword) {
-        throw new Error("Passwords do not match.");
+        setCreateAccountError("Passwords do not match.");
       }
 
       // Create the user
@@ -84,7 +92,7 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
       // Automatically sign in after account creation
       await handleSignIn({ email, password });
     } catch (error: any) {
-      console.error("Failed to create account:", error.message);
+      setCreateAccountError("Failed to create account. Please try again.");
     }
   };
 
@@ -103,6 +111,8 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
           formTitle="Sign in for a faster checkout"
           handleSignIn={handleSignIn}
           handleCreateAccountClick={handleSwitchToCreateAccount}
+          signInError={signInError}
+          onInputChange={() => setSignInError(undefined)}
         />
       ) : (
         <CreateAccountForm
@@ -110,6 +120,8 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
           handleCreateAccount={handleCreateAccount}
           handleClose={handleSwitchToSignIn}
           callBackUrl={callbackUrl}
+          createAccountError={createAccountError} // ✅ Pass error state
+          onInputChange={() => setCreateAccountError(undefined)} // ✅ Clear error when user types
         />
       )}
     </div>

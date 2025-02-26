@@ -12,7 +12,7 @@ import {
   PaymentData,
   PaymentResponse,
   Variant,
-} from "@/interfaces";
+} from "shared/src/interfaces";
 
 /* API Service to manage requests and stat in a declarative way */
 export const api = createApi({
@@ -29,6 +29,7 @@ export const api = createApi({
     "Orders",
     "Variants",
     "ProductsByCategory",
+    "Favorites",
   ],
 
   /*
@@ -415,6 +416,62 @@ export const api = createApi({
         }
       },
     }),
+    updatePassword: build.mutation<
+      { message: string }, // Expected response
+      { userId: string; currentPassword: string; newPassword: string } // Payload
+    >({
+      query: ({ userId, currentPassword, newPassword }) => {
+        console.log("Updating password for user:", userId);
+        return {
+          url: `/api/users/${userId}/password`,
+          method: "PATCH",
+          body: { currentPassword, newPassword },
+        };
+      },
+      invalidatesTags: ["Users"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Password updated successfully:", data);
+        } catch (error) {
+          console.error("Error updating password:", error);
+        }
+      },
+    }),
+    updateFavorites: build.mutation<
+      { message: string }, // Expected response
+      { userId: string; productId: string } // Payload
+    >({
+      query: ({ userId, productId }) => ({
+        url: `/api/users/${userId}/favorites`,
+        method: "PATCH",
+        body: { productId },
+      }),
+      invalidatesTags: ["Favorites"],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Favorites updated successfully:", data);
+        } catch (error) {
+          console.error("Error updating favorites:", error);
+        }
+      },
+    }),
+    getFavorites: build.query<Product[], string>({
+      query: (userId) => ({
+        url: `/api/users/${userId}/favorites`,
+        method: "GET",
+      }),
+      providesTags: (_, __, userId) => [{ type: "Favorites", id: userId }],
+      onQueryStarted: async (_args, { queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log("Favorites fetched successfully:", data);
+        } catch (error) {
+          console.error("Error fetching favorites:", error);
+        }
+      },
+    }),
   }),
 });
 
@@ -435,4 +492,7 @@ export const {
   useCreatePaymentMutation,
   useCreateOrderMutation,
   useGetProductsByPrimaryCategoryQuery,
+  useUpdatePasswordMutation,
+  useUpdateFavoritesMutation,
+  useGetFavoritesQuery,
 } = api;
