@@ -1,8 +1,8 @@
 import Profile from "@/components/account/Profile";
 import EditPassword from "@/components/account/EditPassword";
-import AddressBook from "@/components/account/AddressBook";
+// import AddressBook from "@/components/account/AddressBook";
 import Favorites from "@/components/account/Favorites";
-import SavedPayments from "@/components/account/SavedPayments";
+// import SavedPayments from "@/components/account/SavedPayments";
 // import CakeScale from "./components/CakeScale";
 import AccountHome from "@/components/account/AccountHome";
 import OrderHistory from "@/components/account/OrderHistory";
