@@ -301,3 +301,76 @@ export const updatePassword = async (
     res.status(500).json({ message: "Error updating password." });
   }
 };
+export const updateFavorites = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const { productId } = req.body;
+
+    if (!userId || !productId) {
+      res.status(400).json({ message: "User ID and Product ID are required." });
+      return;
+    }
+
+    const user = await prisma.users.findUnique({
+      where: { userId },
+      include: { favoriteProducts: true },
+    });
+
+    if (!user) {
+      res.status(404).json({ message: "User not found." });
+      return;
+    }
+
+    const isFavorite = user.favoriteProducts.some(
+      (product) => product.productId === productId
+    );
+
+    await prisma.users.update({
+      where: { userId },
+      data: {
+        favoriteProducts: isFavorite
+          ? { disconnect: { productId } } // Remove from favorites
+          : { connect: { productId } }, // Add to favorites
+      },
+    });
+
+    res.status(200).json({
+      message: isFavorite ? "Removed from favorites." : "Added to favorites.",
+    });
+  } catch (error) {
+    console.error("Error updating favorites:", error);
+    res.status(500).json({ message: "Error updating favorites." });
+  }
+};
+
+export const getFavorites = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      res.status(400).json({ message: "User ID is required." });
+      return;
+    }
+
+    const user = await prisma.users.findUnique({
+      where: { userId },
+      include: { favoriteProducts: true },
+    });
+
+    if (!user) {
+      res.status(404).json({ message: "User not found." });
+      return;
+    }
+
+    res.status(200).json(user.favoriteProducts);
+  } catch (error) {
+    console.error("Error fetching favorites:", error);
+    res.status(500).json({ message: "Error fetching favorites." });
+  }
+};

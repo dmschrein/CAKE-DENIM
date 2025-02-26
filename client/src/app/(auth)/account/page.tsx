@@ -1,18 +1,11 @@
 "use client";
 
 import { signOut, useSession } from "next-auth/react";
-
-import React, { useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import React from "react";
 import Sidebar from "./Sidebar";
 import AccountContent from "./AccountContent";
 import { Gender, User } from "shared/src/interfaces";
-
-{
-  /* TODO:
-   * Add side bar that has account details (home), (order history), saved(favorites)
-   * addresses, password
-   */
-}
 
 type Section =
   | "home"
@@ -25,28 +18,34 @@ type Section =
   | "cake-scale";
 
 const AccountPage: React.FC = () => {
-  // store the session data for the user
   const { data: session } = useSession();
-  console.log("Session data: ", session);
   const userEmail = session?.user?.email;
-  console.log("User email: ", userEmail);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
+  // Get the active tab from the URL, default to "home"
+  const tab = (searchParams.get("tab") as Section) || "home";
+
+  // User object derived from NextAuth session
   const user: User | null = session?.user
     ? {
-        userId: session.user.id, // Rename 'id' -> 'userId'
+        userId: session.user.id,
         email: session.user.email,
         firstName: session.user.firstName || "",
         lastName: session.user.lastName || "",
-        password: "", // Placeholder since NextAuth does not provide passwords
-        userType: "REGISTERED", // Default role
-        phone: "", // Default empty string
-        gender: Gender.PreferNotToSay, // Use Gender enum
-        createdAt: new Date().toISOString(), // Default timestamp
-        orders: [], // Empty array by default
+        password: "",
+        userType: "REGISTERED",
+        phone: "",
+        gender: Gender.PreferNotToSay,
+        createdAt: new Date().toISOString(),
+        orders: [],
       }
     : null;
 
-  const [selectedSection, setSelectedSection] = useState<Section>("home");
+  // Function to update the active tab in the URL
+  const handleTabChange = (newTab: Section) => {
+    router.push(`/account?tab=${newTab}`);
+  };
 
   const handleSignOutClicked = async () => {
     await signOut({ callbackUrl: "/" });
@@ -56,12 +55,13 @@ const AccountPage: React.FC = () => {
     <div className="flex min-h-screen bg-white">
       {/* Sidebar */}
       <Sidebar
-        selectedSection={selectedSection}
-        setSelectedSection={setSelectedSection}
+        selectedSection={tab}
+        setSelectedSection={handleTabChange} // Updates the URL instead of local state
         handleSignOut={handleSignOutClicked}
         userDetails={user}
       />
-      <AccountContent selectedSection={selectedSection} userEmail={userEmail} />
+      {/* Main Account Content */}
+      <AccountContent selectedSection={tab} userEmail={userEmail} />
     </div>
   );
 };

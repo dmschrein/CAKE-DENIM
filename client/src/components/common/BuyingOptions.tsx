@@ -2,7 +2,9 @@
 
 import { FC } from "react";
 import { useCart } from "@/providers/CartProvider";
-import { Product, Variant } from "../../interfaces";
+import { Product, Variant } from "shared/src/interfaces";
+import { useSession } from "next-auth/react";
+import { useUpdateFavorites } from "@/hooks/useUpdateFavorites";
 
 interface Props {
   product: Product;
@@ -15,6 +17,11 @@ interface Props {
 }
 const BuyingOptions: FC<Props> = ({ product, variantId, color, size }) => {
   const { updateCart } = useCart();
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+
+  const { updateFavorites, error, successMessage, isLoading } =
+    useUpdateFavorites();
 
   {
     /* 6. Called when the Add to Car button is clicked */
@@ -29,6 +36,14 @@ const BuyingOptions: FC<Props> = ({ product, variantId, color, size }) => {
     // specified details (product, variantId, color, size, and quantity of 1
     updateCart(product, variantId, color, size, 1);
   };
+  const onSaveClick = async () => {
+    if (!userId) {
+      alert("You must be logged in to save favorites.");
+      return;
+    }
+
+    await updateFavorites(userId, product.productId);
+  };
 
   return (
     <div className="flex space-x-2 p-2">
@@ -38,7 +53,16 @@ const BuyingOptions: FC<Props> = ({ product, variantId, color, size }) => {
       >
         Add to Cart
       </button>
-      <button className="flex-1 bg-blue-950 p-2 text-white">Save</button>
+      <button
+        onClick={onSaveClick}
+        className="bg-blue-950 p-2 text-white"
+        disabled={isLoading}
+      >
+        {isLoading ? "Saving..." : "Save"}
+      </button>
+
+      {error && <p className="text-red-500">{error}</p>}
+      {successMessage && <p className="text-green-500">{successMessage}</p>}
     </div>
   );
 };
