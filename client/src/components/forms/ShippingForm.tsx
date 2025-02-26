@@ -1,7 +1,7 @@
 // "use client";
 
 // import { useState, FormEvent } from "react";
-// import { ShippingInfo } from "@/interfaces";
+// import { ShippingInfo } from "shared/src/interfaces";
 
 // interface ShippingFormProps {
 //   shippingInfo: ShippingInfo | null;

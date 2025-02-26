@@ -6,7 +6,7 @@ import {
   useState,
   useEffect,
 } from "react";
-import { Product, Variant } from "../interfaces";
+import { Product, Variant } from "shared/src/interfaces";
 
 type cartItem = {
   product: Product;

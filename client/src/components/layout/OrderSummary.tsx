@@ -3,7 +3,7 @@
 import React from "react";
 import { useCart } from "@/providers/CartProvider";
 import Image from "next/image";
-import { ShippingInfo } from "@/interfaces";
+import { ShippingInfo } from "shared/src/interfaces";
 
 interface OrderSummaryProps {
   shippingInfo: ShippingInfo | null;

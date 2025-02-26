@@ -89,7 +89,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({
     try {
       handleCreateAccount(formData);
     } catch (error: any) {
-      setErrorMessage(error.message || "Something went wrong.");
+      setErrorMessage(errorMessage || "Something went wrong.");
     } finally {
       setIsLoading(false);
     }

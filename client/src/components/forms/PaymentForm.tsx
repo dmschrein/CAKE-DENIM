@@ -1,4 +1,4 @@
-import { ShippingInfo, BillingInfo } from "@/interfaces";
+import { ShippingInfo, BillingInfo } from "shared/src/interfaces";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import OrderSummary from "../layout/OrderSummary";

@@ -44,6 +44,8 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
     setIsLoading(true);
     try {
       await handleSignIn(userInfo);
+    } catch (error: any) {
+      setErrorMessage(errorMessage || "Failed to sign in. Please try again.");
     } finally {
       setIsLoading(false);
     }
