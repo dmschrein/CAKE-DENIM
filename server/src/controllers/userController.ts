@@ -60,6 +60,10 @@ export const createUser = async (
       firstName = "",
       lastName = "",
       userType,
+      phone,
+      gender,
+      preferredSize,
+      birthday,
     } = req.body; // Set default values for optional fields
 
     console.log("Received user data: ", { email, userType });
@@ -67,6 +71,7 @@ export const createUser = async (
     // Check if user already exists
     const existingUser = await prisma.users.findUnique({
       where: { email },
+      include: { birthday: true },
     });
 
     // If user exists and is trying to sign up using a different method
@@ -99,9 +104,32 @@ export const createUser = async (
                   : existingUser.passwordHash,
                 firstName: firstName || existingUser.firstName,
                 lastName: lastName || existingUser.lastName,
+                phone: phone || existingUser.phone,
+                gender: gender || existingUser.gender,
+                preferredSize: preferredSize || existingUser.preferredSize,
                 userType: "REGISTERED",
+
+                birthday: birthday
+                  ? {
+                      upsert: {
+                        create: {
+                          month: birthday.month,
+                          day: birthday.day,
+                          year: birthday.year,
+                        },
+                        update: {
+                          month: birthday.month,
+                          day: birthday.day,
+                          year: birthday.year,
+                        },
+                      },
+                    }
+                  : undefined, // Only update birthday if provided
               },
+              include: { birthday: true },
             });
+
+            console.log("User upgraded to REGISTERED:", updatedUser);
             res.status(200).json(updatedUser);
             return;
           }
@@ -125,7 +153,20 @@ export const createUser = async (
         firstName,
         lastName,
         userType,
+        phone,
+        gender,
+        preferredSize,
+        birthday: birthday
+          ? {
+              create: {
+                month: birthday.month,
+                day: birthday.day,
+                year: birthday.year,
+              },
+            }
+          : undefined, // Only create birthday if provided
       },
+      include: { birthday: true },
     });
     console.log("User created successfully: ", newUser);
     res.status(201).json(newUser); // Send the created user as the response

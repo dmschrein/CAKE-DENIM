@@ -147,6 +147,14 @@ export interface HomePageMetrics {
 }
 
 // User for update mutation and get queries
+export enum Gender {
+  Male = "MALE",
+  Female = "FEMALE",
+  NonBinary = "NON_BINARY",
+  Other = "OTHER",
+  PreferNotToSay = "PREFER_NOT_TO_SAY",
+}
+
 export interface User {
   userId: string;
   email: string;
@@ -155,12 +163,14 @@ export interface User {
   lastName: string;
   userType?: UserType;
   phone?: string;
-  gender?: string;
+  gender?: Gender; // ✅ Added gender field
   createdAt: string;
   orders?: Order[];
+
+  birthday?: Birthday;
+  preferredSize?: string;
 }
 
-// NewUser for create mutation
 export interface NewUser {
   email: string;
   confirmEmail: string;
@@ -169,6 +179,22 @@ export interface NewUser {
   firstName: string;
   lastName: string;
   userType: UserType;
+
+  phone?: string;
+  gender?: Gender; // ✅ Added gender field
+  preferredSize?: string;
+  birthday?: {
+    month: string;
+    day: string;
+    year: string;
+  };
+}
+
+export interface Birthday {
+  birthdayId: string;
+  month: string;
+  day: string;
+  year: string;
 }
 
 export interface GuestUser {

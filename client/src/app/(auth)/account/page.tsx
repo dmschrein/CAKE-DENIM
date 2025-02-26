@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import AccountContent from "./AccountContent";
-import { User } from "shared/src/interfaces";
+import { Gender, User } from "shared/src/interfaces";
 
 {
   /* TODO:
@@ -35,12 +35,12 @@ const AccountPage: React.FC = () => {
     ? {
         userId: session.user.id, // Rename 'id' -> 'userId'
         email: session.user.email,
-        firstName: session.user.firstName,
-        lastName: session.user.lastName,
+        firstName: session.user.firstName || "",
+        lastName: session.user.lastName || "",
         password: "", // Placeholder since NextAuth does not provide passwords
         userType: "REGISTERED", // Default role
         phone: "", // Default empty string
-        gender: "unknown", // Default
+        gender: Gender.PreferNotToSay, // Use Gender enum
         createdAt: new Date().toISOString(), // Default timestamp
         orders: [], // Empty array by default
       }
@@ -53,7 +53,7 @@ const AccountPage: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-white">
       {/* Sidebar */}
       <Sidebar
         selectedSection={selectedSection}

@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useStripe } from "@stripe/react-stripe-js";
 import { useCreatePaymentMutation, useCreateOrderMutation } from "@/state/api";
 import { useCart } from "@/providers/CartProvider";
-import { BillingInfo, NewOrder, ShippingInfo } from "@/interfaces";
+import { BillingInfo, NewOrder, ShippingInfo } from "shared/src/interfaces";
 import { useSession } from "next-auth/react";
 import OrderSummary from "../layout/OrderSummary";
 

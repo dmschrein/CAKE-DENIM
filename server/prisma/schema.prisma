@@ -20,6 +20,15 @@ enum UserType {
   REGISTERED
 }
 
+// Add Gender Enum
+enum Gender {
+  MALE
+  FEMALE
+  NON_BINARY
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
 // User (Customers) Model
 model Users {
   userId           String     @id @default(uuid())
@@ -27,16 +36,29 @@ model Users {
   passwordHash     String?
   firstName        String?
   lastName         String?
+  phone            String?
+  gender           Gender?
   addressId        String?
   address          Address?   @relation(fields: [addressId], references: [addressId])
   userType         UserType   @default(REGISTERED)
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
   stripeCustomerId String?
+  birthdayId       String?
+  birthday         Birthday?  @relation(fields: [birthdayId], references: [birthdayId])
+  preferredSize    String?
   Reviews          Reviews[] // each user can have multiple reviews
   Orders           Orders[]
   Cart             Carts?
   favoriteProducts Products[]
+}
+
+model Birthday {
+  birthdayId String  @id @default(uuid())
+  month      String
+  day        String
+  year       String
+  Users      Users[]
 }
 
 model Address {

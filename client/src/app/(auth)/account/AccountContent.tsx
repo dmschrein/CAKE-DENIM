@@ -54,7 +54,13 @@ const AccountContent: React.FC<AccountContentProps> = ({
         />
       );
     case "profile":
-      return <Profile userDetails={userDetails} />;
+      return (
+        <Profile
+          userDetails={userDetails}
+          isLoading={overLoading}
+          isError={orderError}
+        />
+      );
     case "password":
       return <EditPassword />;
     case "address-book":
