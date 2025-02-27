@@ -122,7 +122,7 @@ export const createWebhookController = async (): Promise<WebhookController> => {
     }
 
     const stripe = new Stripe(stripeSecretKey, {
-      apiVersion: "2025-01-27.acacia",
+      apiVersion: "2025-02-24.acacia",
     });
 
     logger.info("🟢 WebhookController initialized successfully.");
