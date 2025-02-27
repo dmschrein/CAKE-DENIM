@@ -28,7 +28,7 @@ export class CheckoutService {
       }
       console.log();
       this.stripe = new Stripe(stripeSecretKey, {
-        apiVersion: "2025-01-27.acacia", // Corrected API version
+        apiVersion: "2025-02-24.acacia", // Corrected API version
       });
 
       logger.info("Stripe initialized successfully for CheckoutService.");
