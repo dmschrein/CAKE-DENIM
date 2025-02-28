@@ -1,7 +1,6 @@
 // client/src/components/forms/SigninFormCommon.tsx
 "use client";
 
-import Link from "next/link";
 import React, { useState } from "react";
 import AuthFormContainer from "../common/AuthFormContainer";
 import AuthInput from "../common/AuthInput";
@@ -12,6 +11,7 @@ type SigninFormProps = {
   handleClose?: () => void;
   showCloseButton?: boolean;
   handleCreateAccountClick: () => void;
+  handleForgotPasswordClick: () => void;
   signInError?: string;
   onInputChange?: () => void;
 };
@@ -22,6 +22,7 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
   formTitle,
   handleSignIn,
   handleCreateAccountClick,
+  handleForgotPasswordClick,
   signInError,
   onInputChange,
 }) => {
@@ -58,6 +59,13 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
     handleCreateAccountClick();
   };
 
+  const handleForgotPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage(""); // Reset error message when creating an account
+    console.log("handleForgotPasswordClick:", handleForgotPasswordClick);
+    handleForgotPasswordClick();
+  };
+
   return (
     <>
       <AuthFormContainer title={formTitle} onSubmit={handleSignInClick}>
@@ -89,9 +97,12 @@ const SigninFormCommon: React.FC<SigninFormProps> = ({
         </button>
         {/* Links */}
         <div className="mt-8 flex justify-between">
-          <Link href="#" className="text-blue-950 underline">
+          <button
+            onClick={handleForgotPassword}
+            className="text-blue-950 underline"
+          >
             Forgot password?
-          </Link>
+          </button>
           <button
             onClick={handleCreateAccount}
             className="text-blue-950 underline"

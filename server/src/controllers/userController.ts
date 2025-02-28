@@ -76,68 +76,53 @@ export const createUser = async (
 
     // If user exists and is trying to sign up using a different method
     if (existingUser) {
-      switch (userType) {
-        case "EMAIL_ONLY":
-        case "GUEST":
-          // If the user exists and is EMAIL_ONLY or GUEST, return the existing user
-          console.log(
-            "Opt-in or Guest user already exists. Returning existing user."
-          );
-          res.status(200).json(existingUser);
-          return;
-        case "REGISTERED":
-          // if user exists and userType is REGISTER, ask user to log in
-          if (existingUser.userType === "REGISTERED") {
-            res.status(400).json({
-              message:
-                "Email already exists. Please log in or use other email.",
-            });
-            return;
-          } else {
-            // else if user exists (as GUEST or EMAIL_ONLY) but is creating an account. Update their information.
-            console.log("User is already in system. Update their information.");
-            const updatedUser = await prisma.users.update({
-              where: { email },
-              data: {
-                passwordHash: password
-                  ? await bcrypt.hash(password, saltRounds)
-                  : existingUser.passwordHash,
-                firstName: firstName || existingUser.firstName,
-                lastName: lastName || existingUser.lastName,
-                phone: phone || existingUser.phone,
-                gender: gender || existingUser.gender,
-                preferredSize: preferredSize || existingUser.preferredSize,
-                userType: "REGISTERED",
+      if (existingUser.userType == "REGISTERED") {
+        console.log("User already exists. Blocking account creation.");
+        res.status(400).json({
+          error: "USER_ALREADY_EXISTS",
+          message:
+            "An account with this email already exists. Please log in or use a different email.",
+        });
+        return;
+      } else {
+        // else if user exists (as GUEST or EMAIL_ONLY) but is creating an account. Update their information.
+        console.log("Upgrading existing user to REGISTERED.");
+        const updatedUser = await prisma.users.update({
+          where: { email },
+          data: {
+            passwordHash: password
+              ? await bcrypt.hash(password, saltRounds)
+              : existingUser.passwordHash,
+            firstName: firstName || existingUser.firstName,
+            lastName: lastName || existingUser.lastName,
+            phone: phone || existingUser.phone,
+            gender: gender || existingUser.gender,
+            preferredSize: preferredSize || existingUser.preferredSize,
+            userType: "REGISTERED",
 
-                birthday: birthday
-                  ? {
-                      upsert: {
-                        create: {
-                          month: birthday.month,
-                          day: birthday.day,
-                          year: birthday.year,
-                        },
-                        update: {
-                          month: birthday.month,
-                          day: birthday.day,
-                          year: birthday.year,
-                        },
-                      },
-                    }
-                  : undefined, // Only update birthday if provided
-              },
-              include: { birthday: true },
-            });
+            birthday: birthday
+              ? {
+                  upsert: {
+                    create: {
+                      month: birthday.month,
+                      day: birthday.day,
+                      year: birthday.year,
+                    },
+                    update: {
+                      month: birthday.month,
+                      day: birthday.day,
+                      year: birthday.year,
+                    },
+                  },
+                }
+              : undefined, // Only update birthday if provided
+          },
+          include: { birthday: true },
+        });
 
-            console.log("User upgraded to REGISTERED:", updatedUser);
-            res.status(200).json(updatedUser);
-            return;
-          }
-        default:
-          res.status(400).json({
-            message: "Email already exists. Please log in or use other email.",
-          });
-          return;
+        console.log("User upgraded to REGISTERED:", updatedUser);
+        res.status(200).json(updatedUser);
+        return;
       }
     }
     // Provide a default value for passwordHash if no password is provided
