@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import SigninFormCommon from "../forms/SigninFormCommon";
 import CreateAccountForm from "../forms/CreateAccountForm";
 import { useCreateUserMutation } from "@/state/api";
+import ForgotPasswordForm from "../forms/ForgotPasswordForm";
 
 interface SignInFormContainerProps {
   callbackUrl?: string;
@@ -132,6 +133,8 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
           signInError={signInError}
           onInputChange={() => setSignInError(undefined)}
         />
+      ) : activeForm === "forgotPassword" ? (
+        <ForgotPasswordForm handleClose={handleSwitchToSignIn} />
       ) : (
         <CreateAccountForm
           formTitle="Create An Account"
