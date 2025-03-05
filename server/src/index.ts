@@ -38,6 +38,7 @@ import webhookRoutes from "./routes/webhookRoutes";
       "https://cake-denim.vercel.app",
       "https://cake-denim-git-development-darrel-schreiners-projects.vercel.app",
       "https://main.d3pnxtvhsudm94.amplifyapp.com",
+      "https://cakedenim.com",
     ];
 
     // Security middleware

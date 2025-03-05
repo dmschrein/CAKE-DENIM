@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { sendSignupConfirmationEmail } from "../actions/email";
 
 const prisma = new PrismaClient();
 const saltRounds = 10;
@@ -154,6 +155,14 @@ export const createUser = async (
       include: { birthday: true },
     });
     console.log("User created successfully: ", newUser);
+    // Send signup confirmation email
+    try {
+      await sendSignupConfirmationEmail(newUser.email, newUser.firstName);
+      console.log("Signup confirmation email sent successfully.");
+    } catch (emailError) {
+      console.error("Failed to send signup confirmation email:", emailError);
+    }
+
     res.status(201).json(newUser); // Send the created user as the response
   } catch (error) {
     console.error("Error creating user:", error);
