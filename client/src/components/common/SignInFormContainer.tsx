@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import SigninFormCommon from "../forms/SigninFormCommon";
 import CreateAccountForm from "../forms/CreateAccountForm";
 import { useCreateUserMutation } from "@/state/api";
+import ForgotPasswordForm from "../forms/ForgotPasswordForm";
 
 interface SignInFormContainerProps {
   callbackUrl?: string;
@@ -20,9 +21,9 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
   const [createAccountError, setCreateAccountError] = useState<
     string | undefined
   >(undefined); // ✅ Change null to undefined
-  const [activeForm, setActiveForm] = useState<"signin" | "createAccount">(
-    "signin",
-  );
+  const [activeForm, setActiveForm] = useState<
+    "signin" | "createAccount" | "forgotPassword"
+  >("signin");
   const router = useRouter();
 
   const handleSignIn = async (userInfo: {
@@ -92,12 +93,29 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
       // Automatically sign in after account creation
       await handleSignIn({ email, password });
     } catch (error: any) {
-      setCreateAccountError("Failed to create account. Please try again.");
+      //console.error("❌ Error creating account:", error);
+
+      // Extract the actual error message
+      const serverError = error?.error?.data || error?.data;
+      const errorMessage =
+        serverError?.message || "Failed to create account. Please try again.";
+
+      if (serverError?.error === "USER_ALREADY_EXISTS") {
+        setCreateAccountError(
+          "An account with this email already exists. Please log in instead.",
+        );
+      } else {
+        setCreateAccountError(errorMessage);
+      }
     }
   };
 
   const handleSwitchToCreateAccount = () => {
     setActiveForm("createAccount");
+  };
+
+  const handleSwitchToForgotPassword = () => {
+    setActiveForm("forgotPassword");
   };
 
   const handleSwitchToSignIn = () => {
@@ -111,9 +129,12 @@ const SignInFormContainer: React.FC<SignInFormContainerProps> = ({
           formTitle="Sign in for a faster checkout"
           handleSignIn={handleSignIn}
           handleCreateAccountClick={handleSwitchToCreateAccount}
+          handleForgotPasswordClick={handleSwitchToForgotPassword}
           signInError={signInError}
           onInputChange={() => setSignInError(undefined)}
         />
+      ) : activeForm === "forgotPassword" ? (
+        <ForgotPasswordForm handleClose={handleSwitchToSignIn} />
       ) : (
         <CreateAccountForm
           formTitle="Create An Account"

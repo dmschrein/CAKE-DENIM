@@ -223,9 +223,25 @@ export const api = createApi({
       onQueryStarted: async (_arg, { queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
-          console.log("User created sucessfully: ", data);
-        } catch (error) {
-          console.error("Error creating user: ", error);
+          console.log("✅ User created successfully:", data);
+        } catch (error: any) {
+          // 1️⃣ Log the entire error object first
+          // console.error(
+          //   "❌ Full Error Object:",
+          //   JSON.stringify(error, null, 2),
+          // );
+          // Correctly extract the server response
+          const serverResponse = error?.error?.data || error?.data;
+
+          if (serverResponse) {
+            console.log("Extracted Server Response: ", serverResponse);
+            console.log("Extracted Error Message:", serverResponse.message);
+          } else {
+            console.log(
+              "Unexpected Error Format:",
+              JSON.stringify(error, null, 2),
+            );
+          }
         }
       },
     }),
