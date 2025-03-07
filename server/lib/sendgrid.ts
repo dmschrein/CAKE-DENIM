@@ -30,5 +30,5 @@ export const sendEmail = async ({
 
 const templates = {
   SignupConfirmation: "d-d76fbe57fcf74bb1abbf07852a4230bf",
-  ForgotPassword: "test",
+  ForgotPassword: "d-34345b3c4faa48fb9262f82eb0c8ac16",
 };

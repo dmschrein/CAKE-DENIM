@@ -1,11 +1,6 @@
 /* API Slice service to handle API interactions in a declarative way */
 
-import {
-  createApi,
-  fetchBaseQuery,
-  FetchBaseQueryArgs,
-  FetchBaseQueryError,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   Product,
   HomePageMetrics,
