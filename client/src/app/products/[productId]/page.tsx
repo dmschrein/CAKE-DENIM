@@ -111,10 +111,7 @@ const ProductsPage = () => {
           {product.imageURL2.map((image, index) => (
             <Image
               key={index}
-              src={
-                image ||
-                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
-              }
+              src={image || product.imageURL}
               alt="Thumbnail"
               width={100}
               height={150}

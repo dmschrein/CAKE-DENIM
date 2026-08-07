@@ -22,14 +22,5 @@
     "rating": 5.0,
     "comment": "Loved it.",
     "createdAt": "2024-01-08T22:08:30Z"
-  },
-  {
-    "reviewId": "4",
-    "userId": "2",
-    "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
-    "rating": 4.0,
-    "comment": "Loved it.",
-    "createdAt": "2024-01-09T22:08:30Z"
-
   }
 ]

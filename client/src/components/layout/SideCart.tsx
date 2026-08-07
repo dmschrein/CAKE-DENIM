@@ -81,7 +81,7 @@ const SideCart: React.FC<Props> = ({ visible, onRequestClose }) => {
             <div className="flex space-x-4">
               {/* Display product image using Next.js Image component for optimization */}
               <Image
-                src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png" // Replace with cartItem.product.thumbnail if applicable
+                src={cartItem.product.imageURL}
                 alt=""
                 className="rounded object-cover"
                 width={64}

@@ -38,34 +38,30 @@ const components: {
   {
     title: "Gift Guide",
     href: "/products/collection/Jeans",
-    image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore1.jpg",
-    // fallbackSrc: "/assets/cakebabe.png",
+    image:
+      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-side-pockets.jpg",
   },
   {
     title: "CAKE Travel Essentials",
     href: "/products/collection/Jeans",
     image:
       "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg",
-    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Escape with US",
     href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Ochoa1-front.jpg",
-    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Sexy Sustainables",
     href: "/products/collection/Jeans",
     image:
       "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell2-front.jpg",
-    // fallbackSrc: "/assets/cakebabe.png",
   },
   {
     title: "Desirable Denim",
     href: "/products/collection/Jeans",
     image: "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel1-full.jpg",
-    // fallbackSrc: "/assets/cakebabe.png",
   },
 ];
 
@@ -137,7 +133,7 @@ const Navigation: React.FC = () => {
                         </ListItem>
                         <ListItem
                           href="/products/collection/Tops"
-                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
+                          image="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Peron5-close-front.jpg"
                           title="Tops"
                           className="bg-white/10 transition-colors duration-200 hover:bg-white/20"
                         >
@@ -306,7 +302,6 @@ const ListItem = React.forwardRef<
           <div className="relative mb-2 h-44 w-28">
             <CustomImage
               src={image}
-              //fallbackSrc="/assets/cakebabe.png"
               alt={title}
               width={112}
               height={176}
