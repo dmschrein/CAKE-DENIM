@@ -28,18 +28,11 @@
     "description": "Distressed Wash Jeans"
   },
   {
-    "subcategoryId": "sttp002",
-    "subcategoryName": "Statement Tees",
-    "categoryId": "tp002",
-    "categoryName": "Tops",
-    "description": "Statement Tees"
-  },
-  {
     "subcategoryId": "cttp002",
     "subcategoryName": "Crop Tops",
     "categoryId": "tp002",
     "categoryName": "Tops",
-    "description": "Statement Tees"
+    "description": "Crop Tops"
   },
   {
     "subcategoryId": "dstp002",

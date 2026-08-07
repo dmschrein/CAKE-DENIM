@@ -104,8 +104,7 @@ export default function HomePage() {
         <ul className="grid h-full w-full gap-1 pt-1 md:grid-cols-3">
           <Link href={"/blog"}>
             <CustomImage
-              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
-              //fallbackSrc="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
+              src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Herschel1-full.jpg"
               width={601}
               height={752}
               alt="image1"
@@ -114,7 +113,6 @@ export default function HomePage() {
           <Link href={"/blog"}>
             <CustomImage
               src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy2-front-close.jpg"
-              //fallbackSrc="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
               width={601}
               height={752}
               alt="image2"
@@ -123,7 +121,6 @@ export default function HomePage() {
           <Link href={"/blog"}>
             <CustomImage
               src="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Blackwell6-back.jpg"
-              //fallbackSrc="https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg"
               width={601}
               height={752}
               alt="image2"

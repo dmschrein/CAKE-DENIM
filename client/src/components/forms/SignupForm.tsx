@@ -69,9 +69,8 @@ const SignupForm: React.FC<SignUpFormProps> = ({ handleClose }) => {
           <div className="mb-4 flex justify-center">
             <CustomImage
               src={
-                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/cakebabe.png"
+                "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Nightingale1-frontfull.jpg"
               }
-              fallbackSrc="/assets/cakebabe.png"
               width={748}
               height={850}
               alt="Signup"

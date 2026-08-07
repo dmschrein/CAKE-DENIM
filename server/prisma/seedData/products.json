@@ -57,44 +57,6 @@
     "updatedAt": "2023-04-01T12:00:00Z"
   },
   {
-    "productId": "cbs4-cd4f2wb0-fb2ws0-pr1d1",
-    "name": "Cakebabe Shirt",
-    "description": "Statement Women's Tee",
-    "price": 38.0,
-    "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg",
-    "imageURL2": [
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe1-front.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe2.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe3.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe4.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe5.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Cakebabe6.jpg"
-    ],
-    "primaryCategory": "Tops",
-    "createdAt": "2024-10-04T12:00:00Z",
-    "updatedAt": "2024-11-05T12:00:00Z"
-  },
-  {
-    "productId": "emcs5-cd4f5wb0-fb2ws0-pr1d1",
-    "name": "Eat More Cake Shirt",
-    "description": "Statement Oversized Tee",
-    "price": 35.0,
-    "stockQuantity": 100,
-    "imageURL": "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore1.jpg",
-    "imageURL2": [
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore1.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore2.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore3.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore4.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore5.jpg",
-      "https://s3-cakedenim.s3.us-west-1.amazonaws.com/EatMore6.jpg"
-    ],
-    "primaryCategory": "Tops",
-    "createdAt": "2024-10-04T12:00:00Z",
-    "updatedAt": "2024-11-05T12:00:00Z"
-  },
-  {
     "productId": "bw6-cd2f7wb0-fb4ws3-pr1d1",
     "name": "The Blackwell",
     "description": "Denim Bralette - Crop Top",
@@ -113,7 +75,6 @@
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
-
   {
     "productId": "och8-cd8f3wb0-fb3ws0-pr1d1",
     "name": "The Ochoa",
@@ -132,7 +93,6 @@
     "createdAt": "2024-10-04T12:00:00Z",
     "updatedAt": "2024-11-05T12:00:00Z"
   },
-
   {
     "productId": "ken20-cd1f50wb0-fb4ws0-pr1d1",
     "name": "The Kennedy Jacket",
