@@ -42,7 +42,7 @@ const components: {
       "https://s3-cakedenim.s3.us-west-1.amazonaws.com/morrison-side-pockets.jpg",
   },
   {
-    title: "CAKE Travel Essentials",
+    title: "CAKE DENIM Travel Essentials",
     href: "/products/collection/Jeans",
     image:
       "https://s3-cakedenim.s3.us-west-1.amazonaws.com/Kennedy1-frontfull.jpg",
